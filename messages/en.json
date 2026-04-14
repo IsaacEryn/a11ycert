@@ -1,0 +1,121 @@
+{
+  "common": {
+    "siteName": "A11yCert",
+    "siteDescription": "Bilingual study platform for IAAP CPACC & WAS certifications",
+    "nav": {
+      "home": "Home",
+      "cpacc": "CPACC",
+      "was": "WAS",
+      "glossary": "Glossary",
+      "studyPlan": "Study Plan",
+      "about": "About",
+      "privacy": "Privacy Policy"
+    },
+    "languageMode": {
+      "ko": "한국어",
+      "en": "English",
+      "parallel": "Parallel"
+    },
+    "exam": {
+      "domain": "Domain",
+      "questions": "Questions",
+      "passingScore": "Passing Score",
+      "timeLimit": "Time Limit",
+      "startQuiz": "Start Quiz",
+      "viewFlashcards": "View Flashcards"
+    },
+    "quiz": {
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "explanation": "Explanation",
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit",
+      "retry": "Try Again",
+      "saveWrongAnswers": "Save Wrong Answers"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Prepare for IAAP Certifications",
+      "subtitle": "Bilingual Korean-English study platform for CPACC & WAS exams",
+      "startCpacc": "Start CPACC",
+      "startWas": "Start WAS"
+    },
+    "features": {
+      "bilingual": {
+        "title": "Bilingual Study Cards",
+        "description": "Korean explanation paired with English original text"
+      },
+      "flashcard": {
+        "title": "Flashcards",
+        "description": "Memorize key terminology with spaced repetition"
+      },
+      "quiz": {
+        "title": "Practice Quizzes",
+        "description": "Test your knowledge with real-style questions + wrong answer notes"
+      }
+    }
+  },
+  "cpacc": {
+    "title": "CPACC Exam Prep",
+    "overview": "Certified Professional in Accessibility Core Competencies",
+    "examInfo": {
+      "questions": "100 questions (4 choices)",
+      "time": "2 hours",
+      "passing": "600/800 (scaled score)",
+      "format": "Online proctored"
+    },
+    "domains": {
+      "1": {
+        "title": "Disabilities, Challenges, and Assistive Technologies",
+        "en": "Disabilities, Challenges, and Assistive Technologies",
+        "weight": "40 questions"
+      },
+      "2": {
+        "title": "Accessibility and Universal Design",
+        "en": "Accessibility and Universal Design",
+        "weight": "40 questions"
+      },
+      "3": {
+        "title": "Standards, Laws, and Management Strategies",
+        "en": "Standards, Laws, and Management Strategies",
+        "weight": "20 questions"
+      }
+    }
+  },
+  "was": {
+    "title": "WAS Exam Prep",
+    "overview": "Web Accessibility Specialist",
+    "examInfo": {
+      "questions": "75 questions (4 choices)",
+      "time": "90 minutes",
+      "passing": "65% (~49/75)",
+      "format": "Online proctored"
+    },
+    "domains": {
+      "1": {
+        "title": "Creating Accessible Web Solutions",
+        "en": "Creating Accessible Web Solutions",
+        "weight": "40% (~30 questions)"
+      },
+      "2": {
+        "title": "Testing and Evaluation",
+        "en": "Testing and Evaluation",
+        "weight": "30% (~22 questions)"
+      },
+      "3": {
+        "title": "Remediation and Best Practices",
+        "en": "Remediation and Best Practices",
+        "weight": "30% (~22 questions)"
+      }
+    }
+  },
+  "about": {
+    "title": "About",
+    "description": "a11ycert.com is an unofficial study platform for Korean learners preparing for the IAAP CPACC and WAS certification exams."
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  }
+}
