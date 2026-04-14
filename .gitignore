@@ -46,3 +46,6 @@ CLAUDE.md
 
 # Internal planning docs
 .private/
+
+# Supabase (DB schema, migrations — internal only)
+supabase/

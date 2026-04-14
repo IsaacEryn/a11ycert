@@ -1,169 +1,169 @@
 {
-  "common": {
-    "siteName": "A11yCert",
-    "siteDescription": "IAAP CPACC & WAS 자격증 한국어 학습 플랫폼",
-    "nav": {
-      "home": "홈",
-      "cpacc": "CPACC",
-      "was": "WAS",
-      "overview": "개요",
-      "study": "학습",
-      "quiz": "모의 퀴즈",
-      "flashcards": "플래시카드",
-      "wrongAnswers": "오답노트",
-      "glossary": "용어집",
-      "community": "커뮤니티",
-      "about": "소개",
-      "privacy": "개인정보처리방침"
-    },
-    "languageMode": {
-      "ko": "한국어",
-      "en": "English",
-      "parallel": "병렬"
-    },
-    "exam": {
-      "domain": "도메인",
-      "questions": "문항",
-      "passingScore": "합격선",
-      "timeLimit": "제한 시간",
-      "startQuiz": "퀴즈 시작",
-      "viewFlashcards": "플래시카드 보기"
-    },
-    "quiz": {
-      "correct": "정답",
-      "incorrect": "오답",
-      "explanation": "해설",
-      "next": "다음",
-      "previous": "이전",
-      "submit": "제출",
-      "retry": "다시 풀기",
-      "saveWrongAnswers": "오답 저장"
-    }
-  },
-  "home": {
-    "hero": {
-      "title": "IAAP 자격증, 한국어로 준비하세요",
-      "subtitle": "CPACC · WAS 시험을 한국어와 영어로 함께 학습하는 이중 언어 플랫폼",
-      "startCpacc": "CPACC 시작",
-      "startWas": "WAS 시작"
-    },
-    "features": {
-      "bilingual": {
-        "title": "이중 언어 학습 카드",
-        "description": "한국어 설명과 영어 원문을 하나의 카드로"
-      },
-      "flashcard": {
-        "title": "플래시카드",
-        "description": "핵심 용어를 반복 암기"
-      },
-      "quiz": {
-        "title": "모의 퀴즈",
-        "description": "실전 문제로 실력 점검 + 오답 노트"
-      }
-    }
-  },
-  "cpacc": {
-    "title": "CPACC 시험 준비",
-    "overview": "Certified Professional in Accessibility Core Competencies",
-    "examInfo": {
-      "questions": "100문항 (4지선다)",
-      "time": "2시간",
-      "passing": "600/800 (scaled score)",
-      "format": "온라인 원격 감독"
-    },
-    "domains": {
-      "1": {
-        "title": "장애, 도전, 보조기술",
-        "en": "Disabilities, Challenges, and Assistive Technologies",
-        "weight": "40문항"
-      },
-      "2": {
-        "title": "접근성 및 보편적 설계",
-        "en": "Accessibility and Universal Design",
-        "weight": "40문항"
-      },
-      "3": {
-        "title": "표준, 법률, 관리 전략",
-        "en": "Standards, Laws, and Management Strategies",
-        "weight": "20문항"
-      }
-    }
-  },
-  "was": {
-    "title": "WAS 시험 준비",
-    "overview": "Web Accessibility Specialist",
-    "examInfo": {
-      "questions": "75문항 (4지선다)",
-      "time": "90분",
-      "passing": "65% (약 49/75)",
-      "format": "온라인 원격 감독"
-    },
-    "domains": {
-      "1": {
-        "title": "접근 가능한 웹 솔루션 구축",
-        "en": "Creating Accessible Web Solutions",
-        "weight": "40% (~30문항)"
-      },
-      "2": {
-        "title": "테스트 및 평가",
-        "en": "Testing and Evaluation",
-        "weight": "30% (~22문항)"
-      },
-      "3": {
-        "title": "개선 및 모범 사례",
-        "en": "Remediation and Best Practices",
-        "weight": "30% (~22문항)"
-      }
-    }
-  },
-  "about": {
-    "title": "소개",
-    "subtitle": "A11yCert는 IAAP CPACC 및 WAS 자격증을 준비하는 한국어 학습자를 위한 이중 언어 학습 플랫폼입니다.",
-    "purpose": {
-      "title": "사이트 목적",
-      "body": "국내에 IAAP 접근성 자격증 관련 한국어 학습 자료가 매우 부족한 현실에서, 한국어와 영어를 함께 학습하며 시험을 준비할 수 있는 환경을 만들기 위해 제작되었습니다. 이중 언어 학습 카드, 플래시카드, 모의 퀴즈 등을 통해 영어로 진행되는 시험을 효과적으로 준비할 수 있도록 돕습니다."
-    },
-    "creator": {
-      "title": "만든 사람",
-      "name": "Isaac",
-      "intro": "웹 개발 및 디지털 접근성에 관심 있는 개발자입니다. CPACC 자격증 준비 과정에서 한국어 학습 자료의 필요성을 느껴 이 사이트를 제작했습니다.",
-      "blogLabel": "블로그",
-      "blogUrl": "https://www.codeslog.com"
-    },
-    "source": {
-      "title": "콘텐츠 출처",
-      "body": "모든 학습 콘텐츠는 IAAP 공식 Body of Knowledge(BoK)를 기반으로 작성되었습니다. 시험 응시 전 반드시 IAAP 공식 자료를 함께 참고하시기 바랍니다."
-    },
-    "disclaimer": {
-      "title": "면책 조항",
-      "body": "이 사이트는 IAAP 공인 기관이 아니며, 비공식 학습 자료를 제공합니다. 콘텐츠의 정확성을 위해 노력하지만, 실제 시험 내용과 차이가 있을 수 있습니다. 오류 제보는 GitHub Issues를 통해 남겨주세요."
-    }
-  },
-  "privacy": {
-    "title": "개인정보처리방침",
-    "lastUpdated": "최종 업데이트: 2026년 4월",
-    "intro": "a11ycert.com(이하 '사이트')은 이용자의 개인정보를 소중히 여깁니다. 본 방침은 사이트 이용 과정에서 수집되는 정보와 그 처리 방식을 안내합니다.",
-    "collected": {
-      "title": "수집하는 정보",
-      "body": "이 사이트는 별도의 회원가입이나 로그인을 요구하지 않습니다. 학습 진도, 오답 노트 등의 데이터는 사용자 기기의 localStorage에만 저장되며, 서버로 전송되거나 외부로 공유되지 않습니다."
-    },
-    "thirdParty": {
-      "title": "광고 및 분석 서비스",
-      "adsense": "Google AdSense: 맞춤형 광고 제공을 위해 쿠키를 사용합니다. Google은 이 쿠키를 통해 사용자의 관심사에 맞는 광고를 표시합니다.",
-      "analytics": "Google Analytics: 사이트 방문 통계를 익명으로 수집합니다. 개인을 식별하는 정보는 수집되지 않습니다.",
-      "moreInfo": "자세한 내용은 Google 개인정보처리방침을 참고하세요."
-    },
-    "cookies": {
-      "title": "쿠키 정책",
-      "body": "이 사이트는 광고 및 분석 서비스를 위해 제3자 쿠키를 사용합니다. 브라우저 설정에서 쿠키 수신을 거부할 수 있으며, 이 경우 일부 기능 이용이 제한될 수 있습니다."
-    },
-    "rights": {
-      "title": "이용자 권리",
-      "body": "이용자는 언제든지 브라우저의 localStorage를 초기화하여 사이트에 저장된 모든 데이터를 삭제할 수 있습니다."
-    },
-    "contact": {
-      "title": "문의",
-      "body": "개인정보 관련 문의 사항은 GitHub Issues 또는 아래 블로그를 통해 연락해주세요."
-    }
-  }
+	"common": {
+		"siteName": "A11yCert",
+		"siteDescription": "IAAP CPACC & WAS 자격증 한국어 학습 플랫폼",
+		"nav": {
+			"home": "홈",
+			"cpacc": "CPACC",
+			"was": "WAS",
+			"overview": "개요",
+			"study": "학습",
+			"quiz": "모의 퀴즈",
+			"flashcards": "플래시카드",
+			"wrongAnswers": "오답노트",
+			"glossary": "용어집",
+			"community": "커뮤니티",
+			"about": "소개",
+			"privacy": "개인정보처리방침"
+		},
+		"languageMode": {
+			"ko": "한국어",
+			"en": "English",
+			"parallel": "병렬"
+		},
+		"exam": {
+			"domain": "도메인",
+			"questions": "문항",
+			"passingScore": "합격선",
+			"timeLimit": "제한 시간",
+			"startQuiz": "퀴즈 시작",
+			"viewFlashcards": "플래시카드 보기"
+		},
+		"quiz": {
+			"correct": "정답",
+			"incorrect": "오답",
+			"explanation": "해설",
+			"next": "다음",
+			"previous": "이전",
+			"submit": "제출",
+			"retry": "다시 풀기",
+			"saveWrongAnswers": "오답 저장"
+		}
+	},
+	"home": {
+		"hero": {
+			"title": "IAAP 자격증, 한국어로 준비하세요",
+			"subtitle": "CPACC · WAS 시험을 한국어와 영어로 함께 학습하는 이중 언어 플랫폼",
+			"startCpacc": "CPACC 시작",
+			"startWas": "WAS 시작"
+		},
+		"features": {
+			"bilingual": {
+				"title": "이중 언어 학습 카드",
+				"description": "한국어 설명과 영어 원문을 하나의 카드로"
+			},
+			"flashcard": {
+				"title": "플래시카드",
+				"description": "핵심 용어를 반복 암기"
+			},
+			"quiz": {
+				"title": "모의 퀴즈",
+				"description": "실전 문제로 실력 점검 + 오답 노트"
+			}
+		}
+	},
+	"cpacc": {
+		"title": "CPACC 시험 준비",
+		"overview": "Certified Professional in Accessibility Core Competencies",
+		"examInfo": {
+			"questions": "100문항 (4지선다)",
+			"time": "2시간",
+			"passing": "600/800 (scaled score)",
+			"format": "온라인 원격 감독"
+		},
+		"domains": {
+			"1": {
+				"title": "장애, 도전, 보조기술",
+				"en": "Disabilities, Challenges, and Assistive Technologies",
+				"weight": "40문항"
+			},
+			"2": {
+				"title": "접근성 및 보편적 설계",
+				"en": "Accessibility and Universal Design",
+				"weight": "40문항"
+			},
+			"3": {
+				"title": "표준, 법률, 관리 전략",
+				"en": "Standards, Laws, and Management Strategies",
+				"weight": "20문항"
+			}
+		}
+	},
+	"was": {
+		"title": "WAS 시험 준비",
+		"overview": "Web Accessibility Specialist",
+		"examInfo": {
+			"questions": "75문항 (4지선다)",
+			"time": "90분",
+			"passing": "65% (약 49/75)",
+			"format": "온라인 원격 감독"
+		},
+		"domains": {
+			"1": {
+				"title": "접근 가능한 웹 솔루션 구축",
+				"en": "Creating Accessible Web Solutions",
+				"weight": "40% (~30문항)"
+			},
+			"2": {
+				"title": "테스트 및 평가",
+				"en": "Testing and Evaluation",
+				"weight": "30% (~22문항)"
+			},
+			"3": {
+				"title": "개선 및 모범 사례",
+				"en": "Remediation and Best Practices",
+				"weight": "30% (~22문항)"
+			}
+		}
+	},
+	"about": {
+		"title": "소개",
+		"subtitle": "A11yCert는 IAAP CPACC 및 WAS 자격증을 준비하는 한국어 학습자를 위한 이중 언어 학습 플랫폼입니다.",
+		"purpose": {
+			"title": "사이트 목적",
+			"body": "국내에 IAAP 접근성 자격증 관련 한국어 학습 자료가 매우 부족한 현실에서, 한국어와 영어를 함께 학습하며 시험을 준비할 수 있는 환경을 만들기 위해 제작되었습니다. 이중 언어 학습 카드, 플래시카드, 모의 퀴즈 등을 통해 영어로 진행되는 시험을 효과적으로 준비할 수 있도록 돕습니다."
+		},
+		"creator": {
+			"title": "만든 사람",
+			"name": "Isaac",
+			"intro": "웹 개발 및 디지털 접근성에 관심 있는 개발자입니다. CPACC 자격증 준비 과정에서 한국어 학습 자료의 필요성을 느껴 이 사이트를 제작했습니다.",
+			"blogLabel": "블로그",
+			"blogUrl": "https://www.codeslog.com"
+		},
+		"source": {
+			"title": "콘텐츠 출처",
+			"body": "모든 학습 콘텐츠는 IAAP 공식 Body of Knowledge(BoK)를 기반으로 작성되었습니다. 시험 응시 전 반드시 IAAP 공식 자료를 함께 참고하시기 바랍니다."
+		},
+		"disclaimer": {
+			"title": "면책 조항",
+			"body": "이 사이트는 IAAP 공인 기관이 아니며, 비공식 학습 자료를 제공합니다. 콘텐츠의 정확성을 위해 노력하지만, 실제 시험 내용과 차이가 있을 수 있습니다. 오류 제보는 GitHub Issues를 통해 남겨주세요."
+		}
+	},
+	"privacy": {
+		"title": "개인정보처리방침",
+		"lastUpdated": "최종 업데이트: 2026년 4월",
+		"intro": "a11ycert.com(이하 '사이트')은 이용자의 개인정보를 소중히 여깁니다. 본 방침은 사이트 이용 과정에서 수집되는 정보와 그 처리 방식을 안내합니다.",
+		"collected": {
+			"title": "수집하는 정보",
+			"body": "이 사이트는 별도의 회원가입이나 로그인을 요구하지 않습니다. 학습 진도, 오답 노트 등의 데이터는 사용자 기기의 localStorage에만 저장되며, 서버로 전송되거나 외부로 공유되지 않습니다."
+		},
+		"thirdParty": {
+			"title": "광고 및 분석 서비스",
+			"adsense": "Google AdSense: 맞춤형 광고 제공을 위해 쿠키를 사용합니다. Google은 이 쿠키를 통해 사용자의 관심사에 맞는 광고를 표시합니다.",
+			"analytics": "Google Analytics: 사이트 방문 통계를 익명으로 수집합니다. 개인을 식별하는 정보는 수집되지 않습니다.",
+			"moreInfo": "자세한 내용은 Google 개인정보처리방침을 참고하세요."
+		},
+		"cookies": {
+			"title": "쿠키 정책",
+			"body": "이 사이트는 광고 및 분석 서비스를 위해 제3자 쿠키를 사용합니다. 브라우저 설정에서 쿠키 수신을 거부할 수 있으며, 이 경우 일부 기능 이용이 제한될 수 있습니다."
+		},
+		"rights": {
+			"title": "이용자 권리",
+			"body": "이용자는 언제든지 브라우저의 localStorage를 초기화하여 사이트에 저장된 모든 데이터를 삭제할 수 있습니다."
+		},
+		"contact": {
+			"title": "문의",
+			"body": "개인정보 관련 문의 사항은 GitHub Issues 또는 아래 블로그를 통해 연락해주세요."
+		}
+	}
 }
