@@ -117,9 +117,52 @@
   },
   "about": {
     "title": "About",
-    "description": "a11ycert.com is an unofficial study platform for Korean learners preparing for the IAAP CPACC and WAS certification exams."
+    "subtitle": "A11yCert is a bilingual study platform for Korean learners preparing for IAAP CPACC and WAS certifications.",
+    "purpose": {
+      "title": "Purpose",
+      "body": "Korean-language resources for IAAP accessibility certifications are scarce. A11yCert was created to bridge that gap — offering bilingual (Korean/English) study cards, flashcards, and practice quizzes so learners can prepare effectively for English-language exams."
+    },
+    "creator": {
+      "title": "Creator",
+      "name": "Isaac",
+      "intro": "A developer passionate about web development and digital accessibility. This site was built while preparing for the CPACC exam, out of a need for quality Korean-language study materials.",
+      "blogLabel": "Blog",
+      "blogUrl": "https://www.codeslog.com"
+    },
+    "source": {
+      "title": "Content Source",
+      "body": "All study content is based on the official IAAP Body of Knowledge (BoK). Please refer to official IAAP materials alongside this site when preparing for your exam."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "body": "This site is not affiliated with or endorsed by IAAP. It provides unofficial study materials. While we strive for accuracy, content may differ from actual exam questions. Please report errors via GitHub Issues."
+    }
   },
   "privacy": {
-    "title": "Privacy Policy"
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: April 2026",
+    "intro": "a11ycert.com values your privacy. This policy explains what information is collected and how it is used.",
+    "collected": {
+      "title": "Information We Collect",
+      "body": "This site does not require registration or login. Study progress and wrong-answer notes are stored only in your browser's localStorage and are never sent to a server or shared externally."
+    },
+    "thirdParty": {
+      "title": "Advertising & Analytics",
+      "adsense": "Google AdSense: Uses cookies to display personalized ads based on your interests.",
+      "analytics": "Google Analytics: Collects anonymized visit statistics. No personally identifiable information is collected.",
+      "moreInfo": "For more details, please refer to Google's Privacy Policy."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "body": "This site uses third-party cookies for advertising and analytics. You can disable cookies in your browser settings, which may limit certain features."
+    },
+    "rights": {
+      "title": "Your Rights",
+      "body": "You can delete all data stored by this site at any time by clearing your browser's localStorage."
+    },
+    "contact": {
+      "title": "Contact",
+      "body": "For privacy-related inquiries, please reach out via GitHub Issues or through the creator's blog."
+    }
   }
 }
