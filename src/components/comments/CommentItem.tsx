@@ -38,6 +38,7 @@ export default function CommentItem({
 }: CommentItemProps) {
 	const [isEditing, setIsEditing] = useState(false);
 	const [isReplying, setIsReplying] = useState(false);
+	const [confirmingDelete, setConfirmingDelete] = useState(false);
 	const isKo = locale === "ko";
 	const isOwner = currentUserId === comment.user_id;
 	const nickname = comment.profiles?.nickname || (isKo ? "익명" : "Anonymous");
@@ -60,7 +61,10 @@ export default function CommentItem({
 						referrerPolicy="no-referrer"
 					/>
 				) : (
-					<span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-500 shrink-0 mt-0.5">
+					<span
+						className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-500 shrink-0 mt-0.5"
+						aria-hidden="true"
+					>
 						{nickname.charAt(0).toUpperCase()}
 					</span>
 				)}
@@ -69,7 +73,9 @@ export default function CommentItem({
 					{/* 헤더 */}
 					<div className="flex items-center gap-2">
 						<span className="text-sm font-medium text-gray-900">{nickname}</span>
-						<span className="text-xs text-gray-400">{timeAgo}</span>
+						<span className="text-xs text-gray-400">
+							<time dateTime={comment.created_at}>{timeAgo}</time>
+						</span>
 					</div>
 
 					{/* 내용 */}
@@ -83,6 +89,7 @@ export default function CommentItem({
 							locale={locale}
 							initialValue={comment.content}
 							submitLabel={isKo ? "수정" : "Edit"}
+							labelText={isKo ? "댓글 수정" : "Edit comment"}
 						/>
 					) : (
 						<p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap break-words">
@@ -96,7 +103,13 @@ export default function CommentItem({
 							{currentUserId && (
 								<button
 									onClick={() => setIsReplying(!isReplying)}
-									className="text-gray-400 hover:text-blue-600 transition-colors"
+									aria-label={
+										isKo
+											? `${nickname}의 댓글에 답글 작성`
+											: `Reply to ${nickname}'s comment`
+									}
+									aria-expanded={isReplying}
+									className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 								>
 									{isKo ? "답글" : "Reply"}
 								</button>
@@ -105,20 +118,45 @@ export default function CommentItem({
 								<>
 									<button
 										onClick={() => setIsEditing(true)}
-										className="text-gray-400 hover:text-blue-600 transition-colors"
+										aria-label={isKo ? "내 댓글 수정" : "Edit my comment"}
+										className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 									>
 										{isKo ? "수정" : "Edit"}
 									</button>
-									<button
-										onClick={() => {
-											if (confirm(isKo ? "댓글을 삭제하시겠습니까?" : "Delete this comment?")) {
-												onDelete(comment.id);
-											}
-										}}
-										className="text-gray-400 hover:text-red-600 transition-colors"
-									>
-										{isKo ? "삭제" : "Delete"}
-									</button>
+
+									{/* 인라인 삭제 확인 (native confirm 대신) */}
+									{confirmingDelete ? (
+										<span className="flex items-center gap-1.5">
+											<span className="text-red-600">
+												{isKo ? "삭제할까요?" : "Delete?"}
+											</span>
+											<button
+												onClick={() => {
+													setConfirmingDelete(false);
+													onDelete(comment.id);
+												}}
+												aria-label={isKo ? "삭제 확인" : "Confirm delete"}
+												className="text-red-600 font-medium hover:text-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 rounded"
+											>
+												{isKo ? "확인" : "Yes"}
+											</button>
+											<button
+												onClick={() => setConfirmingDelete(false)}
+												aria-label={isKo ? "삭제 취소" : "Cancel delete"}
+												className="text-gray-400 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
+											>
+												{isKo ? "취소" : "No"}
+											</button>
+										</span>
+									) : (
+										<button
+											onClick={() => setConfirmingDelete(true)}
+											aria-label={isKo ? "내 댓글 삭제" : "Delete my comment"}
+											className="text-gray-400 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
+										>
+											{isKo ? "삭제" : "Delete"}
+										</button>
+									)}
 								</>
 							)}
 						</div>
@@ -135,6 +173,9 @@ export default function CommentItem({
 								onCancel={() => setIsReplying(false)}
 								locale={locale}
 								placeholder={isKo ? "답글을 작성해주세요..." : "Write a reply..."}
+								labelText={
+									isKo ? `${nickname}의 댓글에 답글` : `Reply to ${nickname}`
+								}
 							/>
 						</div>
 					)}
@@ -151,7 +192,7 @@ export default function CommentItem({
 										onEdit={onEdit}
 										onDelete={onDelete}
 										onReply={onReply}
-										replies={[]} // 1단계 대댓글만 지원
+										replies={[]}
 									/>
 								</li>
 							))}

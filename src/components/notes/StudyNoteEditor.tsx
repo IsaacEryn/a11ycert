@@ -15,10 +15,12 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 	const [savedContent, setSavedContent] = useState("");
 	const [isSaving, setIsSaving] = useState(false);
 	const [lastSaved, setLastSaved] = useState<Date | null>(null);
+	const [confirmingDelete, setConfirmingDelete] = useState(false);
 	const auth = useOptionalAuth();
 	const isKo = locale === "ko";
 	const debounceRef = useRef<NodeJS.Timeout | null>(null);
-	const supabase = createClient();
+	const supabaseRef = useRef(createClient());
+	const supabase = supabaseRef.current;
 
 	// 기존 메모 로드
 	const loadNote = useCallback(async () => {
@@ -78,7 +80,6 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 
 	const handleDelete = async () => {
 		if (!auth?.user) return;
-		if (!confirm(isKo ? "메모를 삭제하시겠습니까?" : "Delete this note?")) return;
 
 		await supabase
 			.from("study_notes")
@@ -89,12 +90,14 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 		setContent("");
 		setSavedContent("");
 		setLastSaved(null);
+		setConfirmingDelete(false);
 	};
 
 	if (!auth?.user) {
 		return (
 			<div className="mt-8 rounded-lg border border-dashed border-gray-200 px-4 py-3 text-sm text-gray-400">
-				{isKo ? "📝 로그인하면 학습 메모를 작성할 수 있습니다." : "📝 Sign in to take study notes."}
+				<span aria-hidden="true">📝</span>{" "}
+				{isKo ? "로그인하면 학습 메모를 작성할 수 있습니다." : "Sign in to take study notes."}
 			</div>
 		);
 	}
@@ -106,20 +109,51 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 					{isKo ? "나의 학습 메모" : "My Study Notes"}
 				</h2>
 				<div className="flex items-center gap-2 text-xs text-gray-400">
-					{isSaving && <span>{isKo ? "저장 중..." : "Saving..."}</span>}
-					{!isSaving && lastSaved && <span>{isKo ? "자동 저장됨" : "Saved"}</span>}
-					{content && (
+					{/* 저장 상태 — aria-live로 스크린리더에 자동 전달 */}
+					<span aria-live="polite" aria-atomic="true">
+						{isSaving
+							? isKo ? "저장 중..." : "Saving..."
+							: lastSaved
+								? isKo ? "자동 저장됨" : "Saved"
+								: ""}
+					</span>
+
+					{/* 삭제 버튼 — confirm() 대신 인라인 확인 */}
+					{content && !confirmingDelete && (
 						<button
-							onClick={handleDelete}
-							className="text-red-400 hover:text-red-600 transition-colors"
+							onClick={() => setConfirmingDelete(true)}
+							className="text-red-400 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
 							aria-label={isKo ? "메모 삭제" : "Delete note"}
 						>
 							{isKo ? "삭제" : "Delete"}
 						</button>
 					)}
+					{confirmingDelete && (
+						<span className="flex items-center gap-1.5" role="group" aria-label={isKo ? "삭제 확인" : "Confirm deletion"}>
+							<span className="text-red-600">{isKo ? "삭제할까요?" : "Delete?"}</span>
+							<button
+								onClick={handleDelete}
+								className="text-red-600 font-medium hover:text-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 rounded"
+								aria-label={isKo ? "메모 삭제 확인" : "Confirm delete note"}
+							>
+								{isKo ? "확인" : "Yes"}
+							</button>
+							<button
+								onClick={() => setConfirmingDelete(false)}
+								className="text-gray-400 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
+								aria-label={isKo ? "삭제 취소" : "Cancel delete"}
+							>
+								{isKo ? "취소" : "No"}
+							</button>
+						</span>
+					)}
 				</div>
 			</div>
+			<label htmlFor="study-note-textarea" className="sr-only">
+				{isKo ? "학습 메모" : "Study notes"}
+			</label>
 			<textarea
+				id="study-note-textarea"
 				value={content}
 				onChange={(e) => handleChange(e.target.value)}
 				placeholder={
@@ -128,7 +162,6 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 						: "Take notes for this unit... (auto-saved)"
 				}
 				className="mt-2 w-full rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y min-h-[100px]"
-				aria-label={isKo ? "학습 메모" : "Study notes"}
 			/>
 		</section>
 	);

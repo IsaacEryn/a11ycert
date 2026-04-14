@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import type { StudyUnit, QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
@@ -23,6 +23,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 	const { wrongAnswers, savedQuestions, unsaveQuestion } = useLearningStore();
 	const [tab, setTab] = useState<Tab>("wrong");
 	const [practiceMode, setPracticeMode] = useState(false);
+	const panelRef = useRef<HTMLDivElement>(null);
 	const isKo = locale === "ko";
 	const c = ACCENT[exam];
 
@@ -32,6 +33,13 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 	const savedQs = allQuestions.filter((q) => savedQuestions.includes(q.id));
 
 	const currentList: QuizQuestion[] = tab === "wrong" ? wrongQs : savedQs;
+
+	const handleTabChange = (t: Tab) => {
+		setTab(t);
+		setPracticeMode(false);
+		// 탭 전환 후 패널로 포커스 이동
+		requestAnimationFrame(() => panelRef.current?.focus());
+	};
 
 	if (practiceMode && currentList.length > 0) {
 		return (
@@ -48,7 +56,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 					</h1>
 					<button
 						onClick={() => setPracticeMode(false)}
-						className="text-sm text-gray-500 hover:text-gray-700"
+						className="text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 					>
 						← {isKo ? "목록으로" : "Back to list"}
 					</button>
@@ -65,7 +73,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 				<div>
 					<Link
 						href={`/${locale}/${exam}`}
-						className={`text-xs font-semibold uppercase tracking-widest no-underline ${isKo ? "" : ""} ${exam === "cpacc" ? "text-blue-600" : "text-violet-600"}`}
+						className={`text-xs font-semibold uppercase tracking-widest no-underline ${exam === "cpacc" ? "text-blue-600" : "text-violet-600"}`}
 					>
 						{exam.toUpperCase()}
 					</Link>
@@ -76,7 +84,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 			</div>
 
 			{/* Tabs */}
-			<div className="mt-6 flex border-b border-gray-200" role="tablist">
+			<div className="mt-6 flex border-b border-gray-200" role="tablist" aria-label={isKo ? "오답노트 탭" : "Study notes tabs"}>
 				{(["wrong", "saved"] as Tab[]).map((t) => {
 					const count = t === "wrong" ? wrongQs.length : savedQs.length;
 					const label =
@@ -91,13 +99,12 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 					return (
 						<button
 							key={t}
+							id={`tab-${t}`}
 							role="tab"
 							aria-selected={isActive}
-							onClick={() => {
-								setTab(t);
-								setPracticeMode(false);
-							}}
-							className={`flex items-center gap-1.5 border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+							aria-controls="tab-panel"
+							onClick={() => handleTabChange(t)}
+							className={`flex items-center gap-1.5 border-b-2 px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-blue-600 ${
 								isActive
 									? `${c.active} border-b-2`
 									: "border-transparent text-gray-500 hover:text-gray-700"
@@ -117,7 +124,14 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 			</div>
 
 			{/* Tab content */}
-			<div role="tabpanel" className="mt-6">
+			<div
+				id="tab-panel"
+				ref={panelRef}
+				role="tabpanel"
+				aria-labelledby={`tab-${tab}`}
+				tabIndex={-1}
+				className="mt-6 focus-visible:outline-none"
+			>
 				{currentList.length === 0 ? (
 					<div className="rounded-xl border border-dashed border-gray-200 px-6 py-12 text-center text-sm text-gray-400">
 						{tab === "wrong"
@@ -144,10 +158,10 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 							</p>
 							<button
 								onClick={() => setPracticeMode(true)}
-								className={`rounded-lg px-4 py-2 text-sm font-medium text-white ${
+								className={`rounded-lg px-4 py-2 text-sm font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 ${
 									exam === "cpacc"
-										? "bg-blue-600 hover:bg-blue-700"
-										: "bg-violet-600 hover:bg-violet-700"
+										? "bg-blue-600 hover:bg-blue-700 focus-visible:outline-blue-800"
+										: "bg-violet-600 hover:bg-violet-700 focus-visible:outline-violet-800"
 								}`}
 							>
 								{isKo ? "연습 모드 시작" : "Start Practice"}
@@ -156,7 +170,6 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 
 						<ul className="space-y-3" role="list">
 							{currentList.map((q) => {
-								const unitId = q.id.split("-q")[0].replace(exam + "-", exam + "-");
 								const unit = units.find((u) => u.questions.some((uq) => uq.id === q.id));
 
 								return (
@@ -185,10 +198,14 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 											{tab === "saved" && (
 												<button
 													onClick={() => unsaveQuestion(q.id)}
-													aria-label={isKo ? "저장 취소" : "Remove from saved"}
-													className="shrink-0 rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500"
+													aria-label={
+														isKo
+															? `저장 취소: ${isKo ? q.question.ko : q.question.en}`
+															: `Remove from saved: ${q.question.en}`
+													}
+													className="shrink-0 rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
 												>
-													✕
+													<span aria-hidden="true">✕</span>
 												</button>
 											)}
 										</div>
