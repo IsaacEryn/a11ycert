@@ -4,11 +4,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  output: "export",       // 정적 내보내기 (GitHub Pages 필수)
-  trailingSlash: true,    // GitHub Pages 경로 호환
-  images: {
-    unoptimized: true,    // 정적 내보내기 시 이미지 최적화 비활성화
-  },
+  // Vercel 배포: SSR + API Routes 활성화 (output: 'export' 제거)
+  // 이미지 최적화: Vercel에서 자동 지원
 };
 
 export default withNextIntl(nextConfig);

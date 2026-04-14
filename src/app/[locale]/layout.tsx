@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/lib/auth/AuthProvider";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -60,19 +61,21 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {/* 건너뛰기 링크: 키보드·스크린리더 사용자를 위해 첫 번째 요소로 배치 */}
-          <a href="#main-content" className="skip-link">
-            {locale === "ko" ? "본문으로 바로가기" : "Skip to main content"}
-          </a>
+          <AuthProvider>
+            {/* 건너뛰기 링크: 키보드·스크린리더 사용자를 위해 첫 번째 요소로 배치 */}
+            <a href="#main-content" className="skip-link">
+              {locale === "ko" ? "본문으로 바로가기" : "Skip to main content"}
+            </a>
 
-          <Header locale={locale} />
+            <Header locale={locale} />
 
-          {/* tabIndex={-1}: 건너뛰기 링크 클릭 시 포커스 수신 */}
-          <main id="main-content" className="flex flex-col flex-1" tabIndex={-1}>
-            {children}
-          </main>
+            {/* tabIndex={-1}: 건너뛰기 링크 클릭 시 포커스 수신 */}
+            <main id="main-content" className="flex flex-col flex-1" tabIndex={-1}>
+              {children}
+            </main>
 
-          <Footer locale={locale} />
+            <Footer locale={locale} />
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

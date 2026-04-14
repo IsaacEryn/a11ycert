@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { getCpaccUnit, getAllCpaccUnitIds } from "@/lib/content/cpacc-units";
 import QuizEngine from "@/components/QuizEngine";
 import UnitCompleteButton from "@/components/UnitCompleteButton";
+import CommentSection from "@/components/comments/CommentSection";
+import StudyNoteEditor from "@/components/notes/StudyNoteEditor";
 
 export async function generateStaticParams() {
   const locales = ["ko", "en"];
@@ -121,6 +123,16 @@ export default async function CpaccUnitPage({
       <div className="mt-8 border-t border-gray-100 pt-6">
         <UnitCompleteButton unitId={unit.id} locale={locale} backHref={`/${locale}/cpacc/study`} />
       </div>
+
+      {/* 학습 메모 */}
+      <StudyNoteEditor
+        pagePath={`/cpacc/study/${unitId}`}
+        unitId={unit.id}
+        locale={locale}
+      />
+
+      {/* 댓글 */}
+      <CommentSection pagePath={`/cpacc/study/${unitId}`} locale={locale} />
     </div>
   );
 }

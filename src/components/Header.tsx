@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageToggle from "./LanguageToggle";
 import MobileMenuToggle from "./MobileMenuToggle";
+import LoginButton from "./auth/LoginButton";
+import UserMenu from "./auth/UserMenu";
 
 interface HeaderProps {
   locale: string;
@@ -60,6 +62,7 @@ export default function Header({ locale }: HeaderProps) {
 
   const flatItems = [
     { href: `/${locale}/glossary`, label: t("glossary") },
+    { href: `/${locale}/community`, label: t("community") },
     { href: `/${locale}/about`, label: t("about") },
   ];
 
@@ -178,6 +181,8 @@ export default function Header({ locale }: HeaderProps) {
           </nav>
 
           <div className="flex items-center gap-2">
+            <LoginButton locale={locale} />
+            <UserMenu locale={locale} />
             <LanguageToggle currentLocale={locale} />
             <MobileMenuToggle
               isOpen={mobileOpen}
