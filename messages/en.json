@@ -6,8 +6,12 @@
       "home": "Home",
       "cpacc": "CPACC",
       "was": "WAS",
+      "overview": "Overview",
+      "study": "Study",
+      "quiz": "Practice Quiz",
+      "flashcards": "Flashcards",
+      "wrongAnswers": "Wrong Answers",
       "glossary": "Glossary",
-      "studyPlan": "Study Plan",
       "about": "About",
       "privacy": "Privacy Policy"
     },
