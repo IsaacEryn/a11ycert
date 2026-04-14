@@ -14,7 +14,7 @@ export default function MobileMenuToggle({ isOpen, onToggle, label }: MobileMenu
 			aria-expanded={isOpen}
 			aria-controls="mobile-nav"
 			aria-label={label}
-			className="sm:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded focus-visible:outline-2"
+			className="sm:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
 		>
 			<span
 				className={[

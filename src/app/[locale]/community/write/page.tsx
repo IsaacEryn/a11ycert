@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
 export default function CommunityWritePage() {
@@ -16,6 +15,7 @@ export default function CommunityWritePage() {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const categories = [
 		{ value: "discussion", label: isKo ? "자유토론" : "Discussion" },
@@ -28,19 +28,24 @@ export default function CommunityWritePage() {
 		if (!auth?.user || isSubmitting) return;
 
 		setIsSubmitting(true);
-		const supabase = createClient();
+		setSubmitError(null);
 
-		const { error } = await supabase.from("board_posts").insert({
-			user_id: auth.user.id,
-			category,
-			title,
-			content,
+		const res = await fetch("/api/board", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ category, title, content }),
 		});
 
-		if (!error) {
+		if (res.ok) {
 			router.push(`/${locale}/community`);
+		} else {
+			const json = await res.json().catch(() => ({}));
+			setSubmitError(
+				json.error ||
+					(isKo ? "등록 중 오류가 발생했습니다. 다시 시도해주세요." : "An error occurred. Please try again.")
+			);
+			setIsSubmitting(false);
 		}
-		setIsSubmitting(false);
 	};
 
 	if (!auth?.user) {
@@ -58,18 +63,26 @@ export default function CommunityWritePage() {
 			<h1 className="text-2xl font-bold text-gray-900">{isKo ? "새 글 작성" : "New Post"}</h1>
 
 			<form onSubmit={handleSubmit} className="mt-6 space-y-4">
-				{/* 카테고리 */}
+				{/* 오류 메시지 */}
+				{submitError && (
+					<p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+						{submitError}
+					</p>
+				)}
+
+				{/* 카테고리 — aria-pressed로 선택 상태 전달 */}
 				<fieldset>
 					<legend className="text-sm font-medium text-gray-700">
 						{isKo ? "카테고리" : "Category"}
 					</legend>
-					<div className="mt-2 flex gap-2">
+					<div className="mt-2 flex gap-2" role="group">
 						{categories.map(({ value, label }) => (
 							<button
 								key={value}
 								type="button"
+								aria-pressed={category === value}
 								onClick={() => setCategory(value)}
-								className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+								className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
 									category === value
 										? "bg-blue-100 text-blue-700"
 										: "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -82,9 +95,12 @@ export default function CommunityWritePage() {
 				</fieldset>
 
 				{/* 제목 */}
-				<label className="block">
-					<span className="text-sm font-medium text-gray-700">{isKo ? "제목" : "Title"}</span>
+				<div>
+					<label htmlFor="post-title" className="block text-sm font-medium text-gray-700">
+						{isKo ? "제목" : "Title"}
+					</label>
 					<input
+						id="post-title"
 						type="text"
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
@@ -92,12 +108,15 @@ export default function CommunityWritePage() {
 						maxLength={200}
 						className="mt-1 w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
 					/>
-				</label>
+				</div>
 
 				{/* 내용 */}
-				<label className="block">
-					<span className="text-sm font-medium text-gray-700">{isKo ? "내용" : "Content"}</span>
+				<div>
+					<label htmlFor="post-content" className="block text-sm font-medium text-gray-700">
+						{isKo ? "내용" : "Content"}
+					</label>
 					<textarea
+						id="post-content"
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
 						required
@@ -105,21 +124,21 @@ export default function CommunityWritePage() {
 						rows={10}
 						className="mt-1 w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y"
 					/>
-				</label>
+				</div>
 
 				{/* 버튼 */}
 				<div className="flex justify-end gap-2 pt-2">
 					<button
 						type="button"
 						onClick={() => router.back()}
-						className="rounded-lg px-5 py-2.5 text-sm text-gray-500 hover:text-gray-700"
+						className="rounded-lg px-5 py-2.5 text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
 					>
 						{isKo ? "취소" : "Cancel"}
 					</button>
 					<button
 						type="submit"
 						disabled={!title.trim() || !content.trim() || isSubmitting}
-						className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+						className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
 					>
 						{isSubmitting ? (isKo ? "등록 중..." : "Posting...") : isKo ? "등록" : "Post"}
 					</button>

@@ -12,7 +12,6 @@
 	--color-border: #e5e7eb; /* gray-200 */
 	--color-error: #dc2626; /* red-600  */
 	--radius-base: 0.5rem;
-	--focus-ring: 0 0 0 3px #bfdbfe; /* blue-200 */
 }
 
 @theme inline {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
@@ -22,12 +22,16 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 	const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, isWrong } =
 		useLearningStore();
 
+	// 포커스 관리 refs
+	const questionRef = useRef<HTMLParagraphElement>(null);
+	const summaryRef = useRef<HTMLDivElement>(null);
+
 	const q = questions[current];
 	const isKo = locale === "ko";
 	const optionKeys = ["a", "b", "c", "d"] as const;
 
 	const handleSelect = (key: "a" | "b" | "c" | "d") => {
-		if (selected !== null) return; // already answered
+		if (selected !== null) return;
 		setSelected(key);
 		setAnswers((prev) => ({ ...prev, [current]: key }));
 
@@ -42,8 +46,12 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 		if (current < questions.length - 1) {
 			setCurrent((c) => c + 1);
 			setSelected(null);
+			// 다음 문제로 이동 후 질문 텍스트로 포커스
+			requestAnimationFrame(() => questionRef.current?.focus());
 		} else {
 			setPhase("summary");
+			// 요약 화면으로 이동 후 결과로 포커스
+			requestAnimationFrame(() => summaryRef.current?.focus());
 		}
 	};
 
@@ -60,7 +68,11 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 
 	if (phase === "summary") {
 		return (
-			<div className="rounded-xl border border-gray-200 p-6">
+			<div
+				ref={summaryRef}
+				tabIndex={-1}
+				className="rounded-xl border border-gray-200 p-6 focus-visible:outline-none"
+			>
 				<h3 className="text-base font-semibold text-gray-900">
 					{isKo ? "퀴즈 완료" : "Quiz Complete"}
 				</h3>
@@ -105,15 +117,16 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 							setSelected(null);
 							setAnswers({});
 							setPhase("quiz");
+							requestAnimationFrame(() => questionRef.current?.focus());
 						}}
-						className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+						className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
 					>
 						{isKo ? "다시 풀기" : "Retry"}
 					</button>
 					{correctCount < questions.length && (
 						<Link
 							href={wrongAnswersLink}
-							className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-red-700"
+							className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800"
 						>
 							{isKo ? "오답노트 보기" : "View Wrong Answers"}
 						</Link>
@@ -143,13 +156,15 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 								? "문제 저장"
 								: "Save question"
 					}
-					className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
+					aria-pressed={isSaved(q.id)}
+					className={`rounded px-2 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
 						isSaved(q.id)
 							? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
 							: "bg-gray-100 text-gray-600 hover:bg-gray-200"
 					}`}
 				>
-					{isSaved(q.id) ? (isKo ? "★ 저장됨" : "★ Saved") : isKo ? "☆ 저장" : "☆ Save"}
+					<span aria-hidden="true">{isSaved(q.id) ? "★" : "☆"}</span>
+					{" "}{isSaved(q.id) ? (isKo ? "저장됨" : "Saved") : isKo ? "저장" : "Save"}
 				</button>
 			</div>
 
@@ -162,57 +177,71 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 					aria-valuenow={current + 1}
 					aria-valuemin={1}
 					aria-valuemax={questions.length}
-					aria-label={isKo ? "퀴즈 진행률" : "Quiz progress"}
+					aria-label={isKo ? `퀴즈 진행률: ${current + 1}/${questions.length}` : `Quiz progress: ${current + 1} of ${questions.length}`}
 				/>
 			</div>
 
-			{/* Question */}
-			<p className="text-sm font-semibold text-gray-900 leading-relaxed">
+			{/* Question — tabIndex={-1}로 포커스 수신 가능하게 */}
+			<p
+				ref={questionRef}
+				tabIndex={-1}
+				className="text-sm font-semibold text-gray-900 leading-relaxed focus-visible:outline-none"
+			>
 				{isKo ? q.question.ko : q.question.en}
 			</p>
 
 			{/* Options */}
-			<ul className="mt-4 space-y-2" role="list">
-				{optionKeys.map((key) => {
-					const text = isKo ? q.options[key].ko : q.options[key].en;
-					let style =
-						"w-full rounded-lg border px-4 py-3 text-left text-sm transition-colors cursor-pointer";
+			<fieldset className="mt-4">
+				<legend className="sr-only">
+					{isKo ? "답을 선택하세요" : "Select your answer"}
+				</legend>
+				<ul className="space-y-2" role="list">
+					{optionKeys.map((key) => {
+						const text = isKo ? q.options[key].ko : q.options[key].en;
+						let style =
+							"w-full rounded-lg border px-4 py-3 text-left text-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2";
 
-					if (!answered) {
-						style += " border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-700";
-					} else if (key === q.answer) {
-						style += " border-green-400 bg-green-50 text-green-800 font-medium";
-					} else if (key === selected) {
-						style += " border-red-400 bg-red-50 text-red-800";
-					} else {
-						style += " border-gray-200 bg-gray-50 text-gray-400";
-					}
+						if (!answered) {
+							style += " border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-700 focus-visible:outline-blue-600";
+						} else if (key === q.answer) {
+							style += " border-green-400 bg-green-50 text-green-800 font-medium focus-visible:outline-green-600";
+						} else if (key === selected) {
+							style += " border-red-400 bg-red-50 text-red-800 focus-visible:outline-red-600";
+						} else {
+							style += " border-gray-200 bg-gray-50 text-gray-400 focus-visible:outline-gray-400";
+						}
 
-					return (
-						<li key={key}>
-							<button
-								className={style}
-								onClick={() => handleSelect(key)}
-								disabled={answered}
-								aria-pressed={selected === key}
-							>
-								<span className="mr-2 font-semibold uppercase">{key}.</span>
-								{text}
-								{answered && key === q.answer && (
-									<span className="ml-2" aria-label={isKo ? "정답" : "Correct answer"}>
-										✓
-									</span>
-								)}
-								{answered && key === selected && key !== q.answer && (
-									<span className="ml-2" aria-label={isKo ? "오답" : "Wrong answer"}>
-										✗
-									</span>
-								)}
-							</button>
-						</li>
-					);
-				})}
-			</ul>
+						// 답변 후 각 선택지 상태를 aria-label로 명시
+						const answerStateLabel = answered
+							? key === q.answer
+								? isKo ? " (정답)" : " (Correct answer)"
+								: key === selected
+									? isKo ? " (선택한 오답)" : " (Your wrong answer)"
+									: ""
+							: "";
+
+						return (
+							<li key={key}>
+								<button
+									className={style}
+									onClick={() => handleSelect(key)}
+									disabled={answered}
+									aria-label={`${key.toUpperCase()}. ${text}${answerStateLabel}`}
+								>
+									<span className="mr-2 font-semibold uppercase" aria-hidden="true">{key}.</span>
+									<span aria-hidden="true">{text}</span>
+									{answered && key === q.answer && (
+										<span className="ml-2" aria-hidden="true">✓</span>
+									)}
+									{answered && key === selected && key !== q.answer && (
+										<span className="ml-2" aria-hidden="true">✗</span>
+									)}
+								</button>
+							</li>
+						);
+					})}
+				</ul>
+			</fieldset>
 
 			{/* Explanation */}
 			{answered && (
@@ -248,7 +277,7 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 			{answered && (
 				<button
 					onClick={handleNext}
-					className="mt-4 rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700"
+					className="mt-4 rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
 				>
 					{current < questions.length - 1
 						? isKo
