@@ -8,39 +8,38 @@ import { cookies } from "next/headers";
  * 퀴즈 문항 조회 (공개)
  */
 export async function GET(request: NextRequest) {
-  const { searchParams } = request.nextUrl;
-  const exam = searchParams.get("exam");
-  const domain = searchParams.get("domain");
-  const unitId = searchParams.get("unit_id");
+	const { searchParams } = request.nextUrl;
+	const exam = searchParams.get("exam");
+	const domain = searchParams.get("domain");
+	const unitId = searchParams.get("unit_id");
 
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll(); },
-        setAll() {},
-      },
-    }
-  );
+	const cookieStore = await cookies();
+	const supabase = createServerClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+		{
+			cookies: {
+				getAll() {
+					return cookieStore.getAll();
+				},
+				setAll() {},
+			},
+		}
+	);
 
-  let query = supabase
-    .from("quiz_questions")
-    .select("*")
-    .eq("is_active", true);
+	let query = supabase.from("quiz_questions").select("*").eq("is_active", true);
 
-  if (unitId) query = query.eq("unit_id", unitId);
-  else if (exam && domain) query = query.eq("exam", exam).eq("domain", Number(domain));
-  else if (exam) query = query.eq("exam", exam);
+	if (unitId) query = query.eq("unit_id", unitId);
+	else if (exam && domain) query = query.eq("exam", exam).eq("domain", Number(domain));
+	else if (exam) query = query.eq("exam", exam);
 
-  const { data, error } = await query.order("created_at");
+	const { data, error } = await query.order("created_at");
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+	if (error) {
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
 
-  return NextResponse.json({ questions: data });
+	return NextResponse.json({ questions: data });
 }
 
 /**
@@ -48,35 +47,37 @@ export async function GET(request: NextRequest) {
  * 향후 관리자 권한 체크 추가 예정
  */
 export async function POST(request: NextRequest) {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll(); },
-        setAll(cs) { cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); },
-      },
-    }
-  );
+	const cookieStore = await cookies();
+	const supabase = createServerClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+		{
+			cookies: {
+				getAll() {
+					return cookieStore.getAll();
+				},
+				setAll(cs) {
+					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+				},
+			},
+		}
+	);
 
-  // 로그인 확인
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+	// 로그인 확인
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
 
-  const body = await request.json();
+	const body = await request.json();
 
-  const { data, error } = await supabase
-    .from("quiz_questions")
-    .insert(body)
-    .select()
-    .single();
+	const { data, error } = await supabase.from("quiz_questions").insert(body).select().single();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
-  }
+	if (error) {
+		return NextResponse.json({ error: error.message }, { status: 400 });
+	}
 
-  return NextResponse.json({ question: data }, { status: 201 });
+	return NextResponse.json({ question: data }, { status: 201 });
 }

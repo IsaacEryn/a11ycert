@@ -2,108 +2,104 @@
 
 /* ─── 디자인 토큰 ──────────────────────────────────────── */
 :root {
-  --color-brand:        #2563eb; /* blue-600 — 배경 흰색 대비 4.93:1 (AA 통과) */
-  --color-brand-hover:  #1d4ed8; /* blue-700 */
-  --color-brand-focus:  #1e40af; /* blue-800 */
-  --color-text:         #111827; /* gray-900 */
-  --color-text-muted:   #6b7280; /* gray-500 */
-  --color-surface:      #ffffff;
-  --color-surface-alt:  #f9fafb; /* gray-50  */
-  --color-border:       #e5e7eb; /* gray-200 */
-  --color-error:        #dc2626; /* red-600  */
-  --radius-base:        0.5rem;
-  --focus-ring:         0 0 0 3px #bfdbfe; /* blue-200 */
+	--color-brand: #2563eb; /* blue-600 — 배경 흰색 대비 4.93:1 (AA 통과) */
+	--color-brand-hover: #1d4ed8; /* blue-700 */
+	--color-brand-focus: #1e40af; /* blue-800 */
+	--color-text: #111827; /* gray-900 */
+	--color-text-muted: #6b7280; /* gray-500 */
+	--color-surface: #ffffff;
+	--color-surface-alt: #f9fafb; /* gray-50  */
+	--color-border: #e5e7eb; /* gray-200 */
+	--color-error: #dc2626; /* red-600  */
+	--radius-base: 0.5rem;
+	--focus-ring: 0 0 0 3px #bfdbfe; /* blue-200 */
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 /* ─── 기반 스타일 ──────────────────────────────────────── */
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 /* 모션 민감 사용자: 스크롤 애니메이션 비활성화 */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
 }
 
 body {
-  color: var(--color-text);
-  background: var(--color-surface);
-  /* 한국어 + 영어 혼용을 위한 폰트 스택 */
-  font-family:
-    var(--font-geist-sans),
-    "Apple SD Gothic Neo",
-    "Malgun Gothic",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  word-break: keep-all; /* 한국어 줄바꿈 최적화 */
-  overflow-wrap: break-word;
+	color: var(--color-text);
+	background: var(--color-surface);
+	/* 한국어 + 영어 혼용을 위한 폰트 스택 */
+	font-family: var(--font-geist-sans), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	word-break: keep-all; /* 한국어 줄바꿈 최적화 */
+	overflow-wrap: break-word;
 }
 
 /* ─── 건너뛰기 링크 (Skip to content) ─────────────────── */
 .skip-link {
-  position: absolute;
-  top: -9999px;
-  left: 0.75rem;
-  z-index: 9999;
-  padding: 0.5rem 1rem;
-  background: var(--color-brand);
-  color: #fff;
-  font-weight: 600;
-  border-radius: 0 0 var(--radius-base) var(--radius-base);
-  text-decoration: none;
-  white-space: nowrap;
+	position: absolute;
+	top: -9999px;
+	left: 0.75rem;
+	z-index: 9999;
+	padding: 0.5rem 1rem;
+	background: var(--color-brand);
+	color: #fff;
+	font-weight: 600;
+	border-radius: 0 0 var(--radius-base) var(--radius-base);
+	text-decoration: none;
+	white-space: nowrap;
 }
 .skip-link:focus {
-  top: 0;
-  outline: 3px solid var(--color-brand-focus);
-  outline-offset: 2px;
+	top: 0;
+	outline: 3px solid var(--color-brand-focus);
+	outline-offset: 2px;
 }
 
 /* ─── 포커스 표시 (키보드 탐색) ───────────────────────── */
 :focus-visible {
-  outline: 3px solid var(--color-brand);
-  outline-offset: 2px;
-  border-radius: 2px;
+	outline: 3px solid var(--color-brand);
+	outline-offset: 2px;
+	border-radius: 2px;
 }
 
 /* 마우스 클릭 시에는 outline 제거 */
 :focus:not(:focus-visible) {
-  outline: none;
+	outline: none;
 }
 
 /* ─── 링크 기본 스타일 ─────────────────────────────────── */
 a {
-  color: var(--color-brand);
-  text-decoration-line: underline;
-  text-underline-offset: 3px;
+	color: var(--color-brand);
+	text-decoration-line: underline;
+	text-underline-offset: 3px;
 }
 a:hover {
-  color: var(--color-brand-hover);
+	color: var(--color-brand-hover);
 }
 
 /* ─── 스크린 리더 전용 텍스트 ─────────────────────────── */
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }
