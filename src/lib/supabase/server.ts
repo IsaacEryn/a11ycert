@@ -1,18 +1,28 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+function isValidUrl(url: string | undefined): boolean {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export async function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !key) {
-    // 환경 변수 미설정 시 — 더미 클라이언트 반환
+  if (!isValidUrl(url) || !key) {
+    // 환경 변수 미설정 또는 유효하지 않은 URL — 더미 클라이언트 반환
     return createDummyServerClient();
   }
 
   const cookieStore = await cookies();
 
-  return createServerClient(url, key, {
+  return createServerClient(url!, key, {
     cookies: {
       getAll() {
         return cookieStore.getAll();

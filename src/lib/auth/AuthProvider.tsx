@@ -1,6 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
+import {
+	createContext,
+	useContext,
+	useEffect,
+	useState,
+	useCallback,
+	useRef,
+	type ReactNode,
+} from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
@@ -45,7 +53,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [session, setSession] = useState<Session | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const supabase = createClient();
+	// createClient()는 싱글톤이지만 매 렌더마다 새 참조를 반환하므로
+	// useRef로 고정해 useCallback/useEffect 의존성 배열 재실행 방지
+	const supabaseRef = useRef(createClient());
+	const supabase = supabaseRef.current;
 
 	const fetchProfile = useCallback(
 		async (userId: string) => {

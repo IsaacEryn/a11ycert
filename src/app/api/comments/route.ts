@@ -1,24 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
-function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
-	return createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll(cs) {
-					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				},
-			},
-		}
-	);
-}
+const MAX_CONTENT_LENGTH = 2000;
 
 /**
  * GET /api/comments?path=/cpacc/study/cpacc-1-1
@@ -28,8 +12,7 @@ export async function GET(request: NextRequest) {
 	const pagePath = request.nextUrl.searchParams.get("path");
 	if (!pagePath) return NextResponse.json({ error: "path required" }, { status: 400 });
 
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const { data, error } = await supabase
 		.from("comments")
@@ -52,17 +35,25 @@ export async function GET(request: NextRequest) {
  * 새 댓글 작성 (로그인 필요)
  */
 export async function POST(request: NextRequest) {
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-	const { page_path, content, parent_id } = await request.json();
-	if (!page_path || !content?.trim()) {
+	const body = await request.json();
+	const { page_path, parent_id } = body;
+	const content: string = body.content ?? "";
+
+	if (!page_path || !content.trim()) {
 		return NextResponse.json({ error: "page_path and content required" }, { status: 400 });
+	}
+	if (content.length > MAX_CONTENT_LENGTH) {
+		return NextResponse.json(
+			{ error: `댓글은 ${MAX_CONTENT_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
 	}
 
 	const { data, error } = await supabase

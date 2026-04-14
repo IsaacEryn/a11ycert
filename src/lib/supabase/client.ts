@@ -2,18 +2,27 @@ import { createBrowserClient } from "@supabase/ssr";
 
 let client: ReturnType<typeof createBrowserClient> | null = null;
 
+function isValidUrl(url: string | undefined): boolean {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !key) {
-    // 환경 변수 미설정 시 — 개발 환경에서 Supabase 미연결 상태
-    // Proxy 객체로 모든 호출을 안전하게 무시
+  if (!isValidUrl(url) || !key) {
+    // 환경 변수 미설정 또는 유효하지 않은 URL — 더미 클라이언트 반환
     return createDummyClient();
   }
 
   if (!client) {
-    client = createBrowserClient(url, key);
+    client = createBrowserClient(url!, key);
   }
   return client;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -18,7 +18,8 @@ export default function WrongAnswerList({ locale }: Props) {
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
-	const supabase = createClient();
+	const supabaseRef = useRef(createClient());
+	const supabase = supabaseRef.current;
 
 	useEffect(() => {
 		async function load() {

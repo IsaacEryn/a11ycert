@@ -1,24 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
-function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
-	return createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll(cs) {
-					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				},
-			},
-		}
-	);
-}
+const MAX_CONTENT_LENGTH = 2000;
 
 /**
  * PATCH /api/comments/[id]
@@ -26,16 +10,23 @@ function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
  */
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 	const { id } = await params;
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-	const { content } = await request.json();
-	if (!content?.trim()) return NextResponse.json({ error: "content required" }, { status: 400 });
+	const body = await request.json();
+	const content: string = body.content ?? "";
+
+	if (!content.trim()) return NextResponse.json({ error: "content required" }, { status: 400 });
+	if (content.length > MAX_CONTENT_LENGTH) {
+		return NextResponse.json(
+			{ error: `댓글은 ${MAX_CONTENT_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
+	}
 
 	const { data, error } = await supabase
 		.from("comments")
@@ -60,8 +51,7 @@ export async function DELETE(
 	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const { id } = await params;
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
