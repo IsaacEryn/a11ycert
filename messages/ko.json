@@ -6,8 +6,12 @@
       "home": "홈",
       "cpacc": "CPACC",
       "was": "WAS",
+      "overview": "개요",
+      "study": "학습",
+      "quiz": "모의 퀴즈",
+      "flashcards": "플래시카드",
+      "wrongAnswers": "오답노트",
       "glossary": "용어집",
-      "studyPlan": "학습 로드맵",
       "about": "소개",
       "privacy": "개인정보처리방침"
     },
