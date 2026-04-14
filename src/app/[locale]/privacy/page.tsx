@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "개인정보처리방침",
+  title: "개인정보처리방침 | Privacy Policy",
 };
 
 export default async function PrivacyPage({
@@ -13,45 +13,63 @@ export default async function PrivacyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
   return <PrivacyContent />;
 }
 
 function PrivacyContent() {
   const t = useTranslations("privacy");
 
+  const sections = [
+    { id: "collected", titleKey: "collected.title", bodyKey: "collected.body" },
+    { id: "cookies",   titleKey: "cookies.title",   bodyKey: "cookies.body" },
+    { id: "rights",    titleKey: "rights.title",    bodyKey: "rights.body" },
+  ] as const;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
-      <div className="mt-6 space-y-6 text-gray-700 leading-relaxed">
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900">수집하는 정보</h2>
-          <p className="mt-2">
-            이 사이트는 별도의 회원가입 없이 이용할 수 있습니다. 학습 진도 및 오답 노트는
-            사용자 기기의 localStorage에만 저장되며 서버로 전송되지 않습니다.
-          </p>
+      <p className="mt-2 text-sm text-gray-400">{t("lastUpdated")}</p>
+      <p className="mt-4 text-gray-700 leading-relaxed">{t("intro")}</p>
+
+      <div className="mt-10 space-y-8 text-gray-700">
+
+        {sections.map(({ id, titleKey, bodyKey }) => (
+          <section key={id} aria-labelledby={`privacy-${id}`}>
+            <h2 id={`privacy-${id}`} className="text-xl font-semibold text-gray-900">
+              {t(titleKey)}
+            </h2>
+            <p className="mt-3 leading-relaxed">{t(bodyKey)}</p>
+          </section>
+        ))}
+
+        {/* 광고 및 분석 — 목록 형태 */}
+        <section aria-labelledby="privacy-thirdparty">
+          <h2 id="privacy-thirdparty" className="text-xl font-semibold text-gray-900">
+            {t("thirdParty.title")}
+          </h2>
+          <ul className="mt-3 space-y-2 leading-relaxed list-disc list-inside">
+            <li>{t("thirdParty.adsense")}</li>
+            <li>{t("thirdParty.analytics")}</li>
+          </ul>
+          <p className="mt-3 text-sm text-gray-500">{t("thirdParty.moreInfo")}</p>
         </section>
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900">광고 및 분석 서비스</h2>
-          <p className="mt-2">
-            Google AdSense 및 Google Analytics를 사용합니다. 이 서비스들은 사용자의 브라우저에
-            쿠키를 저장하고 익명화된 방문 데이터를 수집합니다. 자세한 내용은
-            Google 개인정보처리방침을 참고하세요.
-          </p>
+
+        {/* 문의 */}
+        <section aria-labelledby="privacy-contact">
+          <h2 id="privacy-contact" className="text-xl font-semibold text-gray-900">
+            {t("contact.title")}
+          </h2>
+          <p className="mt-3 leading-relaxed">{t("contact.body")}</p>
+          <a
+            href="https://www.codeslog.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:underline"
+          >
+            codeslog.com <span aria-hidden="true">↗</span>
+          </a>
         </section>
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900">쿠키</h2>
-          <p className="mt-2">
-            이 사이트는 광고 서비스 제공을 위해 제3자 쿠키를 사용합니다.
-            브라우저 설정에서 쿠키를 비활성화할 수 있습니다.
-          </p>
-        </section>
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900">문의</h2>
-          <p className="mt-2">
-            개인정보 관련 문의는 GitHub Issues를 통해 남겨주세요.
-          </p>
-        </section>
+
       </div>
     </div>
   );
