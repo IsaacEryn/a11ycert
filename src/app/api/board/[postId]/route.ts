@@ -1,24 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
-function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
-	return createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll(cs) {
-					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				},
-			},
-		}
-	);
-}
+const MAX_TITLE_LENGTH = 200;
+const MAX_CONTENT_LENGTH = 10000;
 
 /**
  * GET /api/board/[postId]
@@ -29,8 +14,7 @@ export async function GET(
 	{ params }: { params: Promise<{ postId: string }> }
 ) {
 	const { postId } = await params;
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	// 게시글 조회
 	const { data: post, error } = await supabase
@@ -49,11 +33,14 @@ export async function GET(
 		return NextResponse.json({ error: "Not found" }, { status: 404 });
 	}
 
-	// 조회수 증가 (실패해도 무시)
-	await supabase
-		.from("board_posts")
-		.update({ view_count: (post.view_count ?? 0) + 1 })
-		.eq("id", postId);
+	// 조회수 증가 — rpc로 atomic increment (레이스 컨디션 방지)
+	await supabase.rpc("increment_view_count", { post_id: postId }).catch(() => {
+		// rpc 미설치 시 fallback (실패해도 무시)
+		supabase
+			.from("board_posts")
+			.update({ view_count: (post.view_count ?? 0) + 1 })
+			.eq("id", postId);
+	});
 
 	// 댓글 조회
 	const { data: replies } = await supabase
@@ -80,15 +67,29 @@ export async function PATCH(
 	{ params }: { params: Promise<{ postId: string }> }
 ) {
 	const { postId } = await params;
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-	const { title, content } = await request.json();
+	const body = await request.json();
+	const title: string | undefined = body.title;
+	const content: string | undefined = body.content;
+
+	if (title !== undefined && title.length > MAX_TITLE_LENGTH) {
+		return NextResponse.json(
+			{ error: `제목은 ${MAX_TITLE_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
+	}
+	if (content !== undefined && content.length > MAX_CONTENT_LENGTH) {
+		return NextResponse.json(
+			{ error: `본문은 ${MAX_CONTENT_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
+	}
 
 	const { data, error } = await supabase
 		.from("board_posts")
@@ -117,8 +118,7 @@ export async function DELETE(
 	{ params }: { params: Promise<{ postId: string }> }
 ) {
 	const { postId } = await params;
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },

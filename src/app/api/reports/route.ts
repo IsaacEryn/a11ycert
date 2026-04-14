@@ -1,42 +1,41 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
-function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
-	return createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll(cs) {
-					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				},
-			},
-		}
-	);
-}
+const MAX_TITLE_LENGTH = 200;
+const MAX_CONTENT_LENGTH = 5000;
 
 /**
  * POST /api/reports
  * 제보 생성 — reports + board_posts 동시 삽입
  */
 export async function POST(request: NextRequest) {
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-	const { type, target_type, target_id, title, content } = await request.json();
+	const body = await request.json();
+	const { type, target_type, target_id } = body;
+	const title: string = body.title ?? "";
+	const content: string = body.content ?? "";
 
-	if (!type || !target_type || !title?.trim() || !content?.trim()) {
+	if (!type || !target_type || !title.trim() || !content.trim()) {
 		return NextResponse.json({ error: "필수 필드가 누락되었습니다" }, { status: 400 });
+	}
+	if (title.length > MAX_TITLE_LENGTH) {
+		return NextResponse.json(
+			{ error: `제목은 ${MAX_TITLE_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
+	}
+	if (content.length > MAX_CONTENT_LENGTH) {
+		return NextResponse.json(
+			{ error: `내용은 ${MAX_CONTENT_LENGTH}자 이하로 작성해주세요` },
+			{ status: 400 }
+		);
 	}
 
 	// 1. board_posts에 먼저 삽입 (제보 게시글)
@@ -78,16 +77,26 @@ export async function POST(request: NextRequest) {
 }
 
 /**
- * GET /api/reports — 관리자용 제보 목록 조회 (향후 권한 추가)
+ * GET /api/reports — 관리자 전용 제보 목록 조회
  */
 export async function GET() {
-	const cookieStore = await cookies();
-	const supabase = makeSupabase(cookieStore);
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+	// 관리자 권한 확인 (profiles.role = 'admin')
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+
+	if (profile?.role !== "admin") {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
 
 	const { data, error } = await supabase
 		.from("reports")

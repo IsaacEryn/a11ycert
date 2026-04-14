@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
@@ -16,6 +15,7 @@ interface Comment {
 	created_at: string;
 	updated_at: string;
 	profiles: {
+		id: string;
 		nickname: string;
 		avatar_url: string | null;
 	} | null;
@@ -31,18 +31,15 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 	const [isLoading, setIsLoading] = useState(true);
 	const auth = useOptionalAuth();
 	const isKo = locale === "ko";
-	const supabase = createClient();
 
 	const fetchComments = useCallback(async () => {
-		const { data } = await supabase
-			.from("comments")
-			.select("*, profiles(nickname, avatar_url)")
-			.eq("page_path", pagePath)
-			.order("created_at", { ascending: true });
-
-		setComments((data as Comment[]) || []);
+		const res = await fetch(`/api/comments?path=${encodeURIComponent(pagePath)}`);
+		if (res.ok) {
+			const json = await res.json();
+			setComments(json.comments ?? []);
+		}
 		setIsLoading(false);
-	}, [supabase, pagePath]);
+	}, [pagePath]);
 
 	useEffect(() => {
 		fetchComments();
@@ -51,25 +48,26 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 	const handleSubmit = async (content: string, parentId?: string) => {
 		if (!auth?.user) return;
 
-		const { error } = await supabase.from("comments").insert({
-			user_id: auth.user.id,
-			page_path: pagePath,
-			content,
-			parent_id: parentId || null,
+		await fetch("/api/comments", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ page_path: pagePath, content, parent_id: parentId ?? null }),
 		});
 
-		if (!error) {
-			await fetchComments();
-		}
+		await fetchComments();
 	};
 
 	const handleEdit = async (id: string, content: string) => {
-		await supabase.from("comments").update({ content }).eq("id", id);
+		await fetch(`/api/comments/${id}`, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ content }),
+		});
 		await fetchComments();
 	};
 
 	const handleDelete = async (id: string) => {
-		await supabase.from("comments").update({ is_deleted: true }).eq("id", id);
+		await fetch(`/api/comments/${id}`, { method: "DELETE" });
 		await fetchComments();
 	};
 
