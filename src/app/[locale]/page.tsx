@@ -14,10 +14,10 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <HomeContent />;
+  return <HomeContent locale={locale} />;
 }
 
-function HomeContent() {
+function HomeContent({ locale }: { locale: string }) {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
   const tCpacc = useTranslations("cpacc");
@@ -76,13 +76,13 @@ function HomeContent() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/cpacc"
+              href={`/${locale}/cpacc`}
               className="inline-flex items-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white no-underline transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
               {t("hero.startCpacc")}
             </Link>
             <Link
-              href="/was"
+              href={`/${locale}/was`}
               className="inline-flex items-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 no-underline transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
             >
               {t("hero.startWas")}
@@ -174,7 +174,7 @@ function HomeContent() {
                 </dl>
 
                 <Link
-                  href={`/${key}`}
+                  href={`/${locale}/${key}`}
                   className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-blue-600 no-underline hover:underline"
                   aria-label={`${key.toUpperCase()} ${tCommon("exam.startQuiz")}`}
                 >
