@@ -4,6 +4,13 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
+import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import {
+	syncWrongAnswerToDB,
+	removeWrongAnswerFromDB,
+	syncSavedQuestionToDB,
+	removeSavedQuestionFromDB,
+} from "@/lib/store/learning-sync";
 import BilingualText from "@/components/BilingualText";
 import ReportButton from "@/components/report/ReportButton";
 
@@ -23,6 +30,8 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 
 	const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, languageMode } =
 		useLearningStore();
+	const auth = useOptionalAuth();
+	const userId = auth?.user?.id ?? null;
 
 	const questionRef = useRef<HTMLParagraphElement>(null);
 	const summaryRef = useRef<HTMLDivElement>(null);
@@ -38,8 +47,10 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 
 		if (key !== q.answer) {
 			addWrongAnswer(q.id);
+			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
 		} else {
 			removeWrongAnswer(q.id);
+			if (userId) removeWrongAnswerFromDB(userId, q.id);
 		}
 	};
 
@@ -57,8 +68,10 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 	const toggleSave = () => {
 		if (isSaved(q.id)) {
 			unsaveQuestion(q.id);
+			if (userId) removeSavedQuestionFromDB(userId, q.id);
 		} else {
 			saveQuestion(q.id);
+			if (userId) syncSavedQuestionToDB(userId, q.id);
 		}
 	};
 
