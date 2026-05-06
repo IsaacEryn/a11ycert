@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useLearningStore } from "@/lib/store/learningStore";
+import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { syncCompletedUnitToDB } from "@/lib/store/learning-sync";
 
 interface Props {
 	unitId: string;
@@ -11,14 +13,21 @@ interface Props {
 
 export default function UnitCompleteButton({ unitId, locale, backHref }: Props) {
 	const { markUnitComplete, isCompleted } = useLearningStore();
+	const auth = useOptionalAuth();
+	const userId = auth?.user?.id ?? null;
 	const isKo = locale === "ko";
 	const done = isCompleted(unitId);
+
+	const handleComplete = () => {
+		markUnitComplete(unitId);
+		if (userId) syncCompletedUnitToDB(userId, unitId);
+	};
 
 	return (
 		<div className="flex flex-wrap items-center gap-3">
 			{!done ? (
 				<button
-					onClick={() => markUnitComplete(unitId)}
+					onClick={handleComplete}
 					className="rounded-lg bg-green-600 px-5 py-2 text-sm font-medium text-white hover:bg-green-700"
 				>
 					{isKo ? "학습 완료 표시" : "Mark as Complete"}

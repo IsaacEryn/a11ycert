@@ -10,6 +10,7 @@ import {
 	type ReactNode,
 } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { migrateLocalStorageToDB } from "@/lib/store/learning-sync";
 import type { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
 interface Profile {
@@ -101,6 +102,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 				if (event === "SIGNED_IN" && newSession?.user) {
 					await fetchProfile(newSession.user.id);
+					// localStorage → DB 마이그레이션 (비동기, UI 블로킹 없음)
+					migrateLocalStorageToDB(newSession.user.id).catch(() => {});
 				}
 
 				if (event === "SIGNED_OUT") {
