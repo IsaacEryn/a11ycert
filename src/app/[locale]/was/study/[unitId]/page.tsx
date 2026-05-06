@@ -8,6 +8,7 @@ import StudyUnitContent from "@/components/StudyUnitContent";
 import UnitCompleteButton from "@/components/UnitCompleteButton";
 import CommentSection from "@/components/comments/CommentSection";
 import StudyNoteEditor from "@/components/notes/StudyNoteEditor";
+import ReportButton from "@/components/report/ReportButton";
 
 export async function generateStaticParams() {
 	const locales = ["ko", "en"];
@@ -86,8 +87,11 @@ export default async function WasUnitPage({
 				</section>
 			)}
 
-			{/* Complete button */}
+			{/* Report + Complete */}
 			<div className="mt-8 border-t border-gray-100 pt-6">
+				<div className="mb-4 flex justify-end">
+					<ReportButton locale={locale} targetType="content" targetId={unit.id} />
+				</div>
 				<UnitCompleteButton unitId={unit.id} locale={locale} backHref={`/${locale}/was/study`} />
 			</div>
 
