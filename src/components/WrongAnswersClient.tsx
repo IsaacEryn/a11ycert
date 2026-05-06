@@ -5,6 +5,8 @@ import Link from "next/link";
 import type { StudyUnit, QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
 import QuizEngine from "@/components/QuizEngine";
+import BilingualText from "@/components/BilingualText";
+import LanguageModeToggle from "@/components/LanguageModeToggle";
 
 interface Props {
 	locale: string;
@@ -81,6 +83,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 						{isKo ? "오답노트" : "My Study Notes"}
 					</h1>
 				</div>
+				<LanguageModeToggle />
 			</div>
 
 			{/* Tabs */}
@@ -185,15 +188,13 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 													</Link>
 												)}
 												<p className="mt-1 text-sm font-medium text-gray-900 leading-relaxed">
-													{isKo ? q.question.ko : q.question.en}
+													<BilingualText field={q.question} variant="body" as="span" />
 												</p>
 												<div className="mt-2 text-xs text-gray-500">
 													<span className="font-medium">{isKo ? "정답: " : "Answer: "}</span>
-													{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
+													<BilingualText field={q.options[q.answer]} variant="label" as="span" />
 												</div>
-												<p className="mt-1 text-xs text-gray-400 leading-relaxed">
-													{isKo ? q.explanation.ko : q.explanation.en}
-												</p>
+												<BilingualText field={q.explanation} variant="label" as="p" className="mt-1 text-xs text-gray-400 leading-relaxed" />
 											</div>
 											{tab === "saved" && (
 												<button

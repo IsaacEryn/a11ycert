@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getCpaccUnit, getAllCpaccUnitIds } from "@/lib/content/cpacc-units";
 import QuizEngine from "@/components/QuizEngine";
+import StudyUnitContent from "@/components/StudyUnitContent";
 import UnitCompleteButton from "@/components/UnitCompleteButton";
 import CommentSection from "@/components/comments/CommentSection";
 import StudyNoteEditor from "@/components/notes/StudyNoteEditor";
@@ -66,39 +67,7 @@ export default async function CpaccUnitPage({
 			{/* Title */}
 			<h1 className="text-2xl font-bold text-gray-900">{isKo ? unit.title.ko : unit.title.en}</h1>
 
-			{/* Summary banner */}
-			<div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800 leading-relaxed">
-				{isKo ? unit.summary.ko : unit.summary.en}
-			</div>
-
-			{/* Objectives */}
-			<section aria-labelledby="objectives" className="mt-8">
-				<h2 id="objectives" className="text-base font-semibold text-gray-900">
-					{isKo ? "학습 목표" : "Learning Objectives"}
-				</h2>
-				<ul className="mt-3 space-y-1.5 text-sm text-gray-700" role="list">
-					{(isKo ? unit.objectives.ko : unit.objectives.en).map((obj, i) => (
-						<li key={i} className="flex items-start gap-2">
-							<span className="mt-0.5 text-blue-500" aria-hidden="true">
-								•
-							</span>
-							<span>{obj}</span>
-						</li>
-					))}
-				</ul>
-			</section>
-
-			{/* Content */}
-			<section aria-labelledby="content" className="mt-8">
-				<h2 id="content" className="text-base font-semibold text-gray-900">
-					{isKo ? "학습 내용" : "Study Content"}
-				</h2>
-				<div className="mt-3 space-y-4 text-sm text-gray-700 leading-relaxed">
-					{(isKo ? unit.content.ko : unit.content.en).map((para, i) => (
-						<p key={i}>{para}</p>
-					))}
-				</div>
-			</section>
+			<StudyUnitContent unit={unit} locale={locale} accentColor="blue" />
 
 			{/* Quiz */}
 			{unit.questions.length > 0 && (

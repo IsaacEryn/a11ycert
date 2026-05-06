@@ -105,19 +105,24 @@ export default function Header({ locale }: HeaderProps) {
 	);
 
 	return (
-		<header className="sticky top-0 z-40 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
+		<header className="sticky top-0 z-40 border-b border-gray-200/80 bg-white/95 shadow-sm backdrop-blur-sm">
 			<div className="mx-auto max-w-6xl px-4 sm:px-6">
 				<div className="flex h-16 items-center justify-between gap-4">
 					{/* 로고 */}
 					<Link
 						href={`/${locale}`}
-						className="flex items-center gap-2 font-bold text-gray-900 text-lg no-underline hover:text-blue-600 transition-colors"
+						className="flex items-center gap-1.5 no-underline transition-opacity hover:opacity-80"
 						aria-label={locale === "ko" ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
 					>
-						<span aria-hidden="true" className="text-blue-600 text-xl">
+						<span
+							aria-hidden="true"
+							className="rounded-lg bg-blue-600 px-1.5 py-0.5 text-sm font-black tracking-tight text-white"
+						>
 							A11Y
 						</span>
-						<span aria-hidden="true">Cert</span>
+						<span aria-hidden="true" className="text-lg font-bold text-gray-900">
+							Cert
+						</span>
 					</Link>
 
 					{/* 데스크톱 네비게이션 */}
@@ -139,9 +144,9 @@ export default function Header({ locale }: HeaderProps) {
 											}
 										}}
 										className={[
-											"flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors",
+											"flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
 											isActive(`/${locale}/${key}`)
-												? "bg-blue-50 text-blue-700"
+												? "bg-blue-50 text-blue-700 font-semibold"
 												: "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
 										].join(" ")}
 									>
@@ -153,7 +158,7 @@ export default function Header({ locale }: HeaderProps) {
 										<ul
 											id={`dropdown-${key}`}
 											role="list"
-											className="absolute left-0 top-full mt-1 w-36 rounded-lg border border-gray-200 bg-white py-1 shadow-lg z-50"
+											className="absolute left-0 top-full mt-1.5 w-40 rounded-xl border border-gray-200 bg-white py-1.5 shadow-xl z-50"
 											onKeyDown={(e) => {
 												if (e.key === "Escape") closeDropdown(key);
 											}}
@@ -234,6 +239,11 @@ export default function Header({ locale }: HeaderProps) {
 					id="mobile-nav"
 					aria-label={locale === "ko" ? "모바일 메뉴" : "Mobile menu"}
 					className="border-t border-gray-100 bg-white sm:hidden"
+					onKeyDown={(e) => {
+						if (e.key === "Escape") {
+							setMobileOpen(false);
+						}
+					}}
 				>
 					<ul className="flex flex-col px-4 py-3 gap-1" role="list">
 						{/* CPACC / WAS 아코디언 */}

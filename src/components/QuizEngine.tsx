@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
+import BilingualText from "@/components/BilingualText";
 
 interface QuizEngineProps {
 	questions: QuizQuestion[];
@@ -19,10 +20,9 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 	const [answers, setAnswers] = useState<Record<number, "a" | "b" | "c" | "d">>({});
 	const [phase, setPhase] = useState<Phase>("quiz");
 
-	const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, isWrong } =
+	const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, languageMode } =
 		useLearningStore();
 
-	// 포커스 관리 refs
 	const questionRef = useRef<HTMLParagraphElement>(null);
 	const summaryRef = useRef<HTMLDivElement>(null);
 
@@ -46,11 +46,9 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 		if (current < questions.length - 1) {
 			setCurrent((c) => c + 1);
 			setSelected(null);
-			// 다음 문제로 이동 후 질문 텍스트로 포커스
 			requestAnimationFrame(() => questionRef.current?.focus());
 		} else {
 			setPhase("summary");
-			// 요약 화면으로 이동 후 결과로 포커스
 			requestAnimationFrame(() => summaryRef.current?.focus());
 		}
 	};
@@ -94,17 +92,17 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 							}`}
 						>
 							<p className="font-medium text-gray-900">
-								{i + 1}. {isKo ? q.question.ko : q.question.en}
+								{i + 1}. <BilingualText field={q.question} variant="body" as="span" />
 							</p>
 							{!correct && userAns && (
 								<p className="mt-1 text-red-700">
 									{isKo ? "내 답: " : "Your answer: "}
-									{isKo ? q.options[userAns].ko : q.options[userAns].en}
+									<BilingualText field={q.options[userAns]} variant="label" as="span" />
 								</p>
 							)}
 							<p className={correct ? "mt-1 text-green-700" : "mt-1 text-gray-700"}>
 								{isKo ? "정답: " : "Correct: "}
-								{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
+								<BilingualText field={q.options[q.answer]} variant="label" as="span" />
 							</p>
 						</div>
 					);
@@ -181,13 +179,13 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 				/>
 			</div>
 
-			{/* Question — tabIndex={-1}로 포커스 수신 가능하게 */}
+			{/* Question */}
 			<p
 				ref={questionRef}
 				tabIndex={-1}
 				className="text-sm font-semibold text-gray-900 leading-relaxed focus-visible:outline-none"
 			>
-				{isKo ? q.question.ko : q.question.en}
+				<BilingualText field={q.question} variant="heading" as="span" />
 			</p>
 
 			{/* Options */}
@@ -197,7 +195,8 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 				</legend>
 				<ul className="space-y-2" role="list">
 					{optionKeys.map((key) => {
-						const text = isKo ? q.options[key].ko : q.options[key].en;
+						// 스크린리더용 aria-label은 ko-only 또는 en-only에 따라 단일 언어만
+						const srText = languageMode === "en-only" ? q.options[key].en : q.options[key].ko;
 						let style =
 							"w-full rounded-lg border px-4 py-3 text-left text-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2";
 
@@ -211,7 +210,6 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 							style += " border-gray-200 bg-gray-50 text-gray-400 focus-visible:outline-gray-400";
 						}
 
-						// 답변 후 각 선택지 상태를 aria-label로 명시
 						const answerStateLabel = answered
 							? key === q.answer
 								? isKo ? " (정답)" : " (Correct answer)"
@@ -226,10 +224,10 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 									className={style}
 									onClick={() => handleSelect(key)}
 									disabled={answered}
-									aria-label={`${key.toUpperCase()}. ${text}${answerStateLabel}`}
+									aria-label={`${key.toUpperCase()}. ${srText}${answerStateLabel}`}
 								>
 									<span className="mr-2 font-semibold uppercase" aria-hidden="true">{key}.</span>
-									<span aria-hidden="true">{text}</span>
+									<BilingualText field={q.options[key]} variant="option" as="span" aria-hidden="true" />
 									{answered && key === q.answer && (
 										<span className="ml-2" aria-hidden="true">✓</span>
 									)}
@@ -262,7 +260,7 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 								? "오답입니다."
 								: "Incorrect."}
 					</p>
-					<p className="mt-1 leading-relaxed">{isKo ? q.explanation.ko : q.explanation.en}</p>
+					<BilingualText field={q.explanation} variant="body" as="p" className="mt-1 leading-relaxed" />
 					{selected !== q.answer && (
 						<p className="mt-1 text-xs opacity-75">
 							{isKo

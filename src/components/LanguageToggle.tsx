@@ -26,9 +26,10 @@ export default function LanguageToggle({ currentLocale }: LanguageToggleProps) {
 					aria-pressed={currentLocale === locale}
 					aria-label={locale === "ko" ? "한국어로 전환" : "Switch to English"}
 					className={[
-						"px-3 py-1 text-sm font-medium rounded transition-colors",
-						"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
-						currentLocale === locale ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-100",
+						"px-3 py-1 text-sm font-medium rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2",
+						currentLocale === locale
+							? "bg-blue-600 text-white focus-visible:outline-white"
+							: "text-gray-600 hover:bg-gray-100 focus-visible:outline-blue-600",
 					].join(" ")}
 				>
 					{locale === "ko" ? "한국어" : "EN"}

@@ -8,10 +8,18 @@
 	--color-text: #111827; /* gray-900 */
 	--color-text-muted: #6b7280; /* gray-500 */
 	--color-surface: #ffffff;
-	--color-surface-alt: #f9fafb; /* gray-50  */
+	--color-surface-alt: #f8fafc; /* slate-50 */
 	--color-border: #e5e7eb; /* gray-200 */
 	--color-error: #dc2626; /* red-600  */
 	--radius-base: 0.5rem;
+	--radius-lg: 1rem;
+	--radius-xl: 1.25rem;
+	--color-bilingual-secondary: #6b7280; /* gray-500, ≈4.5:1 on white */
+
+	/* Dark surface tokens (hero, dark sections) */
+	--color-dark-bg: #0f172a; /* slate-900 */
+	--color-dark-surface: #1e293b; /* slate-800 */
+	--color-dark-border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -81,13 +89,16 @@ body {
 }
 
 /* ─── 링크 기본 스타일 ─────────────────────────────────── */
-a {
-	color: var(--color-brand);
-	text-decoration-line: underline;
-	text-underline-offset: 3px;
-}
-a:hover {
-	color: var(--color-brand-hover);
+/* @layer base 안에 넣어야 Tailwind 유틸리티(text-white, no-underline 등)가 우선 적용됨 */
+@layer base {
+	a {
+		color: var(--color-brand);
+		text-decoration-line: underline;
+		text-underline-offset: 3px;
+	}
+	a:hover {
+		color: var(--color-brand-hover);
+	}
 }
 
 /* ─── 스크린 리더 전용 텍스트 ─────────────────────────── */
@@ -101,4 +112,10 @@ a:hover {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+/* ─── 히어로 dot 패턴 ──────────────────────────────────── */
+.hero-dot-pattern {
+	background-image: radial-gradient(circle, rgba(129, 140, 248, 0.5) 1px, transparent 1px);
+	background-size: 32px 32px;
 }
