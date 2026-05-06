@@ -676,30 +676,195 @@ const units: StudyUnit[] = [
 		exam: "cpacc",
 		domain: 2,
 		order: 2,
-		available: false,
+		available: true,
 		title: { ko: "WCAG 개요 및 POUR 원칙", en: "WCAG Overview and POUR Principles" },
 		summary: {
 			ko: "WCAG 2.1/2.2의 4가지 POUR 원칙과 구조를 학습합니다.",
 			en: "Study the POUR principles and structure of WCAG 2.1/2.2.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"WCAG의 목적과 W3C/WAI의 역할을 설명할 수 있다",
+				"POUR 4원칙을 나열하고 각각을 설명할 수 있다",
+				"WCAG의 계층 구조(원칙→지침→성공 기준→기법)를 이해한다",
+				"WCAG 2.0, 2.1, 2.2의 발전 과정을 설명할 수 있다",
+			],
+			en: [
+				"Explain the purpose of WCAG and the role of W3C/WAI",
+				"List and describe the four POUR principles",
+				"Understand the WCAG hierarchy: Principles → Guidelines → Success Criteria → Techniques",
+				"Describe the evolution from WCAG 2.0 to 2.1 to 2.2",
+			],
+		},
+		content: {
+			ko: [
+				"WCAG(Web Content Accessibility Guidelines)는 W3C의 WAI(Web Accessibility Initiative)에서 개발한 웹 접근성 국제 표준입니다. 웹 콘텐츠를 장애인이 사용할 수 있도록 하는 기술적 기준을 제공합니다. WCAG 2.0(2008), 2.1(2018), 2.2(2023)로 발전했으며, 각 버전은 이전 버전과 하위 호환됩니다.",
+				"POUR 4원칙은 WCAG의 최상위 구조입니다. ① 인식 가능(Perceivable) — 정보와 UI 구성요소가 사용자에게 인식 가능한 방식으로 제공되어야 합니다. 텍스트 대안, 자막, 색상 대비 등이 여기에 속합니다. ② 운용 가능(Operable) — UI 구성요소와 내비게이션이 조작 가능해야 합니다. 키보드 접근, 충분한 시간, 발작 방지 등이 포함됩니다.",
+				"③ 이해 가능(Understandable) — 정보와 UI 조작 방법을 이해할 수 있어야 합니다. 읽기 쉬운 텍스트, 예측 가능한 동작, 입력 도움 등이 해당됩니다. ④ 견고(Robust) — 콘텐츠가 보조기술을 포함한 다양한 사용자 에이전트에서 안정적으로 해석되어야 합니다. 올바른 HTML 마크업, ARIA 사용 등이 포함됩니다.",
+				"WCAG의 계층 구조: 4개 원칙(POUR) → 13개 지침(Guidelines) → 성공 기준(Success Criteria, 각 A/AA/AAA 등급) → 충분 기법(Sufficient Techniques)과 참고 기법(Advisory Techniques). 성공 기준은 테스트 가능한 구체적 요구사항이며, 기법은 성공 기준을 달성하는 구체적 방법입니다. WCAG 2.2에서는 총 87개 성공 기준이 있습니다.",
+			],
+			en: [
+				"WCAG (Web Content Accessibility Guidelines) is the international web accessibility standard developed by the W3C's Web Accessibility Initiative (WAI). It provides technical criteria for making web content accessible to people with disabilities. WCAG evolved from 2.0 (2008) to 2.1 (2018) to 2.2 (2023), with each version backward-compatible.",
+				"The four POUR principles are WCAG's top-level structure: ① Perceivable — Information and UI components must be presentable in ways users can perceive. Includes text alternatives, captions, and color contrast. ② Operable — UI components and navigation must be operable. Includes keyboard access, enough time, and seizure prevention.",
+				"③ Understandable — Information and UI operation must be understandable. Includes readable text, predictable behavior, and input assistance. ④ Robust — Content must be robust enough to be reliably interpreted by a wide variety of user agents, including assistive technologies. Includes proper HTML markup and ARIA usage.",
+				"WCAG hierarchy: 4 Principles (POUR) → 13 Guidelines → Success Criteria (rated A/AA/AAA) → Sufficient Techniques and Advisory Techniques. Success criteria are specific, testable requirements. Techniques are concrete methods to meet success criteria. WCAG 2.2 contains 87 success criteria in total.",
+			],
+		},
+		questions: [
+			{
+				id: "cpacc-2-2-q1",
+				question: {
+					ko: "POUR 원칙에서 '키보드 접근성'은 어떤 원칙에 해당하는가?",
+					en: "Under which POUR principle does 'keyboard accessibility' fall?",
+				},
+				options: {
+					a: { ko: "인식 가능(Perceivable)", en: "Perceivable" },
+					b: { ko: "운용 가능(Operable)", en: "Operable" },
+					c: { ko: "이해 가능(Understandable)", en: "Understandable" },
+					d: { ko: "견고(Robust)", en: "Robust" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "키보드 접근성은 UI 구성요소의 조작과 관련되므로 '운용 가능(Operable)' 원칙에 해당합니다.",
+					en: "Keyboard accessibility relates to operating UI components, so it falls under the 'Operable' principle.",
+				},
+			},
+			{
+				id: "cpacc-2-2-q2",
+				question: {
+					ko: "WCAG를 개발하는 조직은?",
+					en: "Which organization develops WCAG?",
+				},
+				options: {
+					a: { ko: "IAAP", en: "IAAP" },
+					b: { ko: "ISO", en: "ISO" },
+					c: { ko: "W3C WAI", en: "W3C WAI" },
+					d: { ko: "UN", en: "UN" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "WCAG는 W3C(World Wide Web Consortium)의 WAI(Web Accessibility Initiative)에서 개발합니다.",
+					en: "WCAG is developed by the W3C's Web Accessibility Initiative (WAI).",
+				},
+			},
+			{
+				id: "cpacc-2-2-q3",
+				question: {
+					ko: "POUR에서 '올바른 HTML 마크업과 ARIA 사용'은 어떤 원칙에 해당하는가?",
+					en: "Under which POUR principle does 'proper HTML markup and ARIA usage' fall?",
+				},
+				options: {
+					a: { ko: "인식 가능(Perceivable)", en: "Perceivable" },
+					b: { ko: "운용 가능(Operable)", en: "Operable" },
+					c: { ko: "이해 가능(Understandable)", en: "Understandable" },
+					d: { ko: "견고(Robust)", en: "Robust" },
+				},
+				answer: "d",
+				explanation: {
+					ko: "견고(Robust) 원칙은 다양한 사용자 에이전트와 보조기술에서 콘텐츠가 안정적으로 해석되도록 요구합니다. 올바른 마크업과 ARIA가 핵심입니다.",
+					en: "The Robust principle requires content to be reliably interpreted by diverse user agents and assistive technologies. Proper markup and ARIA are key.",
+				},
+			},
+		],
 	},
 	{
 		id: "cpacc-2-3",
 		exam: "cpacc",
 		domain: 2,
 		order: 3,
-		available: false,
+		available: true,
 		title: { ko: "적합성 수준과 성공 기준", en: "Conformance Levels and Success Criteria" },
 		summary: {
 			ko: "WCAG A, AA, AAA 수준의 차이와 각 수준의 성공 기준을 학습합니다.",
 			en: "Learn the differences between WCAG A, AA, and AAA conformance levels.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"Level A, AA, AAA의 차이를 설명할 수 있다",
+				"법적으로 가장 많이 요구되는 적합성 수준을 알고 있다",
+				"주요 성공 기준의 수준을 구분할 수 있다",
+				"적합성 선언의 조건을 이해한다",
+			],
+			en: [
+				"Explain the differences between Level A, AA, and AAA",
+				"Know which conformance level is most commonly legally required",
+				"Classify key success criteria by their level",
+				"Understand conformance claim conditions",
+			],
+		},
+		content: {
+			ko: [
+				"WCAG는 세 가지 적합성 수준을 정의합니다. Level A는 가장 기본적인 접근성으로, 충족하지 않으면 장애인이 콘텐츠를 전혀 사용할 수 없는 수준입니다. 예: 텍스트 대안(1.1.1), 키보드 접근(2.1.1), 3번 번쩍임 방지(2.3.1). Level AA는 중간 수준으로, 대부분의 법률과 정책에서 요구하는 표준입니다. 예: 색상 대비 4.5:1(1.4.3), 텍스트 크기 조절(1.4.4), 일관된 내비게이션(3.2.3).",
+				"Level AAA는 가장 높은 접근성 수준입니다. 모든 콘텐츠에 적용하기 어려울 수 있지만, 가능한 한 충족하는 것이 권장됩니다. 예: 색상 대비 7:1(1.4.6), 수어 제공(1.2.6), 단축키 비활성화(2.1.4). WCAG는 전체 사이트에 Level AAA 적합성을 선언하는 것을 현실적이지 않다고 인정합니다.",
+				"적합성 선언 5가지 조건: ① 적합성 수준을 명시해야 합니다 ② 전체 페이지에 적용됩니다(페이지 일부만 적합하다고 할 수 없음) ③ 여러 페이지로 구성된 프로세스는 모든 페이지가 적합해야 합니다 ④ 접근성 지원 기술만 사용해야 합니다 ⑤ 비간섭(non-interference) — 부적합 콘텐츠가 나머지 페이지의 접근성을 방해하면 안 됩니다.",
+				"실무에서 가장 중요한 수준은 Level AA입니다. 미국 ADA, EU WAD, 한국 장애인차별금지법 등 대부분의 법률이 WCAG 2.1 Level AA를 요구합니다. Level A 기준을 모두 충족해야 Level AA를 선언할 수 있고, Level AA까지 충족해야 Level AAA를 선언할 수 있습니다(누적적 구조).",
+			],
+			en: [
+				"WCAG defines three conformance levels. Level A is the most basic — failure to meet it means people with disabilities cannot use the content at all. Examples: text alternatives (1.1.1), keyboard access (2.1.1), three flashes prevention (2.3.1). Level AA is the mid-level standard required by most laws and policies. Examples: color contrast 4.5:1 (1.4.3), text resize (1.4.4), consistent navigation (3.2.3).",
+				"Level AAA is the highest accessibility level. It may not be achievable for all content, but meeting it where possible is recommended. Examples: color contrast 7:1 (1.4.6), sign language (1.2.6), shortcut key deactivation (2.1.4). WCAG acknowledges that full Level AAA conformance across an entire site is not always realistic.",
+				"Five conformance conditions: ① The level must be stated ② It applies to entire pages (partial pages cannot be claimed) ③ Multi-page processes require all pages to conform ④ Only accessibility-supported technologies may be used ⑤ Non-interference — non-conforming content must not block access to the rest of the page.",
+				"Level AA is the most practically important level. Most laws — including the US ADA, EU WAD, and Korea's Anti-Discrimination Act — require WCAG 2.1 Level AA. Meeting Level A is a prerequisite for Level AA, and meeting Level AA is a prerequisite for Level AAA (cumulative structure).",
+			],
+		},
+		questions: [
+			{
+				id: "cpacc-2-3-q1",
+				question: {
+					ko: "대부분의 법률에서 요구하는 WCAG 적합성 수준은?",
+					en: "Which WCAG conformance level is most commonly required by law?",
+				},
+				options: {
+					a: { ko: "Level A", en: "Level A" },
+					b: { ko: "Level AA", en: "Level AA" },
+					c: { ko: "Level AAA", en: "Level AAA" },
+					d: { ko: "법률마다 달라 정해진 것이 없다", en: "It varies by law with no standard" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "미국 ADA, EU WAD, 한국 장애인차별금지법 등 대부분의 법률에서 WCAG 2.1 Level AA를 요구합니다.",
+					en: "Most laws, including the US ADA, EU WAD, and Korea's Anti-Discrimination Act, require WCAG 2.1 Level AA.",
+				},
+			},
+			{
+				id: "cpacc-2-3-q2",
+				question: {
+					ko: "WCAG 적합성 선언에 대한 설명으로 옳은 것은?",
+					en: "Which statement about WCAG conformance claims is correct?",
+				},
+				options: {
+					a: { ko: "페이지의 일부분만 적합해도 선언할 수 있다", en: "A claim can be made for a partial page" },
+					b: {
+						ko: "전체 페이지에 대해 적합성을 충족해야 선언 가능하다",
+						en: "Conformance must be met for the entire page",
+					},
+					c: { ko: "Level AAA 충족 없이 Level AA를 건너뛸 수 있다", en: "Level AA can be skipped to claim Level AAA" },
+					d: { ko: "비적합 콘텐츠는 페이지에 포함할 수 없다", en: "Non-conforming content cannot be on the page at all" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "WCAG 적합성은 전체 페이지에 적용됩니다. 페이지 일부만 적합하다고 선언할 수 없으며, 비적합 콘텐츠는 나머지 페이지 접근성을 방해하지 않아야 합니다.",
+					en: "WCAG conformance applies to entire pages. Partial page claims are not allowed. Non-conforming content must not interfere with the rest of the page's accessibility.",
+				},
+			},
+			{
+				id: "cpacc-2-3-q3",
+				question: {
+					ko: "WCAG 성공 기준 1.4.3 '색상 대비'의 최소 대비 비율과 적합성 수준은?",
+					en: "What is the minimum contrast ratio and conformance level of WCAG 1.4.3 'Contrast'?",
+				},
+				options: {
+					a: { ko: "3:1, Level A", en: "3:1, Level A" },
+					b: { ko: "4.5:1, Level AA", en: "4.5:1, Level AA" },
+					c: { ko: "7:1, Level AAA", en: "7:1, Level AAA" },
+					d: { ko: "4.5:1, Level A", en: "4.5:1, Level A" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "WCAG 1.4.3은 일반 텍스트에 대해 4.5:1의 최소 대비 비율을 요구하며, Level AA 성공 기준입니다. 7:1은 Level AAA(1.4.6)입니다.",
+					en: "WCAG 1.4.3 requires a minimum 4.5:1 contrast ratio for normal text and is a Level AA criterion. 7:1 is Level AAA (1.4.6).",
+				},
+			},
+		],
 	},
 
 	// ── Domain 3 ──────────────────────────────────────────────────────────────
