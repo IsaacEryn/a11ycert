@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
 import BilingualText from "@/components/BilingualText";
+import ReportButton from "@/components/report/ReportButton";
 
 interface QuizEngineProps {
 	questions: QuizQuestion[];
@@ -100,10 +101,13 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 									<BilingualText field={q.options[userAns]} variant="label" as="span" />
 								</p>
 							)}
-							<p className={correct ? "mt-1 text-green-700" : "mt-1 text-gray-700"}>
-								{isKo ? "정답: " : "Correct: "}
-								<BilingualText field={q.options[q.answer]} variant="label" as="span" />
-							</p>
+							<div className="mt-1 flex items-center justify-between">
+								<p className={correct ? "text-green-700" : "text-gray-700"}>
+									{isKo ? "정답: " : "Correct: "}
+									<BilingualText field={q.options[q.answer]} variant="label" as="span" />
+								</p>
+								<ReportButton locale={locale} targetType="quiz" targetId={q.id} />
+							</div>
 						</div>
 					);
 				})}
@@ -268,6 +272,9 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 								: "Added to your wrong answers automatically."}
 						</p>
 					)}
+					<div className="mt-2 flex justify-end">
+						<ReportButton locale={locale} targetType="quiz" targetId={q.id} />
+					</div>
 				</div>
 			)}
 
