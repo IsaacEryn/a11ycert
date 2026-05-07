@@ -78,6 +78,14 @@ export default function GlossaryClient({ terms, locale }: Props) {
         ))}
       </div>
 
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {query || certFilter !== "all"
+          ? isKo
+            ? `${filtered.length}개 용어가 검색되었습니다.`
+            : `${filtered.length} term${filtered.length === 1 ? "" : "s"} found.`
+          : ""}
+      </div>
+
       {grouped.length === 0 ? (
         <div style={{ textAlign: "center", padding: "var(--space-12) var(--space-8)", color: "var(--fg-muted)" }}>
           {isKo ? "검색 결과가 없습니다." : "No results found."}
