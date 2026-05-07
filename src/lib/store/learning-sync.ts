@@ -82,14 +82,16 @@ export async function syncCompletedUnitToDB(userId: string, unitId: string) {
 // ── localStorage → DB 전체 마이그레이션 ──────────────────────────────────────
 
 export async function migrateLocalStorageToDB(userId: string) {
-	const raw = localStorage.getItem("a11ycert-learning");
+	const raw = localStorage.getItem("a11ycert.learning.v2");
 	if (!raw) return;
 
 	let parsed: {
 		state?: {
-			wrongAnswers?: string[];
-			savedQuestions?: string[];
-			completedUnits?: string[];
+			perCert?: Record<string, {
+				completedUnits?: string[];
+				bookmarks?: string[];
+				wrongNotes?: string[];
+			}>;
 		};
 	};
 	try {
@@ -98,63 +100,57 @@ export async function migrateLocalStorageToDB(userId: string) {
 		return;
 	}
 
-	const state = parsed?.state;
-	if (!state) return;
+	const perCert = parsed?.state?.perCert;
+	if (!perCert) return;
 
 	const promises: Promise<unknown>[] = [];
+	const now = new Date().toISOString();
 
-	// 오답 마이그레이션 (user_answer는 localStorage에 없으므로 'unknown'으로 표시)
-	if (state.wrongAnswers?.length) {
-		const rows = state.wrongAnswers.map((qid) => ({
-			user_id: userId,
-			question_id: qid,
-			user_answer: "unknown",
-			attempt_count: 1,
-			last_attempted_at: new Date().toISOString(),
-		}));
+	for (const certData of Object.values(perCert)) {
+		// 오답 마이그레이션
+		if (certData.wrongNotes?.length) {
+			const rows = certData.wrongNotes.map((qid) => ({
+				user_id: userId,
+				question_id: qid,
+				user_answer: "unknown",
+				attempt_count: 1,
+				last_attempted_at: now,
+			}));
+			promises.push(
+				(async () => {
+					const { error } = await supabase
+						.from("wrong_answers")
+						.upsert(rows, { onConflict: "user_id,question_id", ignoreDuplicates: true });
+					if (error) console.error("[migration] wrong_answers:", error.message);
+				})()
+			);
+		}
 
-		promises.push(
-			(async () => {
-				const { error } = await supabase
-					.from("wrong_answers")
-					.upsert(rows, { onConflict: "user_id,question_id", ignoreDuplicates: true });
-				if (error) console.error("[migration] wrong_answers:", error.message);
-			})()
-		);
-	}
+		// 저장 문제 마이그레이션
+		if (certData.bookmarks?.length) {
+			const rows = certData.bookmarks.map((qid) => ({ user_id: userId, question_id: qid }));
+			promises.push(
+				(async () => {
+					const { error } = await supabase
+						.from("saved_questions")
+						.upsert(rows, { onConflict: "user_id,question_id", ignoreDuplicates: true });
+					if (error) console.error("[migration] saved_questions:", error.message);
+				})()
+			);
+		}
 
-	// 저장 문제 마이그레이션
-	if (state.savedQuestions?.length) {
-		const rows = state.savedQuestions.map((qid) => ({
-			user_id: userId,
-			question_id: qid,
-		}));
-
-		promises.push(
-			(async () => {
-				const { error } = await supabase
-					.from("saved_questions")
-					.upsert(rows, { onConflict: "user_id,question_id", ignoreDuplicates: true });
-				if (error) console.error("[migration] saved_questions:", error.message);
-			})()
-		);
-	}
-
-	// 완료 단위 마이그레이션
-	if (state.completedUnits?.length) {
-		const rows = state.completedUnits.map((uid) => ({
-			user_id: userId,
-			unit_id: uid,
-		}));
-
-		promises.push(
-			(async () => {
-				const { error } = await supabase
-					.from("completed_units")
-					.upsert(rows, { onConflict: "user_id,unit_id", ignoreDuplicates: true });
-				if (error) console.error("[migration] completed_units:", error.message);
-			})()
-		);
+		// 완료 단위 마이그레이션
+		if (certData.completedUnits?.length) {
+			const rows = certData.completedUnits.map((uid) => ({ user_id: userId, unit_id: uid }));
+			promises.push(
+				(async () => {
+					const { error } = await supabase
+						.from("completed_units")
+						.upsert(rows, { onConflict: "user_id,unit_id", ignoreDuplicates: true });
+					if (error) console.error("[migration] completed_units:", error.message);
+				})()
+			);
+		}
 	}
 
 	await Promise.allSettled(promises);

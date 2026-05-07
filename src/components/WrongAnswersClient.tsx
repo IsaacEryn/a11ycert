@@ -22,7 +22,9 @@ const ACCENT = {
 } as const;
 
 export default function WrongAnswersClient({ locale, exam, units }: Props) {
-	const { wrongAnswers, savedQuestions, unsaveQuestion } = useLearningStore();
+	const { getWrongNotes, getBookmarks, unsaveQuestion } = useLearningStore();
+	const wrongAnswers = getWrongNotes(exam);
+	const savedQuestions = getBookmarks(exam);
 	const [tab, setTab] = useState<Tab>("wrong");
 	const [practiceMode, setPracticeMode] = useState(false);
 	const panelRef = useRef<HTMLDivElement>(null);
@@ -198,7 +200,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 											</div>
 											{tab === "saved" && (
 												<button
-													onClick={() => unsaveQuestion(q.id)}
+													onClick={() => unsaveQuestion(exam, q.id)}
 													aria-label={
 														isKo
 															? `저장 취소: ${isKo ? q.question.ko : q.question.en}`
