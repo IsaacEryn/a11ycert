@@ -8,18 +8,19 @@ import { syncCompletedUnitToDB } from "@/lib/store/learning-sync";
 interface Props {
 	unitId: string;
 	locale: string;
+	exam: "cpacc" | "was";
 	backHref: string;
 }
 
-export default function UnitCompleteButton({ unitId, locale, backHref }: Props) {
+export default function UnitCompleteButton({ unitId, locale, exam, backHref }: Props) {
 	const { markUnitComplete, isCompleted } = useLearningStore();
 	const auth = useOptionalAuth();
 	const userId = auth?.user?.id ?? null;
 	const isKo = locale === "ko";
-	const done = isCompleted(unitId);
+	const done = isCompleted(exam, unitId);
 
 	const handleComplete = () => {
-		markUnitComplete(unitId);
+		markUnitComplete(exam, unitId);
 		if (userId) syncCompletedUnitToDB(userId, unitId);
 	};
 

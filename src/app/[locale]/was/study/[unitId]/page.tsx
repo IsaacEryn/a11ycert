@@ -2,10 +2,11 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getWasUnit, getAllWasUnitIds } from "@/lib/content/was-units";
+import { getWasUnit, getAllWasUnitIds, wasDomains } from "@/lib/content/was-units";
 import QuizEngine from "@/components/QuizEngine";
 import StudyUnitContent from "@/components/StudyUnitContent";
 import UnitCompleteButton from "@/components/UnitCompleteButton";
+import StudySidebar from "@/components/study/StudySidebar";
 import CommentSection from "@/components/comments/CommentSection";
 import StudyNoteEditor from "@/components/notes/StudyNoteEditor";
 import ReportButton from "@/components/report/ReportButton";
@@ -42,64 +43,79 @@ export default async function WasUnitPage({
 
 	const isKo = locale === "ko";
 
+	const allUnits = wasDomains.flatMap((d) => d.units).filter((u) => u.available);
+	const currentIdx = allUnits.findIndex((u) => u.id === unitId);
+	const prevUnit = currentIdx > 0 ? allUnits[currentIdx - 1] : null;
+	const nextUnit = currentIdx < allUnits.length - 1 ? allUnits[currentIdx + 1] : null;
+
+	const currentDomain = wasDomains.find((d) => d.domain === unit.domain);
+	const domainLabel = currentDomain ? (isKo ? currentDomain.title.ko : currentDomain.title.en) : "";
+
 	return (
-		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-			{/* Breadcrumb */}
-			<nav aria-label={isKo ? "경로" : "Breadcrumb"} className="mb-6 text-xs text-gray-400">
-				<ol className="flex items-center gap-1" role="list">
-					<li>
-						<Link href={`/${locale}/was`} className="hover:text-violet-600 no-underline">
-							WAS
-						</Link>
-					</li>
-					<li aria-hidden="true">/</li>
-					<li>
-						<Link href={`/${locale}/was/study`} className="hover:text-violet-600 no-underline">
-							{isKo ? "학습 로드맵" : "Study Roadmap"}
-						</Link>
-					</li>
-					<li aria-hidden="true">/</li>
-					<li className="text-gray-600" aria-current="page">
-						{isKo ? unit.title.ko : unit.title.en}
-					</li>
-				</ol>
-			</nav>
+		<div className="container">
+			<div className="app-layout">
+				<StudySidebar
+					locale={locale}
+					exam="was"
+					activeUnitId={unitId}
+					domains={wasDomains}
+				/>
 
-			{/* Title */}
-			<h1 className="text-2xl font-bold text-gray-900">{isKo ? unit.title.ko : unit.title.en}</h1>
+				<div>
+					{/* Toolbar */}
+					<nav className="study-toolbar" aria-label={isKo ? "현재 위치" : "Current location"}>
+						<div className="study-toolbar__crumbs">
+							<Link href={`/${locale}/was`} style={{ textDecoration: "none", color: "inherit" }}>
+								WAS
+							</Link>
+							<span aria-hidden="true">›</span>
+							<Link href={`/${locale}/was/study`} style={{ textDecoration: "none", color: "inherit" }}>
+								{domainLabel}
+							</Link>
+							<span aria-hidden="true">›</span>
+							<strong>{isKo ? unit.title.ko : unit.title.en}</strong>
+						</div>
+						<div className="study-toolbar__actions">
+							<ReportButton locale={locale} targetType="content" targetId={unit.id} />
+						</div>
+					</nav>
 
-			<StudyUnitContent unit={unit} locale={locale} accentColor="violet" />
+					{/* Bilingual card */}
+					<StudyUnitContent
+						unit={unit}
+						locale={locale}
+						prevUnit={prevUnit}
+						nextUnit={nextUnit}
+						exam="was"
+					/>
 
-			{/* Quiz */}
-			{unit.questions.length > 0 && (
-				<section aria-labelledby="quiz" className="mt-10">
-					<h2 id="quiz" className="text-base font-semibold text-gray-900">
-						{isKo ? "단원 퀴즈" : "Unit Quiz"}
-					</h2>
-					<p className="mt-1 text-xs text-gray-500">
-						{isKo
-							? `${unit.questions.length}문제 · 오답은 오답노트에 자동 저장됩니다`
-							: `${unit.questions.length} questions · Wrong answers are saved automatically`}
-					</p>
-					<div className="mt-4">
-						<QuizEngine questions={unit.questions} locale={locale} exam="was" showAll />
+					{/* Quiz */}
+					{unit.questions.length > 0 && (
+						<section aria-labelledby="unit-quiz" style={{ marginTop: "var(--space-8)" }}>
+							<h2 id="unit-quiz" style={{ fontSize: "var(--fs-md)", fontWeight: 700, marginBottom: "var(--space-2)" }}>
+								{isKo ? "단원 퀴즈" : "Unit Quiz"}
+							</h2>
+							<p style={{ fontSize: "var(--fs-xs)", color: "var(--fg-muted)", marginBottom: "var(--space-4)" }}>
+								{isKo
+									? `${unit.questions.length}문제 · 오답은 오답노트에 자동 저장됩니다`
+									: `${unit.questions.length} questions · Wrong answers are saved automatically`}
+							</p>
+							<QuizEngine questions={unit.questions} locale={locale} exam="was" showAll />
+						</section>
+					)}
+
+					{/* Complete button */}
+					<div style={{ marginTop: "var(--space-8)", paddingTop: "var(--space-6)", borderTop: "1px solid var(--divider)" }}>
+						<UnitCompleteButton unitId={unit.id} locale={locale} exam="was" backHref={`/${locale}/was/study`} />
 					</div>
-				</section>
-			)}
 
-			{/* Report + Complete */}
-			<div className="mt-8 border-t border-gray-100 pt-6">
-				<div className="mb-4 flex justify-end">
-					<ReportButton locale={locale} targetType="content" targetId={unit.id} />
+					{/* Study notes */}
+					<StudyNoteEditor pagePath={`/was/study/${unitId}`} unitId={unit.id} locale={locale} />
+
+					{/* Comments */}
+					<CommentSection pagePath={`/was/study/${unitId}`} locale={locale} />
 				</div>
-				<UnitCompleteButton unitId={unit.id} locale={locale} backHref={`/${locale}/was/study`} />
 			</div>
-
-			{/* 학습 메모 */}
-			<StudyNoteEditor pagePath={`/was/study/${unitId}`} unitId={unit.id} locale={locale} />
-
-			{/* 댓글 */}
-			<CommentSection pagePath={`/was/study/${unitId}`} locale={locale} />
 		</div>
 	);
 }

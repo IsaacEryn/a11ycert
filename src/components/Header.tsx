@@ -1,328 +1,243 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
-import LanguageToggle from "./LanguageToggle";
-import MobileMenuToggle from "./MobileMenuToggle";
-import LoginButton from "./auth/LoginButton";
+import { usePathname, useRouter } from "next/navigation";
+import ModeMenu from "./ModeMenu";
+import MobileSheet from "./MobileSheet";
 import UserMenu from "./auth/UserMenu";
+import { useLearningStore, type LanguageMode } from "@/lib/store/learningStore";
+import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { usePrefs, type Theme } from "@/lib/prefs/PrefsContext";
 
 interface HeaderProps {
-	locale: string;
+  locale: string;
 }
 
-type ExamKey = "cpacc" | "was";
+type Cert = "cpacc" | "was";
+
+function certFromPath(pathname: string): Cert {
+  if (pathname.includes("/was")) return "was";
+  return "cpacc";
+}
 
 export default function Header({ locale }: HeaderProps) {
-	const [mobileOpen, setMobileOpen] = useState(false);
-	const [openDropdown, setOpenDropdown] = useState<ExamKey | null>(null);
-	const [mobileExpanded, setMobileExpanded] = useState<ExamKey | null>(null);
-	const pathname = usePathname();
-	const t = useTranslations("common.nav");
-	const desktopNavRef = useRef<HTMLElement>(null);
-	// 드롭다운 열기 버튼 ref (Escape 시 포커스 반환용)
-	const dropdownBtnRefs = useRef<Partial<Record<ExamKey, HTMLButtonElement | null>>>({});
-	// 드롭다운 첫 링크 ref (열릴 때 포커스 이동용)
-	const dropdownFirstLinkRefs = useRef<Partial<Record<ExamKey, HTMLAnchorElement | null>>>({});
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const isKo = locale === "ko";
+  const cert = certFromPath(pathname);
+  const { languageMode, setLanguageMode } = useLearningStore();
+  const auth = useOptionalAuth();
+  const { theme, setTheme } = usePrefs();
 
-	// 외부 클릭 시 드롭다운 닫기
-	useEffect(() => {
-		function handlePointerDown(e: PointerEvent) {
-			if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) {
-				setOpenDropdown(null);
-			}
-		}
-		document.addEventListener("pointerdown", handlePointerDown);
-		return () => document.removeEventListener("pointerdown", handlePointerDown);
-	}, []);
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
-	// 라우트 변경 시 메뉴 닫기
-	useEffect(() => {
-		setOpenDropdown(null);
-		setMobileOpen(false);
-		setMobileExpanded(null);
-	}, [pathname]);
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(href + "/");
+  }
 
-	function isActive(href: string) {
-		return pathname === href || pathname.startsWith(href + "/");
-	}
+  const navItems = [
+    { href: `/${locale}`, label: isKo ? "홈" : "Home" },
+    { href: `/${locale}/cpacc`, label: "CPACC" },
+    { href: `/${locale}/was`, label: "WAS" },
+    { href: `/${locale}/${cert}/study`, label: isKo ? "학습" : "Study" },
+    { href: `/${locale}/${cert}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
+    { href: `/${locale}/${cert}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
+    { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
+  ];
 
-	const handleDropdownToggle = useCallback(
-		(key: ExamKey, fromKeyboard = false) => {
-			const next = openDropdown === key ? null : key;
-			setOpenDropdown(next);
-			// 키보드로 열었을 때만 첫 번째 링크로 포커스 이동
-			if (next && fromKeyboard) {
-				requestAnimationFrame(() => {
-					dropdownFirstLinkRefs.current[key]?.focus();
-				});
-			}
-		},
-		[openDropdown]
-	);
+  const otherLocale = locale === "ko" ? "en" : "ko";
+  const switchLocalePath = pathname.replace(`/${locale}`, `/${otherLocale}`) || `/${otherLocale}`;
 
-	const closeDropdown = useCallback(
-		(key: ExamKey) => {
-			setOpenDropdown(null);
-			dropdownBtnRefs.current[key]?.focus();
-		},
-		[]
-	);
+  const langOptions: { mode: LanguageMode; label: string; locale?: string }[] = [
+    { mode: "ko-only", label: "KO", locale: "ko" },
+    { mode: "parallel", label: isKo ? "병기" : "Dual" },
+    { mode: "en-only", label: "EN", locale: "en" },
+  ];
 
-	const subItems: Record<ExamKey, { href: string; label: string }[]> = {
-		cpacc: [
-			{ href: `/${locale}/cpacc/study`, label: t("study") },
-			{ href: `/${locale}/cpacc/quiz`, label: t("quiz") },
-			{ href: `/${locale}/cpacc/flashcards`, label: t("flashcards") },
-			{ href: `/${locale}/cpacc/wrong-answers`, label: t("wrongAnswers") },
-		],
-		was: [
-			{ href: `/${locale}/was/study`, label: t("study") },
-			{ href: `/${locale}/was/quiz`, label: t("quiz") },
-			{ href: `/${locale}/was/flashcards`, label: t("flashcards") },
-			{ href: `/${locale}/was/wrong-answers`, label: t("wrongAnswers") },
-		],
-	};
+  function handleLangClick(opt: typeof langOptions[number]) {
+    setLanguageMode(opt.mode);
+    if (opt.locale && opt.locale !== locale) {
+      router.push(switchLocalePath);
+    }
+  }
 
-	const flatItems = [
-		{ href: `/${locale}/glossary`, label: t("glossary") },
-		{ href: `/${locale}/community`, label: t("community") },
-		{ href: `/${locale}/about`, label: t("about") },
-	];
+  const themeOptions: { value: Theme; label: string; icon: string }[] = [
+    { value: "light", label: isKo ? "라이트" : "Light", icon: "☀" },
+    { value: "dark", label: isKo ? "다크" : "Dark", icon: "☾" },
+    { value: "hc", label: isKo ? "고대비" : "HC", icon: "◑" },
+  ];
 
-	const chevron = (open: boolean) => (
-		<svg
-			aria-hidden="true"
-			className={`w-3.5 h-3.5 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
-			fill="none"
-			stroke="currentColor"
-			viewBox="0 0 24 24"
-		>
-			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-		</svg>
-	);
+  return (
+    <>
+    <header className="app-header">
+      <div className="container">
+        <div className="app-header__row">
+          {/* Brand */}
+          <Link
+            href={`/${locale}`}
+            className="brand"
+            aria-label={isKo ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
+          >
+            <span className="brand__mark" aria-hidden="true">A11Y</span>
+            <span>Cert</span>
+          </Link>
 
-	return (
-		<header className="sticky top-0 z-40 border-b border-gray-200/80 bg-white/95 shadow-sm backdrop-blur-sm">
-			<div className="mx-auto max-w-6xl px-4 sm:px-6">
-				<div className="flex h-16 items-center justify-between gap-4">
-					{/* 로고 */}
-					<Link
-						href={`/${locale}`}
-						className="flex items-center gap-1.5 no-underline transition-opacity hover:opacity-80"
-						aria-label={locale === "ko" ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
-					>
-						<span
-							aria-hidden="true"
-							className="rounded-lg bg-blue-600 px-1.5 py-0.5 text-sm font-black tracking-tight text-white"
-						>
-							A11Y
-						</span>
-						<span aria-hidden="true" className="text-lg font-bold text-gray-900">
-							Cert
-						</span>
-					</Link>
+          {/* Desktop nav */}
+          <nav aria-label={isKo ? "주 메뉴" : "Main menu"} className="app-nav">
+            {navItems.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="app-nav__link"
+                aria-current={isActive(href) ? "page" : undefined}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-					{/* 데스크톱 네비게이션 */}
-					<nav aria-label={locale === "ko" ? "주 메뉴" : "Main menu"} className="hidden sm:block" ref={desktopNavRef}>
-						<ul className="flex items-center gap-1" role="list">
-							{/* CPACC / WAS 드롭다운 */}
-							{(["cpacc", "was"] as ExamKey[]).map((key) => (
-								<li key={key} className="relative">
-									<button
-										ref={(el) => { dropdownBtnRefs.current[key] = el; }}
-										aria-expanded={openDropdown === key}
-										aria-controls={`dropdown-${key}`}
-										onClick={() => handleDropdownToggle(key, false)}
-										onKeyDown={(e) => {
-											if (e.key === "Escape") closeDropdown(key);
-											if (e.key === "Enter" || e.key === " ") {
-												e.preventDefault();
-												handleDropdownToggle(key, true);
-											}
-										}}
-										className={[
-											"flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
-											isActive(`/${locale}/${key}`)
-												? "bg-blue-50 text-blue-700 font-semibold"
-												: "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
-										].join(" ")}
-									>
-										{t(key)}
-										{chevron(openDropdown === key)}
-									</button>
+          <div className="app-header__spacer" />
 
-									{openDropdown === key && (
-										<ul
-											id={`dropdown-${key}`}
-											role="list"
-											className="absolute left-0 top-full mt-1.5 w-40 rounded-xl border border-gray-200 bg-white py-1.5 shadow-xl z-50"
-											onKeyDown={(e) => {
-												if (e.key === "Escape") closeDropdown(key);
-											}}
-										>
-											{/* 개요 링크 */}
-											<li>
-												<Link
-													ref={(el) => { dropdownFirstLinkRefs.current[key] = el; }}
-													href={`/${locale}/${key}`}
-													className={[
-														"block px-4 py-2 text-sm no-underline transition-colors border-b border-gray-100",
-														isActive(`/${locale}/${key}`) &&
-														!subItems[key].some((i) => isActive(i.href))
-															? "bg-blue-50 text-blue-700 font-medium"
-															: "text-gray-500 hover:bg-gray-50 hover:text-gray-900",
-													].join(" ")}
-												>
-													{t("overview")}
-												</Link>
-											</li>
-											{subItems[key].map(({ href, label }) => (
-												<li key={href}>
-													<Link
-														href={href}
-														aria-current={isActive(href) ? "page" : undefined}
-														className={[
-															"block px-4 py-2 text-sm no-underline transition-colors",
-															isActive(href)
-																? "bg-blue-50 text-blue-700 font-medium"
-																: "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
-														].join(" ")}
-													>
-														{label}
-													</Link>
-												</li>
-											))}
-										</ul>
-									)}
-								</li>
-							))}
+          {/* Desktop-only controls */}
+          <div className="header-desktop">
+            <div className="lang-toggle" role="group" aria-label={isKo ? "언어 표시 모드" : "Language display mode"}>
+              {langOptions.map((opt) => (
+                <button
+                  key={opt.mode}
+                  aria-pressed={languageMode === opt.mode}
+                  onClick={() => handleLangClick(opt)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <ModeMenu locale={locale} />
+            {!auth?.user && (
+              <button
+                onClick={() => auth?.signInWithGoogle()}
+                className="btn btn--sm"
+                aria-label={isKo ? "Google 계정으로 로그인" : "Sign in with Google"}
+              >
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                </svg>
+                Google
+              </button>
+            )}
+            <UserMenu locale={locale} />
+          </div>
 
-							{/* 용어집, 커뮤니티, 소개 */}
-							{flatItems.map(({ href, label }) => (
-								<li key={href}>
-									<Link
-										href={href}
-										aria-current={isActive(href) ? "page" : undefined}
-										className={[
-											"px-3 py-2 text-sm font-medium rounded-md transition-colors no-underline",
-											isActive(href)
-												? "bg-blue-50 text-blue-700"
-												: "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
-										].join(" ")}
-									>
-										{label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+          {/* Mobile trigger */}
+          <button
+            className="mobile-trigger"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-sheet"
+            aria-label={mobileOpen ? (isKo ? "메뉴 닫기" : "Close menu") : (isKo ? "메뉴 열기" : "Open menu")}
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              {mobileOpen
+                ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
+                : <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>
+              }
+            </svg>
+          </button>
+        </div>
+      </div>
 
-					<div className="flex items-center gap-2">
-						<LoginButton locale={locale} />
-						<UserMenu locale={locale} />
-						<LanguageToggle currentLocale={locale} />
-						<MobileMenuToggle
-							isOpen={mobileOpen}
-							onToggle={() => setMobileOpen((v) => !v)}
-							label={mobileOpen ? (locale === "ko" ? "메뉴 닫기" : "Close menu") : (locale === "ko" ? "메뉴 열기" : "Open menu")}
-						/>
-					</div>
-				</div>
-			</div>
+    </header>
 
-			{/* 모바일 메뉴 */}
-			{mobileOpen && (
-				<nav
-					id="mobile-nav"
-					aria-label={locale === "ko" ? "모바일 메뉴" : "Mobile menu"}
-					className="border-t border-gray-100 bg-white sm:hidden"
-					onKeyDown={(e) => {
-						if (e.key === "Escape") {
-							setMobileOpen(false);
-						}
-					}}
-				>
-					<ul className="flex flex-col px-4 py-3 gap-1" role="list">
-						{/* CPACC / WAS 아코디언 */}
-						{(["cpacc", "was"] as ExamKey[]).map((key) => (
-							<li key={key}>
-								<button
-									aria-expanded={mobileExpanded === key}
-									aria-controls={`mobile-submenu-${key}`}
-									onClick={() => setMobileExpanded(mobileExpanded === key ? null : key)}
-									className={[
-										"flex w-full items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors",
-										isActive(`/${locale}/${key}`)
-											? "bg-blue-50 text-blue-700"
-											: "text-gray-600 hover:bg-gray-100",
-									].join(" ")}
-								>
-									{t(key)}
-									{chevron(mobileExpanded === key)}
-								</button>
+      {/* Mobile sheet — rendered outside <header> so position:fixed works correctly */}
+      <div id="mobile-nav-sheet">
+        <MobileSheet
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          title={isKo ? "메뉴" : "Menu"}
+        >
+          {/* Nav links */}
+          <nav className="mobile-nav" aria-label={isKo ? "모바일 메뉴" : "Mobile menu"}>
+            {navItems.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                aria-current={isActive(href) ? "page" : undefined}
+                onClick={() => setMobileOpen(false)}
+              >
+                <span>{label}</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            ))}
+          </nav>
 
-								{mobileExpanded === key && (
-									<ul
-										id={`mobile-submenu-${key}`}
-										role="list"
-										className="mt-1 ml-3 flex flex-col gap-0.5 border-l-2 border-blue-100 pl-3"
-									>
-										<li>
-											<Link
-												href={`/${locale}/${key}`}
-												className={[
-													"block px-3 py-1.5 text-sm no-underline rounded-md transition-colors",
-													isActive(`/${locale}/${key}`) &&
-													!subItems[key].some((i) => isActive(i.href))
-														? "text-blue-700 font-medium"
-														: "text-gray-500 hover:text-gray-900 hover:bg-gray-50",
-												].join(" ")}
-											>
-												{t("overview")}
-											</Link>
-										</li>
-										{subItems[key].map(({ href, label }) => (
-											<li key={href}>
-												<Link
-													href={href}
-													aria-current={isActive(href) ? "page" : undefined}
-													className={[
-														"block px-3 py-1.5 text-sm no-underline rounded-md transition-colors",
-														isActive(href)
-															? "text-blue-700 font-medium"
-															: "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-													].join(" ")}
-												>
-													{label}
-												</Link>
-											</li>
-										))}
-									</ul>
-								)}
-							</li>
-						))}
+          {/* Language display mode */}
+          <div className="mobile-sheet__section">
+            <p className="mobile-sheet__section-label">{isKo ? "언어 표시" : "Language"}</p>
+            <div className="lang-toggle" style={{ width: "100%" }} role="group" aria-label={isKo ? "언어 표시 모드" : "Language display mode"}>
+              {langOptions.map((opt) => (
+                <button
+                  key={opt.mode}
+                  aria-pressed={languageMode === opt.mode}
+                  style={{ flex: 1 }}
+                  onClick={() => { handleLangClick(opt); setMobileOpen(false); }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
-						{/* 용어집, 커뮤니티, 소개 */}
-						{flatItems.map(({ href, label }) => (
-							<li key={href}>
-								<Link
-									href={href}
-									aria-current={isActive(href) ? "page" : undefined}
-									className={[
-										"block px-3 py-2 text-sm font-medium rounded-md transition-colors no-underline",
-										isActive(href) ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-100",
-									].join(" ")}
-								>
-									{label}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</nav>
-			)}
-		</header>
-	);
+          {/* Theme */}
+          <div className="mobile-sheet__section">
+            <p className="mobile-sheet__section-label">{isKo ? "테마" : "Theme"}</p>
+            <div className="seg" role="group" aria-label={isKo ? "테마 선택" : "Select theme"} style={{ width: "100%" }}>
+              {themeOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  aria-pressed={theme === opt.value}
+                  style={{ flex: 1 }}
+                  onClick={() => setTheme(opt.value)}
+                >
+                  <span aria-hidden="true">{opt.icon}</span> {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Auth */}
+          <div className="mobile-sheet__section">
+            {auth?.user ? (
+              <button
+                className="btn"
+                style={{ width: "100%" }}
+                onClick={async () => { await auth.signOut(); setMobileOpen(false); }}
+              >
+                {isKo ? "로그아웃" : "Sign Out"}
+              </button>
+            ) : (
+              <button
+                className="btn btn--primary"
+                style={{ width: "100%" }}
+                onClick={() => { auth?.signInWithGoogle(); setMobileOpen(false); }}
+              >
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                </svg>
+                {isKo ? "Google로 로그인" : "Sign in with Google"}
+              </button>
+            )}
+          </div>
+        </MobileSheet>
+      </div>
+    </>
+  );
 }

@@ -33,8 +33,8 @@ function createDummyClient() {
   const noopAsync = async () => ({ data: null, error: null });
 
   const authMethods = {
-    getSession: noopAsync,
-    getUser: noopAsync,
+    getSession: async () => ({ data: { session: null }, error: null }),
+    getUser: async () => ({ data: { user: null }, error: null }),
     signInWithOAuth: noopAsync,
     signOut: noopAsync,
     exchangeCodeForSession: noopAsync,

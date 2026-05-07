@@ -1,22 +1,20 @@
-import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { glossaryTerms } from "@/lib/content/glossary";
+import GlossaryClient from "@/components/glossary/GlossaryClient";
+
+export const metadata: Metadata = {
+  title: "접근성 용어집",
+  description: "CPACC·WAS 핵심 접근성 용어를 한국어·영어로 확인하세요.",
+};
 
 export default async function GlossaryPage({ params }: { params: Promise<{ locale: string }> }) {
-	const { locale } = await params;
-	setRequestLocale(locale);
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-	return <GlossaryContent />;
-}
-
-function GlossaryContent() {
-	const t = useTranslations("common.nav");
-
-	return (
-		<div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-			<h1 className="text-3xl font-bold text-gray-900">{t("glossary")}</h1>
-			<p className="mt-12 rounded-lg bg-gray-50 px-5 py-4 text-sm text-gray-500">
-				한영 용어집을 준비 중입니다.
-			</p>
-		</div>
-	);
+  return (
+    <div className="container" style={{ maxWidth: 960, paddingTop: "var(--space-8)", paddingBottom: "var(--space-16)" }}>
+      <GlossaryClient terms={glossaryTerms} locale={locale} />
+    </div>
+  );
 }
