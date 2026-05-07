@@ -23,6 +23,7 @@ function certFromPath(pathname: string): Cert {
 
 export default function Header({ locale }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<Cert | null>(null);
   const pathname = usePathname();
   const router = useRouter();
   const isKo = locale === "ko";
@@ -33,6 +34,7 @@ export default function Header({ locale }: HeaderProps) {
 
   useEffect(() => {
     setMobileOpen(false);
+    setOpenDropdown(null);
   }, [pathname]);
 
   function isActive(href: string) {
@@ -103,18 +105,22 @@ export default function Header({ locale }: HeaderProps) {
           <nav aria-label={isKo ? "주 메뉴" : "Main menu"} className="app-nav">
             {(["cpacc", "was"] as const).map((c) => (
               <div key={c} className="nav-dropdown">
-                <span
+                <button
                   className="app-nav__link nav-dropdown__trigger"
+                  aria-haspopup="menu"
+                  aria-expanded={openDropdown === c}
                   aria-current={isCertActive(c) ? "page" : undefined}
+                  onClick={() => setOpenDropdown(openDropdown === c ? null : c)}
+                  onKeyDown={(e) => { if (e.key === "Escape") setOpenDropdown(null); }}
                 >
                   {c.toUpperCase()}
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                </span>
-                <div className="nav-dropdown__panel">
+                </button>
+                <div className="nav-dropdown__panel" role="menu">
                   {certNavItems(c).map(({ href, label }) => (
-                    <Link key={href} href={href} className="nav-dropdown__item" aria-current={isActive(href) ? "page" : undefined}>
+                    <Link key={href} href={href} className="nav-dropdown__item" role="menuitem" aria-current={isActive(href) ? "page" : undefined}>
                       {label}
                     </Link>
                   ))}
