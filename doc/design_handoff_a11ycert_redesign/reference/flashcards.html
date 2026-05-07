@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>플래시카드 — A11yCert</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/learn.css">
+  <script src="scripts/prefs.js"></script>
+</head>
+<body>
+  <main id="main-content">
+    <div class="container">
+      <div class="flash-shell">
+        <div style="text-align:center;max-width:720px;width:100%;">
+          <div style="font-size:var(--fs-xs);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">FLASHCARDS · CPACC</div>
+          <h1 style="font-size:var(--fs-2xl);font-weight:700;letter-spacing:-0.02em;">접근성 핵심 용어</h1>
+          <p style="color:var(--fg-muted);margin-top:8px;">간격 반복 알고리즘으로 가장 잊기 쉬운 카드부터 보여드립니다.</p>
+        </div>
+
+        <div class="flash-meta">
+          <span>오늘 복습 12 / 30</span>
+          <span class="flash-meta__step">카드 12 / 30</span>
+          <span>다음 카드 4분 후</span>
+        </div>
+
+        <div class="flash-card is-flipped" role="button" tabindex="0" aria-label="카드 뒤집기">
+          <div class="flash-card__inner">
+            <div class="flash-card__face flash-card__face--front">
+              <span class="flash-card__label">용어</span>
+              <div class="flash-card__term">POUR</div>
+              <div class="flash-card__term-alt">Perceivable · Operable · Understandable · Robust</div>
+              <span class="flash-card__hint">탭 또는 <span class="kbd">Space</span> — 답 보기</span>
+            </div>
+            <div class="flash-card__face flash-card__face--back">
+              <span class="flash-card__label">정의</span>
+              <p class="flash-card__def">
+                WCAG 2.x의 4대 원칙. 모든 접근성 가이드라인의 상위 분류로,
+                <strong>인식 가능</strong>·<strong>운용 가능</strong>·<strong>이해 가능</strong>·<strong>견고함</strong>의 머리글자입니다.
+              </p>
+              <p class="flash-card__def-en">
+                The four foundational principles of WCAG: content must be Perceivable, Operable, Understandable, and Robust enough to work with current and future user agents and assistive technologies.
+              </p>
+              <span class="flash-card__hint">얼마나 잘 기억나나요?</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flash-rate" role="group" aria-label="기억 정도 평가">
+          <button class="flash-rate__again">다시 <small>1분 후</small></button>
+          <button class="flash-rate__hard">어려움 <small>10분 후</small></button>
+          <button class="flash-rate__good">좋음 <small>1일 후</small></button>
+          <button class="flash-rate__easy">쉬움 <small>4일 후</small></button>
+        </div>
+
+        <div style="font-size:var(--fs-xs);color:var(--fg-subtle);display:flex;gap:var(--space-3);margin-top:var(--space-2);">
+          <span><span class="kbd">Space</span> 카드 뒤집기</span>
+          <span><span class="kbd">1</span>-<span class="kbd">4</span> 평가</span>
+          <span><span class="kbd">B</span> 즐겨찾기</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/shell.js"></script>
+  <script>A11yCertShell.mount({ active: "flash", lang: "ko" });</script>
+</body>
+</html>
