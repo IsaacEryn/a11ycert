@@ -58,6 +58,7 @@ export default function Header({ locale }: HeaderProps) {
     { label: "WAS", items: certNavItems("was") },
     { label: isKo ? "기타" : "More", items: [
       { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
+      { href: `/${locale}/about`, label: isKo ? "소개" : "About" },
     ]},
   ];
 
@@ -126,6 +127,13 @@ export default function Header({ locale }: HeaderProps) {
               aria-current={isActive(`/${locale}/glossary`) ? "page" : undefined}
             >
               {isKo ? "용어집" : "Glossary"}
+            </Link>
+            <Link
+              href={`/${locale}/about`}
+              className="app-nav__link"
+              aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
+            >
+              {isKo ? "소개" : "About"}
             </Link>
           </nav>
 
