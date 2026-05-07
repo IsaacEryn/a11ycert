@@ -65,7 +65,7 @@ function WasContent({ locale }: { locale: string }) {
   ];
 
   return (
-    <main>
+    <>
       <section className="overview-hero">
         <div className="container">
           <nav className="overview-hero__crumbs" aria-label={isKo ? "경로" : "Breadcrumb"}>
@@ -160,6 +160,6 @@ function WasContent({ locale }: { locale: string }) {
           ))}
         </div>
       </section>
-    </main>
+    </>
   );
 }
