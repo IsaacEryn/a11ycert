@@ -36,17 +36,29 @@ export default function Header({ locale }: HeaderProps) {
   }, [pathname]);
 
   function isActive(href: string) {
+    if (href === `/${locale}`) return pathname === `/${locale}`;
     return pathname === href || pathname.startsWith(href + "/");
   }
 
-  const navItems = [
-    { href: `/${locale}`, label: isKo ? "홈" : "Home" },
-    { href: `/${locale}/cpacc`, label: "CPACC" },
-    { href: `/${locale}/was`, label: "WAS" },
-    { href: `/${locale}/${cert}/study`, label: isKo ? "학습" : "Study" },
-    { href: `/${locale}/${cert}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
-    { href: `/${locale}/${cert}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
-    { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
+  function isCertActive(c: "cpacc" | "was") {
+    return pathname.includes(`/${c}`);
+  }
+
+  function certNavItems(c: "cpacc" | "was") {
+    return [
+      { href: `/${locale}/${c}`, label: isKo ? "개요" : "Overview" },
+      { href: `/${locale}/${c}/study`, label: isKo ? "학습" : "Study" },
+      { href: `/${locale}/${c}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
+      { href: `/${locale}/${c}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
+    ];
+  }
+
+  const mobileNavSections = [
+    { label: "CPACC", items: certNavItems("cpacc") },
+    { label: "WAS", items: certNavItems("was") },
+    { label: isKo ? "기타" : "More", items: [
+      { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
+    ]},
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
@@ -88,16 +100,33 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Desktop nav */}
           <nav aria-label={isKo ? "주 메뉴" : "Main menu"} className="app-nav">
-            {navItems.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="app-nav__link"
-                aria-current={isActive(href) ? "page" : undefined}
-              >
-                {label}
-              </Link>
+            {(["cpacc", "was"] as const).map((c) => (
+              <div key={c} className="nav-dropdown">
+                <span
+                  className="app-nav__link nav-dropdown__trigger"
+                  aria-current={isCertActive(c) ? "page" : undefined}
+                >
+                  {c.toUpperCase()}
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                <div className="nav-dropdown__panel">
+                  {certNavItems(c).map(({ href, label }) => (
+                    <Link key={href} href={href} className="nav-dropdown__item" aria-current={isActive(href) ? "page" : undefined}>
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
+            <Link
+              href={`/${locale}/glossary`}
+              className="app-nav__link"
+              aria-current={isActive(`/${locale}/glossary`) ? "page" : undefined}
+            >
+              {isKo ? "용어집" : "Glossary"}
+            </Link>
           </nav>
 
           <div className="app-header__spacer" />
@@ -162,17 +191,24 @@ export default function Header({ locale }: HeaderProps) {
           title={isKo ? "메뉴" : "Menu"}
         >
           {/* Nav links */}
-          <nav className="mobile-nav" aria-label={isKo ? "모바일 메뉴" : "Mobile menu"}>
-            {navItems.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                aria-current={isActive(href) ? "page" : undefined}
-                onClick={() => setMobileOpen(false)}
-              >
-                <span>{label}</span>
-                <span aria-hidden="true">→</span>
-              </Link>
+          <nav aria-label={isKo ? "모바일 메뉴" : "Mobile menu"}>
+            {mobileNavSections.map(({ label, items }) => (
+              <div key={label} className="mobile-sheet__section" style={{ marginTop: 0, paddingTop: 0, borderTop: "none" }}>
+                <p className="mobile-sheet__section-label">{label}</p>
+                <div className="mobile-nav">
+                  {items.map(({ href, label: itemLabel }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      aria-current={isActive(href) ? "page" : undefined}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span>{itemLabel}</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </nav>
 
