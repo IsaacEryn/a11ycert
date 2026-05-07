@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WAS 개요 — A11yCert</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/overview.css">
+  <script src="scripts/prefs.js"></script>
+</head>
+<body>
+  <main id="main-content">
+    <section class="overview-hero">
+      <div class="container">
+        <nav class="overview-hero__crumbs" aria-label="현재 위치">
+          <a href="index.html">홈</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">WAS 개요</span>
+        </nav>
+        <div class="overview-hero__head">
+          <div>
+            <div class="overview-hero__id">CERT · 02 / SPECIALIST</div>
+            <h1 class="overview-hero__title">WAS — 웹 접근성 전문가 자격증</h1>
+            <p class="overview-hero__title-en">Web Accessibility Specialist</p>
+            <p class="overview-hero__lede">
+              웹 개발자·QA를 대상으로 한 기술 자격증. WCAG의 실제 적용, ARIA 패턴, 보조 기술을 사용한 검수 능력을 평가합니다. CPACC 합격자에게 권장되며, 둘을 모두 취득하면 WAS Practitioner가 됩니다.
+            </p>
+            <div class="overview-hero__cta">
+              <a class="btn btn--primary btn--lg" href="study.html?cert=was">학습 시작</a>
+              <a class="btn btn--lg" href="quiz.html?cert=was">모의 퀴즈</a>
+              <a class="btn btn--ghost btn--lg" href="flashcards.html?cert=was">플래시카드</a>
+            </div>
+          </div>
+          <div class="overview-hero__facts" role="group" aria-label="시험 정보">
+            <div class="overview-hero__fact"><span class="overview-hero__fact-label">문항 수</span><span class="overview-hero__fact-value">75문항</span></div>
+            <div class="overview-hero__fact"><span class="overview-hero__fact-label">형식</span><span class="overview-hero__fact-value">4지선다</span></div>
+            <div class="overview-hero__fact"><span class="overview-hero__fact-label">합격선</span><span class="overview-hero__fact-value">65% (≈49문항)</span></div>
+            <div class="overview-hero__fact"><span class="overview-hero__fact-label">제한 시간</span><span class="overview-hero__fact-value">90분</span></div>
+            <div class="overview-hero__fact"><span class="overview-hero__fact-label">응시료</span><span class="overview-hero__fact-value">$465 USD</span></div>
+            <div class="overview-hero__fact"><span class="overml-hero__fact-label">선수</span><span class="overview-hero__fact-value">CPACC 권장</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="domains">
+      <div class="container">
+        <div class="section__head" style="margin-bottom:var(--space-6)">
+          <div>
+            <h2 class="section__title">시험 영역</h2>
+            <p class="section__sub">IAAP WAS BoK 기준 3개 도메인</p>
+          </div>
+        </div>
+
+        <div class="domain">
+          <div>
+            <div class="domain__num">DOMAIN · 01</div>
+            <h3 class="domain__title">접근성 있는 웹 만들기</h3>
+            <p class="domain__title-en">Create Accessible Web Solutions</p>
+            <div class="domain__weight">비중 40% <span class="domain__weight-bar"><span style="width:40%"></span></span></div>
+            <div class="domain__cta"><a class="btn btn--sm" href="study.html?cert=was&domain=1">이 영역 학습</a></div>
+          </div>
+          <ul class="domain__topics">
+            <li class="domain__topic"><span class="domain__topic-mark">01</span><div><strong>의미론적 HTML</strong><br><span style="color:var(--fg-muted)">랜드마크, 헤딩, 폼</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">02</span><div><strong>대체 텍스트와 미디어</strong><br><span style="color:var(--fg-muted)">alt, caption, transcript</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">03</span><div><strong>색상과 대비</strong><br><span style="color:var(--fg-muted)">4.5:1, 3:1 비대비 요건</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">04</span><div><strong>키보드 접근성</strong><br><span style="color:var(--fg-muted)">포커스 순서, 트랩</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">05</span><div><strong>ARIA 1.x</strong><br><span style="color:var(--fg-muted)">역할·속성·상태, 5가지 규칙</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">06</span><div><strong>반응형·줌·텍스트 간격</strong><br><span style="color:var(--fg-muted)">200% 확대 요건</span></div></li>
+          </ul>
+        </div>
+
+        <div class="domain">
+          <div>
+            <div class="domain__num">DOMAIN · 02</div>
+            <h3 class="domain__title">접근성 식별과 결함 해결</h3>
+            <p class="domain__title-en">Identify and Remediate Accessibility Issues</p>
+            <div class="domain__weight">비중 40% <span class="domain__weight-bar"><span style="width:40%"></span></span></div>
+            <div class="domain__cta"><a class="btn btn--sm" href="study.html?cert=was&domain=2">이 영역 학습</a></div>
+          </div>
+          <ul class="domain__topics">
+            <li class="domain__topic"><span class="domain__topic-mark">07</span><div><strong>자동 검사 도구</strong><br><span style="color:var(--fg-muted)">axe, WAVE, Lighthouse 한계</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">08</span><div><strong>수동 검수 절차</strong><br><span style="color:var(--fg-muted)">키보드·확대·색상 점검</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">09</span><div><strong>스크린 리더 검수</strong><br><span style="color:var(--fg-muted)">NVDA, JAWS, VoiceOver</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">10</span><div><strong>모바일 앱 검수</strong><br><span style="color:var(--fg-muted)">TalkBack, VoiceOver iOS</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">11</span><div><strong>WCAG 적합성 판정</strong><br><span style="color:var(--fg-muted)">충족·실패·해당없음</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">12</span><div><strong>결함 보고서 작성</strong><br><span style="color:var(--fg-muted)">우선순위와 권고안</span></div></li>
+          </ul>
+        </div>
+
+        <div class="domain">
+          <div>
+            <div class="domain__num">DOMAIN · 03</div>
+            <h3 class="domain__title">접근성 테스트 계획과 관리</h3>
+            <p class="domain__title-en">Plan and Manage Accessibility Testing</p>
+            <div class="domain__weight">비중 20% <span class="domain__weight-bar"><span style="width:20%"></span></span></div>
+            <div class="domain__cta"><a class="btn btn--sm" href="study.html?cert=was&domain=3">이 영역 학습</a></div>
+          </div>
+          <ul class="domain__topics">
+            <li class="domain__topic"><span class="domain__topic-mark">13</span><div><strong>테스트 범위 결정</strong><br><span style="color:var(--fg-muted)">샘플링 전략</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">14</span><div><strong>WCAG-EM 평가 방법론</strong><br><span style="color:var(--fg-muted)">5단계 절차</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">15</span><div><strong>장애인 사용자 테스트</strong><br><span style="color:var(--fg-muted)">참여형 검증</span></div></li>
+            <li class="domain__topic"><span class="domain__topic-mark">16</span><div><strong>지속적 통합과 회귀</strong><br><span style="color:var(--fg-muted)">CI 파이프라인 통합</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/shell.js"></script>
+  <script>A11yCertShell.mount({ active: "was", lang: "ko" });</script>
+</body>
+</html>

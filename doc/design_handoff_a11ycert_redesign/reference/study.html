@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>학습 — A11yCert</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/learn.css">
+  <script src="scripts/prefs.js"></script>
+</head>
+<body>
+  <main id="main-content">
+    <div class="container">
+      <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-label="학습 목차">
+          <div class="sidebar__cert-switch" role="group" aria-label="자격증 선택">
+            <button type="button" aria-pressed="true">CPACC</button>
+            <button type="button" aria-pressed="false">WAS</button>
+          </div>
+          <div class="sidebar__progress">
+            <div class="sidebar__progress-row">
+              <span style="color:var(--fg-muted);font-weight:600;">전체 진행</span>
+              <span class="sidebar__progress-num">42 / 100</span>
+            </div>
+            <div class="progress-track" aria-hidden="true"><div class="progress-fill" style="width:42%"></div></div>
+          </div>
+
+          <div class="sidebar__group">Domain 01 · 장애와 보조 기술</div>
+          <ul class="sidebar__list">
+            <li><button class="sidebar__item"><span class="sidebar__item-num">1.1</span><span>장애의 정의와 모델</span><span class="sidebar__item-status is-done" aria-label="완료"></span></button></li>
+            <li><button class="sidebar__item"><span class="sidebar__item-num">1.2</span><span>시각·청각 장애</span><span class="sidebar__item-status is-done" aria-label="완료"></span></button></li>
+            <li><button class="sidebar__item is-active" aria-current="true"><span class="sidebar__item-num">1.3</span><span>인지·학습 장애</span><span class="sidebar__item-status" aria-label="진행 중"></span></button></li>
+            <li><button class="sidebar__item"><span class="sidebar__item-num">1.4</span><span>스크린 리더와 보조 기술</span><span class="sidebar__item-status" aria-label="미시작"></span></button></li>
+            <li><button class="sidebar__item"><span class="sidebar__item-num">1.5</span><span>유니버설 디자인 7원칙</span><span class="sidebar__item-status" aria-label="미시작"></span></button></li>
+          </ul>
+
+          <div class="sidebar__group">Domain 02 · 표준과 법</div>
+          <ul class="sidebar__list">
+            <li><button class="sidebar__item"><span class="sidebar__item-num">2.1</span><span>WCAG 2.x 개요</span><span class="sidebar__item-status" aria-label="미시작"></span></button></li>
+            <li><button class="sidebar__item"><span class="sidebar__item-num">2.2</span><span>POUR 4원칙</span><span class="sidebar__item-status" aria-label="미시작"></span></button></li>
+            <li><button class="sidebar__item"><span class="sidebar__item-num">2.3</span><span>ADA · Section 508</span><span class="sidebar__item-status" aria-label="미시작"></span></button></li>
+          </ul>
+        </aside>
+
+        <!-- Main -->
+        <div>
+          <div class="study-toolbar">
+            <nav class="study-toolbar__crumbs" aria-label="현재 위치">
+              <span>CPACC</span><span aria-hidden="true">›</span>
+              <span>장애와 보조 기술</span><span aria-hidden="true">›</span>
+              <strong>1.3 인지·학습 장애</strong>
+            </nav>
+            <div class="study-toolbar__actions">
+              <button class="btn btn--sm" aria-label="형광펜 모드 켜기">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.586 7.586"/></svg>
+                형광펜
+              </button>
+              <button class="btn btn--sm" aria-label="북마크">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                북마크
+              </button>
+            </div>
+          </div>
+
+          <article class="bilingual-card" aria-labelledby="card-title">
+            <div class="bilingual-card__head">
+              <div>
+                <div class="bilingual-card__num">UNIT · 1.3</div>
+                <h1 class="bilingual-card__title" id="card-title">인지·학습 장애</h1>
+                <div class="bilingual-card__title-en">Cognitive &amp; Learning Disabilities</div>
+              </div>
+              <span class="tag tag--accent">출제 빈도 높음</span>
+            </div>
+
+            <div class="bilingual-card__cols">
+              <div class="bilingual-card__col bilingual-card__col--ko">
+                <h4>한국어 해설 <span class="lang-pill">KO</span></h4>
+                <p>인지 장애는 기억·주의·문제 해결·언어 처리 등에 영향을 주는 광범위한 범주입니다. 대표적으로 <span class="term" tabindex="0" aria-describedby="term-1">난독증(dyslexia)</span>, ADHD, 자폐 스펙트럼, 외상성 뇌손상이 포함됩니다.</p>
+                <p>웹에서는 다음 설계 원칙이 중요합니다: 명확하고 일관된 레이아웃, 짧고 평이한 문장, 충분한 여백, 시간 제한 회피, 자동 재생되는 콘텐츠 차단.</p>
+                <div class="callout">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div class="callout__body">
+                    <div class="callout__title">시험 포인트</div>
+                    WCAG 2.2의 <strong>3.1 (읽기 가능)</strong>, <strong>3.2 (예측 가능)</strong>, <strong>3.3 (입력 지원)</strong>이 인지 장애와 직접 연관됩니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="bilingual-card__col bilingual-card__col--en">
+                <h4>Original Text <span class="lang-pill">EN</span></h4>
+                <p>Cognitive disabilities encompass a broad range of conditions affecting memory, attention, problem-solving, and language processing. Common examples include <em>dyslexia</em>, ADHD, autism spectrum disorders, and traumatic brain injuries.</p>
+                <p>Key web design principles include: clear and consistent layout, plain language, adequate whitespace, avoiding time limits, and preventing auto-playing content.</p>
+                <p style="font-size:12px;color:var(--fg-subtle);margin-top:var(--space-4);">— IAAP CPACC BoK §1.3.2</p>
+              </div>
+            </div>
+
+            <div class="bilingual-card__nav">
+              <button class="btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg> 1.2 시각·청각 장애</button>
+              <div class="bilingual-card__nav-help">
+                <span><span class="kbd">←</span> <span class="kbd">→</span> 이동</span>
+                <span><span class="kbd">L</span> 한/영</span>
+                <span><span class="kbd">B</span> 북마크</span>
+              </div>
+              <button class="btn btn--primary">1.4 보조 기술 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/shell.js"></script>
+  <script>A11yCertShell.mount({ active: "study", lang: "ko" });</script>
+</body>
+</html>

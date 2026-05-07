@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>용어집 — A11yCert</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/learn.css">
+  <script src="scripts/prefs.js"></script>
+</head>
+<body>
+  <main id="main-content">
+    <section class="glossary-hero">
+      <div class="container">
+        <nav class="overview-hero__crumbs" aria-label="현재 위치" style="margin-bottom:var(--space-4);font-size:var(--fs-xs);color:var(--fg-subtle);">
+          <a href="index.html" style="color:var(--fg-muted);">홈</a>
+          <span aria-hidden="true" style="margin:0 6px">/</span>
+          <span aria-current="page">용어집</span>
+        </nav>
+        <h1 style="font-size:var(--fs-3xl);font-weight:700;letter-spacing:-0.02em;">접근성 용어집</h1>
+        <p style="color:var(--fg-muted);margin-top:8px;font-size:var(--fs-md);max-width:60ch;">
+          IAAP 시험에 자주 등장하는 용어 200+개를 한국어 정의와 영어 원문으로 정리했습니다.
+        </p>
+        <div class="glossary-search" role="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:8px;color:var(--fg-subtle);align-self:center;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" placeholder="용어 검색 (예: WCAG, ARIA, 대비비, screen reader)" aria-label="용어 검색">
+          <button class="btn btn--primary">검색</button>
+        </div>
+        <div class="glossary-filter" role="group" aria-label="자격증별 필터">
+          <button aria-pressed="true">전체 (218)</button>
+          <button aria-pressed="false">CPACC (124)</button>
+          <button aria-pressed="false">WAS (94)</button>
+          <button aria-pressed="false">WCAG</button>
+          <button aria-pressed="false">ARIA</button>
+          <button aria-pressed="false">법 · 표준</button>
+          <button aria-pressed="false">보조 기술</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="glossary-list">
+        <div class="glossary-letter">A</div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">ARIA</div>
+            <div class="glossary-row__term-en">Accessible Rich Internet Applications</div>
+          </div>
+          <div class="glossary-row__def">
+            HTML만으로 표현하기 어려운 동적 UI 컴포넌트의 의미·상태·관계를 보조 기술에 전달하기 위한 W3C 명세. <strong>5가지 규칙</strong> 중 첫 번째: "ARIA를 쓰지 않을 수 있다면 쓰지 마라."
+          </div>
+          <div class="glossary-row__cert">
+            <span class="tag tag--accent">WAS</span>
+          </div>
+        </div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">대체 텍스트</div>
+            <div class="glossary-row__term-en">Alt text · alternative text</div>
+          </div>
+          <div class="glossary-row__def">
+            이미지의 의미·기능을 텍스트로 전달하는 대체 수단. 장식용 이미지는 빈 alt(<code>alt=""</code>)로, 의미 있는 이미지는 맥락에 맞춰 간결히 작성합니다.
+          </div>
+          <div class="glossary-row__cert">
+            <span class="tag tag--accent">WAS</span>
+            <span class="tag">CPACC</span>
+          </div>
+        </div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">ADA</div>
+            <div class="glossary-row__term-en">Americans with Disabilities Act</div>
+          </div>
+          <div class="glossary-row__def">
+            1990년 제정된 미국 장애인법. Title III가 디지털 접근성 소송의 근거로 광범위하게 사용됩니다.
+          </div>
+          <div class="glossary-row__cert"><span class="tag">CPACC</span></div>
+        </div>
+
+        <div class="glossary-letter">P</div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">POUR</div>
+            <div class="glossary-row__term-en">Perceivable · Operable · Understandable · Robust</div>
+          </div>
+          <div class="glossary-row__def">
+            WCAG의 4대 원칙. 모든 가이드라인은 이 4가지 중 하나에 속합니다.
+          </div>
+          <div class="glossary-row__cert">
+            <span class="tag tag--accent">WAS</span>
+            <span class="tag">CPACC</span>
+          </div>
+        </div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">프로그래매틱 결정</div>
+            <div class="glossary-row__term-en">Programmatically determined</div>
+          </div>
+          <div class="glossary-row__def">
+            보조 기술이 코드(주로 접근성 트리)를 통해 정보를 추출할 수 있도록 노출된 상태. WCAG 다수 기준에서 핵심 개념입니다.
+          </div>
+          <div class="glossary-row__cert"><span class="tag tag--accent">WAS</span></div>
+        </div>
+
+        <div class="glossary-letter">W</div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">WCAG</div>
+            <div class="glossary-row__term-en">Web Content Accessibility Guidelines</div>
+          </div>
+          <div class="glossary-row__def">
+            W3C가 발표한 웹 접근성 국제 표준. 적합 수준은 A · AA · AAA 세 단계.
+          </div>
+          <div class="glossary-row__cert">
+            <span class="tag tag--accent">WAS</span>
+            <span class="tag">CPACC</span>
+          </div>
+        </div>
+        <div class="glossary-row">
+          <div>
+            <div class="glossary-row__term">WCAG-EM</div>
+            <div class="glossary-row__term-en">WCAG Evaluation Methodology</div>
+          </div>
+          <div class="glossary-row__def">
+            웹사이트 적합성 평가를 위한 W3C 5단계 방법론: 범위 정의 → 페이지 표본 → 평가 → 기록 → 보고.
+          </div>
+          <div class="glossary-row__cert"><span class="tag tag--accent">WAS</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/shell.js"></script>
+  <script>A11yCertShell.mount({ active: "glossary", lang: "ko" });</script>
+</body>
+</html>

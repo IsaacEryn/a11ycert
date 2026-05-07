@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>모의 퀴즈 — A11yCert</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/learn.css">
+  <script src="scripts/prefs.js"></script>
+</head>
+<body>
+  <main id="main-content">
+    <div class="container">
+      <div class="quiz-shell">
+        <div class="quiz-toolbar" role="region" aria-label="퀴즈 진행 상태">
+          <div class="quiz-toolbar__progress">
+            <span class="quiz-toolbar__step">12 / 25</span>
+            <div class="progress-track" aria-hidden="true"><div class="progress-fill" style="width:48%"></div></div>
+          </div>
+          <div style="display:flex;gap:var(--space-2);align-items:center;">
+            <span class="tag tag--accent">CPACC · 표준과 법</span>
+            <span class="quiz-toolbar__timer" aria-label="남은 시간">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              28:41
+            </span>
+            <button class="btn btn--sm">중단</button>
+          </div>
+        </div>
+
+        <div class="quiz-grid">
+          <article class="quiz-card" aria-labelledby="qtitle">
+            <div class="quiz-card__top">
+              <div class="quiz-card__tags">
+                <span class="tag">문항 12</span>
+                <span class="tag tag--accent">WCAG · POUR</span>
+              </div>
+              <button class="quiz-card__bookmark" aria-pressed="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                나중에 다시
+              </button>
+            </div>
+
+            <h1 class="quiz-q" id="qtitle">WCAG 2.2의 네 가지 핵심 원칙(POUR)에 포함되지 <em>않는</em> 것은?</h1>
+            <div class="quiz-q-en">Which of the following is NOT one of WCAG 2.2's four principles (POUR)?</div>
+
+            <div class="quiz-options" role="radiogroup" aria-labelledby="qtitle">
+              <button class="quiz-option" role="radio" aria-checked="false">
+                <span class="quiz-option__letter">A</span>
+                <span class="quiz-option__text">인식 가능 (Perceivable)
+                  <span class="quiz-option__text-en">Information must be presentable in ways users can perceive</span>
+                </span>
+              </button>
+              <button class="quiz-option" role="radio" aria-checked="false">
+                <span class="quiz-option__letter">B</span>
+                <span class="quiz-option__text">운용 가능 (Operable)
+                  <span class="quiz-option__text-en">UI components must be operable by all users</span>
+                </span>
+              </button>
+              <button class="quiz-option is-incorrect" role="radio" aria-checked="true">
+                <span class="quiz-option__letter">C</span>
+                <span class="quiz-option__text">예측 가능 (Predictable)
+                  <span class="quiz-option__text-en">Pages should appear and operate in predictable ways</span>
+                </span>
+                <svg class="quiz-option__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button class="quiz-option is-correct" role="radio" aria-checked="false">
+                <span class="quiz-option__letter">D</span>
+                <span class="quiz-option__text">견고함 (Robust)
+                  <span class="quiz-option__text-en">Content must be robust enough for assistive technologies</span>
+                </span>
+                <svg class="quiz-option__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </button>
+            </div>
+
+            <div class="quiz-explain">
+              <div class="quiz-explain__head is-incorrect">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                오답 · 정답은 D
+              </div>
+              <div class="quiz-explain__title">POUR는 4가지 원칙의 머리글자입니다</div>
+              <div class="quiz-explain__body">
+                <strong>P</strong>erceivable(인식 가능), <strong>O</strong>perable(운용 가능), <strong>U</strong>nderstandable(이해 가능), <strong>R</strong>obust(견고함). "예측 가능(Predictable)"은 <strong>이해 가능</strong>의 하위 가이드라인(3.2)으로, 4대 원칙 자체는 아닙니다.
+              </div>
+              <a class="quiz-explain__ref" href="study.html?cert=cpacc&unit=2.2">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                관련 학습 단원 2.2 POUR 4원칙으로 이동
+              </a>
+            </div>
+
+            <div class="quiz-foot">
+              <div class="quiz-foot__keys">
+                <span><span class="kbd">1</span>~<span class="kbd">4</span> 선택</span>
+                <span><span class="kbd">Enter</span> 확인</span>
+                <span><span class="kbd">→</span> 다음</span>
+              </div>
+              <div style="display:flex;gap:var(--space-2);">
+                <button class="btn">이전</button>
+                <button class="btn btn--primary">다음 문항 →</button>
+              </div>
+            </div>
+          </article>
+
+          <aside style="display:flex;flex-direction:column;gap:var(--space-4);">
+            <div class="aside-card">
+              <div class="aside-card__head">
+                <div>
+                  <div class="aside-card__title">진행 요약</div>
+                  <div class="aside-card__sub">현재 정답률 75%</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;">
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px" aria-label="문항 1 정답"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--danger);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--danger);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--success);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--danger);border-radius:4px;outline:2px solid var(--fg);outline-offset:1px" aria-current="true"></span>
+                <span style="aspect-ratio:1;background:var(--bg-muted);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--bg-muted);border-radius:4px"></span>
+                <span style="aspect-ratio:1;background:var(--bg-muted);border-radius:4px"></span>
+              </div>
+              <div style="margin-top:var(--space-3);display:flex;gap:var(--space-3);font-size:var(--fs-xs);color:var(--fg-muted);">
+                <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:var(--success);border-radius:2px;"></span>정답 9</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:var(--danger);border-radius:2px;"></span>오답 3</span>
+              </div>
+            </div>
+
+            <div class="aside-card">
+              <div class="aside-card__head">
+                <div>
+                  <div class="aside-card__title">자동 오답 노트</div>
+                  <div class="aside-card__sub">틀린 문제는 자동으로 모입니다</div>
+                </div>
+                <a class="btn btn--sm btn--ghost" href="#">전체</a>
+              </div>
+              <ul class="wrong-list">
+                <li class="wrong-list__item">
+                  <span class="wrong-list__num">04</span>
+                  <div>
+                    <div class="wrong-list__cat">인식 가능</div>
+                    <div class="wrong-list__q">대비비 4.5:1 요건이 적용되는 텍스트 크기 기준은?</div>
+                  </div>
+                </li>
+                <li class="wrong-list__item">
+                  <span class="wrong-list__num">08</span>
+                  <div>
+                    <div class="wrong-list__cat">운용 가능</div>
+                    <div class="wrong-list__q">키보드 트랩이 허용되는 예외 상황은?</div>
+                  </div>
+                </li>
+                <li class="wrong-list__item">
+                  <span class="wrong-list__num">12</span>
+                  <div>
+                    <div class="wrong-list__cat">POUR</div>
+                    <div class="wrong-list__q">POUR에 포함되지 않는 원칙</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/shell.js"></script>
+  <script>A11yCertShell.mount({ active: "quiz", lang: "ko" });</script>
+</body>
+</html>
