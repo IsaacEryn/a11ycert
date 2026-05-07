@@ -873,45 +873,303 @@ const units: StudyUnit[] = [
 		exam: "cpacc",
 		domain: 3,
 		order: 1,
-		available: false,
+		available: true,
 		title: { ko: "국제 협약 및 미국 법률", en: "International Standards and US Laws" },
 		summary: {
 			ko: "UN CRPD, 미국 ADA, 재활법 508조를 학습합니다.",
 			en: "Study the UN CRPD, US ADA, and Section 508 of the Rehabilitation Act.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"UN CRPD의 목적과 주요 원칙을 설명할 수 있다",
+				"미국 ADA의 적용 범위와 접근성 관련 조항을 이해한다",
+				"재활법 508조의 의미와 적용 대상을 설명할 수 있다",
+				"ATAG, UAAG 등 W3C 접근성 표준의 역할을 안다",
+			],
+			en: [
+				"Explain the purpose and key principles of the UN CRPD",
+				"Understand the scope and accessibility provisions of the US ADA",
+				"Describe Section 508 and its applicability",
+				"Know the roles of W3C standards like ATAG and UAAG",
+			],
+		},
+		content: {
+			ko: [
+				"UN 장애인권리협약(CRPD: Convention on the Rights of Persons with Disabilities, 2006)은 장애인의 인권을 보장하는 최초의 포괄적 국제 인권 조약입니다. 사회 모델 관점을 채택하며, 접근성(제9조)을 핵심 원칙으로 포함합니다. 한국(2008), 미국(미비준), EU 등 180개 이상의 국가가 비준했습니다. 주요 원칙: 비차별, 완전한 참여, 접근성, 기회의 평등.",
+				"미국 장애인법(ADA: Americans with Disabilities Act, 1990)은 장애인에 대한 차별을 금지하는 미국의 민권법입니다. Title I(고용), Title II(주·지방 정부), Title III(공공 시설 — 민간 사업장)로 구성됩니다. 웹 접근성은 명시적으로 언급되지 않았지만, 법원 판례를 통해 웹사이트도 ADA의 적용을 받는다고 해석됩니다. 2024년 4월 Title II 규칙이 WCAG 2.1 Level AA를 명시적으로 요구합니다.",
+				"재활법(Rehabilitation Act) 508조는 미국 연방 정부 기관이 개발·구매·유지하는 전자 및 정보 기술(ICT)이 장애인에게 접근 가능해야 한다고 요구합니다. 2017년 개정(Section 508 Refresh)에서 WCAG 2.0 Level AA를 직접 참조하도록 업데이트되었습니다. 연방 정부와 계약하는 민간 기업도 적용 대상입니다.",
+				"W3C의 추가 접근성 표준: ATAG(Authoring Tool Accessibility Guidelines)는 웹 저작 도구(CMS, 에디터)가 접근 가능한 콘텐츠를 생성하도록 안내합니다. UAAG(User Agent Accessibility Guidelines)는 브라우저와 미디어 플레이어 등 사용자 에이전트의 접근성 기준입니다. WAI-ARIA는 동적 웹 콘텐츠와 위젯의 접근성을 개선하는 기술 사양입니다.",
+			],
+			en: [
+				"The UN Convention on the Rights of Persons with Disabilities (CRPD, 2006) is the first comprehensive international human rights treaty on disability. It adopts the Social Model and includes accessibility (Article 9) as a core principle. Over 180 countries have ratified it, including South Korea (2008) and the EU; the US has not ratified. Key principles: non-discrimination, full participation, accessibility, and equality of opportunity.",
+				"The Americans with Disabilities Act (ADA, 1990) is a US civil rights law prohibiting discrimination against people with disabilities. It covers Title I (employment), Title II (state/local government), and Title III (public accommodations — private businesses). Web accessibility is not explicitly mentioned, but courts have interpreted websites as covered under the ADA. The 2024 Title II rule explicitly requires WCAG 2.1 Level AA.",
+				"Section 508 of the Rehabilitation Act requires US federal agencies to make their electronic and information technology (ICT) accessible to people with disabilities. The 2017 Section 508 Refresh updated the standards to directly reference WCAG 2.0 Level AA. Private companies contracting with the federal government are also covered.",
+				"Additional W3C accessibility standards: ATAG (Authoring Tool Accessibility Guidelines) guides web authoring tools (CMS, editors) to produce accessible content. UAAG (User Agent Accessibility Guidelines) covers accessibility of browsers and media players. WAI-ARIA is a technical specification for improving accessibility of dynamic web content and widgets.",
+			],
+		},
+		questions: [
+			{
+				id: "cpacc-3-1-q1",
+				question: {
+					ko: "미국 재활법 508조의 적용 대상은?",
+					en: "Who does Section 508 of the Rehabilitation Act apply to?",
+				},
+				options: {
+					a: { ko: "모든 미국 민간 기업", en: "All US private companies" },
+					b: { ko: "미국 연방 정부 기관 및 연방 계약 업체", en: "US federal agencies and federal contractors" },
+					c: { ko: "미국 주 정부만", en: "Only US state governments" },
+					d: { ko: "전 세계 모든 정부 기관", en: "All government agencies worldwide" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "508조는 미국 연방 정부 기관이 개발·구매하는 ICT에 적용되며, 연방 정부와 계약하는 민간 기업도 대상입니다.",
+					en: "Section 508 applies to ICT developed or procured by US federal agencies, and private companies contracting with the federal government are also covered.",
+				},
+			},
+			{
+				id: "cpacc-3-1-q2",
+				question: {
+					ko: "UN CRPD에서 접근성을 다루는 조항은?",
+					en: "Which article of the UN CRPD addresses accessibility?",
+				},
+				options: {
+					a: { ko: "제1조", en: "Article 1" },
+					b: { ko: "제5조", en: "Article 5" },
+					c: { ko: "제9조", en: "Article 9" },
+					d: { ko: "제21조", en: "Article 21" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "UN CRPD 제9조(Accessibility)는 장애인이 물리적 환경, 교통, ICT 등에 동등하게 접근할 수 있도록 요구합니다.",
+					en: "Article 9 (Accessibility) of the UN CRPD requires that persons with disabilities have equal access to the physical environment, transportation, ICT, and more.",
+				},
+			},
+			{
+				id: "cpacc-3-1-q3",
+				question: {
+					ko: "ATAG(Authoring Tool Accessibility Guidelines)의 주요 목적은?",
+					en: "What is the primary purpose of ATAG?",
+				},
+				options: {
+					a: { ko: "브라우저의 접근성을 개선한다", en: "Improve browser accessibility" },
+					b: {
+						ko: "웹 저작 도구가 접근 가능한 콘텐츠를 생성하도록 안내한다",
+						en: "Guide authoring tools to produce accessible content",
+					},
+					c: { ko: "동적 웹 콘텐츠의 역할을 정의한다", en: "Define roles for dynamic web content" },
+					d: { ko: "모바일 앱의 접근성 기준을 제공한다", en: "Provide accessibility standards for mobile apps" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "ATAG는 CMS, 위지윅 에디터 등 웹 저작 도구가 접근 가능한 콘텐츠를 생성할 수 있도록 가이드하는 W3C 표준입니다.",
+					en: "ATAG is a W3C standard that guides web authoring tools like CMS and WYSIWYG editors to produce accessible content.",
+				},
+			},
+		],
 	},
 	{
 		id: "cpacc-3-2",
 		exam: "cpacc",
 		domain: 3,
 		order: 2,
-		available: false,
+		available: true,
 		title: { ko: "유럽 및 한국 법률", en: "European and Korean Laws" },
 		summary: {
 			ko: "EU 웹접근성 지침(WAD), EN 301 549, 한국 장애인차별금지법을 학습합니다.",
 			en: "Study the EU Web Accessibility Directive, EN 301 549, and Korea's Anti-Discrimination Act.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"EU 웹접근성 지침(WAD)의 적용 범위를 설명할 수 있다",
+				"EN 301 549와 WCAG의 관계를 이해한다",
+				"유럽 접근성법(EAA)의 확대된 적용 범위를 설명할 수 있다",
+				"한국 장애인차별금지법과 한국형 웹접근성 지침(KWCAG)을 이해한다",
+			],
+			en: [
+				"Explain the scope of the EU Web Accessibility Directive (WAD)",
+				"Understand the relationship between EN 301 549 and WCAG",
+				"Describe the expanded scope of the European Accessibility Act (EAA)",
+				"Understand Korea's Anti-Discrimination Act and KWCAG",
+			],
+		},
+		content: {
+			ko: [
+				"EU 웹접근성 지침(WAD: Web Accessibility Directive, 2016)은 EU 회원국의 공공 부문 웹사이트와 모바일 앱이 WCAG 2.1 Level AA를 준수하도록 요구합니다. 2019년부터 신규 웹사이트, 2020년부터 기존 웹사이트, 2021년부터 모바일 앱에 적용되었습니다. 회원국은 각자의 국내법으로 이 지침을 이행해야 합니다.",
+				"EN 301 549는 ICT 제품·서비스의 접근성 요구사항을 정의하는 유럽 표준(European Standard)입니다. WCAG 2.1 Level AA 성공 기준을 직접 참조하며, 웹뿐 아니라 소프트웨어, 하드웨어, 문서, 지원 서비스 등 폭넓은 ICT를 포괄합니다. EU 공공 조달에서 접근성 기준으로 사용됩니다.",
+				"유럽 접근성법(EAA: European Accessibility Act, 2019)은 WAD를 넘어 민간 부문까지 접근성 의무를 확대합니다. 2025년 6월부터 시행되며, 전자상거래, 은행 서비스, 전자책, 교통 티켓팅 등 민간 서비스에도 적용됩니다. 소규모 기업(10인 미만/매출 200만 유로 미만)은 면제됩니다.",
+				"한국 장애인차별금지법(2008)은 장애를 이유로 한 차별을 금지하며, 웹 접근성 의무를 포함합니다. 한국형 웹 콘텐츠 접근성 지침(KWCAG 2.2)은 WCAG 2.1을 기반으로 한국 상황에 맞게 조정한 국내 표준(KS X OT0003)입니다. 공공기관은 의무, 민간기관은 단계적 적용이 이루어지고 있습니다. 한국정보화진흥원(NIA)이 웹접근성 인증 심사를 수행합니다.",
+			],
+			en: [
+				"The EU Web Accessibility Directive (WAD, 2016) requires public sector websites and mobile apps in EU member states to comply with WCAG 2.1 Level AA. It applied to new websites from 2019, existing websites from 2020, and mobile apps from 2021. Member states must implement the directive through national laws.",
+				"EN 301 549 is a European Standard defining accessibility requirements for ICT products and services. It directly references WCAG 2.1 Level AA success criteria and covers not just web, but software, hardware, documents, and support services. It is used as the accessibility criterion in EU public procurement.",
+				"The European Accessibility Act (EAA, 2019) extends accessibility obligations beyond WAD to the private sector. Effective from June 2025, it covers e-commerce, banking, e-books, transport ticketing, and more. Micro-enterprises (fewer than 10 employees/turnover under €2 million) are exempt.",
+				"Korea's Anti-Discrimination Against and Remedies for Persons with Disabilities Act (2008) prohibits disability-based discrimination and includes web accessibility obligations. KWCAG 2.2 is Korea's national standard (KS X OT0003) based on WCAG 2.1, adapted for the Korean context. Public institutions have mandatory compliance; private sector compliance is being phased in. The National Information Society Agency (NIA) conducts web accessibility certification.",
+			],
+		},
+		questions: [
+			{
+				id: "cpacc-3-2-q1",
+				question: {
+					ko: "EU 웹접근성 지침(WAD)의 주요 적용 대상은?",
+					en: "What is the primary scope of the EU Web Accessibility Directive (WAD)?",
+				},
+				options: {
+					a: { ko: "모든 민간 기업의 웹사이트", en: "All private company websites" },
+					b: { ko: "공공 부문 웹사이트와 모바일 앱", en: "Public sector websites and mobile apps" },
+					c: { ko: "소셜 미디어 플랫폼만", en: "Social media platforms only" },
+					d: { ko: "전자상거래 사이트만", en: "E-commerce sites only" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "WAD는 EU 회원국의 공공 부문 웹사이트와 모바일 앱에 WCAG 2.1 Level AA 준수를 요구합니다. 민간 부문 확대는 EAA(유럽 접근성법)에서 다룹니다.",
+					en: "WAD requires public sector websites and mobile apps in EU member states to comply with WCAG 2.1 Level AA. Private sector expansion is addressed by the EAA.",
+				},
+			},
+			{
+				id: "cpacc-3-2-q2",
+				question: {
+					ko: "EN 301 549에 대한 설명으로 옳은 것은?",
+					en: "Which statement about EN 301 549 is correct?",
+				},
+				options: {
+					a: { ko: "웹사이트만 다루는 표준이다", en: "It only covers websites" },
+					b: {
+						ko: "웹, 소프트웨어, 하드웨어 등 폭넓은 ICT를 포괄하는 유럽 표준이다",
+						en: "It is a European standard covering web, software, hardware, and other ICT",
+					},
+					c: { ko: "미국에서만 사용되는 표준이다", en: "It is used only in the US" },
+					d: { ko: "WCAG와 관련이 없는 별도의 기준이다", en: "It is separate from WCAG" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "EN 301 549는 WCAG 2.1 Level AA를 참조하면서, 웹뿐 아니라 소프트웨어, 하드웨어, 문서 등 폭넓은 ICT의 접근성을 다루는 유럽 표준입니다.",
+					en: "EN 301 549 references WCAG 2.1 Level AA and covers accessibility for a wide range of ICT including web, software, hardware, and documents.",
+				},
+			},
+			{
+				id: "cpacc-3-2-q3",
+				question: {
+					ko: "한국형 웹 콘텐츠 접근성 지침(KWCAG)의 기반이 되는 국제 표준은?",
+					en: "Which international standard is KWCAG based on?",
+				},
+				options: {
+					a: { ko: "EN 301 549", en: "EN 301 549" },
+					b: { ko: "WCAG 2.1", en: "WCAG 2.1" },
+					c: { ko: "Section 508", en: "Section 508" },
+					d: { ko: "ISO 9241", en: "ISO 9241" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "KWCAG 2.2는 WCAG 2.1을 기반으로 한국 상황에 맞게 조정한 국내 표준(KS X OT0003)입니다.",
+					en: "KWCAG 2.2 is Korea's national standard (KS X OT0003), based on WCAG 2.1 and adapted for the Korean context.",
+				},
+			},
+		],
 	},
 	{
 		id: "cpacc-3-3",
 		exam: "cpacc",
 		domain: 3,
 		order: 3,
-		available: false,
+		available: true,
 		title: { ko: "접근성 관리 전략", en: "Accessibility Management Strategies" },
 		summary: {
 			ko: "조직 내 접근성 프로그램 구축과 관리 전략을 학습합니다.",
 			en: "Learn how to build and manage organizational accessibility programs.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"접근성 성숙도 모델의 단계를 설명할 수 있다",
+				"VPAT/ACR의 역할과 중요성을 이해한다",
+				"접근성 감사의 유형과 도구를 나열할 수 있다",
+				"조직 내 접근성 문화 구축 전략을 설명할 수 있다",
+			],
+			en: [
+				"Explain the stages of accessibility maturity models",
+				"Understand the role and importance of VPAT/ACR",
+				"List types and tools for accessibility auditing",
+				"Describe strategies for building an accessibility culture within an organization",
+			],
+		},
+		content: {
+			ko: [
+				"접근성 성숙도 모델은 조직의 접근성 수준을 단계적으로 평가합니다. 초기(Ad hoc): 접근성이 체계적으로 관리되지 않음. 계획(Planned): 정책과 목표를 수립하기 시작. 관리(Managed): 프로세스에 접근성을 통합하고 모니터링. 정착(Embedded): 접근성이 조직 문화의 일부로 정착. 최적화(Optimized): 지속적 개선과 혁신이 이루어짐.",
+				"VPAT(Voluntary Product Accessibility Template)는 ICT 제품/서비스의 WCAG 적합성 수준을 문서화하는 표준 양식입니다. 작성된 문서를 ACR(Accessibility Conformance Report)이라 합니다. 조달 담당자가 제품의 접근성 수준을 평가할 때 사용합니다. 솔직하고 정확한 보고가 중요하며, '지원(Supports)', '부분 지원(Partially Supports)', '미지원(Does Not Support)' 등으로 평가합니다.",
+				"접근성 감사(Audit)의 유형: 자동화 테스트(axe, WAVE, Lighthouse 등)는 빠르게 기술적 문제를 감지하지만, 전체 이슈의 약 30~40%만 발견할 수 있습니다. 수동 테스트(키보드 탐색, 화면낭독기 테스트)는 자동화가 놓치는 사용성 문제를 발견합니다. 사용자 테스트는 실제 장애인 사용자가 참여하여 실질적 사용성을 평가합니다. 최선의 접근은 세 가지를 병행하는 것입니다.",
+				"조직 내 접근성 문화 구축: 경영진의 지원과 예산 확보가 필수적입니다. 접근성 챔피언(Accessibility Champion)을 팀마다 배치합니다. 디자인·개발·QA 각 단계에서 접근성을 통합합니다(Shift Left 접근법). 정기적인 교육과 워크숍을 실시합니다. 장애인 사용자 관점의 페르소나를 활용합니다. 접근성 정책 성명서(Accessibility Statement)를 게시하여 공개적으로 의지를 표명합니다.",
+			],
+			en: [
+				"Accessibility maturity models assess an organization's accessibility level in stages. Ad hoc: accessibility is not systematically managed. Planned: policies and goals begin to be established. Managed: accessibility is integrated into processes with monitoring. Embedded: accessibility becomes part of organizational culture. Optimized: continuous improvement and innovation occur.",
+				"VPAT (Voluntary Product Accessibility Template) is a standard form for documenting the WCAG conformance level of ICT products/services. The completed document is called an ACR (Accessibility Conformance Report). Procurement officers use it to evaluate product accessibility. Honest and accurate reporting is critical, with ratings like 'Supports', 'Partially Supports', and 'Does Not Support'.",
+				"Accessibility audit types: Automated testing (axe, WAVE, Lighthouse) quickly detects technical issues but finds only about 30-40% of all issues. Manual testing (keyboard navigation, screen reader testing) catches usability issues automation misses. User testing involves actual users with disabilities to evaluate real-world usability. The best approach combines all three.",
+				"Building an accessibility culture: Executive support and budget allocation are essential. Place accessibility champions on each team. Integrate accessibility at every stage — design, development, and QA (Shift Left approach). Conduct regular training and workshops. Use personas representing users with disabilities. Publish an Accessibility Statement to publicly demonstrate commitment.",
+			],
+		},
+		questions: [
+			{
+				id: "cpacc-3-3-q1",
+				question: {
+					ko: "자동화 접근성 테스트 도구가 발견할 수 있는 이슈의 비율은 대략?",
+					en: "Approximately what percentage of accessibility issues can automated testing tools detect?",
+				},
+				options: {
+					a: { ko: "약 10%", en: "About 10%" },
+					b: { ko: "약 30~40%", en: "About 30-40%" },
+					c: { ko: "약 70~80%", en: "About 70-80%" },
+					d: { ko: "거의 100%", en: "Nearly 100%" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "자동화 도구는 전체 접근성 이슈의 약 30~40%만 감지합니다. 나머지는 수동 테스트와 사용자 테스트를 통해 발견해야 합니다.",
+					en: "Automated tools detect only about 30-40% of accessibility issues. The rest must be found through manual testing and user testing.",
+				},
+			},
+			{
+				id: "cpacc-3-3-q2",
+				question: {
+					ko: "VPAT/ACR의 주요 용도는?",
+					en: "What is the primary purpose of VPAT/ACR?",
+				},
+				options: {
+					a: { ko: "웹사이트의 성능을 측정한다", en: "Measure website performance" },
+					b: { ko: "보안 취약점을 보고한다", en: "Report security vulnerabilities" },
+					c: {
+						ko: "ICT 제품의 접근성 적합성 수준을 문서화한다",
+						en: "Document the accessibility conformance level of ICT products",
+					},
+					d: { ko: "개발자 교육 자료로 사용한다", en: "Use as developer training material" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "VPAT/ACR은 ICT 제품이 WCAG 성공 기준을 얼마나 충족하는지 문서화하여, 조달 담당자가 접근성을 평가할 수 있게 합니다.",
+					en: "VPAT/ACR documents how well ICT products meet WCAG success criteria, enabling procurement officers to evaluate accessibility.",
+				},
+			},
+			{
+				id: "cpacc-3-3-q3",
+				question: {
+					ko: "접근성 'Shift Left' 접근법이란?",
+					en: "What does the 'Shift Left' approach to accessibility mean?",
+				},
+				options: {
+					a: {
+						ko: "출시 후 접근성 문제를 수정한다",
+						en: "Fix accessibility issues after launch",
+					},
+					b: {
+						ko: "디자인·개발 초기 단계부터 접근성을 통합한다",
+						en: "Integrate accessibility from the earliest design and development stages",
+					},
+					c: { ko: "왼쪽 정렬을 사용하여 가독성을 높인다", en: "Use left alignment to improve readability" },
+					d: { ko: "자동화 도구에만 의존한다", en: "Rely solely on automated tools" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "Shift Left는 개발 프로세스의 초기(왼쪽) 단계부터 접근성을 통합하여, 나중에 수정하는 비용을 줄이는 전략입니다.",
+					en: "Shift Left means integrating accessibility from the earliest (leftmost) stages of the development process, reducing the cost of later fixes.",
+				},
+			},
+		],
 	},
 ];
 
