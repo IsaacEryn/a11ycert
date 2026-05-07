@@ -19,6 +19,11 @@ export const metadata: Metadata = {
 	openGraph: {
 		siteName: "A11yCert",
 		type: "website",
+		images: [{ url: "/logo.svg", width: 140, height: 40 }],
+	},
+	icons: {
+		icon: "/icon.svg",
+		shortcut: "/icon.svg",
 	},
 };
 
