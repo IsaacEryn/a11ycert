@@ -18,15 +18,21 @@ interface QuizEngineProps {
 	questions: QuizQuestion[];
 	locale: string;
 	exam: "cpacc" | "was";
+	/** true이면 모든 문제를 한 번에 표시 */
+	showAll?: boolean;
 }
 
 type Phase = "quiz" | "summary";
 
-export default function QuizEngine({ questions, locale, exam }: QuizEngineProps) {
+export default function QuizEngine({ questions, locale, exam, showAll = false }: QuizEngineProps) {
 	const [current, setCurrent] = useState(0);
 	const [selected, setSelected] = useState<"a" | "b" | "c" | "d" | null>(null);
 	const [answers, setAnswers] = useState<Record<number, "a" | "b" | "c" | "d">>({});
 	const [phase, setPhase] = useState<Phase>("quiz");
+
+	// showAll 모드: 각 문제별 독립 선택 상태
+	const [allSelections, setAllSelections] = useState<Record<number, "a" | "b" | "c" | "d" | null>>({});
+	const [showAllResults, setShowAllResults] = useState(false);
 
 	const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, languageMode } =
 		useLearningStore();
@@ -78,6 +84,179 @@ export default function QuizEngine({ questions, locale, exam }: QuizEngineProps)
 	const correctCount = questions.filter((_, i) => answers[i] === questions[i].answer).length;
 	const wrongAnswersLink = `/${locale}/${exam}/wrong-answers`;
 
+	// showAll 모드 핸들러
+	const handleSelectAll = (idx: number, key: "a" | "b" | "c" | "d") => {
+		if (allSelections[idx] !== undefined && allSelections[idx] !== null) return;
+		setAllSelections((prev) => ({ ...prev, [idx]: key }));
+
+		const q = questions[idx];
+		if (key !== q.answer) {
+			addWrongAnswer(q.id);
+			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
+		} else {
+			removeWrongAnswer(q.id);
+			if (userId) removeWrongAnswerFromDB(userId, q.id);
+		}
+	};
+
+	const allAnswered = questions.every((_, i) => allSelections[i] != null);
+	const allCorrectCount = questions.filter((q, i) => allSelections[i] === q.answer).length;
+
+	// ── showAll 모드 렌더링 ──────────────────────────────────────────────
+	if (showAll) {
+		return (
+			<div className="space-y-6">
+				{questions.map((q, idx) => {
+					const sel = allSelections[idx] ?? null;
+					const answered = sel !== null;
+					const isCorrect = sel === q.answer;
+					const srText = (key: "a" | "b" | "c" | "d") =>
+						languageMode === "en-only" ? q.options[key].en : q.options[key].ko;
+
+					return (
+						<div
+							key={q.id}
+							className={`rounded-xl border p-5 transition-colors ${
+								answered
+									? isCorrect
+										? "border-green-200 bg-green-50/30"
+										: "border-red-200 bg-red-50/30"
+									: "border-gray-200"
+							}`}
+						>
+							{/* 문제 번호 + 저장 */}
+							<div className="mb-3 flex items-center justify-between">
+								<span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+									{idx + 1}
+								</span>
+								<button
+									onClick={() => {
+										if (isSaved(q.id)) {
+											unsaveQuestion(q.id);
+											if (userId) removeSavedQuestionFromDB(userId, q.id);
+										} else {
+											saveQuestion(q.id);
+											if (userId) syncSavedQuestionToDB(userId, q.id);
+										}
+									}}
+									aria-label={isSaved(q.id) ? (isKo ? "저장 취소" : "Unsave") : (isKo ? "저장" : "Save")}
+									className={`rounded px-2 py-0.5 text-xs font-medium transition-colors ${
+										isSaved(q.id)
+											? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
+											: "bg-gray-100 text-gray-500 hover:bg-gray-200"
+									}`}
+								>
+									{isSaved(q.id) ? "★" : "☆"}
+								</button>
+							</div>
+
+							{/* 질문 */}
+							<p className="text-sm font-semibold text-gray-900 leading-relaxed">
+								<BilingualText field={q.question} variant="heading" as="span" />
+							</p>
+
+							{/* 선택지 */}
+							<ul className="mt-3 space-y-2" role="list">
+								{optionKeys.map((key) => {
+									let style =
+										"w-full rounded-lg border px-4 py-2.5 text-left text-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2";
+									if (!answered) {
+										style += " border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-700 focus-visible:outline-blue-600";
+									} else if (key === q.answer) {
+										style += " border-green-400 bg-green-50 text-green-800 font-medium focus-visible:outline-green-600";
+									} else if (key === sel) {
+										style += " border-red-400 bg-red-50 text-red-800 focus-visible:outline-red-600";
+									} else {
+										style += " border-gray-200 bg-gray-50 text-gray-400 focus-visible:outline-gray-400";
+									}
+
+									const stateLabel = answered
+										? key === q.answer ? (isKo ? " (정답)" : " (Correct)") : key === sel ? (isKo ? " (선택한 오답)" : " (Wrong)") : ""
+										: "";
+
+									return (
+										<li key={key}>
+											<button
+												className={style}
+												onClick={() => handleSelectAll(idx, key)}
+												disabled={answered}
+												aria-label={`${key.toUpperCase()}. ${srText(key)}${stateLabel}`}
+											>
+												<span className="mr-2 font-semibold uppercase" aria-hidden="true">{key}.</span>
+												<BilingualText field={q.options[key]} variant="option" as="span" aria-hidden="true" />
+												{answered && key === q.answer && <span className="ml-2" aria-hidden="true">✓</span>}
+												{answered && key === sel && key !== q.answer && <span className="ml-2" aria-hidden="true">✗</span>}
+											</button>
+										</li>
+									);
+								})}
+							</ul>
+
+							{/* 해설 */}
+							{answered && (
+								<div
+									className={`mt-3 rounded-lg border px-4 py-3 text-sm ${
+										isCorrect
+											? "border-green-200 bg-green-50 text-green-800"
+											: "border-red-200 bg-red-50 text-red-800"
+									}`}
+								>
+									<p className="font-semibold">
+										{isCorrect ? (isKo ? "정답입니다!" : "Correct!") : (isKo ? "오답입니다." : "Incorrect.")}
+									</p>
+									<BilingualText field={q.explanation} variant="body" as="p" className="mt-1 leading-relaxed" />
+								</div>
+							)}
+						</div>
+					);
+				})}
+
+				{/* 전체 결과 */}
+				{allAnswered && !showAllResults && (
+					<div className="flex justify-center pt-2">
+						<button
+							onClick={() => setShowAllResults(true)}
+							className="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+						>
+							{isKo ? "결과 보기" : "See Results"}
+						</button>
+					</div>
+				)}
+
+				{showAllResults && (
+					<div className="rounded-xl border border-gray-200 p-5">
+						<p className="text-xl font-bold text-gray-900">
+							{allCorrectCount} / {questions.length}
+							<span className="ml-2 text-sm font-normal text-gray-500">
+								{isKo ? "정답" : "correct"}
+							</span>
+						</p>
+						<div className="mt-4 flex flex-wrap gap-3">
+							<button
+								onClick={() => {
+									setAllSelections({});
+									setShowAllResults(false);
+								}}
+								className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+							>
+								{isKo ? "다시 풀기" : "Retry"}
+							</button>
+							{allCorrectCount < questions.length && (
+								<Link
+									href={wrongAnswersLink}
+									className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-red-700"
+								>
+									{isKo ? "오답노트 보기" : "View Wrong Answers"}
+								</Link>
+							)}
+						</div>
+					</div>
+				)}
+			</div>
+		);
+	}
+
+	// ── 기존 1문제씩 모드 ──────────────────────────────────────────────
 	if (phase === "summary") {
 		return (
 			<div

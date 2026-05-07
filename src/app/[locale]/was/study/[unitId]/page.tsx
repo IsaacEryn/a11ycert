@@ -82,7 +82,7 @@ export default async function WasUnitPage({
 							: `${unit.questions.length} questions · Wrong answers are saved automatically`}
 					</p>
 					<div className="mt-4">
-						<QuizEngine questions={unit.questions} locale={locale} exam="was" />
+						<QuizEngine questions={unit.questions} locale={locale} exam="was" showAll />
 					</div>
 				</section>
 			)}
