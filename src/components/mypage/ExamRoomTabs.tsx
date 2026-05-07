@@ -24,18 +24,31 @@ export default function ExamRoomTabs({ locale }: Props) {
 	return (
 		<div>
 			{/* Tab List */}
-			<div className="flex border-b border-gray-200" role="tablist">
+			<div
+				style={{ display: "flex", borderBottom: "1px solid var(--border)" }}
+				role="tablist"
+				aria-label={isKo ? "나의 시험장 탭" : "My Exam Room tabs"}
+			>
 				{tabs.map(({ key, label }) => (
 					<button
 						key={key}
 						role="tab"
 						aria-selected={tab === key}
+						aria-controls={`tabpanel-${key}`}
+						id={`tab-${key}`}
 						onClick={() => setTab(key)}
-						className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
-							tab === key
-								? "border-blue-500 text-blue-600"
-								: "border-transparent text-gray-500 hover:text-gray-700"
-						}`}
+						style={{
+							padding: "10px 16px",
+							fontSize: "var(--fs-sm)",
+							fontWeight: 500,
+							border: "none",
+							borderBottom: tab === key ? "2px solid var(--accent)" : "2px solid transparent",
+							background: "none",
+							cursor: "pointer",
+							color: tab === key ? "var(--accent)" : "var(--fg-subtle)",
+							transition: "color var(--dur-fast), border-color var(--dur-fast)",
+							marginBottom: -1,
+						}}
 					>
 						{label}
 					</button>
@@ -43,7 +56,12 @@ export default function ExamRoomTabs({ locale }: Props) {
 			</div>
 
 			{/* Tab Content */}
-			<div role="tabpanel" className="mt-6">
+			<div
+				role="tabpanel"
+				id={`tabpanel-${tab}`}
+				aria-labelledby={`tab-${tab}`}
+				style={{ marginTop: "var(--space-6)" }}
+			>
 				{tab === "wrong" && <WrongAnswerList locale={locale} />}
 				{tab === "saved" && <SavedQuizList locale={locale} />}
 				{tab === "notes" && <NotesList locale={locale} />}

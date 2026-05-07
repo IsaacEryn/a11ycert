@@ -61,17 +61,24 @@ export default function SavedQuizList({ locale }: Props) {
 	};
 
 	if (loading) {
-		return <p className="text-sm text-gray-400">{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
 	}
 
 	if (questions.length === 0) {
 		return (
-			<div className="rounded-xl border border-dashed border-gray-200 px-6 py-10 text-center text-sm text-gray-400">
+			<div style={{
+				borderRadius: "var(--radius-lg)",
+				border: "1px dashed var(--border)",
+				padding: "var(--space-10) var(--space-6)",
+				textAlign: "center",
+				fontSize: "var(--fs-sm)",
+				color: "var(--fg-subtle)",
+			}}>
 				{isKo ? "저장한 문제가 없습니다." : "No saved questions yet."}
-				<div className="mt-3">
+				<div style={{ marginTop: "var(--space-3)" }}>
 					<Link
 						href={`/${locale}/cpacc/study`}
-						className="text-blue-600 no-underline hover:underline text-xs"
+						style={{ color: "var(--accent)", textDecoration: "none", fontSize: "var(--fs-xs)" }}
 					>
 						{isKo ? "학습 시작하기 →" : "Start studying →"}
 					</Link>
@@ -81,23 +88,40 @@ export default function SavedQuizList({ locale }: Props) {
 	}
 
 	return (
-		<ul className="space-y-3" role="list">
+		<ul style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", listStyle: "none", margin: 0, padding: 0 }} role="list">
 			{questions.map((q) => (
-				<li key={q.id} className="rounded-xl border border-yellow-100 bg-yellow-50 px-4 py-3">
-					<div className="flex items-start justify-between gap-3">
-						<div className="flex-1 min-w-0">
-							<p className="text-sm font-medium text-gray-900">
+				<li key={q.id} style={{
+					borderRadius: "var(--radius-lg)",
+					border: "1px solid var(--warning-soft)",
+					background: "var(--warning-soft)",
+					padding: "var(--space-3) var(--space-4)",
+				}}>
+					<div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "var(--space-3)" }}>
+						<div style={{ flex: 1, minWidth: 0 }}>
+							<p style={{ fontSize: "var(--fs-sm)", fontWeight: 500, color: "var(--fg)" }}>
 								{isKo ? q.question.ko : q.question.en}
 							</p>
-							<div className="mt-2 text-xs text-gray-600">
-								<span className="font-medium text-green-700">{isKo ? "정답: " : "Answer: "}</span>
+							<div style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)" }}>
+								<span style={{ fontWeight: 500, color: "var(--success)" }}>{isKo ? "정답: " : "Answer: "}</span>
 								{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
 							</div>
 						</div>
 						<button
 							onClick={() => handleRemove(q.id)}
 							aria-label={isKo ? "저장 취소" : "Remove from saved"}
-							className="shrink-0 text-gray-400 hover:text-red-500 transition-colors"
+							style={{
+								flexShrink: 0,
+								background: "none",
+								border: "none",
+								cursor: "pointer",
+								fontSize: "var(--fs-sm)",
+								color: "var(--fg-subtle)",
+								padding: "var(--space-1)",
+								lineHeight: 1,
+								transition: "color var(--dur-fast)",
+							}}
+							onMouseEnter={(e) => (e.currentTarget.style.color = "var(--danger)")}
+							onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-subtle)")}
 						>
 							✕
 						</button>
