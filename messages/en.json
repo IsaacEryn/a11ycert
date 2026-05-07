@@ -136,7 +136,7 @@
 		},
 		"disclaimer": {
 			"title": "Disclaimer",
-			"body": "This site is not affiliated with or endorsed by IAAP. It provides unofficial study materials. While we strive for accuracy, content may differ from actual exam questions. Please report errors via GitHub Issues."
+			"body": "This site is not affiliated with or endorsed by IAAP. It provides unofficial study materials. While we strive for accuracy, content may differ from actual exam questions. Please report errors via email at contact@a11ycert.com."
 		}
 	},
 	"privacy": {
@@ -163,7 +163,7 @@
 		},
 		"contact": {
 			"title": "Contact",
-			"body": "For privacy-related inquiries, please reach out via GitHub Issues or through the creator's blog."
+			"body": "For privacy-related inquiries, please email contact@a11ycert.com."
 		}
 	}
 }
