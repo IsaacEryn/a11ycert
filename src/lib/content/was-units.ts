@@ -340,15 +340,96 @@ const units: StudyUnit[] = [
 		exam: "was",
 		domain: 1,
 		order: 4,
-		available: false,
+		available: true,
 		title: { ko: "색상 대비와 시각적 디자인", en: "Color Contrast and Visual Design" },
 		summary: {
 			ko: "WCAG AA/AAA 색상 대비 기준과 비텍스트 콘텐츠의 대비 요구사항을 학습합니다.",
 			en: "Learn WCAG AA/AAA color contrast ratios and requirements for non-text content.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"WCAG Level AA와 AAA의 텍스트 대비 비율을 구분할 수 있다",
+				"큰 텍스트의 정의와 대비 기준 차이를 설명할 수 있다",
+				"비텍스트 대비(UI 컴포넌트, 그래픽) 요구사항을 이해한다",
+				"색상 대비 검사 도구를 나열할 수 있다",
+			],
+			en: [
+				"Distinguish WCAG Level AA and AAA text contrast ratios",
+				"Explain the definition of large text and its contrast requirements",
+				"Understand non-text contrast requirements for UI components and graphics",
+				"List color contrast checking tools",
+			],
+		},
+		content: {
+			ko: [
+				"WCAG 1.4.3(Level AA) 텍스트 대비 기준: 일반 텍스트는 최소 4.5:1, 큰 텍스트(18pt 이상 또는 14pt 굵은 글씨)는 최소 3:1의 대비 비율이 필요합니다. WCAG 1.4.6(Level AAA)은 일반 텍스트 7:1, 큰 텍스트 4.5:1을 요구합니다.",
+				"WCAG 1.4.11 비텍스트 대비(Level AA, WCAG 2.1 신규): UI 컴포넌트(버튼 테두리, 입력 필드, 체크박스 등)와 의미 있는 그래픽 요소(차트, 아이콘 등)는 배경 대비 최소 3:1을 충족해야 합니다. 비활성(disabled) 요소와 순수 장식 요소는 면제됩니다.",
+				"색상 대비 검사 도구: WebAIM Contrast Checker(온라인), Colour Contrast Analyser(CCA, 데스크톱), 브라우저 개발자 도구(Chrome DevTools의 색상 피커), axe/WAVE 등 자동화 도구도 대비 검사를 지원합니다. Figma에서는 Stark 플러그인이 널리 사용됩니다.",
+				"실무 팁: 회색 텍스트(#999)를 흰 배경(#fff)에 사용하면 대비 비율은 2.85:1로 AA 미달입니다. 최소 #767676(4.54:1) 이상을 사용해야 합니다. 플레이스홀더 텍스트도 대비 기준을 충족해야 하며, 색상만으로 정보를 전달하지 않아야 합니다(WCAG 1.4.1, Use of Color).",
+			],
+			en: [
+				"WCAG 1.4.3 (Level AA) text contrast: Normal text requires at least 4.5:1; large text (18pt+ or 14pt bold) requires at least 3:1. WCAG 1.4.6 (Level AAA) requires 7:1 for normal text and 4.5:1 for large text.",
+				"WCAG 1.4.11 Non-text Contrast (Level AA, new in WCAG 2.1): UI components (button borders, input fields, checkboxes) and meaningful graphical objects (charts, icons) need at least 3:1 contrast against their background. Disabled elements and purely decorative elements are exempt.",
+				"Contrast checking tools: WebAIM Contrast Checker (online), Colour Contrast Analyser (CCA, desktop), browser DevTools (Chrome's color picker), and automated tools like axe/WAVE also support contrast checking. In Figma, the Stark plugin is widely used.",
+				"Practical tip: Gray text (#999) on a white background (#fff) yields only 2.85:1 contrast ratio — failing AA. Use at least #767676 (4.54:1). Placeholder text must also meet contrast requirements. Never convey information through color alone (WCAG 1.4.1, Use of Color).",
+			],
+		},
+		questions: [
+			{
+				id: "was-1-4-q1",
+				question: {
+					ko: "WCAG Level AA에서 일반 텍스트의 최소 색상 대비 비율은?",
+					en: "What is the minimum color contrast ratio for normal text at WCAG Level AA?",
+				},
+				options: {
+					a: { ko: "3:1", en: "3:1" },
+					b: { ko: "4.5:1", en: "4.5:1" },
+					c: { ko: "7:1", en: "7:1" },
+					d: { ko: "2:1", en: "2:1" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "Level AA(1.4.3)에서 일반 텍스트는 4.5:1, 큰 텍스트는 3:1입니다. 7:1은 Level AAA 기준입니다.",
+					en: "Level AA (1.4.3) requires 4.5:1 for normal text and 3:1 for large text. 7:1 is the Level AAA standard.",
+				},
+			},
+			{
+				id: "was-1-4-q2",
+				question: {
+					ko: "WCAG 1.4.11 비텍스트 대비 기준에서 면제되는 요소는?",
+					en: "Which elements are exempt from WCAG 1.4.11 non-text contrast requirements?",
+				},
+				options: {
+					a: { ko: "버튼 테두리", en: "Button borders" },
+					b: { ko: "비활성(disabled) 요소", en: "Disabled elements" },
+					c: { ko: "체크박스", en: "Checkboxes" },
+					d: { ko: "차트 그래픽", en: "Chart graphics" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "비활성(disabled) 요소와 순수 장식 요소는 WCAG 1.4.11 비텍스트 대비 요구사항에서 면제됩니다.",
+					en: "Disabled elements and purely decorative elements are exempt from WCAG 1.4.11 non-text contrast requirements.",
+				},
+			},
+			{
+				id: "was-1-4-q3",
+				question: {
+					ko: "큰 텍스트(Large Text)의 WCAG 정의로 옳은 것은?",
+					en: "Which is the correct WCAG definition of large text?",
+				},
+				options: {
+					a: { ko: "24pt 이상", en: "24pt or larger" },
+					b: { ko: "18pt 이상 또는 14pt 굵은 글씨", en: "18pt or larger, or 14pt bold" },
+					c: { ko: "16px 이상", en: "16px or larger" },
+					d: { ko: "20pt 이상", en: "20pt or larger" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "WCAG에서 큰 텍스트는 18pt(24px) 이상이거나 14pt(약 18.66px) 이상의 굵은(bold) 글씨입니다.",
+					en: "In WCAG, large text is defined as 18pt (24px) or larger, or 14pt (approximately 18.66px) or larger when bold.",
+				},
+			},
+		],
 	},
 	{
 		id: "was-1-5",
