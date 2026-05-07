@@ -43,26 +43,33 @@ export default function NotesList({ locale }: Props) {
 
 	if (!user) {
 		return (
-			<p className="text-sm text-gray-500">
+			<p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-muted)" }}>
 				{isKo ? "로그인 후 메모를 확인할 수 있습니다." : "Sign in to view your notes."}
 			</p>
 		);
 	}
 
 	if (loading) {
-		return <p className="text-sm text-gray-400">{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
 	}
 
 	if (notes.length === 0) {
 		return (
-			<div className="rounded-xl border border-dashed border-gray-200 px-6 py-10 text-center text-sm text-gray-400">
+			<div style={{
+				borderRadius: "var(--radius-lg)",
+				border: "1px dashed var(--border)",
+				padding: "var(--space-10) var(--space-6)",
+				textAlign: "center",
+				fontSize: "var(--fs-sm)",
+				color: "var(--fg-subtle)",
+			}}>
 				{isKo ? "아직 작성한 메모가 없습니다." : "No study notes yet."}
 			</div>
 		);
 	}
 
 	return (
-		<ul className="space-y-3" role="list">
+		<ul style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", listStyle: "none", margin: 0, padding: 0 }} role="list">
 			{notes.map((note) => {
 				const exam = note.unit_id.startsWith("cpacc") ? "cpacc" : "was";
 				const href = `/${locale}/${exam}/study/${note.unit_id}`;
@@ -72,20 +79,35 @@ export default function NotesList({ locale }: Props) {
 				);
 
 				return (
-					<li key={note.id} className="rounded-xl border border-gray-200 px-4 py-3">
-						<div className="flex items-start justify-between gap-3">
-							<div className="flex-1 min-w-0">
+					<li key={note.id} style={{
+						borderRadius: "var(--radius-lg)",
+						border: "1px solid var(--border)",
+						padding: "var(--space-3) var(--space-4)",
+					}}>
+						<div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "var(--space-3)" }}>
+							<div style={{ flex: 1, minWidth: 0 }}>
 								<Link
 									href={href}
-									className="text-xs font-medium text-blue-600 no-underline hover:underline"
+									style={{ fontSize: "var(--fs-xs)", fontWeight: 500, color: "var(--accent)", textDecoration: "none" }}
+									onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+									onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
 								>
 									{note.unit_id} →
 								</Link>
-								<p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap line-clamp-3">
+								<p style={{
+									marginTop: "var(--space-1)",
+									fontSize: "var(--fs-sm)",
+									color: "var(--fg-muted)",
+									whiteSpace: "pre-wrap",
+									overflow: "hidden",
+									display: "-webkit-box",
+									WebkitLineClamp: 3,
+									WebkitBoxOrient: "vertical",
+								}}>
 									{note.content}
 								</p>
 							</div>
-							<span className="shrink-0 text-xs text-gray-400">{dateStr}</span>
+							<span style={{ flexShrink: 0, fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>{dateStr}</span>
 						</div>
 					</li>
 				);
