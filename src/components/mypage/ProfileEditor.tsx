@@ -40,26 +40,51 @@ export default function ProfileEditor({ locale }: Props) {
 	};
 
 	return (
-		<form onSubmit={handleSave} className="space-y-3">
+		<form onSubmit={handleSave} style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
 			<div>
-				<label htmlFor="nickname" className="block text-xs font-medium text-gray-600 mb-1">
+				<label
+					htmlFor="nickname"
+					style={{ display: "block", fontSize: "var(--fs-xs)", fontWeight: 500, color: "var(--fg-muted)", marginBottom: "var(--space-1)" }}
+				>
 					{isKo ? "닉네임" : "Nickname"}
 				</label>
-				<div className="flex items-center gap-3">
+				<div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
 					<input
 						id="nickname"
 						type="text"
 						value={nickname}
 						onChange={(e) => setNickname(e.target.value)}
 						maxLength={20}
-						className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-600"
+						style={{
+							flex: 1,
+							borderRadius: "var(--radius)",
+							border: "1px solid var(--border)",
+							padding: "var(--space-2) var(--space-3)",
+							fontSize: "var(--fs-sm)",
+							color: "var(--fg)",
+							background: "var(--bg)",
+							outline: "none",
+						}}
 						placeholder={isKo ? "닉네임 입력" : "Enter nickname"}
 						aria-describedby="nickname-status"
+						onFocus={(e) => (e.currentTarget.style.borderColor = "var(--accent)")}
+						onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
 					/>
 					<button
 						type="submit"
 						disabled={saving || !nickname.trim()}
-						className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+						style={{
+							borderRadius: "var(--radius)",
+							background: "var(--accent)",
+							padding: "var(--space-2) var(--space-4)",
+							fontSize: "var(--fs-sm)",
+							fontWeight: 500,
+							color: "var(--fg-on-accent)",
+							border: "none",
+							cursor: saving || !nickname.trim() ? "not-allowed" : "pointer",
+							opacity: saving || !nickname.trim() ? 0.5 : 1,
+							transition: "opacity var(--dur-fast)",
+						}}
 					>
 						{saving
 							? isKo ? "저장 중..." : "Saving..."
@@ -69,14 +94,14 @@ export default function ProfileEditor({ locale }: Props) {
 			</div>
 
 			{/* 저장 상태 메시지 — aria-live로 스크린리더에 자동 전달 */}
-			<div id="nickname-status" aria-live="polite" aria-atomic="true" className="text-xs">
+			<div id="nickname-status" aria-live="polite" aria-atomic="true" style={{ fontSize: "var(--fs-xs)", minHeight: "1.2em" }}>
 				{saved && (
-					<span className="text-green-600">
+					<span style={{ color: "var(--success)" }}>
 						{isKo ? "닉네임이 저장되었습니다." : "Nickname saved successfully."}
 					</span>
 				)}
 				{saveError && (
-					<span className="text-red-600" role="alert">
+					<span style={{ color: "var(--danger)" }} role="alert">
 						{saveError}
 					</span>
 				)}
