@@ -27,7 +27,6 @@ export default function WrongAnswerList({ locale }: Props) {
 			let ids: string[] = [];
 
 			if (user) {
-				// DB에서 오답 목록 조회
 				const { data } = await supabase
 					.from("wrong_answers")
 					.select("question_id")
@@ -35,7 +34,6 @@ export default function WrongAnswerList({ locale }: Props) {
 					.order("last_attempted_at", { ascending: false });
 
 				ids = data?.map((r: { question_id: string }) => r.question_id) ?? [];
-				// DB가 비어있으면 localStorage 데이터 사용
 				if (ids.length === 0) ids = localWrong;
 			} else {
 				ids = localWrong;
@@ -50,17 +48,24 @@ export default function WrongAnswerList({ locale }: Props) {
 	}, [user, localWrong, supabase]);
 
 	if (loading) {
-		return <p className="text-sm text-gray-400">{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
 	}
 
 	if (questions.length === 0) {
 		return (
-			<div className="rounded-xl border border-dashed border-gray-200 px-6 py-10 text-center text-sm text-gray-400">
+			<div style={{
+				borderRadius: "var(--radius-lg)",
+				border: "1px dashed var(--border)",
+				padding: "var(--space-10) var(--space-6)",
+				textAlign: "center",
+				fontSize: "var(--fs-sm)",
+				color: "var(--fg-subtle)",
+			}}>
 				{isKo ? "아직 오답이 없습니다." : "No wrong answers yet."}
-				<div className="mt-3">
+				<div style={{ marginTop: "var(--space-3)" }}>
 					<Link
 						href={`/${locale}/cpacc/study`}
-						className="text-blue-600 no-underline hover:underline text-xs"
+						style={{ color: "var(--accent)", textDecoration: "none", fontSize: "var(--fs-xs)" }}
 					>
 						{isKo ? "학습 시작하기 →" : "Start studying →"}
 					</Link>
@@ -70,17 +75,22 @@ export default function WrongAnswerList({ locale }: Props) {
 	}
 
 	return (
-		<ul className="space-y-3" role="list">
+		<ul style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", listStyle: "none", margin: 0, padding: 0 }} role="list">
 			{questions.map((q) => (
-				<li key={q.id} className="rounded-xl border border-red-100 bg-red-50 px-4 py-3">
-					<p className="text-sm font-medium text-gray-900">
+				<li key={q.id} style={{
+					borderRadius: "var(--radius-lg)",
+					border: "1px solid var(--danger-soft)",
+					background: "var(--danger-soft)",
+					padding: "var(--space-3) var(--space-4)",
+				}}>
+					<p style={{ fontSize: "var(--fs-sm)", fontWeight: 500, color: "var(--fg)" }}>
 						{isKo ? q.question.ko : q.question.en}
 					</p>
-					<div className="mt-2 text-xs text-gray-600">
-						<span className="font-medium text-green-700">{isKo ? "정답: " : "Answer: "}</span>
+					<div style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)" }}>
+						<span style={{ fontWeight: 500, color: "var(--success)" }}>{isKo ? "정답: " : "Answer: "}</span>
 						{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
 					</div>
-					<p className="mt-1 text-xs text-gray-500 leading-relaxed">
+					<p style={{ marginTop: "var(--space-1)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)", lineHeight: 1.6 }}>
 						{isKo ? q.explanation.ko : q.explanation.en}
 					</p>
 				</li>
