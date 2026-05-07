@@ -44,28 +44,28 @@ export default function HomeHero({ locale, isKo }: Props) {
 
             <dl className="hero__stats">
               <div>
+                <dt className="hero__stat-label">{isKo ? "실전형 학습 문항" : "Practice questions"}</dt>
                 <dd className="hero__stat-num">
                   175
                   <span style={{ fontSize: "0.55em", color: "var(--fg-muted)", fontWeight: 600, marginLeft: 2 }}>
                     {isKo ? "문항" : "Qs"}
                   </span>
                 </dd>
-                <dt className="hero__stat-label">{isKo ? "실전형 학습 문항" : "Practice questions"}</dt>
               </div>
               <div>
+                <dt className="hero__stat-label">{isKo ? "CPACC · WAS 과정" : "CPACC · WAS courses"}</dt>
                 <dd className="hero__stat-num">
                   2
                   <span style={{ fontSize: "0.55em", color: "var(--fg-muted)", fontWeight: 600, marginLeft: 6 }}>
                     {isKo ? "자격증" : "certs"}
                   </span>
                 </dd>
-                <dt className="hero__stat-label">{isKo ? "CPACC · WAS 과정" : "CPACC · WAS courses"}</dt>
               </div>
               <div>
+                <dt className="hero__stat-label">{isKo ? "계정 없이 이용" : "No account needed"}</dt>
                 <dd className="hero__stat-num" style={{ color: "var(--success)" }}>
                   {isKo ? "무료" : "Free"}
                 </dd>
-                <dt className="hero__stat-label">{isKo ? "계정 없이 이용" : "No account needed"}</dt>
               </div>
             </dl>
           </div>
