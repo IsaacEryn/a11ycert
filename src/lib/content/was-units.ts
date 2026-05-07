@@ -436,30 +436,192 @@ const units: StudyUnit[] = [
 		exam: "was",
 		domain: 1,
 		order: 5,
-		available: false,
+		available: true,
 		title: { ko: "폼과 입력 요소 접근성", en: "Form and Input Accessibility" },
 		summary: {
 			ko: "레이블 연결, 오류 메시지, 필수 입력 표시, fieldset/legend 사용법을 학습합니다.",
 			en: "Learn label association, error messages, required fields, and fieldset/legend usage.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"label 요소와 입력 필드를 올바르게 연결할 수 있다",
+				"인라인 오류 메시지의 접근성 패턴을 설명할 수 있다",
+				"fieldset과 legend의 사용 목적을 이해한다",
+				"필수 필드 표시의 접근성 요구사항을 설명할 수 있다",
+			],
+			en: [
+				"Correctly associate label elements with input fields",
+				"Explain accessible patterns for inline error messages",
+				"Understand the purpose of fieldset and legend",
+				"Describe accessibility requirements for marking required fields",
+			],
+		},
+		content: {
+			ko: [
+				"레이블 연결: 모든 폼 입력 요소에는 연결된 레이블이 있어야 합니다. `<label for=\"id\">`로 명시적 연결하거나, 입력 요소를 `<label>` 안에 감싸는 암시적 연결이 가능합니다. 플레이스홀더만으로는 레이블을 대체할 수 없습니다 — 입력 시작 시 사라지기 때문입니다.",
+				"오류 메시지 패턴: 유효성 검사 오류는 오류 필드 근처에 인라인으로 표시하고, aria-describedby로 입력 필드와 연결합니다. aria-invalid=\"true\"로 오류 상태를 명시합니다. 페이지 상단에 오류 요약을 제공하고, 오류 요약이나 첫 오류 필드에 포커스를 이동합니다. 오류 메시지는 문제가 무엇인지와 수정 방법을 모두 설명해야 합니다.",
+				"fieldset/legend: 관련된 폼 요소를 그룹화할 때 사용합니다. 대표적 사례: 라디오 버튼 그룹, 체크박스 그룹, 주소 입력 필드 그룹. `<fieldset>`이 그룹 컨테이너, `<legend>`가 그룹의 제목입니다. 스크린리더는 legend 텍스트를 각 입력 필드 앞에 함께 읽어줍니다.",
+				"필수 필드: 필수 입력은 시각적 표시(빨간 별표 * 등)와 프로그래밍적 표시(aria-required=\"true\" 또는 required 속성)를 모두 제공해야 합니다. 시각적 표시만 있으면 스크린리더 사용자가 인식할 수 없고, 프로그래밍적 표시만 있으면 시각 사용자가 놓칠 수 있습니다. autocomplete 속성을 사용하면 자동완성을 지원하여 인지 장애 사용자에게 도움됩니다.",
+			],
+			en: [
+				"Label association: Every form input must have an associated label. Use explicit association with `<label for=\"id\">` or implicit association by wrapping the input inside `<label>`. Placeholder text alone cannot substitute for a label — it disappears when typing begins.",
+				"Error message patterns: Validation errors should be displayed inline near the error field and connected via aria-describedby. Use aria-invalid=\"true\" to mark the error state. Provide an error summary at the top and move focus to the error summary or first error field. Error messages should explain both what went wrong and how to fix it.",
+				"fieldset/legend: Used to group related form elements. Common use cases: radio button groups, checkbox groups, and address field groups. `<fieldset>` is the group container; `<legend>` is the group title. Screen readers read the legend text before each input field within the group.",
+				"Required fields: Required inputs need both visual indication (red asterisk *, etc.) and programmatic indication (aria-required=\"true\" or the required attribute). Visual-only marking is invisible to screen reader users; programmatic-only marking may be missed by sighted users. The autocomplete attribute supports autofill, helping users with cognitive disabilities.",
+			],
+		},
+		questions: [
+			{
+				id: "was-1-5-q1",
+				question: {
+					ko: "폼 입력 필드의 레이블로 플레이스홀더만 사용하면 안 되는 이유는?",
+					en: "Why shouldn't placeholder text be used as the only label for a form input?",
+				},
+				options: {
+					a: { ko: "브라우저 호환성이 낮다", en: "Low browser compatibility" },
+					b: { ko: "입력을 시작하면 사라져 참조할 수 없다", en: "It disappears when typing begins and cannot be referenced" },
+					c: { ko: "스타일링이 어렵다", en: "It is difficult to style" },
+					d: { ko: "색상을 변경할 수 없다", en: "Its color cannot be changed" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "플레이스홀더 텍스트는 사용자가 입력을 시작하면 사라지므로, 입력 중간에 필드가 무엇인지 확인할 수 없습니다. 항상 `<label>`을 사용해야 합니다.",
+					en: "Placeholder text disappears once the user starts typing, making it impossible to reference what the field is for mid-entry. Always use a `<label>` element.",
+				},
+			},
+			{
+				id: "was-1-5-q2",
+				question: {
+					ko: "라디오 버튼 그룹을 접근성 있게 그룹화하는 올바른 방법은?",
+					en: "What is the correct accessible way to group radio buttons?",
+				},
+				options: {
+					a: { ko: "`<div>`와 `<span>`으로 감싼다", en: "Wrap with `<div>` and `<span>`" },
+					b: { ko: "`<fieldset>`과 `<legend>`로 감싼다", en: "Wrap with `<fieldset>` and `<legend>`" },
+					c: { ko: "`<section>`과 `<h2>`로 감싼다", en: "Wrap with `<section>` and `<h2>`" },
+					d: { ko: "각 라디오 버튼에 aria-group을 추가한다", en: "Add aria-group to each radio button" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "`<fieldset>`으로 그룹을 감싸고 `<legend>`로 그룹 제목을 제공합니다. 스크린리더는 legend 텍스트를 각 라디오 버튼 앞에 읽어줍니다.",
+					en: "Use `<fieldset>` to wrap the group and `<legend>` for the group title. Screen readers read the legend text before each radio button.",
+				},
+			},
+			{
+				id: "was-1-5-q3",
+				question: {
+					ko: "오류 메시지를 입력 필드와 프로그래밍적으로 연결하는 ARIA 속성은?",
+					en: "Which ARIA attribute programmatically connects an error message to its input field?",
+				},
+				options: {
+					a: { ko: "aria-label", en: "aria-label" },
+					b: { ko: "aria-describedby", en: "aria-describedby" },
+					c: { ko: "aria-hidden", en: "aria-hidden" },
+					d: { ko: "aria-live", en: "aria-live" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "aria-describedby는 오류 메시지 요소의 ID를 참조하여 입력 필드에 추가 설명(오류 내용)을 연결합니다.",
+					en: "aria-describedby references the ID of the error message element, connecting additional description (error content) to the input field.",
+				},
+			},
+		],
 	},
 	{
 		id: "was-1-6",
 		exam: "was",
 		domain: 1,
 		order: 6,
-		available: false,
+		available: true,
 		title: { ko: "이미지와 멀티미디어 접근성", en: "Image and Multimedia Accessibility" },
 		summary: {
 			ko: "장식 이미지 vs 정보 이미지 구분, 자막, 오디오 설명 제공 방법을 학습합니다.",
 			en: "Learn how to distinguish decorative vs informative images, and provide captions and audio descriptions.",
 		},
-		objectives: { ko: [], en: [] },
-		content: { ko: [], en: [] },
-		questions: [],
+		objectives: {
+			ko: [
+				"장식 이미지와 정보 이미지의 alt 텍스트 차이를 설명할 수 있다",
+				"복잡한 이미지(차트, 그래프)의 대체 텍스트 제공 방법을 이해한다",
+				"자막과 오디오 설명의 WCAG 요구사항을 설명할 수 있다",
+				"SVG 접근성 마크업 방법을 이해한다",
+			],
+			en: [
+				"Explain the difference in alt text for decorative vs informative images",
+				"Understand how to provide text alternatives for complex images",
+				"Describe WCAG requirements for captions and audio descriptions",
+				"Understand SVG accessibility markup methods",
+			],
+		},
+		content: {
+			ko: [
+				"이미지 접근성의 핵심은 alt 속성입니다(WCAG 1.1.1, Level A). 정보 이미지는 내용을 간결하게 전달하는 alt 텍스트를 제공합니다. 장식 이미지(순수 시각 장식)는 alt=\"\"(빈 alt)로 설정하여 스크린리더가 건너뛰도록 합니다. alt 속성 자체를 생략하면 스크린리더가 파일명을 읽어버립니다.",
+				"복잡한 이미지(차트, 그래프, 인포그래픽): 짧은 alt로 이미지를 요약하고, 상세한 데이터는 본문 텍스트, 데이터 테이블, 또는 aria-describedby로 연결된 별도 설명을 제공합니다. 텍스트로 된 이미지(로고 제외)는 가능하면 실제 텍스트를 사용해야 합니다.",
+				"비디오 자막: 미리 녹화된 비디오는 자막 필수(WCAG 1.2.2, Level A). 실시간 비디오는 자막 필수(WCAG 1.2.4, Level AA). 오디오 설명(Audio Description)은 시각적으로만 전달되는 정보를 음성으로 설명합니다(WCAG 1.2.5, Level AA). 음성 전용 콘텐츠(팟캐스트)는 텍스트 대본(Transcript)이 필요합니다(WCAG 1.2.1, Level A).",
+				"SVG 접근성: `<svg>` 요소에 role=\"img\"를 추가하고, `<title>` 요소로 짧은 설명을, `<desc>` 요소로 긴 설명을 제공합니다. aria-labelledby로 title과 desc를 연결합니다. 장식용 SVG는 aria-hidden=\"true\"로 숨깁니다.",
+			],
+			en: [
+				"The key to image accessibility is the alt attribute (WCAG 1.1.1, Level A). Informative images need concise alt text describing their content. Decorative images (pure visual decoration) use alt=\"\" (empty alt) so screen readers skip them. Omitting the alt attribute entirely causes screen readers to read the filename.",
+				"Complex images (charts, graphs, infographics): Provide a short alt summarizing the image, and detailed data through body text, data tables, or a separate description connected via aria-describedby. Images of text (except logos) should use actual text whenever possible.",
+				"Video captions: Prerecorded video requires captions (WCAG 1.2.2, Level A). Live video requires captions (WCAG 1.2.4, Level AA). Audio descriptions narrate visually-only conveyed information (WCAG 1.2.5, Level AA). Audio-only content (podcasts) requires a text transcript (WCAG 1.2.1, Level A).",
+				"SVG accessibility: Add role=\"img\" to the `<svg>` element, provide a short description with `<title>` and a long description with `<desc>`. Connect them using aria-labelledby. Decorative SVGs should use aria-hidden=\"true\".",
+			],
+		},
+		questions: [
+			{
+				id: "was-1-6-q1",
+				question: {
+					ko: "장식 이미지의 올바른 alt 속성 값은?",
+					en: "What is the correct alt attribute value for a decorative image?",
+				},
+				options: {
+					a: { ko: "alt=\"장식 이미지\"", en: "alt=\"decorative image\"" },
+					b: { ko: "alt=\"\" (빈 문자열)", en: "alt=\"\" (empty string)" },
+					c: { ko: "alt 속성을 생략한다", en: "Omit the alt attribute" },
+					d: { ko: "alt=\"image\"", en: "alt=\"image\"" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "장식 이미지는 alt=\"\"(빈 alt)로 설정하여 스크린리더가 건너뛰도록 합니다. alt 속성을 생략하면 파일명을 읽어버립니다.",
+					en: "Decorative images use alt=\"\" so screen readers skip them. Omitting the alt attribute entirely causes the filename to be read aloud.",
+				},
+			},
+			{
+				id: "was-1-6-q2",
+				question: {
+					ko: "미리 녹화된 비디오에 자막을 제공하는 것은 어떤 WCAG 수준의 요구사항인가?",
+					en: "At what WCAG level is it required to provide captions for prerecorded video?",
+				},
+				options: {
+					a: { ko: "Level AAA", en: "Level AAA" },
+					b: { ko: "Level AA", en: "Level AA" },
+					c: { ko: "Level A", en: "Level A" },
+					d: { ko: "권고사항(필수 아님)", en: "Advisory (not required)" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "미리 녹화된 비디오의 자막은 WCAG 1.2.2 Level A 요구사항으로, 가장 기본적인 접근성 기준입니다.",
+					en: "Captions for prerecorded video is a WCAG 1.2.2 Level A requirement — the most basic accessibility standard.",
+				},
+			},
+			{
+				id: "was-1-6-q3",
+				question: {
+					ko: "SVG를 접근성 있게 만들기 위해 사용하는 요소 조합은?",
+					en: "Which element combination makes an SVG accessible?",
+				},
+				options: {
+					a: { ko: "alt와 longdesc", en: "alt and longdesc" },
+					b: { ko: "role=\"img\", <title>, <desc>", en: "role=\"img\", <title>, <desc>" },
+					c: { ko: "aria-label만 사용", en: "aria-label only" },
+					d: { ko: "figcaption만 사용", en: "figcaption only" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "SVG는 role=\"img\"로 이미지 역할을 명시하고, <title>로 짧은 설명, <desc>로 긴 설명을 제공합니다.",
+					en: "SVG uses role=\"img\" to declare image semantics, <title> for a short description, and <desc> for a long description.",
+				},
+			},
+		],
 	},
 
 	// ── Domain 2 ──────────────────────────────────────────────────────────────
