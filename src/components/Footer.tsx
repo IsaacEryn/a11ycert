@@ -89,10 +89,23 @@ export default function Footer({ locale }: FooterProps) {
           <span>
             © {new Date().getFullYear()} A11yCert.{" "}
             {isKo ? "IAAP와 무관한 독립 운영 사이트." : "Independent site, not affiliated with IAAP."}
+            {" "}
+            {isKo ? "제작: " : "Made by "}
+            <a
+              href="https://www.codeslog.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--accent)", textDecoration: "none" }}
+            >
+              Isaac
+            </a>
           </span>
-          <span>
-            {isKo ? "오류 제보: GitHub Issues" : "Report issues via GitHub Issues"}
-          </span>
+          <a
+            href="mailto:contact@a11ycert.com"
+            style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)" }}
+          >
+            {isKo ? "오류 제보: contact@a11ycert.com" : "Report issues: contact@a11ycert.com"}
+          </a>
         </div>
       </div>
     </footer>
