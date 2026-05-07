@@ -14,7 +14,8 @@ interface Props {
 
 export default function SavedQuizList({ locale }: Props) {
 	const { user } = useAuth();
-	const { savedQuestions: localSaved, unsaveQuestion } = useLearningStore();
+	const { getBookmarks, unsaveQuestion } = useLearningStore();
+	const localSaved = [...getBookmarks("cpacc"), ...getBookmarks("was")];
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
@@ -54,7 +55,8 @@ export default function SavedQuizList({ locale }: Props) {
 				.eq("user_id", user.id)
 				.eq("question_id", questionId);
 		}
-		unsaveQuestion(questionId);
+		const cert = questionId.startsWith("was-") ? "was" : "cpacc";
+		unsaveQuestion(cert, questionId);
 		setQuestions((prev) => prev.filter((q) => q.id !== questionId));
 	};
 

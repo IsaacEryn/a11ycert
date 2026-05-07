@@ -52,10 +52,10 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 		setAnswers((prev) => ({ ...prev, [current]: key }));
 
 		if (key !== q.answer) {
-			addWrongAnswer(q.id);
+			addWrongAnswer(exam, q.id);
 			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
 		} else {
-			removeWrongAnswer(q.id);
+			removeWrongAnswer(exam, q.id);
 			if (userId) removeWrongAnswerFromDB(userId, q.id);
 		}
 	};
@@ -72,11 +72,11 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 	};
 
 	const toggleSave = () => {
-		if (isSaved(q.id)) {
-			unsaveQuestion(q.id);
+		if (isSaved(exam, q.id)) {
+			unsaveQuestion(exam, q.id);
 			if (userId) removeSavedQuestionFromDB(userId, q.id);
 		} else {
-			saveQuestion(q.id);
+			saveQuestion(exam, q.id);
 			if (userId) syncSavedQuestionToDB(userId, q.id);
 		}
 	};
@@ -91,10 +91,10 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 
 		const q = questions[idx];
 		if (key !== q.answer) {
-			addWrongAnswer(q.id);
+			addWrongAnswer(exam, q.id);
 			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
 		} else {
-			removeWrongAnswer(q.id);
+			removeWrongAnswer(exam, q.id);
 			if (userId) removeWrongAnswerFromDB(userId, q.id);
 		}
 	};
@@ -131,22 +131,22 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 								</span>
 								<button
 									onClick={() => {
-										if (isSaved(q.id)) {
-											unsaveQuestion(q.id);
+										if (isSaved(exam, q.id)) {
+											unsaveQuestion(exam, q.id);
 											if (userId) removeSavedQuestionFromDB(userId, q.id);
 										} else {
-											saveQuestion(q.id);
+											saveQuestion(exam, q.id);
 											if (userId) syncSavedQuestionToDB(userId, q.id);
 										}
 									}}
-									aria-label={isSaved(q.id) ? (isKo ? "저장 취소" : "Unsave") : (isKo ? "저장" : "Save")}
+									aria-label={isSaved(exam, q.id) ? (isKo ? "저장 취소" : "Unsave") : (isKo ? "저장" : "Save")}
 									className={`rounded px-2 py-0.5 text-xs font-medium transition-colors ${
-										isSaved(q.id)
+										isSaved(exam, q.id)
 											? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
 											: "bg-gray-100 text-gray-500 hover:bg-gray-200"
 									}`}
 								>
-									{isSaved(q.id) ? "★" : "☆"}
+									{isSaved(exam, q.id) ? "★" : "☆"}
 								</button>
 							</div>
 
@@ -342,7 +342,7 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 				<button
 					onClick={toggleSave}
 					aria-label={
-						isSaved(q.id)
+						isSaved(exam, q.id)
 							? isKo
 								? "저장 취소"
 								: "Unsave question"
@@ -350,15 +350,15 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 								? "문제 저장"
 								: "Save question"
 					}
-					aria-pressed={isSaved(q.id)}
+					aria-pressed={isSaved(exam, q.id)}
 					className={`rounded px-2 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
-						isSaved(q.id)
+						isSaved(exam, q.id)
 							? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
 							: "bg-gray-100 text-gray-600 hover:bg-gray-200"
 					}`}
 				>
-					<span aria-hidden="true">{isSaved(q.id) ? "★" : "☆"}</span>
-					{" "}{isSaved(q.id) ? (isKo ? "저장됨" : "Saved") : isKo ? "저장" : "Save"}
+					<span aria-hidden="true">{isSaved(exam, q.id) ? "★" : "☆"}</span>
+					{" "}{isSaved(exam, q.id) ? (isKo ? "저장됨" : "Saved") : isKo ? "저장" : "Save"}
 				</button>
 			</div>
 

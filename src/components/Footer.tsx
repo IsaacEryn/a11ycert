@@ -1,129 +1,100 @@
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface FooterProps {
-	locale: string;
+  locale: string;
 }
 
 export default function Footer({ locale }: FooterProps) {
-	const t = useTranslations("common.nav");
+  const isKo = locale === "ko";
 
-	const cpaccLinks = [
-		{ href: `/${locale}/cpacc`, label: t("overview") },
-		{ href: `/${locale}/cpacc/study`, label: t("study") },
-		{ href: `/${locale}/cpacc/quiz`, label: t("quiz") },
-		{ href: `/${locale}/cpacc/flashcards`, label: t("flashcards") },
-	];
+  const cpaccLinks = [
+    { href: `/${locale}/cpacc`, label: isKo ? "개요" : "Overview" },
+    { href: `/${locale}/cpacc/study`, label: isKo ? "학습" : "Study" },
+    { href: `/${locale}/cpacc/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
+    { href: `/${locale}/cpacc/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
+  ];
 
-	const wasLinks = [
-		{ href: `/${locale}/was`, label: t("overview") },
-		{ href: `/${locale}/was/study`, label: t("study") },
-		{ href: `/${locale}/was/quiz`, label: t("quiz") },
-		{ href: `/${locale}/was/flashcards`, label: t("flashcards") },
-	];
+  const wasLinks = [
+    { href: `/${locale}/was`, label: isKo ? "개요" : "Overview" },
+    { href: `/${locale}/was/study`, label: isKo ? "학습" : "Study" },
+    { href: `/${locale}/was/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
+    { href: `/${locale}/was/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
+  ];
 
-	const otherLinks = [
-		{ href: `/${locale}/glossary`, label: t("glossary") },
-		{ href: `/${locale}/community`, label: t("community") },
-		{ href: `/${locale}/about`, label: t("about") },
-		{ href: `/${locale}/privacy`, label: t("privacy") },
-	];
+  const siteLinks = [
+    { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
+    { href: `/${locale}/about`, label: isKo ? "소개" : "About" },
+    { href: `/${locale}/privacy`, label: isKo ? "개인정보처리방침" : "Privacy" },
+  ];
 
-	return (
-		<footer className="border-t border-gray-200 bg-gray-950 text-gray-400">
-			<div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-				<div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-					{/* 브랜드 */}
-					<div className="col-span-2 sm:col-span-1">
-						<Link
-							href={`/${locale}`}
-							className="inline-flex items-center gap-1.5 no-underline"
-							aria-label={locale === "ko" ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
-						>
-							<span className="rounded-lg bg-blue-600 px-1.5 py-0.5 text-sm font-black tracking-tight text-white">
-								A11Y
-							</span>
-							<span className="text-base font-bold text-white">Cert</span>
-						</Link>
-						<p className="mt-3 text-xs leading-relaxed text-gray-500 max-w-[180px]">
-							{locale === "ko"
-								? "IAAP BoK 기반 비공식 한국어 학습 플랫폼"
-								: "Unofficial study platform based on IAAP Body of Knowledge."}
-						</p>
-					</div>
+  return (
+    <footer className="app-footer">
+      <div className="container">
+        <div className="app-footer__grid">
+          {/* Brand col */}
+          <div className="app-footer__col">
+            <Link
+              href={`/${locale}`}
+              className="brand"
+              aria-label={isKo ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
+            >
+              <span className="brand__mark" aria-hidden="true">A11Y</span>
+              <span>Cert</span>
+            </Link>
+            <p style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", lineHeight: 1.6, maxWidth: "24ch" }}>
+              {isKo
+                ? "IAAP BoK 기반 비공식 한국어 학습 플랫폼"
+                : "Unofficial study platform based on IAAP Body of Knowledge."}
+            </p>
+          </div>
 
-					{/* CPACC */}
-					<nav aria-label={locale === "ko" ? "CPACC 메뉴" : "CPACC navigation"}>
-						<p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">
-							CPACC
-						</p>
-						<ul className="space-y-2" role="list">
-							{cpaccLinks.map(({ href, label }) => (
-								<li key={href}>
-									<Link
-										href={href}
-										className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
-									>
-										{label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+          {/* CPACC col */}
+          <nav aria-label={isKo ? "CPACC 메뉴" : "CPACC navigation"} className="app-footer__col">
+            <h4>CPACC</h4>
+            <ul>
+              {cpaccLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-					{/* WAS */}
-					<nav aria-label={locale === "ko" ? "WAS 메뉴" : "WAS navigation"}>
-						<p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">
-							WAS
-						</p>
-						<ul className="space-y-2" role="list">
-							{wasLinks.map(({ href, label }) => (
-								<li key={href}>
-									<Link
-										href={href}
-										className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
-									>
-										{label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+          {/* WAS col */}
+          <nav aria-label={isKo ? "WAS 메뉴" : "WAS navigation"} className="app-footer__col">
+            <h4>WAS</h4>
+            <ul>
+              {wasLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-					{/* 기타 */}
-					<nav aria-label={locale === "ko" ? "사이트 메뉴" : "Site menu"}>
-						<p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">
-							{locale === "ko" ? "사이트" : "Site"}
-						</p>
-						<ul className="space-y-2" role="list">
-							{otherLinks.map(({ href, label }) => (
-								<li key={href}>
-									<Link
-										href={href}
-										className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
-									>
-										{label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
-				</div>
+          {/* Site col */}
+          <nav aria-label={isKo ? "사이트 메뉴" : "Site menu"} className="app-footer__col">
+            <h4>{isKo ? "사이트" : "Site"}</h4>
+            <ul>
+              {siteLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
-				<div className="mt-10 flex flex-col gap-1 border-t border-gray-800 pt-6 sm:flex-row sm:items-center sm:justify-between">
-					<p className="text-xs text-gray-400">
-						© {new Date().getFullYear()} A11yCert.{" "}
-						{locale === "ko"
-							? "IAAP와 무관한 독립 운영 사이트."
-							: "Independent site, not affiliated with IAAP."}
-					</p>
-					<p className="text-xs text-gray-400">
-						{locale === "ko"
-							? "오류 제보: GitHub Issues"
-							: "Report issues via GitHub Issues"}
-					</p>
-				</div>
-			</div>
-		</footer>
-	);
+        <div className="app-footer__bottom">
+          <span>
+            © {new Date().getFullYear()} A11yCert.{" "}
+            {isKo ? "IAAP와 무관한 독립 운영 사이트." : "Independent site, not affiliated with IAAP."}
+          </span>
+          <span>
+            {isKo ? "오류 제보: GitHub Issues" : "Report issues via GitHub Issues"}
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
 }
