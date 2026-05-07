@@ -4,148 +4,162 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "WAS 시험 준비",
-	description:
-		"IAAP WAS(Web Accessibility Specialist) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
+  title: "WAS 시험 준비",
+  description:
+    "IAAP WAS(Web Accessibility Specialist) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
 };
 
 export default async function WasPage({ params }: { params: Promise<{ locale: string }> }) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	return <WasContent locale={locale} />;
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <WasContent locale={locale} />;
 }
 
+const domains = [
+  {
+    domainNum: "01",
+    weightPct: 40,
+    topics: [
+      { mark: "01", title: "의미론적 HTML", sub: "랜드마크, 헤딩, 폼" },
+      { mark: "02", title: "대체 텍스트와 미디어", sub: "alt, caption, transcript" },
+      { mark: "03", title: "색상과 대비", sub: "4.5:1, 3:1 비대비 요건" },
+      { mark: "04", title: "키보드 접근성", sub: "포커스 순서, 트랩" },
+      { mark: "05", title: "ARIA 1.x", sub: "역할·속성·상태, 5가지 규칙" },
+      { mark: "06", title: "반응형·줌·텍스트 간격", sub: "200% 확대 요건" },
+    ],
+  },
+  {
+    domainNum: "02",
+    weightPct: 30,
+    topics: [
+      { mark: "07", title: "자동 검사 도구", sub: "axe, WAVE, Lighthouse 한계" },
+      { mark: "08", title: "수동 검수 절차", sub: "키보드·확대·색상 점검" },
+      { mark: "09", title: "스크린 리더 검수", sub: "NVDA, JAWS, VoiceOver" },
+      { mark: "10", title: "모바일 앱 검수", sub: "TalkBack, VoiceOver iOS" },
+      { mark: "11", title: "WCAG 적합성 판정", sub: "충족·실패·해당없음" },
+      { mark: "12", title: "결함 보고서 작성", sub: "우선순위와 권고안" },
+    ],
+  },
+  {
+    domainNum: "03",
+    weightPct: 30,
+    topics: [
+      { mark: "13", title: "테스트 범위 결정", sub: "샘플링 전략" },
+      { mark: "14", title: "WCAG-EM 평가 방법론", sub: "5단계 절차" },
+      { mark: "15", title: "장애인 사용자 테스트", sub: "참여형 검증" },
+      { mark: "16", title: "지속적 통합과 회귀", sub: "CI 파이프라인 통합" },
+    ],
+  },
+];
+
 function WasContent({ locale }: { locale: string }) {
-	const t = useTranslations("was");
-	const tNav = useTranslations("common.nav");
-	const tExam = useTranslations("common.exam");
+  const t = useTranslations("was");
+  const tExam = useTranslations("common.exam");
+  const isKo = locale === "ko";
 
-	const examInfoItems = [
-		{ label: tExam("questions"), value: t("examInfo.questions") },
-		{ label: tExam("timeLimit"), value: t("examInfo.time") },
-		{ label: tExam("passingScore"), value: t("examInfo.passing") },
-		{
-			label: locale === "ko" ? "응시 자격" : "Eligibility",
-			value: locale === "ko" ? "실무 경력 3년 이상 권장" : "3+ years of experience recommended",
-		},
-	];
+  const examFacts = [
+    { label: tExam("questions"), value: t("examInfo.questions") },
+    { label: tExam("timeLimit"), value: t("examInfo.time") },
+    { label: tExam("passingScore"), value: t("examInfo.passing") },
+    { label: isKo ? "형식" : "Format", value: t("examInfo.format") },
+  ];
 
-	const domains = [
-		{
-			num: "1",
-			desc:
-				locale === "ko"
-					? "시맨틱 HTML 마크업, WAI-ARIA 역할·속성·상태, 키보드 탐색과 포커스 관리, 색상 대비 기준, 폼 접근성, 이미지 대체 텍스트, SPA 접근성, 커스텀 위젯 패턴을 학습합니다."
-					: "Study semantic HTML, WAI-ARIA roles/properties/states, keyboard navigation and focus management, color contrast requirements, form accessibility, alt text for images, SPA accessibility, and custom widget patterns.",
-		},
-		{
-			num: "2",
-			desc:
-				locale === "ko"
-					? "axe, WAVE, Lighthouse 등 자동화 도구와 수동 테스트 방법론, NVDA·JAWS·VoiceOver·TalkBack 등 보조기술을 활용한 스크린리더 테스트, 접근성 감사 프레임워크를 학습합니다."
-					: "Study automated tools (axe, WAVE, Lighthouse), manual testing methodologies, screen reader testing with NVDA, JAWS, VoiceOver, TalkBack, and accessibility audit frameworks.",
-		},
-		{
-			num: "3",
-			desc:
-				locale === "ko"
-					? "접근성 이슈 수정 전략, ARIA 구현 기법, 개발자 및 QA 엔지니어링 모범 사례, 접근성 설계 패턴을 학습합니다."
-					: "Study accessibility remediation strategies, ARIA implementation techniques, developer and QA engineering best practices, and accessible design patterns.",
-		},
-	] as const;
+  return (
+    <main>
+      <section className="overview-hero">
+        <div className="container">
+          <nav className="overview-hero__crumbs" aria-label={isKo ? "경로" : "Breadcrumb"}>
+            <Link href={`/${locale}`}>{isKo ? "홈" : "Home"}</Link>
+            <span aria-hidden="true">/</span>
+            <span>WAS</span>
+          </nav>
 
-	const quickLinks = [
-		{ href: `/${locale}/was/study`, label: tNav("study") },
-		{ href: `/${locale}/was/quiz`, label: tNav("quiz") },
-		{ href: `/${locale}/was/flashcards`, label: tNav("flashcards") },
-		{ href: `/${locale}/was/wrong-answers`, label: tNav("wrongAnswers") },
-	];
+          <div className="overview-hero__head">
+            <div>
+              <div className="overview-hero__id">CERT · 02 · WAS</div>
+              <h1 className="overview-hero__title">{t("title")}</h1>
+              <p className="overview-hero__title-en">{t("overview")}</p>
+              <p className="overview-hero__lede">
+                {isKo
+                  ? "웹 개발자·QA 대상 기술 자격증. WCAG 적용, ARIA, 코드 검증, 보조기술 기반 실제 검수 능력을 평가하는 IAAP 전문가 자격증입니다."
+                  : "Technical IAAP certification for web developers and QA professionals. Tests WCAG application, ARIA, code validation, and real-world audit skills."}
+              </p>
+              <div className="overview-hero__cta">
+                <Link className="btn btn--primary" href={`/${locale}/was/study`}>
+                  {isKo ? "학습 시작" : "Start Learning"}
+                </Link>
+                <Link className="btn" href={`/${locale}/was/quiz`}>
+                  {isKo ? "모의 퀴즈" : "Mock Quiz"}
+                </Link>
+                <Link className="btn btn--ghost" href={`/${locale}/was/flashcards`}>
+                  {isKo ? "플래시카드" : "Flashcards"}
+                </Link>
+              </div>
+            </div>
 
-	return (
-		<div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-			{/* 헤더 */}
-			<div>
-				<p className="text-xs font-semibold uppercase tracking-widest text-violet-600">IAAP</p>
-				<h1 className="mt-1 text-3xl font-bold text-gray-900">{t("title")}</h1>
-				<p className="mt-2 text-gray-500 italic">{t("overview")}</p>
-			</div>
+            <dl className="overview-hero__facts" aria-label={isKo ? "시험 정보" : "Exam Information"}>
+              {examFacts.map(({ label, value }) => (
+                <div key={label} className="overview-hero__fact">
+                  <dt className="overview-hero__fact-label">{label}</dt>
+                  <dd className="overview-hero__fact-value">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
 
-			{/* CPACC 선취득 권장 안내 */}
-			<div className="mt-6 rounded-lg border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-800">
-				{locale === "ko"
-					? "💡 WAS 시험은 CPACC 자격증 취득 후 응시하는 것을 권장합니다."
-					: "💡 It is recommended to obtain the CPACC certification before taking the WAS exam."}
-			</div>
+      <section className="domains" aria-labelledby="was-domains-title">
+        <div className="container">
+          <div className="section__head">
+            <div>
+              <h2 id="was-domains-title" className="section__title">
+                {isKo ? "시험 도메인" : "Exam Domains"}
+              </h2>
+              <p className="section__sub">
+                {isKo ? "3개 도메인, 총 75문항" : "3 domains · 75 questions total"}
+              </p>
+            </div>
+          </div>
 
-			{/* 시험 정보 */}
-			<section aria-labelledby="was-examinfo" className="mt-8">
-				<h2 id="was-examinfo" className="text-lg font-semibold text-gray-900">
-					{locale === "ko" ? "시험 정보" : "Exam Information"}
-				</h2>
-				<dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-					{examInfoItems.map(({ label, value }) => (
-						<div key={label} className="rounded-lg bg-gray-50 px-4 py-3">
-							<dt className="text-xs text-gray-500">{label}</dt>
-							<dd className="mt-1 font-semibold text-gray-900 text-sm">{value}</dd>
-						</div>
-					))}
-				</dl>
-			</section>
+          {domains.map((d, i) => (
+            <div key={d.domainNum} className="domain">
+              <div>
+                <div className="domain__num">DOMAIN · {d.domainNum}</div>
+                <h3 className="domain__title">{t(`domains.${i + 1}.title`)}</h3>
+                <p className="domain__title-en">{t(`domains.${i + 1}.en`)}</p>
+                <div className="domain__weight">
+                  <span>{t(`domains.${i + 1}.weight`)}</span>
+                  <div className="domain__weight-bar" aria-hidden="true">
+                    <span style={{ width: `${d.weightPct}%` }} />
+                  </div>
+                </div>
+                <div className="domain__cta">
+                  <Link className="btn btn--sm" href={`/${locale}/was/study`}>
+                    {isKo ? "학습" : "Study"}
+                  </Link>
+                  <Link className="btn btn--sm btn--ghost" href={`/${locale}/was/quiz`}>
+                    {isKo ? "퀴즈" : "Quiz"}
+                  </Link>
+                </div>
+              </div>
 
-			{/* 도메인 */}
-			<section aria-labelledby="was-domains" className="mt-10">
-				<h2 id="was-domains" className="text-lg font-semibold text-gray-900">
-					{locale === "ko" ? "시험 도메인" : "Exam Domains"}
-				</h2>
-				<ul className="mt-4 space-y-4" role="list">
-					{domains.map(({ num, desc }) => (
-						<li key={num} className="rounded-xl border border-gray-200 p-5">
-							<div className="flex items-start gap-4">
-								<span
-									aria-hidden="true"
-									className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-bold text-violet-700"
-								>
-									{num}
-								</span>
-								<div>
-									<h3 className="font-semibold text-gray-900">
-										{t(`domains.${num}.title`)}
-										<span className="ml-2 text-xs font-normal text-gray-400">
-											{t(`domains.${num}.en`)}
-										</span>
-									</h3>
-									<p className="mt-1 text-xs font-medium text-violet-600">
-										{t(`domains.${num}.weight`)}
-									</p>
-									<p className="mt-2 text-sm text-gray-600 leading-relaxed">{desc}</p>
-								</div>
-							</div>
-						</li>
-					))}
-				</ul>
-			</section>
-
-			{/* 빠른 시작 */}
-			<section aria-labelledby="was-quicklinks" className="mt-10">
-				<h2 id="was-quicklinks" className="text-lg font-semibold text-gray-900">
-					{locale === "ko" ? "학습 시작" : "Start Studying"}
-				</h2>
-				<ul className="mt-4 grid gap-3 sm:grid-cols-2" role="list">
-					{quickLinks.map(({ href, label }) => (
-						<li key={href}>
-							<Link
-								href={href}
-								className="flex items-center justify-between rounded-xl border border-gray-200 px-5 py-4 text-sm font-medium text-gray-700 no-underline transition-colors hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
-							>
-								{label}
-								<span aria-hidden="true" className="text-gray-400">
-									→
-								</span>
-							</Link>
-						</li>
-					))}
-				</ul>
-			</section>
-		</div>
-	);
+              <ul className="domain__topics">
+                {d.topics.map((topic) => (
+                  <li key={topic.mark} className="domain__topic">
+                    <span className="domain__topic-mark">{topic.mark}</span>
+                    <div>
+                      <strong>{topic.title}</strong>
+                      <br />
+                      <span style={{ color: "var(--fg-muted)" }}>{topic.sub}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }

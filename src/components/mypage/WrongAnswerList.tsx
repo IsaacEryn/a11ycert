@@ -14,7 +14,8 @@ interface Props {
 
 export default function WrongAnswerList({ locale }: Props) {
 	const { user } = useAuth();
-	const { wrongAnswers: localWrong } = useLearningStore();
+	const { getWrongNotes } = useLearningStore();
+	const localWrong = [...getWrongNotes("cpacc"), ...getWrongNotes("was")];
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";

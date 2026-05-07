@@ -2,62 +2,110 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import type { Cert } from "./migrate-v1";
 
 export type LanguageMode = "ko-only" | "parallel" | "en-only";
 
-interface LearningState {
-	savedQuestions: string[];
-	wrongAnswers: string[];
-	completedUnits: string[];
-	languageMode: LanguageMode;
+interface PerCertData {
+  completedUnits: string[];
+  bookmarks: string[];
+  wrongNotes: string[];
+}
 
-	saveQuestion: (id: string) => void;
-	unsaveQuestion: (id: string) => void;
-	addWrongAnswer: (id: string) => void;
-	removeWrongAnswer: (id: string) => void;
-	markUnitComplete: (unitId: string) => void;
-	setLanguageMode: (mode: LanguageMode) => void;
-	isSaved: (id: string) => boolean;
-	isWrong: (id: string) => boolean;
-	isCompleted: (unitId: string) => boolean;
+interface LearningState {
+  perCert: Record<string, PerCertData>;
+  languageMode: LanguageMode;
+
+  // Per-cert actions
+  markUnitComplete: (cert: Cert, unitId: string) => void;
+  saveQuestion: (cert: Cert, id: string) => void;
+  unsaveQuestion: (cert: Cert, id: string) => void;
+  addWrongAnswer: (cert: Cert, id: string) => void;
+  removeWrongAnswer: (cert: Cert, id: string) => void;
+
+  // Per-cert queries
+  isCompleted: (cert: Cert, unitId: string) => boolean;
+  isSaved: (cert: Cert, id: string) => boolean;
+  isWrong: (cert: Cert, id: string) => boolean;
+  getCompletedCount: (cert: Cert) => number;
+  getBookmarks: (cert: Cert) => string[];
+  getWrongNotes: (cert: Cert) => string[];
+
+  setLanguageMode: (mode: LanguageMode) => void;
+}
+
+function emptyCert(): PerCertData {
+  return { completedUnits: [], bookmarks: [], wrongNotes: [] };
+}
+
+function getCert(state: LearningState, cert: string): PerCertData {
+  return state.perCert[cert] ?? emptyCert();
+}
+
+function patchCert(
+  state: LearningState,
+  cert: string,
+  patch: Partial<PerCertData>
+): Partial<LearningState> {
+  return {
+    perCert: {
+      ...state.perCert,
+      [cert]: { ...getCert(state, cert), ...patch },
+    },
+  };
 }
 
 export const useLearningStore = create<LearningState>()(
-	persist(
-		(set, get) => ({
-			savedQuestions: [],
-			wrongAnswers: [],
-			completedUnits: [],
-			languageMode: "ko-only" as LanguageMode,
+  persist(
+    (set, get) => ({
+      perCert: {},
+      languageMode: "ko-only" as LanguageMode,
 
-			saveQuestion: (id) =>
-				set((s) =>
-					s.savedQuestions.includes(id) ? s : { savedQuestions: [...s.savedQuestions, id] }
-				),
+      markUnitComplete: (cert, unitId) =>
+        set((s) => {
+          const c = getCert(s, cert);
+          if (c.completedUnits.includes(unitId)) return s;
+          return patchCert(s, cert, { completedUnits: [...c.completedUnits, unitId] });
+        }),
 
-			unsaveQuestion: (id) =>
-				set((s) => ({ savedQuestions: s.savedQuestions.filter((q) => q !== id) })),
+      saveQuestion: (cert, id) =>
+        set((s) => {
+          const c = getCert(s, cert);
+          if (c.bookmarks.includes(id)) return s;
+          return patchCert(s, cert, { bookmarks: [...c.bookmarks, id] });
+        }),
 
-			addWrongAnswer: (id) =>
-				set((s) => (s.wrongAnswers.includes(id) ? s : { wrongAnswers: [...s.wrongAnswers, id] })),
+      unsaveQuestion: (cert, id) =>
+        set((s) => {
+          const c = getCert(s, cert);
+          return patchCert(s, cert, { bookmarks: c.bookmarks.filter((x) => x !== id) });
+        }),
 
-			removeWrongAnswer: (id) =>
-				set((s) => ({ wrongAnswers: s.wrongAnswers.filter((q) => q !== id) })),
+      addWrongAnswer: (cert, id) =>
+        set((s) => {
+          const c = getCert(s, cert);
+          if (c.wrongNotes.includes(id)) return s;
+          return patchCert(s, cert, { wrongNotes: [...c.wrongNotes, id] });
+        }),
 
-			markUnitComplete: (unitId) =>
-				set((s) =>
-					s.completedUnits.includes(unitId) ? s : { completedUnits: [...s.completedUnits, unitId] }
-				),
+      removeWrongAnswer: (cert, id) =>
+        set((s) => {
+          const c = getCert(s, cert);
+          return patchCert(s, cert, { wrongNotes: c.wrongNotes.filter((x) => x !== id) });
+        }),
 
-			setLanguageMode: (mode) => set({ languageMode: mode }),
+      isCompleted: (cert, unitId) => getCert(get(), cert).completedUnits.includes(unitId),
+      isSaved: (cert, id) => getCert(get(), cert).bookmarks.includes(id),
+      isWrong: (cert, id) => getCert(get(), cert).wrongNotes.includes(id),
+      getCompletedCount: (cert) => getCert(get(), cert).completedUnits.length,
+      getBookmarks: (cert) => getCert(get(), cert).bookmarks,
+      getWrongNotes: (cert) => getCert(get(), cert).wrongNotes,
 
-			isSaved: (id) => get().savedQuestions.includes(id),
-			isWrong: (id) => get().wrongAnswers.includes(id),
-			isCompleted: (unitId) => get().completedUnits.includes(unitId),
-		}),
-		{
-			name: "a11ycert-learning",
-			storage: createJSONStorage(() => localStorage),
-		}
-	)
+      setLanguageMode: (mode) => set({ languageMode: mode }),
+    }),
+    {
+      name: "a11ycert.learning.v2",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
 );
