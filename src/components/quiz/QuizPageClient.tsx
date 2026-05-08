@@ -51,7 +51,7 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
     setAnswers((prev) => ({ ...prev, [current]: key }));
     if (key !== q.answer) {
       addWrongAnswer(exam, q.id);
-      if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
+      if (userId) syncWrongAnswerToDB(userId, q.id, key);
     } else {
       removeWrongAnswer(exam, q.id);
       if (userId) removeWrongAnswerFromDB(userId, q.id);
