@@ -14,8 +14,7 @@ const supabase = createClient();
 export async function syncWrongAnswerToDB(
 	userId: string,
 	questionId: string,
-	userAnswer: string,
-	exam: string
+	userAnswer: string
 ) {
 	const { error } = await supabase.from("wrong_answers").upsert(
 		{

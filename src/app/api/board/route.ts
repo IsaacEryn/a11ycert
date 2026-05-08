@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 const MAX_TITLE_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 10000;
 const BLOCKED_CATEGORIES = ["report"] as const;
+const ALLOWED_CATEGORIES = ["free", "study", "announcement"] as const;
+type AllowedCategory = typeof ALLOWED_CATEGORIES[number];
 
 /**
  * GET /api/board?category=all&page=1&limit=20
@@ -34,12 +36,18 @@ export async function GET(request: NextRequest) {
 		.range(offset, offset + limit - 1);
 
 	if (category !== "all") {
+		if (!ALLOWED_CATEGORIES.includes(category as AllowedCategory)) {
+			return NextResponse.json({ error: "Invalid category" }, { status: 400 });
+		}
 		query = query.eq("category", category);
 	}
 
 	const { data, error, count } = await query;
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+	if (error) {
+		console.error("[GET /api/board]", error.message);
+		return NextResponse.json({ error: "게시글을 불러올 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({
 		posts: data,
@@ -98,7 +106,10 @@ export async function POST(request: NextRequest) {
 		.select("id, category, title, created_at")
 		.single();
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[POST /api/board]", error.message);
+		return NextResponse.json({ error: "게시글을 저장할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ post: data }, { status: 201 });
 }

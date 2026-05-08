@@ -36,7 +36,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 		.select("id, content, updated_at")
 		.single();
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[PATCH /api/comments]", error.message);
+		return NextResponse.json({ error: "댓글을 수정할 수 없습니다." }, { status: 500 });
+	}
 	if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
 	return NextResponse.json({ comment: data });
@@ -64,7 +67,10 @@ export async function DELETE(
 		.eq("id", id)
 		.eq("user_id", user.id);
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[DELETE /api/comments]", error.message);
+		return NextResponse.json({ error: "댓글을 삭제할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ success: true });
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -15,7 +15,11 @@ interface Props {
 export default function WrongAnswerList({ locale }: Props) {
 	const { user } = useAuth();
 	const { getWrongNotes } = useLearningStore();
-	const localWrong = [...getWrongNotes("cpacc"), ...getWrongNotes("was")];
+	const localWrong = useMemo(
+		() => [...getWrongNotes("cpacc"), ...getWrongNotes("was")],
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	);
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
@@ -45,7 +49,7 @@ export default function WrongAnswerList({ locale }: Props) {
 		}
 
 		load();
-	}, [user, localWrong, supabase]);
+	}, [user, localWrong, supabase]); // localWrong is stable via useMemo([])
 
 	if (loading) {
 		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;

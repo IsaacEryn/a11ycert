@@ -36,7 +36,8 @@ export async function GET(request: NextRequest) {
 	const { data, error } = await query.order("created_at");
 
 	if (error) {
-		return NextResponse.json({ error: error.message }, { status: 500 });
+		console.error("[GET /api/quiz]", error.message);
+		return NextResponse.json({ error: "퀴즈를 불러올 수 없습니다." }, { status: 500 });
 	}
 
 	return NextResponse.json({ questions: data });
@@ -71,12 +72,23 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 	}
 
+	// 어드민 권한 확인
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+	if (!profile || profile.role !== "admin") {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
+
 	const body = await request.json();
 
 	const { data, error } = await supabase.from("quiz_questions").insert(body).select().single();
 
 	if (error) {
-		return NextResponse.json({ error: error.message }, { status: 400 });
+		console.error("[POST /api/quiz]", error.message);
+		return NextResponse.json({ error: "문항을 저장할 수 없습니다." }, { status: 400 });
 	}
 
 	return NextResponse.json({ question: data }, { status: 201 });

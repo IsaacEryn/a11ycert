@@ -103,7 +103,10 @@ export async function PATCH(
 		.select("id, title, updated_at")
 		.single();
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[PATCH /api/board]", error.message);
+		return NextResponse.json({ error: "게시글을 수정할 수 없습니다." }, { status: 500 });
+	}
 	if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
 	return NextResponse.json({ post: data });
@@ -131,7 +134,10 @@ export async function DELETE(
 		.eq("id", postId)
 		.eq("user_id", user.id);
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[DELETE /api/board]", error.message);
+		return NextResponse.json({ error: "게시글을 삭제할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ success: true });
 }

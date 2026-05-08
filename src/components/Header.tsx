@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ModeMenu from "./ModeMenu";
@@ -24,6 +24,8 @@ function certFromPath(pathname: string): Cert {
 export default function Header({ locale }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<Cert | null>(null);
+  const triggerRefs = useRef<Partial<Record<Cert, HTMLButtonElement>>>({});
+  const panelRefs = useRef<Partial<Record<Cert, HTMLDivElement>>>({});
   const pathname = usePathname();
   const router = useRouter();
   const isKo = locale === "ko";
@@ -36,6 +38,29 @@ export default function Header({ locale }: HeaderProps) {
     setMobileOpen(false);
     setOpenDropdown(null);
   }, [pathname]);
+
+  // 드롭다운 열릴 때 첫 번째 메뉴 아이템으로 포커스 이동
+  useEffect(() => {
+    if (openDropdown) {
+      requestAnimationFrame(() => {
+        const first = panelRefs.current[openDropdown]?.querySelector<HTMLElement>('[role="menuitem"]');
+        first?.focus();
+      });
+    }
+  }, [openDropdown]);
+
+  const handleDropdownKeyDown = useCallback((e: React.KeyboardEvent, c: Cert) => {
+    const panel = panelRefs.current[c];
+    if (!panel) return;
+    const items = Array.from(panel.querySelectorAll<HTMLElement>('[role="menuitem"]'));
+    const idx = items.indexOf(document.activeElement as HTMLElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); items[(idx + 1) % items.length]?.focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); items[(idx - 1 + items.length) % items.length]?.focus(); }
+    else if (e.key === "Home") { e.preventDefault(); items[0]?.focus(); }
+    else if (e.key === "End") { e.preventDefault(); items[items.length - 1]?.focus(); }
+    else if (e.key === "Escape") { setOpenDropdown(null); triggerRefs.current[c]?.focus(); }
+    else if (e.key === "Tab") { setOpenDropdown(null); }
+  }, []);
 
   function isActive(href: string) {
     if (href === `/${locale}`) return pathname === `/${locale}`;
@@ -106,19 +131,31 @@ export default function Header({ locale }: HeaderProps) {
             {(["cpacc", "was"] as const).map((c) => (
               <div key={c} className="nav-dropdown">
                 <button
+                  ref={(el) => { triggerRefs.current[c] = el ?? undefined; }}
                   className="app-nav__link nav-dropdown__trigger"
                   aria-haspopup="menu"
                   aria-expanded={openDropdown === c}
                   aria-current={isCertActive(c) ? "page" : undefined}
                   onClick={() => setOpenDropdown(openDropdown === c ? null : c)}
-                  onKeyDown={(e) => { if (e.key === "Escape") setOpenDropdown(null); }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") { setOpenDropdown(null); }
+                    else if (e.key === "ArrowDown" && openDropdown !== c) {
+                      e.preventDefault();
+                      setOpenDropdown(c);
+                    }
+                  }}
                 >
                   {c.toUpperCase()}
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </button>
-                <div className="nav-dropdown__panel" role="menu">
+                <div
+                  ref={(el) => { panelRefs.current[c] = el ?? undefined; }}
+                  className="nav-dropdown__panel"
+                  role="menu"
+                  onKeyDown={(e) => handleDropdownKeyDown(e, c)}
+                >
                   {certNavItems(c).map(({ href, label }) => (
                     <Link key={href} href={href} className="nav-dropdown__item" role="menuitem" aria-current={isActive(href) ? "page" : undefined}>
                       {label}

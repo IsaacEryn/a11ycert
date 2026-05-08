@@ -51,7 +51,8 @@ export async function POST(request: NextRequest) {
 		.single();
 
 	if (postError) {
-		return NextResponse.json({ error: postError.message }, { status: 400 });
+		console.error("[POST /api/reports] board_posts insert", postError.message);
+		return NextResponse.json({ error: "제보를 저장할 수 없습니다." }, { status: 500 });
 	}
 
 	// 2. reports 삽입
@@ -70,7 +71,8 @@ export async function POST(request: NextRequest) {
 		.single();
 
 	if (reportError) {
-		return NextResponse.json({ error: reportError.message }, { status: 400 });
+		console.error("[POST /api/reports] reports insert", reportError.message);
+		return NextResponse.json({ error: "제보를 저장할 수 없습니다." }, { status: 500 });
 	}
 
 	return NextResponse.json({ report, post }, { status: 201 });
@@ -94,7 +96,7 @@ export async function GET() {
 		.eq("id", user.id)
 		.single();
 
-	if (profile?.role !== "admin") {
+	if (!profile || profile.role !== "admin") {
 		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 	}
 
@@ -104,7 +106,10 @@ export async function GET() {
 		.order("created_at", { ascending: false })
 		.limit(50);
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+	if (error) {
+		console.error("[GET /api/reports]", error.message);
+		return NextResponse.json({ error: "목록을 불러올 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ reports: data });
 }

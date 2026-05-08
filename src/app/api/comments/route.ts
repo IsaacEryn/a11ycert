@@ -25,7 +25,10 @@ export async function GET(request: NextRequest) {
 		.eq("page_path", pagePath)
 		.order("created_at", { ascending: true });
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+	if (error) {
+		console.error("[GET /api/comments]", error.message);
+		return NextResponse.json({ error: "댓글을 불러올 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ comments: data });
 }
@@ -72,7 +75,10 @@ export async function POST(request: NextRequest) {
 		)
 		.single();
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[POST /api/comments]", error.message);
+		return NextResponse.json({ error: "댓글을 저장할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ comment: data }, { status: 201 });
 }

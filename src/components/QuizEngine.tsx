@@ -53,7 +53,7 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 
 		if (key !== q.answer) {
 			addWrongAnswer(exam, q.id);
-			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
+			if (userId) syncWrongAnswerToDB(userId, q.id, key);
 		} else {
 			removeWrongAnswer(exam, q.id);
 			if (userId) removeWrongAnswerFromDB(userId, q.id);
@@ -92,7 +92,7 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 		const q = questions[idx];
 		if (key !== q.answer) {
 			addWrongAnswer(exam, q.id);
-			if (userId) syncWrongAnswerToDB(userId, q.id, key, exam);
+			if (userId) syncWrongAnswerToDB(userId, q.id, key);
 		} else {
 			removeWrongAnswer(exam, q.id);
 			if (userId) removeWrongAnswerFromDB(userId, q.id);

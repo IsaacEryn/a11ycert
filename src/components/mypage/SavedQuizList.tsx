@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -15,7 +15,11 @@ interface Props {
 export default function SavedQuizList({ locale }: Props) {
 	const { user } = useAuth();
 	const { getBookmarks, unsaveQuestion } = useLearningStore();
-	const localSaved = [...getBookmarks("cpacc"), ...getBookmarks("was")];
+	const localSaved = useMemo(
+		() => [...getBookmarks("cpacc"), ...getBookmarks("was")],
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	);
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
@@ -45,7 +49,7 @@ export default function SavedQuizList({ locale }: Props) {
 		}
 
 		load();
-	}, [user, localSaved, supabase]);
+	}, [user, localSaved, supabase]); // localSaved is stable via useMemo([])
 
 	const handleRemove = async (questionId: string) => {
 		if (user) {
