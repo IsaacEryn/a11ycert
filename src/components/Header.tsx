@@ -64,6 +64,7 @@ export default function Header({ locale }: HeaderProps) {
 
   function isActive(href: string) {
     if (href === `/${locale}`) return pathname === `/${locale}`;
+    if (/\/(cpacc|was)$/.test(href)) return pathname === href;
     return pathname === href || pathname.startsWith(href + "/");
   }
 
