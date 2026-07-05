@@ -34,13 +34,9 @@ export async function GET(
 	}
 
 	// 조회수 증가 — rpc로 atomic increment (레이스 컨디션 방지)
-	await supabase.rpc("increment_view_count", { post_id: postId }).catch(() => {
-		// rpc 미설치 시 fallback (실패해도 무시)
-		supabase
-			.from("board_posts")
-			.update({ view_count: (post.view_count ?? 0) + 1 })
-			.eq("id", postId);
-	});
+	// RPC는 002_role_and_view_count.sql에 정의. 실패해도 응답은 정상 반환.
+	const { error: rpcError } = await supabase.rpc("increment_view_count", { post_id: postId });
+	if (rpcError) console.error("[GET /api/board/[postId]] increment_view_count", rpcError.message);
 
 	// 댓글 조회
 	const { data: replies } = await supabase
@@ -78,6 +74,12 @@ export async function PATCH(
 	const title: string | undefined = body.title;
 	const content: string | undefined = body.content;
 
+	if (title !== undefined && !title.trim()) {
+		return NextResponse.json({ error: "제목을 입력해주세요" }, { status: 400 });
+	}
+	if (content !== undefined && !content.trim()) {
+		return NextResponse.json({ error: "본문을 입력해주세요" }, { status: 400 });
+	}
 	if (title !== undefined && title.length > MAX_TITLE_LENGTH) {
 		return NextResponse.json(
 			{ error: `제목은 ${MAX_TITLE_LENGTH}자 이하로 작성해주세요` },
@@ -101,7 +103,7 @@ export async function PATCH(
 		.eq("id", postId)
 		.eq("user_id", user.id)
 		.select("id, title, updated_at")
-		.single();
+		.maybeSingle();
 
 	if (error) {
 		console.error("[PATCH /api/board]", error.message);

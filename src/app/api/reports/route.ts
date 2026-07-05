@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 
 const MAX_TITLE_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 5000;
+const ALLOWED_TYPES = ["correction", "error", "suggestion"] as const;
+const ALLOWED_TARGET_TYPES = ["quiz", "content", "glossary"] as const;
 
 /**
  * POST /api/reports
@@ -24,6 +26,13 @@ export async function POST(request: NextRequest) {
 
 	if (!type || !target_type || !title.trim() || !content.trim()) {
 		return NextResponse.json({ error: "필수 필드가 누락되었습니다" }, { status: 400 });
+	}
+	if (
+		!ALLOWED_TYPES.includes(type) ||
+		!ALLOWED_TARGET_TYPES.includes(target_type) ||
+		(target_id !== undefined && target_id !== null && typeof target_id !== "string")
+	) {
+		return NextResponse.json({ error: "유효하지 않은 제보 유형입니다" }, { status: 400 });
 	}
 	if (title.length > MAX_TITLE_LENGTH) {
 		return NextResponse.json(
@@ -72,6 +81,8 @@ export async function POST(request: NextRequest) {
 
 	if (reportError) {
 		console.error("[POST /api/reports] reports insert", reportError.message);
+		// 고아 게시글 방지: 방금 만든 board_post 롤백
+		await supabase.from("board_posts").delete().eq("id", post.id).eq("user_id", user.id);
 		return NextResponse.json({ error: "제보를 저장할 수 없습니다." }, { status: 500 });
 	}
 

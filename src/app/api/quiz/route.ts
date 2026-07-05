@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
 /**
  * GET /api/quiz?exam=cpacc&domain=1&unit_id=cpacc-1-1
@@ -13,19 +12,7 @@ export async function GET(request: NextRequest) {
 	const domain = searchParams.get("domain");
 	const unitId = searchParams.get("unit_id");
 
-	const cookieStore = await cookies();
-	const supabase = createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll() {},
-			},
-		}
-	);
+	const supabase = await createClient();
 
 	let query = supabase.from("quiz_questions").select("*").eq("is_active", true);
 
@@ -43,26 +30,34 @@ export async function GET(request: NextRequest) {
 	return NextResponse.json({ questions: data });
 }
 
+// 삽입 허용 필드 화이트리스트 (mass assignment 방지) — 001_initial_schema.sql 컬럼 기준
+const INSERTABLE_FIELDS = [
+	"id",
+	"exam",
+	"domain",
+	"unit_id",
+	"difficulty",
+	"question_ko",
+	"question_en",
+	"option_a_ko",
+	"option_a_en",
+	"option_b_ko",
+	"option_b_en",
+	"option_c_ko",
+	"option_c_en",
+	"option_d_ko",
+	"option_d_en",
+	"answer",
+	"explanation_ko",
+	"explanation_en",
+	"is_active",
+] as const;
+
 /**
  * POST /api/quiz — 퀴즈 문항 추가 (관리자 전용)
- * 향후 관리자 권한 체크 추가 예정
  */
 export async function POST(request: NextRequest) {
-	const cookieStore = await cookies();
-	const supabase = createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-		{
-			cookies: {
-				getAll() {
-					return cookieStore.getAll();
-				},
-				setAll(cs) {
-					cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				},
-			},
-		}
-	);
+	const supabase = await createClient();
 
 	// 로그인 확인
 	const {
@@ -83,8 +78,14 @@ export async function POST(request: NextRequest) {
 	}
 
 	const body = await request.json();
+	const row = Object.fromEntries(
+		INSERTABLE_FIELDS.filter((field) => body[field] !== undefined).map((field) => [
+			field,
+			body[field],
+		])
+	);
 
-	const { data, error } = await supabase.from("quiz_questions").insert(body).select().single();
+	const { data, error } = await supabase.from("quiz_questions").insert(row).select().single();
 
 	if (error) {
 		console.error("[POST /api/quiz]", error.message);

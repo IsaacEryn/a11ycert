@@ -31,11 +31,14 @@ export default function FlashcardCard({
   const isKo = locale === "ko";
 
   useEffect(() => {
+    // 화살표 키만 전역 단축키로 유지 — Space/Enter는 카드 요소의 onKeyDown에서 처리
+    // (전역 preventDefault 시 페이지 내 다른 버튼·링크·입력의 키보드 조작이 깨짐)
     const handler = (e: KeyboardEvent) => {
-      if (e.key === " " || e.key === "Enter") {
-        e.preventDefault();
-        onFlip();
-      } else if (e.key === "ArrowRight") {
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable)) {
+        return;
+      }
+      if (e.key === "ArrowRight") {
         onNext();
       } else if (e.key === "ArrowLeft") {
         onPrev();
@@ -43,7 +46,7 @@ export default function FlashcardCard({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onFlip, onNext, onPrev]);
+  }, [onNext, onPrev]);
 
   const rateLabels = {
     again: { ko: "다시", en: "Again", hint: { ko: "잘 모름", en: "Forgot" } },
@@ -57,6 +60,12 @@ export default function FlashcardCard({
       <div
         className={`flash-card${isFlipped ? " is-flipped" : ""}`}
         onClick={onFlip}
+        onKeyDown={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            onFlip();
+          }
+        }}
         role="button"
         tabIndex={0}
         aria-pressed={isFlipped}

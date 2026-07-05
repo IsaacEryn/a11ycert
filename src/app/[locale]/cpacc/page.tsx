@@ -2,12 +2,28 @@ import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CPACC 시험 준비",
-  description:
-    "IAAP CPACC(Certified Professional in Accessibility Core Competencies) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return locale === "ko"
+    ? {
+        title: "CPACC 시험 준비",
+        description:
+          "IAAP CPACC(Certified Professional in Accessibility Core Competencies) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
+        alternates: localeAlternates(locale, "/cpacc"),
+      }
+    : {
+        title: "CPACC Exam Prep",
+        description:
+          "IAAP CPACC (Certified Professional in Accessibility Core Competencies) exam info, domain study guides, mock quizzes, and flashcards — in Korean and English.",
+        alternates: localeAlternates(locale, "/cpacc"),
+      };
+}
 
 export default async function CpaccPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

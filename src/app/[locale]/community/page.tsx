@@ -124,9 +124,17 @@ export default function CommunityPage() {
 				className="focus-visible:outline-none"
 			>
 				{isLoading ? (
-					<p className="mt-8 text-sm text-gray-400" aria-live="polite">
-						{isKo ? "불러오는 중..." : "Loading..."}
-					</p>
+					<div className="mt-6" aria-live="polite" aria-busy="true">
+						<span className="sr-only">{isKo ? "불러오는 중..." : "Loading..."}</span>
+						<ul className="divide-y divide-gray-100 motion-safe:animate-pulse" aria-hidden="true">
+							{[0, 1, 2, 3, 4].map((i) => (
+								<li key={i} className="py-4">
+									<div className="h-3 w-16 rounded" style={{ background: "var(--bg-muted)" }} />
+									<div className="mt-2 h-4 w-3/4 rounded" style={{ background: "var(--bg-muted)" }} />
+								</li>
+							))}
+						</ul>
+					</div>
 				) : posts.length === 0 ? (
 					<p className="mt-8 text-sm text-gray-400">
 						{isKo ? "아직 게시글이 없습니다." : "No posts yet."}

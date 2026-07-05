@@ -604,6 +604,7 @@ button { font-family: inherit; cursor: pointer; }
 .lang-toggle button {
   border: 0; background: transparent;
   padding: 4px 12px;
+  min-height: 24px; /* WCAG 2.2 AA 2.5.8 최소 타깃 크기 */
   border-radius: 999px;
   color: var(--fg-muted);
   cursor: pointer;

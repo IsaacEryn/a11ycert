@@ -3,29 +3,44 @@ import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, localeAlternates } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/lib/auth/AuthProvider";
 import { PrefsProvider } from "@/lib/prefs/PrefsContext";
 import "../globals.css";
 
-export const metadata: Metadata = {
-	title: {
-		default: "A11yCert — IAAP 자격증 한국어 학습",
-		template: "%s | A11yCert",
-	},
-	description: "IAAP CPACC & WAS 자격증 시험을 한국어와 영어로 준비하는 이중 언어 학습 플랫폼",
-	metadataBase: new URL("https://a11ycert.com"),
-	openGraph: {
-		siteName: "A11yCert",
-		type: "website",
-		images: [{ url: "/logo.svg", width: 140, height: 40 }],
-	},
-	icons: {
-		icon: "/icon.svg",
-		shortcut: "/icon.svg",
-	},
-};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const isKo = locale === "ko";
+
+	return {
+		title: {
+			default: isKo
+				? "A11yCert — IAAP 자격증 한국어 학습"
+				: "A11yCert — Bilingual IAAP Certification Prep",
+			template: "%s | A11yCert",
+		},
+		description: isKo
+			? "IAAP CPACC & WAS 자격증 시험을 한국어와 영어로 준비하는 이중 언어 학습 플랫폼"
+			: "A bilingual (Korean/English) study platform for the IAAP CPACC & WAS certification exams",
+		metadataBase: new URL(SITE_URL),
+		alternates: localeAlternates(locale, ""),
+		openGraph: {
+			siteName: "A11yCert",
+			type: "website",
+			locale: isKo ? "ko_KR" : "en_US",
+		},
+		icons: {
+			icon: "/icon.svg",
+			shortcut: "/icon.svg",
+		},
+	};
+}
 
 export function generateStaticParams() {
 	return routing.locales.map((locale) => ({ locale }));

@@ -34,7 +34,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 		.eq("id", id)
 		.eq("user_id", user.id) // RLS + 추가 보호
 		.select("id, content, updated_at")
-		.single();
+		.maybeSingle();
 
 	if (error) {
 		console.error("[PATCH /api/comments]", error.message);

@@ -32,9 +32,12 @@ export default function CommentForm({
 		if (!content.trim() || isSubmitting) return;
 
 		setIsSubmitting(true);
-		await onSubmit(content.trim());
-		setContent("");
-		setIsSubmitting(false);
+		try {
+			await onSubmit(content.trim());
+			setContent("");
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -47,16 +50,19 @@ export default function CommentForm({
 				value={content}
 				onChange={(e) => setContent(e.target.value)}
 				placeholder={placeholder || (isKo ? "댓글을 입력하세요..." : "Write a comment...")}
-				className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+				className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1 resize-none"
+				style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 				rows={3}
 				maxLength={2000}
+				disabled={isSubmitting}
 			/>
 			<div className="flex items-center justify-end gap-2">
 				{onCancel && (
 					<button
 						type="button"
 						onClick={onCancel}
-						className="rounded-md px-3 py-1.5 text-xs font-medium text-gray-500 hover:text-gray-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+						className="rounded-md px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+						style={{ color: "var(--fg-muted)" }}
 					>
 						{isKo ? "취소" : "Cancel"}
 					</button>
@@ -64,7 +70,8 @@ export default function CommentForm({
 				<button
 					type="submit"
 					disabled={!content.trim() || isSubmitting}
-					className="rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+					className="rounded-md px-3 py-1.5 text-xs font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+					style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 				>
 					{isSubmitting
 						? isKo

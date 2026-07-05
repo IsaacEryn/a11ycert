@@ -9,6 +9,7 @@ import UserMenu from "./auth/UserMenu";
 import { useLearningStore, type LanguageMode } from "@/lib/store/learningStore";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { usePrefs, type Theme } from "@/lib/prefs/PrefsContext";
+import { certNavItems as sharedCertNavItems, siteNavItems } from "@/lib/nav";
 
 interface HeaderProps {
   locale: string;
@@ -73,21 +74,13 @@ export default function Header({ locale }: HeaderProps) {
   }
 
   function certNavItems(c: "cpacc" | "was") {
-    return [
-      { href: `/${locale}/${c}`, label: isKo ? "개요" : "Overview" },
-      { href: `/${locale}/${c}/study`, label: isKo ? "학습" : "Study" },
-      { href: `/${locale}/${c}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
-      { href: `/${locale}/${c}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
-    ];
+    return sharedCertNavItems(locale, c);
   }
 
   const mobileNavSections = [
     { label: "CPACC", items: certNavItems("cpacc") },
     { label: "WAS", items: certNavItems("was") },
-    { label: isKo ? "기타" : "More", items: [
-      { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
-      { href: `/${locale}/about`, label: isKo ? "소개" : "About" },
-    ]},
+    { label: isKo ? "기타" : "More", items: siteNavItems(locale, { includePrivacy: false }) },
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
@@ -241,6 +234,7 @@ export default function Header({ locale }: HeaderProps) {
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
           title={isKo ? "메뉴" : "Menu"}
+          locale={locale}
         >
           {/* Nav links */}
           <nav aria-label={isKo ? "모바일 메뉴" : "Mobile menu"}>

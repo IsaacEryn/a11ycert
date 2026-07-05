@@ -66,6 +66,16 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 		[auth?.user, supabase, pagePath, unitId, savedContent]
 	);
 
+	// 디바운스 저장 대기 중(미저장 변경) 새로고침·창 닫기 시 이탈 경고
+	useEffect(() => {
+		if (content === savedContent) return;
+		const handler = (e: BeforeUnloadEvent) => {
+			e.preventDefault();
+		};
+		window.addEventListener("beforeunload", handler);
+		return () => window.removeEventListener("beforeunload", handler);
+	}, [content, savedContent]);
+
 	const handleChange = (value: string) => {
 		setContent(value);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
@@ -16,6 +16,17 @@ export default function CommunityWritePage() {
 	const [content, setContent] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
+
+	// 작성 중 새로고침·창 닫기 시 이탈 경고 (제출 중에는 제외)
+	const isDirty = (title.trim() !== "" || content.trim() !== "") && !isSubmitting;
+	useEffect(() => {
+		if (!isDirty) return;
+		const handler = (e: BeforeUnloadEvent) => {
+			e.preventDefault();
+		};
+		window.addEventListener("beforeunload", handler);
+		return () => window.removeEventListener("beforeunload", handler);
+	}, [isDirty]);
 
 	const categories = [
 		{ value: "discussion", label: isKo ? "자유토론" : "Discussion" },

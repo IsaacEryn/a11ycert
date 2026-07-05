@@ -6,16 +6,21 @@ interface Props {
   open: boolean;
   onClose: () => void;
   title: string;
+  locale?: string;
   children: ReactNode;
 }
 
-export default function MobileSheet({ open, onClose, title, children }: Props) {
+const FOCUSABLE =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+export default function MobileSheet({ open, onClose, title, locale = "ko", children }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Focus trap & Escape
   useEffect(() => {
     if (!open) return;
-    panelRef.current?.focus();
+    const first = panelRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+    (first ?? panelRef.current)?.focus();
 
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
@@ -48,7 +53,7 @@ export default function MobileSheet({ open, onClose, title, children }: Props) {
           <button
             className="mobile-sheet__close"
             onClick={onClose}
-            aria-label="닫기"
+            aria-label={locale === "ko" ? "닫기" : "Close"}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />

@@ -4,9 +4,11 @@ import { createClient } from "@/lib/supabase/server";
 
 const MAX_TITLE_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 10000;
-const BLOCKED_CATEGORIES = ["report"] as const;
-const ALLOWED_CATEGORIES = ["free", "study", "announcement"] as const;
+// DB 스키마·커뮤니티 UI와 동일한 카테고리 체계
+const ALLOWED_CATEGORIES = ["report", "discussion", "question", "tip"] as const;
 type AllowedCategory = typeof ALLOWED_CATEGORIES[number];
+// report(제보)는 /api/reports 경유로만 생성 가능
+const USER_POSTABLE_CATEGORIES: AllowedCategory[] = ["discussion", "question", "tip"];
 
 /**
  * GET /api/board?category=all&page=1&limit=20
@@ -70,12 +72,18 @@ export async function POST(request: NextRequest) {
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
 	const body = await request.json();
-	const { category } = body;
+	const category: string = body.category ?? "";
 	const title: string = body.title ?? "";
 	const content: string = body.content ?? "";
 
 	if (!category || !title.trim() || !content.trim()) {
 		return NextResponse.json({ error: "category, title, content 필수" }, { status: 400 });
+	}
+	if (!USER_POSTABLE_CATEGORIES.includes(category as AllowedCategory)) {
+		return NextResponse.json(
+			{ error: category === "report" ? "제보는 /api/reports를 사용해주세요" : "Invalid category" },
+			{ status: 400 }
+		);
 	}
 	if (title.length > MAX_TITLE_LENGTH) {
 		return NextResponse.json(
@@ -88,11 +96,6 @@ export async function POST(request: NextRequest) {
 			{ error: `본문은 ${MAX_CONTENT_LENGTH}자 이하로 작성해주세요` },
 			{ status: 400 }
 		);
-	}
-
-	// report 카테고리는 /api/reports를 통해서만 생성
-	if (BLOCKED_CATEGORIES.includes(category)) {
-		return NextResponse.json({ error: "제보는 /api/reports를 사용해주세요" }, { status: 400 });
 	}
 
 	const { data, error } = await supabase
