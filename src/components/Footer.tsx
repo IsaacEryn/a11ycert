@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { certNavItems, siteNavItems } from "@/lib/nav";
 
 interface FooterProps {
   locale: string;
@@ -7,25 +8,9 @@ interface FooterProps {
 export default function Footer({ locale }: FooterProps) {
   const isKo = locale === "ko";
 
-  const cpaccLinks = [
-    { href: `/${locale}/cpacc`, label: isKo ? "개요" : "Overview" },
-    { href: `/${locale}/cpacc/study`, label: isKo ? "학습" : "Study" },
-    { href: `/${locale}/cpacc/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
-    { href: `/${locale}/cpacc/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
-  ];
-
-  const wasLinks = [
-    { href: `/${locale}/was`, label: isKo ? "개요" : "Overview" },
-    { href: `/${locale}/was/study`, label: isKo ? "학습" : "Study" },
-    { href: `/${locale}/was/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
-    { href: `/${locale}/was/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
-  ];
-
-  const siteLinks = [
-    { href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
-    { href: `/${locale}/about`, label: isKo ? "소개" : "About" },
-    { href: `/${locale}/privacy`, label: isKo ? "개인정보처리방침" : "Privacy" },
-  ];
+  const cpaccLinks = certNavItems(locale, "cpacc");
+  const wasLinks = certNavItems(locale, "was");
+  const siteLinks = siteNavItems(locale);
 
   return (
     <footer className="app-footer">

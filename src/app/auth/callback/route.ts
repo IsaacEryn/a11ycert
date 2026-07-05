@@ -9,7 +9,10 @@ import { createClient } from "@/lib/supabase/server";
 export async function GET(request: Request) {
 	const { searchParams, origin } = new URL(request.url);
 	const code = searchParams.get("code");
-	const next = searchParams.get("next") ?? "/";
+	const nextRaw = searchParams.get("next") ?? "/";
+
+	// 오픈 리다이렉트 방지: 반드시 내부 경로(/)로만 허용
+	const next = nextRaw.startsWith("/") && !nextRaw.startsWith("//") ? nextRaw : "/";
 
 	if (code) {
 		const supabase = await createClient();

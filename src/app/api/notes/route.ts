@@ -28,7 +28,10 @@ export async function GET(request: NextRequest) {
 			.eq("page_path", pagePath)
 			.maybeSingle();
 
-		if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+		if (error) {
+			console.error("[GET /api/notes]", error.message);
+			return NextResponse.json({ error: "메모를 불러올 수 없습니다." }, { status: 500 });
+		}
 		return NextResponse.json({ note: data });
 	}
 
@@ -39,7 +42,10 @@ export async function GET(request: NextRequest) {
 		.eq("user_id", user.id)
 		.order("updated_at", { ascending: false });
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+	if (error) {
+		console.error("[GET /api/notes]", error.message);
+		return NextResponse.json({ error: "메모를 불러올 수 없습니다." }, { status: 500 });
+	}
 	return NextResponse.json({ notes: data ?? [] });
 }
 
@@ -90,7 +96,10 @@ export async function POST(request: NextRequest) {
 		.select("id, content, updated_at")
 		.single();
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[POST /api/notes]", error.message);
+		return NextResponse.json({ error: "메모를 저장할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ note: data });
 }
@@ -116,7 +125,10 @@ export async function DELETE(request: NextRequest) {
 		.eq("user_id", user.id)
 		.eq("page_path", pagePath);
 
-	if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+	if (error) {
+		console.error("[DELETE /api/notes]", error.message);
+		return NextResponse.json({ error: "메모를 삭제할 수 없습니다." }, { status: 500 });
+	}
 
 	return NextResponse.json({ success: true });
 }

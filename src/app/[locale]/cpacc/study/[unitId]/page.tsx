@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getCpaccUnit, getAllCpaccUnitIds, cpaccDomains } from "@/lib/content/cpacc-units";
+import { localeAlternates } from "@/lib/seo";
 import QuizEngine from "@/components/QuizEngine";
 import StudyUnitContent from "@/components/StudyUnitContent";
 import UnitCompleteButton from "@/components/UnitCompleteButton";
@@ -28,6 +29,7 @@ export async function generateMetadata({
 	return {
 		title: locale === "ko" ? unit.title.ko : unit.title.en,
 		description: locale === "ko" ? unit.summary.ko : unit.summary.en,
+		alternates: localeAlternates(locale, `/cpacc/study/${unitId}`),
 	};
 }
 

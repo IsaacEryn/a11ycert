@@ -38,6 +38,28 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
 
   const total = questions.length;
   const q = questions[current];
+
+  if (total === 0) {
+    return (
+      <div className="quiz-shell">
+        <div className="container">
+          <div className="quiz-card" style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+            <p className="quiz-q">{isKo ? "출제 가능한 문항이 없습니다" : "No questions available"}</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)", marginTop: "var(--space-2)" }}>
+              {isKo
+                ? "학습 단원을 먼저 완료하거나 잠시 후 다시 시도해주세요."
+                : "Complete a study unit first, or try again later."}
+            </p>
+            <div style={{ marginTop: "var(--space-5)" }}>
+              <Link className="btn btn--primary" href={`/${locale}/${exam}/study`}>
+                {isKo ? "학습 로드맵으로" : "Go to Study Roadmap"}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const answered = selected !== null;
   const correctCount = questions.filter((_, i) => answers[i] === questions[i].answer).length;
 

@@ -2,12 +2,28 @@ import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "WAS 시험 준비",
-  description:
-    "IAAP WAS(Web Accessibility Specialist) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return locale === "ko"
+    ? {
+        title: "WAS 시험 준비",
+        description:
+          "IAAP WAS(Web Accessibility Specialist) 자격증 시험 정보, 도메인별 학습 가이드, 모의 퀴즈, 플래시카드를 한국어로 제공합니다.",
+        alternates: localeAlternates(locale, "/was"),
+      }
+    : {
+        title: "WAS Exam Prep",
+        description:
+          "IAAP WAS (Web Accessibility Specialist) exam info, domain study guides, mock quizzes, and flashcards — in Korean and English.",
+        alternates: localeAlternates(locale, "/was"),
+      };
+}
 
 export default async function WasPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

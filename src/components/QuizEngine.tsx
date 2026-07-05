@@ -441,6 +441,7 @@ export default function QuizEngine({ questions, locale, exam, showAll = false }:
 						? { borderColor: "var(--success-soft)", background: "var(--success-soft)", color: "var(--success)" }
 						: { borderColor: "var(--danger-soft)", background: "var(--danger-soft)", color: "var(--danger)" }}
 					role="alert"
+					aria-atomic="true"
 				>
 					<p className="font-semibold">
 						{selected === q.answer

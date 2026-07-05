@@ -1,12 +1,28 @@
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo";
 
-export const metadata: Metadata = {
-	title: "소개 | About",
-	description:
-		"A11yCert 소개 — IAAP CPACC & WAS 자격증 한국어 학습 플랫폼을 만든 사람과 목적을 소개합니다.",
-};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	return locale === "ko"
+		? {
+				title: "소개",
+				description:
+					"A11yCert 소개 — IAAP CPACC & WAS 자격증 한국어 학습 플랫폼을 만든 사람과 목적을 소개합니다.",
+				alternates: localeAlternates(locale, "/about"),
+			}
+		: {
+				title: "About",
+				description:
+					"About A11yCert — who built this bilingual IAAP CPACC & WAS study platform and why.",
+				alternates: localeAlternates(locale, "/about"),
+			};
+}
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;

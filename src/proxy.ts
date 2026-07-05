@@ -9,6 +9,13 @@ export async function proxy(request: NextRequest) {
 	// 1. Supabase 세션 갱신 (JWT 토큰 리프레시)
 	const supabaseResponse = await updateSession(request);
 
+	// API·auth 콜백은 로케일 라우팅 대상이 아님 — intl 미들웨어를 거치면
+	// /api/* → /ko/api/* (404)로 리다이렉트되어 API가 깨진다. 세션 갱신만 적용.
+	const { pathname } = request.nextUrl;
+	if (pathname.startsWith("/api/") || pathname.startsWith("/auth/")) {
+		return supabaseResponse;
+	}
+
 	// 2. next-intl 로케일 라우팅 처리
 	const intlResponse = intlMiddleware(request);
 

@@ -122,46 +122,49 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="report-title"
-				className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl"
+				className="w-full max-w-md rounded-xl p-6 shadow-xl"
+				style={{ background: "var(--bg-elev)", color: "var(--fg)", border: "1px solid var(--border)" }}
 			>
 				{submitted ? (
 					<div className="text-center py-4">
-						<p className="text-lg font-semibold text-green-600" role="status">
+						<p className="text-lg font-semibold" style={{ color: "var(--success)" }} role="status">
 							{isKo ? "제보가 접수되었습니다!" : "Report submitted!"}
 						</p>
-						<p className="mt-2 text-sm text-gray-500">
+						<p className="mt-2 text-sm" style={{ color: "var(--fg-muted)" }}>
 							{isKo
 								? "커뮤니티 게시판에서 토론에 참여할 수 있습니다."
 								: "You can join the discussion in the community board."}
 						</p>
 						<button
 							onClick={onClose}
-							className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+							className="mt-4 rounded-lg px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2"
+							style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 						>
 							{isKo ? "닫기" : "Close"}
 						</button>
 					</div>
 				) : !auth?.user ? (
 					<div className="text-center py-4">
-						<p className="text-sm text-gray-500">
+						<p className="text-sm" style={{ color: "var(--fg-muted)" }}>
 							{isKo ? "제보하려면 로그인이 필요합니다." : "Please sign in to submit a report."}
 						</p>
 						<button
 							onClick={onClose}
-							className="mt-4 text-sm text-blue-600 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
+							className="mt-4 text-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 rounded"
+							style={{ color: "var(--accent)" }}
 						>
 							{isKo ? "닫기" : "Close"}
 						</button>
 					</div>
 				) : (
 					<form onSubmit={handleSubmit}>
-						<h2 id="report-title" className="text-base font-semibold text-gray-900">
+						<h2 id="report-title" className="text-base font-semibold" style={{ color: "var(--fg)" }}>
 							{isKo ? "정보 수정 요청 / 오류 제보" : "Report Issue"}
 						</h2>
 
 						{/* 유형 선택 — aria-pressed로 선택 상태 전달 */}
 						<fieldset className="mt-4">
-							<legend className="text-xs font-medium text-gray-600">
+							<legend className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>
 								{isKo ? "유형" : "Type"}
 							</legend>
 							<div className="mt-1.5 flex gap-2" role="group">
@@ -171,11 +174,12 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 										type="button"
 										aria-pressed={type === value}
 										onClick={() => setType(value)}
-										className={`rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
+										className="rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+										style={
 											type === value
-												? "bg-blue-100 text-blue-700"
-												: "bg-gray-100 text-gray-600 hover:bg-gray-200"
-										}`}
+												? { background: "var(--accent-soft)", color: "var(--accent-soft-fg)" }
+												: { background: "var(--bg-muted)", color: "var(--fg-muted)" }
+										}
 									>
 										{label}
 									</button>
@@ -185,34 +189,38 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 
 						{/* 오류 메시지 */}
 						{submitError && (
-							<p role="alert" className="mt-3 text-sm text-red-600">
+							<p id="report-submit-error" role="alert" className="mt-3 text-sm" style={{ color: "var(--danger)" }}>
 								{submitError}
 							</p>
 						)}
 
 						{/* 제목 */}
 						<label className="mt-4 block">
-							<span className="text-xs font-medium text-gray-600">{isKo ? "제목" : "Title"}</span>
+							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{isKo ? "제목" : "Title"}</span>
 							<input
 								type="text"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 								required
 								maxLength={100}
-								className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+								aria-describedby={submitError ? "report-submit-error" : undefined}
+								className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+								style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 							/>
 						</label>
 
 						{/* 내용 */}
 						<label className="mt-3 block">
-							<span className="text-xs font-medium text-gray-600">{isKo ? "내용" : "Details"}</span>
+							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{isKo ? "내용" : "Details"}</span>
 							<textarea
 								value={content}
 								onChange={(e) => setContent(e.target.value)}
 								required
 								maxLength={2000}
 								rows={4}
-								className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+								aria-describedby={submitError ? "report-submit-error" : undefined}
+								className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1 resize-none"
+								style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 							/>
 						</label>
 
@@ -221,14 +229,16 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 							<button
 								type="button"
 								onClick={onClose}
-								className="rounded-lg px-4 py-2 text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+								className="rounded-lg px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+								style={{ color: "var(--fg-muted)" }}
 							>
 								{isKo ? "취소" : "Cancel"}
 							</button>
 							<button
 								type="submit"
 								disabled={!title.trim() || !content.trim() || isSubmitting}
-								className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+								className="rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2"
+								style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 							>
 								{isSubmitting
 									? isKo
