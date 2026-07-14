@@ -543,4 +543,53 @@ export const glossaryTerms: GlossaryTerm[] = [
     },
     certs: ["cpacc", "was"],
   },
+  {
+    id: "photosensitive-epilepsy",
+    term: { ko: "광과민성 발작", en: "Photosensitive Epilepsy" },
+    definition: {
+      ko: "초당 3회를 초과하는 섬광이나 규칙적 패턴 등 시각 자극으로 발작이 유발되는 뇌전증의 한 형태. WCAG 2.3.1이 콘텐츠의 섬광 임계값을 규정합니다.",
+      en: "A form of epilepsy where visual stimuli — flashing over three times per second or regular patterns — trigger seizures. WCAG 2.3.1 sets flash thresholds for content.",
+    },
+    certs: ["cpacc", "was"],
+    aliases: ["seizure", "발작", "photosensitive"],
+  },
+  {
+    id: "deaf-blindness",
+    term: { ko: "농맹", en: "Deaf-Blindness" },
+    definition: {
+      ko: "시각과 청각 손상이 함께 있는 대표적 중복 장애. ICT 접근은 갱신형 점자 디스플레이가 사실상 유일한 통로라 텍스트 기반 콘텐츠와 올바른 마크업이 필수입니다.",
+      en: "The canonical multiple disability combining vision and hearing loss. A refreshable braille display is effectively the only ICT channel, making text-based content and correct markup essential.",
+    },
+    certs: ["cpacc"],
+    aliases: ["중복장애", "deafblind"],
+  },
+  {
+    id: "person-first-language",
+    term: { ko: "사람 우선 표현", en: "Person-First Language" },
+    definition: {
+      ko: "'장애가 있는 사람'처럼 사람을 장애보다 먼저 두는 표현 방식. 장애가 그 사람의 전부가 아님을 강조하며, 미국 공식 문서·의료·교육 맥락의 오랜 표준입니다.",
+      en: "Language that puts the person before the condition — 'person with a disability' — emphasizing that disability is not the whole person. Long the standard in US official, medical, and educational contexts.",
+    },
+    certs: ["cpacc"],
+    aliases: ["피플 퍼스트"],
+  },
+  {
+    id: "identity-first-language",
+    term: { ko: "정체성 우선 표현", en: "Identity-First Language" },
+    definition: {
+      ko: "'농인', '자폐인'처럼 장애를 정체성의 일부로 앞세우는 표현 방식. 농문화 공동체와 자폐 자기옹호 운동이 선호하는 경향이 뚜렷하며, 원칙은 당사자·공동체의 선호를 따르는 것입니다.",
+      en: "Language that leads with disability as identity — 'Deaf person,' 'autistic person.' Preferred by the Deaf culture community and autistic self-advocates; the rule is to follow the person's and community's preference.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "invisible-disability",
+    term: { ko: "비가시적 장애", en: "Invisible Disability" },
+    definition: {
+      ko: "심리·정신 장애, 만성 통증, 많은 인지 장애처럼 겉으로 드러나지 않는 장애. 낙인 우려로 공개를 꺼려 통계에 과소 반영되고 접근성 계획에서 간과되기 쉽습니다.",
+      en: "Disabilities not outwardly apparent — psychological conditions, chronic pain, many cognitive disabilities. Stigma discourages disclosure, so they are undercounted in statistics and overlooked in accessibility planning.",
+    },
+    certs: ["cpacc"],
+    aliases: ["hidden disability", "숨겨진 장애"],
+  },
 ];

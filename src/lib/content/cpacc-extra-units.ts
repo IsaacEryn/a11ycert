@@ -760,4 +760,390 @@ export const cpaccExtraUnits: StudyUnit[] = [
 			},
 		],
 	},
+	// ── Domain 1 신규 (BoK 커버리지 배치 C-1) ─────────────────────────────────
+	{
+		id: "cpacc-1-8",
+		exam: "cpacc",
+		domain: 1,
+		order: 8,
+		available: true,
+		title: { ko: "심리·정신 장애, 발작 장애, 중복 장애", en: "Psychological, Seizure, and Multiple Disabilities" },
+		summary: {
+			ko: "심리·정신 장애와 발작 장애, 중복/복합 장애의 특성과 장벽, 해결책을 학습합니다. BoK Domain 1B/1C의 마지막 세 범주로, 눈에 잘 드러나지 않아 자주 간과되는 영역입니다.",
+			en: "Learn the characteristics, barriers, and solutions for psychological disabilities, seizure disorders, and multiple/complex disabilities — the last three categories of BoK Domain 1B/1C, often overlooked because they are largely invisible.",
+		},
+		objectives: {
+			ko: [
+				"주요 심리·정신 장애의 유형과 ICT 사용 시의 장벽을 설명할 수 있다",
+				"발작 장애와 광과민성 발작의 촉발 요인, WCAG의 관련 기준을 제시할 수 있다",
+				"중복/복합 장애의 개념과 농맹의 대표 사례를 설명할 수 있다",
+				"비가시적 장애가 통계와 설계에서 간과되는 이유를 설명할 수 있다",
+			],
+			en: [
+				"Describe major types of psychological disabilities and the ICT barriers they create",
+				"State the triggers of seizure disorders and photosensitive seizures, and the related WCAG criteria",
+				"Explain the concept of multiple/complex disabilities with deaf-blindness as the canonical example",
+				"Explain why invisible disabilities are overlooked in statistics and design",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "심리·정신 장애의 유형과 장벽", en: "Types and Barriers of Psychological Disabilities" },
+				paragraphs: {
+					ko: [
+						"심리·정신 장애(psychological/psychiatric disabilities)는 기분, 사고, 행동에 영향을 주는 상태를 포괄합니다. 대표 범주: 불안 장애(공황 장애, 사회불안, 강박, PTSD), 기분 장애(우울증, 양극성 장애), 정신증적 장애(조현병 — 환각·망상·와해된 사고). WHO 추산 전 세계 8명 중 1명이 정신 건강 상태를 안고 살아가며, 대부분은 겉으로 드러나지 않습니다.",
+						"ICT 사용 시의 장벽: 예측 불가능한 인터페이스와 갑작스러운 변화는 불안을 증폭시킵니다. 공격적인 시간 제한, 복잡한 절차, 오류에 대한 비난조 메시지는 우울·불안 상태의 사용자를 쉽게 포기하게 만듭니다. 깜빡이고 움직이는 콘텐츠, 자동 재생 미디어는 주의 집중을 방해하고 스트레스를 높입니다. 약물 부작용으로 인한 떨림·졸림·집중력 저하가 이차적 장벽이 되기도 합니다.",
+						"해결책: 일관되고 예측 가능한 내비게이션, 충분한 시간과 시간 연장 옵션(WCAG 2.2.1), 명확하고 정중한 오류 안내와 복구 수단, 움직임·자동재생의 정지 수단(WCAG 2.2.2), 진행 상태 저장. 이는 인지 장애 대응책과 크게 겹치며, 스트레스 상황의 모든 사용자에게 이익입니다.",
+					],
+					en: [
+						"Psychological (psychiatric) disabilities encompass conditions affecting mood, thinking, and behavior. Major categories: anxiety disorders (panic disorder, social anxiety, OCD, PTSD), mood disorders (depression, bipolar disorder), and psychotic disorders (schizophrenia — hallucinations, delusions, disorganized thinking). The WHO estimates one in eight people worldwide lives with a mental health condition, mostly invisible to others.",
+						"ICT barriers: unpredictable interfaces and sudden changes amplify anxiety. Aggressive time limits, complex procedures, and blaming error messages make users with depression or anxiety give up easily. Flashing and moving content and auto-playing media disrupt attention and raise stress. Medication side effects — tremors, drowsiness, reduced concentration — can create secondary barriers.",
+						"Solutions: consistent, predictable navigation; generous time limits with extension options (WCAG 2.2.1); clear, respectful error messages with recovery paths; mechanisms to stop motion and autoplay (WCAG 2.2.2); and saving progress. These overlap heavily with cognitive-disability solutions and benefit every user under stress.",
+					],
+				},
+			},
+			{
+				heading: { ko: "발작 장애와 광과민성", en: "Seizure Disorders and Photosensitivity" },
+				paragraphs: {
+					ko: [
+						"발작 장애(뇌전증 등)는 뇌의 비정상적 전기 활동으로 발작이 일어나는 상태입니다. 전 세계 약 5천만 명이 뇌전증을 갖고 있으며, 그중 일부(약 3~5%)는 시각 자극으로 발작이 유발되는 광과민성 발작(photosensitive epilepsy)을 경험합니다. 1997년 일본에서 애니메이션 방송의 강한 적색 섬광으로 685명이 병원에 이송된 사건이 대표 사례입니다.",
+						"촉발 요인: 초당 3회를 초과하는 섬광(특히 채도 높은 적색 섬광), 고대비 스트라이프 같은 규칙적 패턴, 화면 대부분을 차지하는 큰 면적의 번쩍임. WCAG 2.3.1(3회 섬광 또는 임계값 이하, Level A)은 이를 직접 다루는 성공 기준이며, 콘텐츠가 임계값을 넘는지 PEAT(Photosensitive Epilepsy Analysis Tool) 같은 도구로 검사할 수 있습니다.",
+						"발작은 예고 없이 일어나므로 사후 대응이 불가능합니다 — 위험 콘텐츠를 애초에 만들지 않는 것이 유일한 대책입니다. 사용자 측 대응(모션 감소 설정, 화면 밝기 제한)이 있지만, 제작자가 2.3.1을 지키는 것이 1차 방어선입니다.",
+					],
+					en: [
+						"Seizure disorders (such as epilepsy) involve seizures caused by abnormal electrical activity in the brain. About 50 million people worldwide have epilepsy, and a subset (roughly 3–5%) experience photosensitive epilepsy, where visual stimuli trigger seizures. The canonical case: a 1997 Japanese animation broadcast whose intense red flashes sent 685 people to hospital.",
+						"Triggers: flashing more than three times per second (especially saturated red flashes), regular patterns such as high-contrast stripes, and flashing that covers a large screen area. WCAG 2.3.1 (Three Flashes or Below Threshold, Level A) addresses this directly, and tools such as PEAT (Photosensitive Epilepsy Analysis Tool) can check content against the thresholds.",
+						"Seizures occur without warning, so there is no after-the-fact mitigation — not creating dangerous content is the only real defense. User-side measures exist (reduced-motion settings, brightness limits), but authors honoring 2.3.1 are the first line of protection.",
+					],
+				},
+			},
+			{
+				heading: { ko: "중복/복합 장애와 농맹", en: "Multiple/Complex Disabilities and Deaf-Blindness" },
+				paragraphs: {
+					ko: [
+						"중복/복합 장애(multiple/compound disabilities)는 두 가지 이상의 장애가 동시에 존재하는 상태입니다. 각 장애의 해결책이 서로 충돌할 수 있다는 점이 핵심 난제입니다 — 예: 시각 장애의 해결책인 음성 출력은 청각 장애가 함께 있으면 쓸 수 없고, 청각 장애의 해결책인 자막은 시각 장애가 함께 있으면 쓸 수 없습니다.",
+						"농맹(deaf-blindness)은 대표적 중복 장애로, 시각과 청각 손상이 함께 있는 상태입니다. 헬렌 켈러가 역사적으로 가장 잘 알려진 사례입니다. 농맹인의 ICT 접근은 점자 디스플레이가 사실상 유일한 통로입니다 — 스크린 리더의 출력을 갱신형 점자 디스플레이로 읽으므로, 콘텐츠가 텍스트로 제공되고 마크업이 올바라야 하며, 이미지 대체 텍스트·캡션의 텍스트 버전(트랜스크립트)이 필수입니다.",
+						"대면 소통은 촉수화(tactile signing), 손바닥 문자 등으로 이뤄집니다. 설계 시사점: 단일 감각에만 의존하는 정보 제공(소리로만 알림, 색으로만 구분)은 중복 장애에서 완전히 실패합니다. 정보를 텍스트 기반으로 제공하면 어떤 감각 조합의 손상에도 변환 가능한 공통 분모가 됩니다.",
+					],
+					en: [
+						"Multiple/compound disabilities are two or more disabilities present at once. The core difficulty is that solutions for one disability can conflict with another — e.g., speech output (a solution for blindness) is unusable with deafness, and captions (a solution for deafness) are unusable with blindness.",
+						"Deaf-blindness, the canonical multiple disability, combines vision and hearing loss. Helen Keller is the most famous historical example. For ICT access, a braille display is effectively the only channel — screen reader output is read on a refreshable braille display, so content must exist as text with correct markup, and text alternatives for images plus transcripts of captions are essential.",
+						"In-person communication uses tactile signing, print-on-palm, and similar methods. The design implication: information that relies on a single sense (sound-only alerts, color-only distinctions) fails completely for compound disabilities. Text-based information is the common denominator convertible to any remaining sense.",
+					],
+				},
+			},
+			{
+				heading: { ko: "비가시적 장애와 설계 시사점", en: "Invisible Disabilities and Design Implications" },
+				paragraphs: {
+					ko: [
+						"심리·정신 장애, 발작 장애, 그리고 많은 인지 장애는 겉으로 드러나지 않는 비가시적 장애(invisible disabilities)입니다. 낙인 때문에 공개를 꺼리는 경향이 강해 통계에 과소 반영되고, 조직의 접근성 계획에서도 시각·운동 장애에 비해 후순위로 밀리기 쉽습니다.",
+						"실무 원칙: 사용자에게 장애 공개를 요구하지 않고도 작동하는 설계가 좋은 설계입니다. 시간 여유, 예측 가능성, 오류 관용, 모션 제어, 텍스트 대체는 공개 여부와 무관하게 모두를 보호합니다. CPACC 시험에서는 각 범주의 대표 상태·장벽·해결책의 짝을 정확히 연결하는 문제가 출제됩니다.",
+					],
+					en: [
+						"Psychological disabilities, seizure disorders, and many cognitive disabilities are invisible disabilities. Stigma discourages disclosure, so they are underrepresented in statistics and easily deprioritized in organizational accessibility plans compared with visual or motor disabilities.",
+						"The practical principle: good design works without requiring users to disclose a disability. Generous timing, predictability, error tolerance, motion control, and text alternatives protect everyone regardless of disclosure. The CPACC exam tests precise matching of each category's representative conditions, barriers, and solutions.",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "WHO — 정신 장애 팩트시트", en: "WHO — Mental Disorders fact sheet" }, url: "https://www.who.int/news-room/fact-sheets/detail/mental-disorders" },
+			{ label: { ko: "WHO — 뇌전증 팩트시트", en: "WHO — Epilepsy fact sheet" }, url: "https://www.who.int/news-room/fact-sheets/detail/epilepsy" },
+			{ label: { ko: "WCAG 2.3.1 세 번의 섬광 — 이해하기", en: "Understanding SC 2.3.1 Three Flashes or Below Threshold" }, url: "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html" },
+			{ label: { ko: "국립농맹연구센터(NCDB) — 농맹 개요", en: "National Center on Deaf-Blindness — Deaf-Blindness overview" }, url: "https://www.nationaldb.org/info-center/deaf-blindness-overview/" },
+		],
+		questions: [
+			{
+				id: "cpacc-1-8-q1",
+				question: {
+					ko: "광과민성 발작을 유발할 수 있는 콘텐츠 조건으로 옳은 것은?",
+					en: "Which content condition can trigger photosensitive seizures?",
+				},
+				options: {
+					a: { ko: "초당 3회를 초과하는 섬광", en: "Flashing more than three times per second" },
+					b: { ko: "저대비 파스텔 색상", en: "Low-contrast pastel colors" },
+					c: { ko: "정적인 고해상도 이미지", en: "Static high-resolution images" },
+					d: { ko: "느린 페이드 전환", en: "Slow fade transitions" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "WCAG 2.3.1은 콘텐츠가 초당 3회를 초과해 번쩍이지 않도록(또는 임계값 이하) 요구합니다. 채도 높은 적색 섬광과 큰 면적의 번쩍임이 특히 위험합니다.",
+					en: "WCAG 2.3.1 requires content not flash more than three times per second (or stay below thresholds). Saturated red flashes and large flashing areas are especially dangerous.",
+				},
+			},
+			{
+				id: "cpacc-1-8-q2",
+				question: {
+					ko: "농맹인이 웹 콘텐츠에 접근하는 사실상 유일한 통로는?",
+					en: "What is effectively the only channel for deaf-blind users to access web content?",
+				},
+				options: {
+					a: { ko: "화면 확대", en: "Screen magnification" },
+					b: { ko: "자막", en: "Captions" },
+					c: { ko: "갱신형 점자 디스플레이", en: "A refreshable braille display" },
+					d: { ko: "음성 출력", en: "Speech output" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "시각과 청각이 모두 손상된 농맹인은 스크린 리더 출력을 점자 디스플레이로 읽습니다. 따라서 텍스트 기반 콘텐츠와 올바른 마크업, 트랜스크립트가 필수입니다.",
+					en: "With both vision and hearing impaired, deaf-blind users read screen reader output on a braille display — making text-based content, correct markup, and transcripts essential.",
+				},
+			},
+			{
+				id: "cpacc-1-8-q3",
+				question: {
+					ko: "불안 장애가 있는 사용자에게 가장 큰 장벽이 되는 것은?",
+					en: "Which is the biggest barrier for users with anxiety disorders?",
+				},
+				options: {
+					a: { ko: "공격적인 시간 제한과 예측 불가능한 인터페이스 변화", en: "Aggressive time limits and unpredictable interface changes" },
+					b: { ko: "높은 색상 대비", en: "High color contrast" },
+					c: { ko: "명확한 오류 복구 안내", en: "Clear error recovery guidance" },
+					d: { ko: "일관된 내비게이션", en: "Consistent navigation" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "시간 압박과 예측 불가능성은 불안을 증폭시킵니다. 충분한 시간(WCAG 2.2.1), 예측 가능한 구조, 정중한 오류 안내가 해결책입니다. b·c·d는 오히려 도움을 주는 요소입니다.",
+					en: "Time pressure and unpredictability amplify anxiety. Generous timing (WCAG 2.2.1), predictable structure, and respectful error guidance are the solutions; b, c, and d are helpful, not barriers.",
+				},
+			},
+			{
+				id: "cpacc-1-8-q4",
+				question: {
+					ko: "중복/복합 장애의 핵심 난제로 옳은 것은?",
+					en: "What is the core difficulty of multiple/compound disabilities?",
+				},
+				options: {
+					a: { ko: "장애 간 해결책이 서로 충돌할 수 있다", en: "Solutions for one disability can conflict with another" },
+					b: { ko: "발생 빈도가 높아 통계가 과대집계된다", en: "High prevalence inflates statistics" },
+					c: { ko: "단일 보조기술로 모두 해결된다", en: "A single assistive technology solves everything" },
+					d: { ko: "법적 정의가 존재하지 않는다", en: "No legal definition exists" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "예컨대 시각 장애용 음성 출력은 청각 장애가 함께 있으면 무용지물입니다. 단일 감각에 의존하지 않는 텍스트 기반 정보 제공이 공통 분모가 됩니다.",
+					en: "For example, speech output for blindness is useless when deafness co-occurs. Text-based information that doesn't depend on a single sense is the common denominator.",
+				},
+			},
+			{
+				id: "cpacc-1-8-q5",
+				question: {
+					ko: "비가시적 장애가 통계에 과소 반영되는 주요 이유는?",
+					en: "Why are invisible disabilities underrepresented in statistics?",
+				},
+				options: {
+					a: { ko: "낙인에 대한 우려로 공개·자기보고를 꺼리기 때문", en: "Stigma discourages disclosure and self-reporting" },
+					b: { ko: "발생하지 않기 때문", en: "They do not occur" },
+					c: { ko: "법으로 집계가 금지되어 있기 때문", en: "Counting them is legally prohibited" },
+					d: { ko: "모든 국가가 동일한 정의를 쓰기 때문", en: "All countries use identical definitions" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "심리·정신 장애 등 비가시적 장애는 낙인 우려로 공개를 꺼려 자기보고 기반 통계에서 빠지기 쉽습니다. 통계 부재가 수요 부재를 의미하지 않습니다.",
+					en: "Stigma makes people reluctant to disclose invisible disabilities, so self-report-based statistics miss them. Absence of statistics is not absence of demand.",
+				},
+			},
+			{
+				id: "cpacc-1-8-q6",
+				question: {
+					ko: "WHO 추산 전 세계에서 정신 건강 상태를 안고 살아가는 인구 비율은?",
+					en: "According to WHO estimates, what share of people worldwide lives with a mental health condition?",
+				},
+				options: {
+					a: { ko: "8명 중 1명", en: "One in eight" },
+					b: { ko: "100명 중 1명", en: "One in a hundred" },
+					c: { ko: "2명 중 1명", en: "One in two" },
+					d: { ko: "1,000명 중 1명", en: "One in a thousand" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "WHO는 전 세계 8명 중 1명(약 9억 7천만 명)이 정신 건강 상태를 안고 살아간다고 추산합니다. 대부분은 겉으로 드러나지 않습니다.",
+					en: "The WHO estimates one in eight people worldwide (about 970 million) lives with a mental health condition, mostly invisible.",
+				},
+			},
+		],
+	},
+	{
+		id: "cpacc-1-9",
+		exam: "cpacc",
+		domain: 1,
+		order: 9,
+		available: true,
+		title: { ko: "장애 에티켓", en: "Disability Etiquette" },
+		summary: {
+			ko: "장애인과 상호작용할 때의 존중하는 언어와 행동 원칙을 학습합니다. BoK Domain 1E에 해당하며, 사람 우선 표현과 정체성 우선 표현의 차이가 핵심 출제 포인트입니다.",
+			en: "Learn respectful language and interaction principles with disabled people. This is BoK Domain 1E; the difference between person-first and identity-first language is a key exam point.",
+		},
+		objectives: {
+			ko: [
+				"사람 우선 표현과 정체성 우선 표현의 차이와 각각을 선호하는 맥락을 설명할 수 있다",
+				"장애 유형별 상호작용 에티켓의 기본 원칙을 제시할 수 있다",
+				"보조기술·보조동물·이동기기를 대하는 올바른 태도를 설명할 수 있다",
+				"피해야 할 표현(완곡어법, 시혜적 표현)을 식별할 수 있다",
+			],
+			en: [
+				"Explain person-first vs. identity-first language and when each is preferred",
+				"State basic interaction etiquette principles for different disability types",
+				"Describe the correct attitude toward assistive technology, service animals, and mobility devices",
+				"Identify language to avoid (euphemisms, patronizing expressions)",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "사람 우선 vs 정체성 우선 표현", en: "Person-First vs. Identity-First Language" },
+				paragraphs: {
+					ko: [
+						"사람 우선 표현(person-first language)은 '장애가 있는 사람(person with a disability)'처럼 사람을 먼저 두어 장애가 그 사람의 전부가 아님을 강조합니다. 미국의 공식 문서·의료·교육 맥락에서 오랫동안 표준이었습니다.",
+						"정체성 우선 표현(identity-first language)은 '농인(Deaf person)', '자폐인(autistic person)'처럼 장애를 정체성의 일부로 앞세웁니다. 농문화 공동체와 자폐 자기옹호 운동은 장애를 제거해야 할 결함이 아닌 자부심의 원천으로 보아 정체성 우선을 선호하는 경향이 뚜렷합니다. 대문자 D의 'Deaf'는 농문화 정체성을 나타냅니다.",
+						"CPACC 관점의 원칙: 어느 한쪽이 절대적으로 옳지 않으며, 당사자와 공동체의 선호가 우선입니다. 확실하지 않으면 당사자에게 묻는 것이 가장 안전하고 존중하는 방법입니다. 조직 문서에는 대상 공동체의 관례를 따르되 일관성을 유지합니다.",
+					],
+					en: [
+						"Person-first language — 'person with a disability' — puts the person before the condition, emphasizing that disability is not the whole person. It has long been the standard in US official documents, healthcare, and education.",
+						"Identity-first language — 'Deaf person,' 'autistic person' — leads with disability as part of identity. The Deaf culture community and the autistic self-advocacy movement tend to prefer identity-first, viewing disability as a source of pride rather than a defect to erase. Capital-D 'Deaf' denotes Deaf cultural identity.",
+						"The CPACC principle: neither is absolutely correct; the preference of the person and their community comes first. When unsure, asking the person is the safest and most respectful approach. Organizational documents should follow the target community's conventions and stay consistent.",
+					],
+				},
+			},
+			{
+				heading: { ko: "피해야 할 표현", en: "Language to Avoid" },
+				paragraphs: {
+					ko: [
+						"완곡어법과 시혜적 표현은 피합니다: 'differently-abled', 'special needs', 'handicapable' 같은 표현은 장애를 직접 말하기를 회피하며 당사자 다수가 거부합니다. '휠체어에 갇힌(wheelchair-bound)', '~로 고통받는(suffers from)' 같은 비극적 프레임도 부적절합니다 — 휠체어는 구속이 아니라 이동의 자유를 주는 도구입니다('휠체어 사용자'가 옳은 표현).",
+						"'정상인(normal person)'을 비장애인의 의미로 쓰지 않습니다 — 장애인이 비정상이라는 함의를 갖기 때문입니다. '비장애인(non-disabled person)'이 중립적 표현입니다. 또한 장애를 극복 서사의 소재로 삼아 일상적 활동을 과도하게 칭찬하는 것(inspiration porn)도 당사자를 대상화하는 행동입니다.",
+					],
+					en: [
+						"Avoid euphemisms and patronizing terms: 'differently-abled,' 'special needs,' and 'handicapable' dodge naming disability directly and are rejected by many disabled people. Tragic framing like 'wheelchair-bound' or 'suffers from' is also inappropriate — a wheelchair grants freedom of movement, not confinement ('wheelchair user' is correct).",
+						"Do not use 'normal person' to mean non-disabled — it implies disabled people are abnormal; 'non-disabled person' is the neutral term. Likewise, excessively praising everyday activities as heroic overcoming ('inspiration porn') objectifies disabled people.",
+					],
+				},
+			},
+			{
+				heading: { ko: "상호작용의 기본 원칙", en: "Basic Interaction Principles" },
+				paragraphs: {
+					ko: [
+						"공통 원칙: 도움이 필요해 보여도 먼저 물어보고, 거절을 존중합니다. 장애인 본인에게 직접 말합니다 — 동행인이나 수어 통역사가 아니라 당사자를 향해 말하고 시선을 둡니다. 성인은 성인으로 대하며, 어린아이에게 하듯 말하지 않습니다.",
+						"유형별 에티켓: 시각 장애인과 만나면 자신이 누구인지 말로 알리고, 자리를 뜰 때도 알립니다. 안내를 요청받으면 팔을 잡아끌지 말고 자신의 팔꿈치를 내어 줍니다. 청각 장애인과는 얼굴을 마주 보고 명확히 말하되 과장하지 않고, 필요하면 필담을 활용합니다. 휠체어 사용자와 긴 대화를 나눌 때는 가능하면 눈높이를 맞춥니다. 언어 장애가 있는 사람의 말은 끝까지 기다리고, 대신 문장을 완성하지 않으며, 이해하지 못했으면 이해한 척하지 말고 다시 묻습니다.",
+						"보조기기와 보조동물: 휠체어·지팡이 등 이동기기는 신체의 연장이므로 허락 없이 만지거나 기대지 않습니다. 하네스를 착용하고 일하는 중인 안내견은 쓰다듬거나 먹이를 주거나 부르지 않습니다.",
+					],
+					en: [
+						"Common principles: ask before helping even when help seems needed, and respect refusal. Speak directly to the disabled person — address and look at them, not their companion or sign language interpreter. Treat adults as adults; do not talk down as if to a child.",
+						"By type: with blind people, identify yourself verbally and announce when you leave; if guiding is requested, offer your elbow rather than grabbing their arm. With deaf or hard-of-hearing people, face them and speak clearly without exaggeration, and use writing when needed. In long conversations with wheelchair users, try to be at eye level. With people with speech disabilities, wait for them to finish, don't complete their sentences, and if you didn't understand, ask again rather than pretending.",
+						"Devices and service animals: mobility devices such as wheelchairs and canes are extensions of the body — don't touch or lean on them without permission. A guide dog working in its harness should not be petted, fed, or called.",
+					],
+				},
+			},
+			{
+				heading: { ko: "디지털 맥락에서의 에티켓", en: "Etiquette in Digital Contexts" },
+				paragraphs: {
+					ko: [
+						"에티켓은 대면을 넘어 콘텐츠 제작에도 적용됩니다: 이미지의 사람을 묘사하는 대체 텍스트와 문서의 표현에서 위 언어 원칙을 지키고, 장애인을 등장시키는 마케팅에서 시혜적 프레임을 피합니다. 회의·행사에서는 접근성 요구 사항을 사전에 조사하고(참가 신청 양식에 문의란), 수어 통역·자막·자료의 접근 가능한 형식을 준비합니다.",
+						"원격 회의 에티켓: 발언 전 이름을 말하기(시각 장애 참가자를 위해), 화면 공유 내용을 말로도 설명하기, 자동 자막 활성화, 채팅으로만 중요한 정보를 전달하지 않기. 이런 관행은 CPACC가 요구하는 '에티켓의 실천(apply into practice)'의 디지털 확장입니다.",
+					],
+					en: [
+						"Etiquette extends beyond in-person interaction to content creation: honor the language principles above in alt text describing people and in documents, and avoid patronizing frames in marketing featuring disabled people. For meetings and events, survey access needs in advance (an inquiry field on registration forms) and arrange sign language interpretation, captions, and accessible formats.",
+						"Remote meeting etiquette: say your name before speaking (for blind participants), verbally describe shared screens, enable live captions, and never deliver key information via chat alone. These practices are the digital extension of CPACC's 'apply etiquette into practice.'",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "United Spinal — 장애 에티켓 가이드", en: "United Spinal — Disability Etiquette guide" }, url: "https://unitedspinal.org/disability-etiquette/" },
+			{ label: { ko: "NCDJ — 장애 표현 스타일 가이드", en: "NCDJ — Disability Language Style Guide" }, url: "https://ncdj.org/style-guide/" },
+			{ label: { ko: "CDC — 장애 포용적 커뮤니케이션", en: "CDC — Communicating With and About People with Disabilities" }, url: "https://www.cdc.gov/ncbddd/disabilityandhealth/materials/factsheets/fs-communicating-with-people.html" },
+		],
+		questions: [
+			{
+				id: "cpacc-1-9-q1",
+				question: {
+					ko: "정체성 우선 표현(identity-first)을 선호하는 경향이 뚜렷한 공동체는?",
+					en: "Which communities show a clear preference for identity-first language?",
+				},
+				options: {
+					a: { ko: "농문화 공동체와 자폐 자기옹호 운동", en: "The Deaf culture community and the autistic self-advocacy movement" },
+					b: { ko: "모든 장애 공동체가 사람 우선만 선호", en: "All disability communities prefer person-first only" },
+					c: { ko: "의료 전문가 협회", en: "Medical professional associations" },
+					d: { ko: "정부 표준 기관", en: "Government standards bodies" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "농문화 공동체(대문자 D의 Deaf)와 자폐 자기옹호 운동은 장애를 정체성과 자부심의 일부로 보아 정체성 우선 표현을 선호하는 경향이 강합니다. 원칙은 당사자·공동체의 선호를 따르는 것입니다.",
+					en: "The Deaf community (capital-D Deaf) and autistic self-advocates tend to prefer identity-first language, viewing disability as identity and pride. The rule is to follow the person's and community's preference.",
+				},
+			},
+			{
+				id: "cpacc-1-9-q2",
+				question: {
+					ko: "'휠체어에 갇힌(wheelchair-bound)'이라는 표현이 부적절한 이유는?",
+					en: "Why is 'wheelchair-bound' inappropriate?",
+				},
+				options: {
+					a: { ko: "휠체어는 구속이 아니라 이동의 자유를 주는 도구이기 때문", en: "A wheelchair grants freedom of movement, not confinement" },
+					b: { ko: "법률 용어가 아니기 때문", en: "It is not a legal term" },
+					c: { ko: "너무 길기 때문", en: "It is too long" },
+					d: { ko: "번역이 어렵기 때문", en: "It is hard to translate" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "비극적 프레임은 당사자의 실제 경험과 다릅니다. 휠체어는 이동을 가능하게 하는 도구이므로 '휠체어 사용자(wheelchair user)'가 올바른 표현입니다.",
+					en: "The tragic framing misrepresents lived experience — a wheelchair enables mobility. 'Wheelchair user' is the correct term.",
+				},
+			},
+			{
+				id: "cpacc-1-9-q3",
+				question: {
+					ko: "수어 통역사와 함께 온 농인과 대화할 때 올바른 태도는?",
+					en: "When talking with a Deaf person accompanied by a sign language interpreter, you should:",
+				},
+				options: {
+					a: { ko: "통역사를 향해 말한다", en: "Speak toward the interpreter" },
+					b: { ko: "당사자를 향해 말하고 시선을 둔다", en: "Address and look at the Deaf person" },
+					c: { ko: "필담만 사용한다", en: "Use writing only" },
+					d: { ko: "말을 크게 과장한다", en: "Exaggerate your speech loudly" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "대화 상대는 통역사가 아니라 당사자입니다. 당사자를 향해 말하고 시선을 유지하는 것이 기본 에티켓입니다.",
+					en: "The conversation partner is the Deaf person, not the interpreter. Address and maintain eye contact with the person.",
+				},
+			},
+			{
+				id: "cpacc-1-9-q4",
+				question: {
+					ko: "하네스를 착용하고 일하는 중인 안내견을 대하는 올바른 방법은?",
+					en: "How should you treat a guide dog working in its harness?",
+				},
+				options: {
+					a: { ko: "쓰다듬으며 인사한다", en: "Pet it to say hello" },
+					b: { ko: "간식을 준다", en: "Give it treats" },
+					c: { ko: "만지거나 부르거나 먹이를 주지 않는다", en: "Do not pet, call, or feed it" },
+					d: { ko: "이름을 크게 불러 주의를 끈다", en: "Call its name loudly to get attention" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "하네스를 착용한 안내견은 근무 중입니다. 주의를 빼앗으면 사용자의 안전이 위협받으므로 만지거나 부르거나 먹이를 주지 않습니다.",
+					en: "A harnessed guide dog is on duty. Distracting it endangers its handler — do not pet, call, or feed it.",
+				},
+			},
+			{
+				id: "cpacc-1-9-q5",
+				question: {
+					ko: "장애인에게 도움을 제공할 때의 기본 원칙은?",
+					en: "What is the basic principle when offering help to a disabled person?",
+				},
+				options: {
+					a: { ko: "먼저 물어보고 거절을 존중한다", en: "Ask first and respect refusal" },
+					b: { ko: "보이는 즉시 개입한다", en: "Intervene immediately when you see them" },
+					c: { ko: "동행인에게 대신 묻는다", en: "Ask their companion instead" },
+					d: { ko: "도움이 필요 없다고 가정한다", en: "Assume no help is ever needed" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "도움이 필요해 보여도 먼저 의사를 묻고, 거절하면 존중합니다. 요청 없이 휠체어를 밀거나 팔을 잡아끄는 것은 무례하며 위험할 수 있습니다.",
+					en: "Even when help seems needed, ask first and respect a 'no.' Unrequested pushing of a wheelchair or grabbing an arm is rude and can be dangerous.",
+				},
+			},
+		],
+	},
 ];
