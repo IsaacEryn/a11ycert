@@ -1276,6 +1276,19 @@ const units: StudyUnit[] = [
 		content: { ko: [], en: [] },
 		sections: [
 			{
+				heading: { ko: "세계인권선언 (UDHR)", en: "The Universal Declaration of Human Rights (UDHR)" },
+				paragraphs: {
+					ko: [
+						"세계인권선언(UDHR, 1948)은 UN 총회가 채택한 최초의 보편적 인권 문서로, 모든 국제 인권 규범의 뿌리입니다. '모든 사람은 태어날 때부터 자유롭고 존엄과 권리에 있어 평등하다'(제1조)는 선언은 장애 유무와 무관하게 적용됩니다. 다만 장애를 명시적으로 다루지는 않으며, 법적 구속력이 없는 선언(declaration)이라는 한계가 있습니다.",
+						"시험 관점의 핵심: UDHR은 '선언'(구속력 없음, 도덕적·정치적 권위), CRPD는 '협약/조약'(비준국에 법적 의무 발생)이라는 문서 유형의 차이를 구분해야 합니다. UDHR이 놓은 보편적 인권의 토대 위에서, 장애를 명시적으로 다루는 CRPD가 58년 뒤에 만들어졌습니다.",
+					],
+					en: [
+						"The Universal Declaration of Human Rights (UDHR, 1948), adopted by the UN General Assembly, is the first universal human rights document and the root of all international human rights norms. 'All human beings are born free and equal in dignity and rights' (Article 1) applies regardless of disability. However, it does not explicitly address disability, and as a declaration it is not legally binding.",
+						"The key exam distinction: the UDHR is a declaration (non-binding, moral and political authority), while the CRPD is a convention/treaty (creating legal obligations for ratifying states). On the universal foundation the UDHR laid, the disability-specific CRPD followed 58 years later.",
+					],
+				},
+			},
+			{
 				heading: { ko: "UN 장애인권리협약 (CRPD)", en: "The UN CRPD" },
 				paragraphs: {
 					ko: [
@@ -1285,6 +1298,19 @@ const units: StudyUnit[] = [
 					en: [
 						"The UN Convention on the Rights of Persons with Disabilities (CRPD, 2006) is the first comprehensive international human rights treaty on disability. It adopts the Social Model and a human-rights approach, with accessibility (Article 9) as a core principle. Key principles: respect for dignity, non-discrimination, full and effective participation, respect for difference, equality of opportunity, and accessibility.",
 						"Over 180 states and bodies have ratified it, including South Korea (2008) and the EU; the US signed but never ratified. Article 2 defines 'reasonable accommodation' and declares its denial to be disability-based discrimination. Where the Optional Protocol is ratified, individuals can petition the UN committee directly. Remember: the CRPD is not directly enforceable law but an international framework each state implements through national legislation.",
+					],
+				},
+			},
+			{
+				heading: { ko: "마라케시 조약", en: "The Marrakesh Treaty" },
+				paragraphs: {
+					ko: [
+						"마라케시 조약(Marrakesh Treaty, 2013 채택·2016 발효)은 시각 장애인과 그 밖의 인쇄물 접근 장애인(print disabilities)을 위해 저작권의 예외를 규정하는 WIPO(세계지식재산기구) 조약입니다. 배경은 '책 기근(book famine)' — 출판물 중 접근 가능한 형식(점자, 대활자, 오디오, 접근 가능한 전자책)으로 제작되는 비율이 극히 낮은 문제입니다.",
+						"핵심 내용: 비준국은 저작권자의 허락 없이 접근 가능한 형식의 복제본을 제작·배포할 수 있는 저작권 예외를 국내법에 도입해야 하며, 승인된 기관(authorized entities)을 통한 접근 가능 복제본의 국가 간 교환도 허용됩니다. 한국은 2015년 비준했습니다. 시험 포인트: 마라케시 조약은 '저작권 예외를 통한 읽기 자료 접근'이라는 특정 목적의 조약이라는 점에서, 포괄적 인권 조약인 CRPD와 구별됩니다.",
+					],
+					en: [
+						"The Marrakesh Treaty (adopted 2013, in force 2016) is a WIPO (World Intellectual Property Organization) treaty establishing copyright exceptions for people who are blind, visually impaired, or otherwise print-disabled. Its background is the 'book famine' — only a tiny share of published works ever becomes available in accessible formats (braille, large print, audio, accessible e-books).",
+						"Core provisions: ratifying states must adopt copyright exceptions allowing accessible-format copies to be made and distributed without the rightsholder's permission, and cross-border exchange of accessible copies through authorized entities is permitted. Korea ratified in 2015. Exam point: the Marrakesh Treaty is a purpose-specific treaty — access to reading materials via copyright exceptions — distinguishing it from the comprehensive human rights treaty CRPD.",
 					],
 				},
 			},
@@ -1475,6 +1501,21 @@ const units: StudyUnit[] = [
 					],
 					en: [
 						"Ontario's AODA pioneered phased mandatory WCAG 2.0 AA compliance for public and private organizations, complemented federally by the Accessible Canada Act (ACA, 2019). The UK's Equality Act 2010 and Australia's Disability Discrimination Act 1992 ground digital accessibility in those countries. For the exam, focus on distinguishing each law's jurisdiction (international/national/regional), covered sector (public/private), and referenced standard.",
+					],
+				},
+			},
+			{
+				heading: { ko: "지역 인권 협약", en: "Regional Human Rights Instruments" },
+				paragraphs: {
+					ko: [
+						"국제 조약(UN)과 국가법 사이에는 대륙·지역 단위의 인권 협약이 있습니다. EU 기본권 헌장(Charter of Fundamental Rights of the EU, 2000 선포·2009 리스본 조약으로 법적 구속력)은 제21조에서 장애를 이유로 한 차별을 금지하고, 제26조에서 장애인의 자립·사회 통합·참여 권리를 명시합니다. EU 기관과 회원국의 EU법 이행에 적용됩니다.",
+						"아프리카 인권 헌장(African Charter on Human and Peoples' Rights, 1981 — 반줄 헌장)은 아프리카연합 회원국에 적용되는 인권 조약으로, 제18조에서 장애인이 특별 보호 조치를 받을 권리를 규정합니다. 2018년에는 장애인 권리에 관한 별도 의정서가 채택되었습니다.",
+						"미주 장애인 차별 철폐 협약(Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities, 1999)은 미주기구(OAS) 회원국의 협약으로, 장애를 이유로 한 차별의 정의와 철폐 조치를 규정한 세계 최초의 장애 특화 지역 인권 협약입니다. 시험 포인트: 세 문서의 지역(유럽/아프리카/미주)과 성격을 짝지을 수 있어야 합니다.",
+					],
+					en: [
+						"Between international (UN) treaties and national laws sit continental and regional human rights instruments. The Charter of Fundamental Rights of the EU (proclaimed 2000, legally binding since the 2009 Lisbon Treaty) prohibits discrimination on grounds of disability (Article 21) and recognizes the rights of disabled people to independence, integration, and participation (Article 26). It applies to EU institutions and member states implementing EU law.",
+						"The African Charter on Human and Peoples' Rights (1981, the Banjul Charter) is the human rights treaty of African Union member states; Article 18 provides that disabled people have the right to special measures of protection. A dedicated Protocol on the rights of persons with disabilities followed in 2018.",
+						"The Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities (1999), under the Organization of American States (OAS), was the world's first disability-specific regional human rights convention, defining disability discrimination and measures to eliminate it. Exam point: be able to match each instrument to its region (Europe/Africa/Americas) and character.",
 					],
 				},
 			},

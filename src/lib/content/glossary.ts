@@ -583,6 +583,16 @@ export const glossaryTerms: GlossaryTerm[] = [
     certs: ["cpacc"],
   },
   {
+    id: "marrakesh-treaty",
+    term: { ko: "마라케시 조약", en: "Marrakesh Treaty" },
+    definition: {
+      ko: "시각 장애인 등 인쇄물 접근 장애인을 위해 저작권 예외를 규정한 WIPO 조약(2013). 접근 가능한 형식의 도서 제작·배포·국가 간 교환을 저작권자 허락 없이 허용해 '책 기근' 문제에 대응합니다.",
+      en: "A WIPO treaty (2013) establishing copyright exceptions for blind and print-disabled people, allowing accessible-format books to be made, distributed, and exchanged across borders without rightsholder permission — addressing the 'book famine.'",
+    },
+    certs: ["cpacc"],
+    aliases: ["book famine", "책 기근"],
+  },
+  {
     id: "invisible-disability",
     term: { ko: "비가시적 장애", en: "Invisible Disability" },
     definition: {

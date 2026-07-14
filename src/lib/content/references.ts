@@ -67,11 +67,15 @@ export const unitReferences: Record<string, UnitReference[]> = {
 		{ label: { ko: "UN 장애인권리협약 (CRPD)", en: "UN Convention on the Rights of Persons with Disabilities (CRPD)" }, url: "https://social.desa.un.org/issues/disability/crpd/convention-on-the-rights-of-persons-with-disabilities-crpd" },
 		{ label: { ko: "ADA.gov — 미국 장애인법", en: "ADA.gov — Americans with Disabilities Act" }, url: "https://www.ada.gov/" },
 		{ label: { ko: "Section508.gov — 미국 재활법 508조", en: "Section508.gov — Rehabilitation Act Section 508" }, url: "https://www.section508.gov/" },
+		{ label: { ko: "WIPO — 마라케시 조약", en: "WIPO — The Marrakesh Treaty" }, url: "https://www.wipo.int/treaties/en/ip/marrakesh/" },
+		{ label: { ko: "UN — 세계인권선언", en: "UN — Universal Declaration of Human Rights" }, url: "https://www.un.org/en/about-us/universal-declaration-of-human-rights" },
 	],
 	"cpacc-3-2": [
 		{ label: { ko: "W3C WAI — 세계 각국의 웹 접근성 법·정책", en: "W3C WAI — Web Accessibility Laws & Policies" }, url: "https://www.w3.org/WAI/policies/" },
 		{ label: { ko: "유럽집행위원회 — 유럽 접근성법 (EAA)", en: "European Commission — European Accessibility Act (EAA)" }, url: "https://employment-social-affairs.ec.europa.eu/policies-and-activities/social-protection-social-inclusion/persons-disabilities/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en" },
 		{ label: { ko: "ETSI — EN 301 549 (유럽 ICT 접근성 표준)", en: "ETSI — EN 301 549 (European ICT accessibility standard)" }, url: "https://www.etsi.org/human-factors-accessibility/en-301-549-v3-the-harmonized-european-standard-for-ict-accessibility" },
+		{ label: { ko: "EU 기본권 헌장 전문", en: "Charter of Fundamental Rights of the EU (full text)" }, url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12012P/TXT" },
+		{ label: { ko: "OAS — 미주 장애인 차별 철폐 협약", en: "OAS — Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities" }, url: "https://www.oas.org/juridico/english/treaties/a-65.html" },
 	],
 	"cpacc-3-3": [
 		{ label: { ko: "W3C — 접근성 성숙도 모델", en: "W3C — Accessibility Maturity Model" }, url: "https://www.w3.org/TR/maturity-model/" },

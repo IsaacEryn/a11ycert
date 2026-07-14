@@ -64,6 +64,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 				en: "This is the Social Model's core distinction: impairment is merely a personal characteristic, while disability results from social and environmental barriers that block participation.",
 			},
 		},
+		{
+			id: "cpacc-1-1-x4",
+			question: {
+				ko: "복지 급여 자격 판정에 주로 사용되며, 사람의 가치를 경제적 기여로 축소한다는 비판을 받는 장애 모델은?",
+				en: "Which disability model underpins benefit eligibility decisions and is criticized for reducing a person's worth to economic contribution?",
+			},
+			options: {
+				a: { ko: "경제 모델 (Economic Model)", en: "The Economic Model" },
+				b: { ko: "자선 모델 (Charity Model)", en: "The Charity Model" },
+				c: { ko: "사회 모델 (Social Model)", en: "The Social Model" },
+				d: { ko: "기능적 해결 모델 (Functional Solutions Model)", en: "The Functional Solutions Model" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "경제 모델은 장애를 노동 능력과 생산성의 관점에서 정의합니다. 복지 정책의 근거가 되지만 사람의 가치를 경제적 기여로 축소한다는 비판이 있습니다.",
+				en: "The Economic Model defines disability in terms of work capacity and productivity — useful for welfare policy but criticized for reducing worth to economic contribution.",
+			},
+		},
+		{
+			id: "cpacc-1-1-x5",
+			question: {
+				ko: "수어를 제1언어로 쓰는 농(Deaf) 공동체가 자신들을 언어적 소수자로 이해하는 관점과 가장 부합하는 모델은?",
+				en: "Which model best matches the Deaf community's self-understanding as a linguistic minority?",
+			},
+			options: {
+				a: { ko: "의료 모델", en: "The Medical Model" },
+				b: { ko: "사회 정체성/문화 소속 모델", en: "The Social Identity/Cultural Affiliation Model" },
+				c: { ko: "경제 모델", en: "The Economic Model" },
+				d: { ko: "자선 모델", en: "The Charity Model" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "사회 정체성/문화 소속 모델은 장애를 자부심의 원천이자 문화적 정체성으로 봅니다. 수어를 쓰는 농 공동체가 대표적 예입니다.",
+				en: "The Social Identity/Cultural Affiliation Model views disability as pride and cultural identity — the signing Deaf community is the prime example.",
+			},
+		},
 	],
 	"cpacc-1-2": [
 		{
@@ -706,6 +742,60 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 				en: "EN 301 549 is the European standard defining accessibility requirements for ICT broadly — software, hardware, documents, and support services as well as the web — referencing WCAG for web requirements. It underpins the EU Web Accessibility Directive and the European Accessibility Act.",
 			},
 		},
+		{
+			id: "cpacc-3-1-x5",
+			question: {
+				ko: "세계인권선언(UDHR)과 UN CRPD의 차이로 옳은 것은?",
+				en: "What is the correct distinction between the UDHR and the UN CRPD?",
+			},
+			options: {
+				a: { ko: "UDHR은 구속력 없는 선언, CRPD는 비준국에 법적 의무를 발생시키는 협약이다", en: "The UDHR is a non-binding declaration; the CRPD is a convention creating legal obligations for ratifying states" },
+				b: { ko: "둘 다 법적 구속력이 없다", en: "Neither is legally binding" },
+				c: { ko: "UDHR이 장애를 더 상세히 다룬다", en: "The UDHR addresses disability in more detail" },
+				d: { ko: "CRPD가 UDHR보다 먼저 채택되었다", en: "The CRPD was adopted before the UDHR" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "UDHR(1948)은 도덕적·정치적 권위를 갖는 선언이고, CRPD(2006)는 비준국에 법적 의무를 발생시키는 조약입니다. 장애를 명시적으로 다루는 것은 CRPD입니다.",
+				en: "The UDHR (1948) is a declaration with moral and political authority; the CRPD (2006) is a treaty creating legal obligations. The CRPD is the one that explicitly addresses disability.",
+			},
+		},
+		{
+			id: "cpacc-3-1-x6",
+			question: {
+				ko: "마라케시 조약의 목적으로 옳은 것은?",
+				en: "What is the purpose of the Marrakesh Treaty?",
+			},
+			options: {
+				a: { ko: "시각 장애인 등 인쇄물 접근 장애인을 위한 저작권 예외로 접근 가능한 형식의 도서를 늘리는 것", en: "Copyright exceptions so accessible-format books can be made for blind and print-disabled people" },
+				b: { ko: "웹사이트의 WCAG 준수를 의무화하는 것", en: "Mandating WCAG compliance for websites" },
+				c: { ko: "보조기술 관세를 철폐하는 것", en: "Eliminating tariffs on assistive technology" },
+				d: { ko: "장애인 고용 쿼터를 규정하는 것", en: "Setting disability employment quotas" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "마라케시 조약(WIPO, 2013)은 '책 기근' 문제를 해결하기 위해 저작권자의 허락 없이 접근 가능한 형식의 복제본을 제작·배포·국가 간 교환할 수 있는 저작권 예외를 규정합니다.",
+				en: "The Marrakesh Treaty (WIPO, 2013) addresses the 'book famine' with copyright exceptions allowing accessible-format copies to be made, distributed, and exchanged across borders without rightsholder permission.",
+			},
+		},
+		{
+			id: "cpacc-3-1-x7",
+			question: {
+				ko: "마라케시 조약을 관장하는 국제기구는?",
+				en: "Which international organization administers the Marrakesh Treaty?",
+			},
+			options: {
+				a: { ko: "WIPO (세계지식재산기구)", en: "WIPO (World Intellectual Property Organization)" },
+				b: { ko: "WHO (세계보건기구)", en: "WHO (World Health Organization)" },
+				c: { ko: "W3C", en: "The W3C" },
+				d: { ko: "ILO (국제노동기구)", en: "ILO (International Labour Organization)" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "마라케시 조약은 저작권 예외를 다루는 조약이므로 지식재산을 관장하는 WIPO 조약입니다. 인권 일반의 CRPD(UN)와 구별하세요.",
+				en: "As a copyright-exception treaty, Marrakesh is administered by WIPO. Distinguish it from the CRPD, a UN human rights treaty.",
+			},
+		},
 	],
 	"cpacc-3-2": [
 		{
@@ -778,6 +868,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 			explanation: {
 				ko: "한국은 장애인차별금지 및 권리구제 등에 관한 법률(장차법)이 전자정보 접근성에 대한 정당한 편의제공을 요구하고, 국가 표준으로 한국형 웹 콘텐츠 접근성 지침(KWCAG)을 둡니다. KWCAG는 WCAG를 기반으로 국내 환경에 맞게 조정된 지침이며, 인증마크는 임의 인증입니다.",
 				en: "Korea's Anti-Discrimination Act requires reasonable accommodation for access to electronic information, with KWCAG as the national standard. KWCAG is based on WCAG and adapted for the Korean context; the certification mark is voluntary.",
+			},
+		},
+		{
+			id: "cpacc-3-2-x5",
+			question: {
+				ko: "세계 최초의 장애 특화 지역 인권 협약은?",
+				en: "What was the world's first disability-specific regional human rights convention?",
+			},
+			options: {
+				a: { ko: "미주 장애인 차별 철폐 협약 (1999, OAS)", en: "The Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities (1999, OAS)" },
+				b: { ko: "EU 기본권 헌장", en: "The EU Charter of Fundamental Rights" },
+				c: { ko: "아프리카 인권 헌장", en: "The African Charter on Human and Peoples' Rights" },
+				d: { ko: "UN CRPD", en: "The UN CRPD" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "미주기구(OAS)의 1999년 협약은 장애를 이유로 한 차별의 정의와 철폐 조치를 규정한 최초의 장애 특화 지역 협약으로, UN CRPD(2006)보다 앞섭니다.",
+				en: "The OAS convention of 1999 was the first disability-specific regional instrument, predating the UN CRPD (2006).",
+			},
+		},
+		{
+			id: "cpacc-3-2-x6",
+			question: {
+				ko: "EU 기본권 헌장에 대한 설명으로 옳은 것은?",
+				en: "Which statement about the EU Charter of Fundamental Rights is correct?",
+			},
+			options: {
+				a: { ko: "장애 차별 금지(제21조)와 장애인의 통합 권리(제26조)를 명시하며, 리스본 조약 이후 법적 구속력을 갖는다", en: "It prohibits disability discrimination (Art. 21), recognizes integration rights (Art. 26), and has been legally binding since the Lisbon Treaty" },
+				b: { ko: "구속력 없는 권고 문서다", en: "It is a non-binding recommendation" },
+				c: { ko: "미주기구(OAS)의 문서다", en: "It is an OAS instrument" },
+				d: { ko: "웹 접근성 기술 기준을 포함한다", en: "It contains technical web accessibility standards" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "EU 기본권 헌장은 2009년 리스본 조약으로 법적 구속력을 얻었으며, 제21조(차별 금지)와 제26조(장애인의 자립·사회 통합·참여)가 장애 관련 핵심 조항입니다.",
+				en: "The Charter became legally binding with the 2009 Lisbon Treaty; Articles 21 (non-discrimination) and 26 (independence, integration, participation) are the key disability provisions.",
 			},
 		},
 	],
