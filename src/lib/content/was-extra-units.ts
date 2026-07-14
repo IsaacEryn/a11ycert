@@ -934,4 +934,369 @@ export const wasExtraUnits: StudyUnit[] = [
 			},
 		],
 	},
+	// ── Domain 2·3 신규 (BoK 커버리지 배치 C-4) ──────────────────────────────
+	{
+		id: "was-2-3",
+		exam: "was",
+		domain: 2,
+		order: 3,
+		available: true,
+		title: { ko: "적합성 평가와 WCAG-EM", en: "Conformance Evaluation and WCAG-EM" },
+		summary: {
+			ko: "감사를 '재현 가능한 평가'로 만드는 방법론을 학습합니다 — 목표 수준 설정, WCAG의 다섯 가지 적합성 요구사항, WCAG-EM 5단계, 성공 기준·실패 판정, 가이드라인의 한계. WAS BoK Domain 2B의 핵심입니다.",
+			en: "Learn the methodology that turns an audit into a repeatable evaluation — setting the target level, WCAG's five conformance requirements, the five steps of WCAG-EM, assigning success criteria and failures, and the guidelines' limitations. Core to WAS BoK Domain 2B.",
+		},
+		objectives: {
+			ko: [
+				"평가의 목표 적합성 수준을 설정하고 그 함의를 설명할 수 있다",
+				"WCAG의 다섯 가지 적합성 요구사항을 나열하고 적용할 수 있다",
+				"WCAG-EM의 5단계 절차를 순서대로 설명할 수 있다",
+				"발견한 이슈를 올바른 성공 기준과 실패에 할당할 수 있다",
+				"가이드라인이 보장하지 못하는 영역(한계)을 설명할 수 있다",
+			],
+			en: [
+				"Set a target conformance level for an evaluation and explain its implications",
+				"List and apply WCAG's five conformance requirements",
+				"Describe the five steps of WCAG-EM in order",
+				"Assign found issues to the correct success criteria and failures",
+				"Explain what the guidelines cannot guarantee (their limitations)",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "목표 수준과 다섯 가지 적합성 요구사항", en: "Target Level and the Five Conformance Requirements" },
+				paragraphs: {
+					ko: [
+						"평가의 첫 결정은 목표 적합성 수준입니다. 사실상의 세계 표준이자 대부분 법률의 기준은 Level AA(A 포함)이며, AAA는 전체 사이트 요구가 아니라 선별 적용이 권장됩니다. 목표 수준은 검사할 성공 기준의 집합을 결정합니다 — WCAG 2.2 기준 A 32개 + AA 24개.",
+						"WCAG 적합성 주장에는 다섯 가지 요구사항이 있습니다: ① 적합성 수준 — 목표 수준의 모든 SC를 충족(또는 적합한 대체 버전 제공), ② 전체 페이지 — 페이지 일부만의 적합성은 불가(위젯 하나라도 실패하면 페이지가 실패), ③ 완전한 프로세스 — 결제처럼 여러 페이지로 이어지는 과업은 모든 단계가 적합해야, ④ 접근성 지원 방식의 기술 사용, ⑤ 비간섭 — 적합하지 않은 기술이 있어도 나머지 콘텐츠의 이용을 방해(키보드 트랩, 자동재생, 섬광 등)하지 않아야 합니다.",
+					],
+					en: [
+						"An evaluation's first decision is the target conformance level. Level AA (which includes A) is the de facto global standard and the basis of most laws; AAA is recommended selectively, not site-wide. The target level determines the set of success criteria to test — in WCAG 2.2, 32 at A plus 24 at AA.",
+						"A WCAG conformance claim has five requirements: ① conformance level — all SCs at the target level satisfied (or a conforming alternate version provided); ② full pages — no partial-page conformance (one failing widget fails the page); ③ complete processes — multi-page tasks like checkout must conform at every step; ④ accessibility-supported ways of using technologies; ⑤ non-interference — non-conforming technology must not block use of the rest (keyboard traps, autoplay, flashing).",
+					],
+				},
+			},
+			{
+				heading: { ko: "WCAG-EM — 5단계 평가 방법론", en: "WCAG-EM — The Five-Step Evaluation Methodology" },
+				paragraphs: {
+					ko: [
+						"WCAG-EM(Website Accessibility Conformance Evaluation Methodology)은 W3C가 발행한 사이트 단위 적합성 평가 절차입니다(비규범 노트). 5단계: ① 평가 범위 정의(대상 사이트 경계, 목표 수준, 접근성 지원 기준선 — 지원한다고 가정할 브라우저·AT 조합), ② 사이트 탐색(공통 페이지, 핵심 기능, 다양한 페이지 유형·기술 파악), ③ 대표 표본 선정(구조화 표본 + 무작위 표본 — 전수 검사가 불가능한 큰 사이트의 현실적 해법), ④ 표본 평가(적합성 요구사항에 따라 SC별 판정, 실패 기록), ⑤ 결과 보고(판정 근거, 점수화는 선택).",
+						"핵심 개념은 3단계의 표본 추출입니다: 홈·로그인·검색 같은 공통 페이지와 핵심 프로세스는 반드시 포함하고, 페이지 유형·템플릿·기술별 대표를 고른 뒤, 무작위 표본을 더해 선택 편향을 통제합니다. 무작위 표본에서 구조화 표본에 없는 유형의 실패가 나오면 표본이 대표성을 잃었다는 신호입니다.",
+					],
+					en: [
+						"WCAG-EM (Website Accessibility Conformance Evaluation Methodology) is the W3C's procedure for site-level conformance evaluation (a non-normative note). Five steps: ① define the evaluation scope (site boundary, target level, accessibility-support baseline — the browser/AT combinations assumed supported); ② explore the site (common pages, essential functionality, the variety of page types and technologies); ③ select a representative sample (structured plus random — the realistic answer when auditing every page is impossible); ④ audit the sample (judge each SC per the conformance requirements, record failures); ⑤ report findings (with evidence; scoring optional).",
+						"The heart is step 3's sampling: always include common pages (home, login, search) and essential processes, pick representatives per page type, template, and technology, then add a random sample to control selection bias. Failures in the random sample of kinds absent from the structured sample signal the sample lost representativeness.",
+					],
+				},
+			},
+			{
+				heading: { ko: "성공 기준·실패 판정", en: "Assigning Success Criteria and Failures" },
+				paragraphs: {
+					ko: [
+						"발견한 이슈는 올바른 성공 기준에 할당해야 합니다 — 같은 증상도 원인에 따라 SC가 다릅니다. 예: '버튼을 키보드로 조작 불가'는 2.1.1(키보드)이지만, '포커스는 가나 보이지 않음'은 2.4.7(포커스 표시), '이름이 없어 스크린 리더가 읽지 못함'은 4.1.2(이름·역할·값)입니다. WCAG의 문서화된 실패(Failure) 기법(F 번호)은 특정 SC를 확실히 위반하는 패턴의 목록으로, 판정의 근거로 인용할 수 있습니다.",
+						"판정 시 주의: 성공 기준은 '충족/미충족/해당 없음'으로 판정하며, 해당 콘텐츠가 없으면 N/A입니다(예: 오디오가 없는 페이지의 1.2.x). 하나의 결함이 여러 SC를 동시에 위반할 수 있고, 반대로 나쁜 UX라도 어떤 SC도 위반하지 않으면 적합성 실패는 아닙니다 — 이 경우 '모범 사례 권고'로 구분해 보고하는 것이 정직한 감사입니다.",
+					],
+					en: [
+						"Found issues must be assigned to the right success criterion — the same symptom maps to different SCs by cause. 'Button not keyboard-operable' is 2.1.1 (Keyboard); 'focus moves but is invisible' is 2.4.7 (Focus Visible); 'no accessible name so screen readers announce nothing' is 4.1.2 (Name, Role, Value). WCAG's documented Failures (F-numbers) list patterns that definitively violate specific SCs and can be cited as evidence.",
+						"Judgment cautions: each SC is judged satisfied / not satisfied / not applicable — N/A when the content type is absent (1.2.x on a page with no audio). One defect can violate several SCs at once; conversely, bad UX that violates no SC is not a conformance failure — honest audits report it separately as a best-practice recommendation.",
+					],
+				},
+			},
+			{
+				heading: { ko: "가이드라인의 한계와 QA 통합", en: "Guideline Limitations and QA Integration" },
+				paragraphs: {
+					ko: [
+						"WCAG 적합이 곧 '모두에게 사용 가능'은 아닙니다. BoK가 명시하는 한계: 인지 장애·저시력 사용자의 요구 중 상당수는 AA 기준으로 완전히 담보되지 않고, 테스트 가능성을 위해 기준이 보수적으로 좁게 정의된 영역이 있으며, 신기술·네이티브 앱 영역은 커버리지가 얕습니다. 그래서 적합성 평가와 별개로 사용성 테스트와 장애인 사용자 피드백이 필요합니다.",
+						"평가를 일회성 감사로 끝내지 않으려면 QA 프로세스에 통합해야 합니다: 요구사항 단계에서 접근성 수용 기준(acceptance criteria) 명시, 디자인 리뷰 체크리스트, PR 단위 자동 검사, 릴리스 전 수동 스모크 테스트(키보드·스크린 리더 핵심 경로), 주기적 WCAG-EM 감사와 회귀 추적. '완료 정의(Definition of Done)'에 접근성을 포함하는 것이 구조적 해법입니다.",
+					],
+					en: [
+						"WCAG conformance is not 'usable by everyone.' Limitations the BoK names: many needs of users with cognitive disabilities and low vision aren't fully guaranteed at AA; some criteria are defined narrowly and conservatively for testability; coverage of new technologies and native apps is thin. Hence usability testing and feedback from disabled users are needed alongside conformance evaluation.",
+						"To keep evaluation from being a one-off audit, integrate it into QA: accessibility acceptance criteria at the requirements stage, design review checklists, automated checks per PR, pre-release manual smoke tests (keyboard and screen reader on critical paths), and periodic WCAG-EM audits with regression tracking. Putting accessibility in the Definition of Done is the structural fix.",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "W3C — WCAG-EM 명세", en: "W3C — WCAG-EM specification" }, url: "https://www.w3.org/TR/WCAG-EM/" },
+			{ label: { ko: "WCAG-EM 보고서 도구", en: "WCAG-EM Report Tool" }, url: "https://www.w3.org/WAI/eval/report-tool/" },
+			{ label: { ko: "WCAG 2.2 — 적합성 요구사항", en: "WCAG 2.2 — Conformance requirements" }, url: "https://www.w3.org/TR/WCAG22/#conformance" },
+			{ label: { ko: "W3C — ACT 규칙 목록", en: "W3C — ACT Rules list" }, url: "https://www.w3.org/WAI/standards-guidelines/act/rules/" },
+		],
+		questions: [
+			{
+				id: "was-2-3-q1",
+				question: {
+					ko: "WCAG 적합성 요구사항 중 '전체 페이지(full pages)'의 의미는?",
+					en: "What does the 'full pages' conformance requirement mean?",
+				},
+				options: {
+					a: { ko: "페이지 일부만의 적합성 주장은 불가하며, 위젯 하나가 실패해도 페이지가 실패한다", en: "No partial-page conformance — one failing widget fails the whole page" },
+					b: { ko: "사이트의 모든 페이지를 전수 검사해야 한다", en: "Every page of the site must be audited" },
+					c: { ko: "페이지가 화면 전체를 차지해야 한다", en: "Pages must fill the entire screen" },
+					d: { ko: "홈페이지만 검사하면 된다", en: "Only the home page needs testing" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "적합성은 페이지 전체 단위로 판정합니다. 서드파티 위젯 하나라도 실패하면 그 페이지는 적합하지 않습니다. 전수 검사 여부는 별개 문제로, WCAG-EM은 표본 평가를 씁니다.",
+					en: "Conformance is judged per whole page — a single failing third-party widget fails the page. Auditing scope is separate; WCAG-EM uses sampling.",
+				},
+			},
+			{
+				id: "was-2-3-q2",
+				question: {
+					ko: "WCAG-EM 5단계의 올바른 순서는?",
+					en: "What is the correct order of WCAG-EM's five steps?",
+				},
+				options: {
+					a: { ko: "범위 정의 → 사이트 탐색 → 표본 선정 → 표본 평가 → 결과 보고", en: "Define scope → explore site → select sample → audit sample → report findings" },
+					b: { ko: "표본 선정 → 범위 정의 → 결과 보고 → 표본 평가 → 사이트 탐색", en: "Select sample → define scope → report → audit → explore" },
+					c: { ko: "결과 보고 → 표본 평가 → 표본 선정 → 사이트 탐색 → 범위 정의", en: "Report → audit → sample → explore → scope" },
+					d: { ko: "사이트 탐색 → 결과 보고 → 범위 정의 → 표본 선정 → 표본 평가", en: "Explore → report → scope → sample → audit" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "WCAG-EM은 범위 정의(목표 수준·기준선) → 탐색(페이지 유형·기술 파악) → 대표 표본 선정 → 평가 → 보고의 5단계입니다.",
+					en: "WCAG-EM proceeds: define scope (target level, baseline) → explore (page types, technologies) → select a representative sample → audit → report.",
+				},
+			},
+			{
+				id: "was-2-3-q3",
+				question: {
+					ko: "WCAG-EM에서 무작위 표본을 추가하는 이유는?",
+					en: "Why does WCAG-EM add a random sample?",
+				},
+				options: {
+					a: { ko: "구조화 표본의 선택 편향을 통제하고 대표성을 검증하기 위해", en: "To control selection bias in the structured sample and validate its representativeness" },
+					b: { ko: "검사 시간을 늘리기 위해", en: "To lengthen the audit" },
+					c: { ko: "자동화 도구가 요구하기 때문", en: "Because automated tools require it" },
+					d: { ko: "법적 의무이기 때문", en: "Because it is legally mandated" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "무작위 표본에서 구조화 표본에 없는 유형의 실패가 발견되면 표본이 대표성을 잃었다는 신호입니다 — 선택 편향을 통제하는 장치입니다.",
+					en: "Failures in the random sample of kinds absent from the structured sample signal lost representativeness — it's the control for selection bias.",
+				},
+			},
+			{
+				id: "was-2-3-q4",
+				question: {
+					ko: "'포커스는 이동하지만 눈에 보이지 않는' 이슈를 할당할 성공 기준은?",
+					en: "Which success criterion does 'focus moves but is not visible' violate?",
+				},
+				options: {
+					a: { ko: "2.1.1 키보드", en: "2.1.1 Keyboard" },
+					b: { ko: "2.4.7 포커스 표시", en: "2.4.7 Focus Visible" },
+					c: { ko: "1.4.3 대비(최소)", en: "1.4.3 Contrast (Minimum)" },
+					d: { ko: "4.1.2 이름·역할·값", en: "4.1.2 Name, Role, Value" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "키보드 조작 자체는 되므로 2.1.1이 아니라, 포커스 표시가 없는 2.4.7 위반입니다. 같은 증상도 원인에 따라 SC가 달라지는 대표 사례입니다.",
+					en: "Keyboard operation works, so it's not 2.1.1 — the missing indicator violates 2.4.7. A classic case of cause determining the SC.",
+				},
+			},
+			{
+				id: "was-2-3-q5",
+				question: {
+					ko: "나쁜 UX지만 어떤 성공 기준도 위반하지 않는 이슈의 올바른 처리 방법은?",
+					en: "How should an issue be handled that is bad UX but violates no success criterion?",
+				},
+				options: {
+					a: { ko: "적합성 실패와 구분해 '모범 사례 권고'로 보고한다", en: "Report it separately as a best-practice recommendation, distinct from conformance failures" },
+					b: { ko: "가장 비슷한 SC 위반으로 기록한다", en: "Record it as the closest SC violation" },
+					c: { ko: "보고서에서 제외한다", en: "Omit it from the report" },
+					d: { ko: "AAA 위반으로 기록한다", en: "Record it as a AAA violation" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "적합성 판정의 신뢰성을 위해 실패와 권고를 구분해야 합니다. SC 위반이 아닌 것을 위반으로 기록하면 감사의 근거가 무너집니다.",
+					en: "Separating failures from recommendations preserves the audit's credibility — recording non-violations as violations undermines the evidence base.",
+				},
+			},
+			{
+				id: "was-2-3-q6",
+				question: {
+					ko: "'비간섭(non-interference)' 적합성 요구사항이 금지하는 것은?",
+					en: "What does the 'non-interference' conformance requirement prohibit?",
+				},
+				options: {
+					a: { ko: "적합하지 않은 기술이 나머지 콘텐츠의 이용을 방해하는 것 (키보드 트랩·자동재생·섬광 등)", en: "Non-conforming technology blocking use of the rest of the page (keyboard traps, autoplay, flashing)" },
+					b: { ko: "서드파티 스크립트의 사용", en: "Using any third-party scripts" },
+					c: { ko: "CSS 애니메이션 전부", en: "All CSS animations" },
+					d: { ko: "JavaScript 사용", en: "Using JavaScript" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "적합성에 의존하지 않는 콘텐츠가 있어도, 그것이 키보드 트랩·자동재생 오디오·섬광·포커스 방해 등으로 나머지 페이지 이용을 막으면 안 됩니다.",
+					en: "Even content not relied upon for conformance must not block the rest — no keyboard traps, autoplaying audio, flashing, or focus disruption.",
+				},
+			},
+		],
+	},
+	{
+		id: "was-3-3",
+		exam: "was",
+		domain: 3,
+		order: 3,
+		available: true,
+		title: { ko: "조달 프로세스와 ACR", en: "Procurement and the ACR" },
+		summary: {
+			ko: "서드파티 제품·서비스 도입 시 접근성을 통합하는 방법을 학습합니다 — 조달 수명주기별 체크포인트, 접근성 전문가의 역할, VPAT/ACR의 구조와 읽는 법. WAS BoK Domain 3C에 해당합니다.",
+			en: "Learn how to integrate accessibility when acquiring third-party products and services — checkpoints across the procurement lifecycle, the accessibility expert's role, and the structure and reading of VPATs/ACRs. This is WAS BoK Domain 3C.",
+		},
+		objectives: {
+			ko: [
+				"조달 수명주기 각 단계의 접근성 체크포인트를 제시할 수 있다",
+				"조달에서 접근성 전문가가 수행하는 역할을 설명할 수 있다",
+				"VPAT과 ACR의 관계, ACR의 적합성 표기(지원/부분 지원 등)를 해석할 수 있다",
+				"ACR의 한계와 자체 검증의 필요성을 설명할 수 있다",
+			],
+			en: [
+				"State accessibility checkpoints for each stage of the procurement lifecycle",
+				"Explain the accessibility expert's role in procurement",
+				"Interpret the VPAT/ACR relationship and ACR conformance terms (supports, partially supports, etc.)",
+				"Explain ACR limitations and why independent verification is needed",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "조달 수명주기와 접근성", en: "Accessibility Across the Procurement Lifecycle" },
+				paragraphs: {
+					ko: [
+						"조직이 쓰는 웹 솔루션의 상당수는 직접 만들지 않고 사들입니다 — CMS, 채팅 위젯, 결제 모듈, 분석 도구, LMS. 사들인 컴포넌트의 접근성 결함은 그대로 내 사이트의 적합성 실패가 되므로('전체 페이지' 요구사항), 조달 단계의 통제가 필수입니다.",
+						"수명주기별 체크포인트: ① 요구사항 정의 — RFP에 접근성 요구(WCAG 2.1/2.2 AA, EN 301 549 등)와 증빙 요구를 명시, ② 후보 평가 — ACR 검토와 핵심 시나리오 자체 테스트, 데모에 스크린 리더·키보드 시연 요구, ③ 계약 — 접근성 보증 조항, 결함 수정 SLA, 향후 버전의 유지 의무, ④ 도입 후 — 통합 검증(내 사이트 맥락에서 재테스트)과 벤더 결함 보고 채널 운영. 미국 연방 조달의 Section 508, EU 공공 조달의 EN 301 549가 이 절차를 법제화한 대표 사례입니다.",
+					],
+					en: [
+						"Much of an organization's web stack is bought, not built — CMSs, chat widgets, payment modules, analytics, LMSs. A purchased component's accessibility defects become your site's conformance failures (the 'full pages' requirement), so procurement-stage control is essential.",
+						"Lifecycle checkpoints: ① requirements — state accessibility requirements (WCAG 2.1/2.2 AA, EN 301 549) and required evidence in the RFP; ② vendor evaluation — review ACRs, test key scenarios yourself, require screen reader and keyboard demos; ③ contract — accessibility warranty clauses, defect-fix SLAs, obligations for future versions; ④ post-adoption — integration verification (retest in your site's context) and a vendor defect-reporting channel. US federal procurement under Section 508 and EU public procurement under EN 301 549 are the canonical legal embodiments.",
+					],
+				},
+			},
+			{
+				heading: { ko: "VPAT과 ACR 읽는 법", en: "Reading VPATs and ACRs" },
+				paragraphs: {
+					ko: [
+						"VPAT(Voluntary Product Accessibility Template)은 ITI가 배포하는 '빈 양식'이고, 벤더가 이를 채워 발행한 결과물이 ACR(Accessibility Conformance Report)입니다. VPAT 에디션은 참조 표준에 따라 WCAG, 508, EU(EN 301 549), INT(통합)로 나뉩니다. ACR은 성공 기준별로 적합성 수준을 표기합니다: 지원(Supports), 부분 지원(Partially Supports), 미지원(Does Not Support), 해당 없음(Not Applicable).",
+						"읽을 때 볼 것: 평가 방법(자체 평가인가, 제3자 감사인가, 어떤 도구·AT로 테스트했는가), 문서 날짜와 제품 버전(오래된 ACR은 현재 버전을 대변하지 못함), '부분 지원' 항목의 비고란(어떤 기능이 어떻게 실패하는지 구체적인가), 전부 'Supports'로만 채워진 문서(현실적으로 드물어 신뢰성 의심 신호). 비고가 구체적이고 부분 지원을 정직하게 기재한 ACR이 오히려 신뢰할 수 있는 문서입니다.",
+					],
+					en: [
+						"The VPAT (Voluntary Product Accessibility Template) is the blank form published by ITI; the ACR (Accessibility Conformance Report) is what a vendor produces by completing it. VPAT editions track reference standards: WCAG, 508, EU (EN 301 549), and INT (combined). An ACR rates each success criterion: Supports, Partially Supports, Does Not Support, or Not Applicable.",
+						"What to look for: the evaluation method (self-assessment or third-party audit; which tools and AT were used), document date and product version (a stale ACR doesn't represent the current release), the remarks on 'Partially Supports' rows (do they specify which features fail and how), and documents marked 'Supports' throughout (realistically rare — a credibility red flag). An ACR with specific remarks that honestly records partial support is the more trustworthy document.",
+					],
+				},
+			},
+			{
+				heading: { ko: "접근성 전문가의 역할과 자체 검증", en: "The Expert's Role and Independent Verification" },
+				paragraphs: {
+					ko: [
+						"조달에서 접근성 전문가(WAS 역할)의 일: RFP의 접근성 요구사항 작성, 벤더 ACR의 기술 검토(주장과 증거의 대조), 후보 제품의 핵심 과업 자체 테스트(키보드·스크린 리더로 대표 시나리오), 계약 조항 자문, 도입 후 통합 검증과 결함 우선순위 판정. 전문가는 '문서 심사자'가 아니라 '검증자'입니다.",
+						"ACR은 출발점이지 보증이 아닙니다: 자체 평가 ACR은 낙관적으로 치우치기 쉽고, 테스트된 버전·환경이 내 도입 환경과 다를 수 있으며, '제품 자체'의 적합성이 '내 사이트에 통합된 상태'의 적합성을 의미하지 않습니다(테마 커스터마이즈, 설정, 함께 쓰는 스크립트가 결과를 바꿈). 따라서 핵심 제품은 반드시 대표 시나리오의 자체 테스트로 ACR 주장을 표본 검증하고, 통합 후 재테스트합니다.",
+					],
+					en: [
+						"The accessibility expert's procurement work: writing the RFP's accessibility requirements, technically reviewing vendor ACRs (claims versus evidence), independently testing key tasks on candidate products (representative scenarios with keyboard and screen reader), advising on contract clauses, and post-adoption integration verification with defect prioritization. The expert is a verifier, not a paperwork reviewer.",
+						"An ACR is a starting point, not a guarantee: self-assessed ACRs skew optimistic; the tested version and environment may differ from yours; and conformance of 'the product itself' is not conformance of 'the product integrated into your site' (theming, configuration, and co-resident scripts change outcomes). So spot-check ACR claims by testing representative scenarios on critical products, and retest after integration.",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "ITI — VPAT 공식 양식", en: "ITI — Official VPAT templates" }, url: "https://www.itic.org/policy/accessibility/vpat" },
+			{ label: { ko: "Section508.gov — ICT 구매 접근성", en: "Section508.gov — Buy accessible ICT" }, url: "https://www.section508.gov/buy/" },
+			{ label: { ko: "W3C WAI — 접근 가능한 ICT 조달", en: "W3C WAI — ICT procurement guidance (Planning and Managing)" }, url: "https://www.w3.org/WAI/planning-and-managing/" },
+		],
+		questions: [
+			{
+				id: "was-3-3-q1",
+				question: {
+					ko: "VPAT과 ACR의 관계로 옳은 것은?",
+					en: "What is the relationship between a VPAT and an ACR?",
+				},
+				options: {
+					a: { ko: "VPAT은 빈 양식이고, 벤더가 채워 발행한 결과물이 ACR이다", en: "The VPAT is the blank template; the ACR is the completed report a vendor publishes" },
+					b: { ko: "같은 문서의 다른 이름이다", en: "They are two names for the same document" },
+					c: { ko: "ACR이 양식이고 VPAT이 결과물이다", en: "The ACR is the template and the VPAT the result" },
+					d: { ko: "둘 다 W3C가 발행한다", en: "Both are published by the W3C" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "VPAT은 ITI가 배포하는 템플릿이고, 이를 채운 완성 문서가 ACR입니다. 에디션은 WCAG/508/EU/INT로 나뉩니다.",
+					en: "The VPAT is ITI's template; the completed document is the ACR. Editions: WCAG, 508, EU, INT.",
+				},
+			},
+			{
+				id: "was-3-3-q2",
+				question: {
+					ko: "ACR에서 신뢰성을 의심해야 할 신호는?",
+					en: "Which is a credibility red flag in an ACR?",
+				},
+				options: {
+					a: { ko: "모든 항목이 'Supports'로만 채워져 있고 비고가 없다", en: "Every row says 'Supports' with no remarks" },
+					b: { ko: "부분 지원 항목에 구체적 실패 내용이 적혀 있다", en: "Partially Supports rows describe specific failures" },
+					c: { ko: "제3자 감사로 평가되었다", en: "It was evaluated by a third-party audit" },
+					d: { ko: "테스트에 사용한 스크린 리더가 명시되어 있다", en: "It names the screen readers used in testing" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "현실의 제품이 전 항목을 완벽 지원하는 경우는 드뭅니다. 부분 지원을 정직하고 구체적으로 기재한 ACR이 오히려 신뢰할 수 있습니다. b·c·d는 신뢰성을 높이는 요소입니다.",
+					en: "Real products rarely support everything perfectly. An ACR that honestly details partial support is the trustworthy one; b, c, and d increase credibility.",
+				},
+			},
+			{
+				id: "was-3-3-q3",
+				question: {
+					ko: "RFP(제안요청서) 단계에서 해야 할 접근성 조치는?",
+					en: "What accessibility action belongs at the RFP stage?",
+				},
+				options: {
+					a: { ko: "접근성 요구 표준(WCAG AA 등)과 증빙(ACR 등) 요구를 명시한다", en: "State required standards (e.g., WCAG AA) and required evidence (e.g., an ACR)" },
+					b: { ko: "도입 후 통합 테스트를 수행한다", en: "Run post-adoption integration tests" },
+					c: { ko: "결함 수정 SLA를 협상한다", en: "Negotiate defect-fix SLAs" },
+					d: { ko: "벤더에게 소스 코드를 요구한다", en: "Demand the vendor's source code" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "요구사항 단계에서는 표준과 증빙 요구를 RFP에 명시합니다. SLA는 계약 단계, 통합 검증은 도입 후 단계의 일입니다.",
+					en: "At requirements time, put standards and evidence requirements in the RFP. SLAs belong to contracting; integration verification comes after adoption.",
+				},
+			},
+			{
+				id: "was-3-3-q4",
+				question: {
+					ko: "ACR이 '지원'이라 밝힌 제품도 도입 후 재테스트해야 하는 이유는?",
+					en: "Why retest after adoption even when the ACR says 'Supports'?",
+				},
+				options: {
+					a: { ko: "제품 단독의 적합성이 내 사이트에 통합된 상태의 적합성을 보장하지 않기 때문", en: "Conformance of the product alone doesn't guarantee conformance once integrated into your site" },
+					b: { ko: "ACR은 법적으로 무효이기 때문", en: "ACRs are legally void" },
+					c: { ko: "재테스트가 계약 관행이기 때문", en: "Retesting is merely contractual custom" },
+					d: { ko: "자동화 도구가 요구하기 때문", en: "Automated tools require it" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "테마 커스터마이즈, 설정, 함께 로드되는 스크립트가 결과를 바꿉니다. 테스트된 버전·환경이 도입 환경과 다를 수도 있어 통합 맥락의 재검증이 필요합니다.",
+					en: "Theming, configuration, and co-resident scripts change outcomes, and the tested version/environment may differ from yours — integration-context verification is required.",
+				},
+			},
+			{
+				id: "was-3-3-q5",
+				question: {
+					ko: "사들인 채팅 위젯의 접근성 실패가 내 사이트에 미치는 영향은?",
+					en: "How does an accessibility failure in a purchased chat widget affect your site?",
+				},
+				options: {
+					a: { ko: "'전체 페이지' 요구사항에 따라 위젯이 있는 페이지의 적합성 실패가 된다", en: "Under the 'full pages' requirement, pages containing it fail conformance" },
+					b: { ko: "벤더 책임이므로 내 적합성과 무관하다", en: "It's the vendor's responsibility, irrelevant to your conformance" },
+					c: { ko: "위젯은 평가에서 자동 제외된다", en: "Widgets are automatically excluded from evaluation" },
+					d: { ko: "AAA 수준에서만 문제가 된다", en: "It only matters at AAA" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "적합성은 페이지 전체 단위입니다. 서드파티 컴포넌트의 실패도 그 페이지의 실패이므로, 조달 단계에서 접근성을 통제해야 하는 이유입니다.",
+					en: "Conformance is judged per full page — third-party failures are your page's failures, which is exactly why procurement-stage control matters.",
+				},
+			},
+		],
+	},
 ];

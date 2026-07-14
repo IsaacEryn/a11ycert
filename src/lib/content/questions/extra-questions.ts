@@ -1396,6 +1396,24 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 				en: "'Not Applicable' applies only when the evaluated content contains nothing the criterion addresses — e.g., 1.4.2 (Audio Control) on a page with no audio. Difficulty or schedule is never a basis for the judgment.",
 			},
 		},
+		{
+			id: "was-2-1-x6",
+			question: {
+				ko: "W3C ACT(Accessibility Conformance Testing) 규칙의 목적은?",
+				en: "What is the purpose of the W3C ACT (Accessibility Conformance Testing) rules?",
+			},
+			options: {
+				a: { ko: "도구·감사자마다 판정이 갈리지 않도록 테스트 방법과 실패 판정을 표준화하는 것", en: "Standardizing test procedures and failure verdicts so tools and auditors don't diverge" },
+				b: { ko: "새로운 성공 기준을 추가하는 것", en: "Adding new success criteria" },
+				c: { ko: "자동화 도구를 대체하는 것", en: "Replacing automated tools" },
+				d: { ko: "수동 테스트를 금지하는 것", en: "Prohibiting manual testing" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "ACT 규칙은 적용 대상·기대 결과·통과/실패 예제를 명시해 판정의 일관성을 높입니다. axe-core 등 주요 도구가 자사 규칙을 ACT 형식에 매핑하며, 도구 간 결과가 다를 때 중립적 기준이 됩니다.",
+				en: "ACT rules specify applicability, expectations, and pass/fail examples to make verdicts consistent. Major tools map their rules to the ACT format, and the rules arbitrate when tools disagree.",
+			},
+		},
 	],
 	"was-2-2": [
 		{

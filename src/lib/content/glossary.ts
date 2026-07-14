@@ -603,6 +603,16 @@ export const glossaryTerms: GlossaryTerm[] = [
     aliases: ["user agent", "사용자 에이전트"],
   },
   {
+    id: "act-rules",
+    term: { ko: "ACT 규칙", en: "ACT Rules" },
+    definition: {
+      ko: "W3C의 접근성 적합성 테스트(Accessibility Conformance Testing) 규칙. 적용 대상·기대 결과·통과/실패 예제를 명시해 도구·감사자 간 판정 일관성을 높이며, axe-core 등 주요 도구가 이 형식에 자사 규칙을 매핑합니다.",
+      en: "The W3C's Accessibility Conformance Testing rules. Each specifies applicability, expectations, and pass/fail examples to make verdicts consistent across tools and auditors; major tools like axe-core map their rules to this format.",
+    },
+    certs: ["was"],
+    aliases: ["accessibility conformance testing"],
+  },
+  {
     id: "accessibility-supported",
     term: { ko: "접근성 지원", en: "Accessibility Supported" },
     definition: {

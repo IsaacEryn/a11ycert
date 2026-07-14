@@ -944,6 +944,19 @@ const units: StudyUnit[] = [
 					],
 				},
 			},
+			{
+				heading: { ko: "ACT 규칙 — 테스트의 표준화", en: "ACT Rules — Standardizing Tests" },
+				paragraphs: {
+					ko: [
+						"W3C의 ACT(Accessibility Conformance Testing) 규칙은 '무엇을 어떻게 검사하고 어떤 결과를 실패로 판정하는가'를 표준화한 테스트 규칙 형식입니다. 같은 페이지를 놓고 도구·감사자마다 판정이 갈리는 문제를 줄이기 위해, 각 규칙은 적용 대상(applicability), 기대 결과(expectations), 통과·실패 예제를 명시합니다. axe-core 등 주요 도구들이 자사 규칙을 ACT 규칙 형식에 매핑해 일관성을 검증합니다.",
+						"실무 의미: 도구 간 결과가 다를 때 ACT 규칙과 그 예제가 중립적 판정 기준이 됩니다. 또한 각 규칙은 특정 성공 기준에 매핑되므로, '이 실패가 어느 SC 위반인가'를 근거 있게 문서화하는 데 유용합니다. 다만 모든 SC가 ACT 규칙으로 커버되는 것은 아니므로 수동 판단은 여전히 필요합니다.",
+					],
+					en: [
+						"The W3C's ACT (Accessibility Conformance Testing) rules standardize what to test, how, and what counts as failure. To reduce divergent verdicts between tools and auditors on the same page, each rule specifies applicability, expectations, and passed/failed examples. Major tools such as axe-core map their rules to the ACT format to validate consistency.",
+						"In practice: when tools disagree, ACT rules and their examples serve as a neutral arbiter. Because each rule maps to specific success criteria, they also help document which SC a failure violates. Not every SC is covered by an ACT rule, though — manual judgment remains necessary.",
+					],
+				},
+			},
 		],
 		questions: [
 			{
