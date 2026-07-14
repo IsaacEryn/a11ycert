@@ -213,7 +213,10 @@
 		"reviewTitle": "Question Review",
 		"retake": "Retake",
 		"toStats": "View Stats",
-		"selectAnswer": "Select your answer"
+		"selectAnswer": "Select your answer",
+		"presetLabel": "Exam format",
+		"presetMini": "Mini Practice",
+		"presetFull": "Full Exam"
 	},
 	"stats": {
 		"title": "Progress & Stats",

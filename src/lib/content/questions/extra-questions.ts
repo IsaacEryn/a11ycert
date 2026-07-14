@@ -272,8 +272,67 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 
+	"cpacc-1-6": [
+		{
+			id: "cpacc-1-6-x1",
+			question: {
+				ko: "한국이 세계에서 가장 빠른 속도로 진입한 인구 구조 단계는?",
+				en: "Which demographic stage has Korea entered faster than any other country?",
+			},
+			options: {
+				a: { ko: "초고령사회 (65세 이상 인구 20% 초과)", en: "Super-aged society (over 20% aged 65+)" },
+				b: { ko: "인구 정점 사회", en: "Peak population society" },
+				c: { ko: "저출산 사회", en: "Low birth-rate society" },
+				d: { ko: "다문화 사회", en: "Multicultural society" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "한국은 세계에서 가장 빠른 속도로 초고령사회(65세 이상 20%+)에 진입했습니다. 시각·청각·운동·인지의 자연 노화가 접근성 요구로 이어지므로, 접근성은 고령 고객 전체를 위한 기본 품질이 됩니다.",
+				en: "Korea entered super-aged status (20%+ aged 65+) faster than any country. Natural aging of vision, hearing, motor, and cognition translates into accessibility needs — making accessibility baseline quality for the entire older customer base.",
+			},
+		},
+	],
+	"cpacc-1-7": [
+		{
+			id: "cpacc-1-7-x1",
+			question: {
+				ko: "AT 도입 성공의 첫 번째 원칙으로 꼽히는 것은?",
+				en: "What is cited as the first principle of successful AT adoption?",
+			},
+			options: {
+				a: { ko: "가장 비싼 기기를 선택하는 것", en: "Choosing the most expensive device" },
+				b: { ko: "사용자를 선정 과정의 중심에 두는 것 (자기결정)", en: "Centering the user in the selection process (self-determination)" },
+				c: { ko: "최신 기술만 사용하는 것", en: "Using only the newest technology" },
+				d: { ko: "훈련을 생략해 빠르게 보급하는 것", en: "Skipping training for faster rollout" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "사용자 의견 없이 선정된 AT는 포기율이 높습니다. 자기결정(사용자 중심 선정), 충분한 훈련과 지속 지원, 사용 환경과 함께하는 평가가 성공적 도입의 원칙입니다.",
+				en: "AT selected without user input has high abandonment. Self-determination (user-centered selection), real training with ongoing support, and assessment within the user's environments are the principles of successful adoption.",
+			},
+		},
+	],
+
 	// ── Domain 2: 접근성 및 보편적 설계 ──────────────────────────────────────
 	"cpacc-2-1": [
+		{
+			id: "cpacc-2-1-x5",
+			question: {
+				ko: "포용적 설계(Inclusive Design)가 보편적 설계와 구별되는 강조점은?",
+				en: "What emphasis distinguishes Inclusive Design from Universal Design?",
+			},
+			options: {
+				a: { ko: "배제된 사용자로부터 배우고 다양성을 설계 과정에 참여시키는 방법론", en: "A methodology of learning from excluded users and involving diversity in the design process" },
+				b: { ko: "장애인 전용 제품을 별도로 만드는 것", en: "Building separate products exclusively for disabled people" },
+				c: { ko: "법적 준수만을 목표로 하는 것", en: "Targeting legal compliance only" },
+				d: { ko: "시각 디자인의 심미성", en: "Visual aesthetics" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "보편적 설계가 '모두를 위한 하나의 결과물'이라는 산출물 지향이라면, 포용적 설계는 배제 사례에서 배우고 다양한 사용자를 과정에 참여시키는 방법론적 측면을 강조합니다.",
+				en: "Where Universal Design orients toward one outcome usable by all, Inclusive Design emphasizes methodology — learning from exclusion and involving diverse users in the process.",
+			},
+		},
 		{
 			id: "cpacc-2-1-x3",
 			question: {
@@ -348,6 +407,24 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"cpacc-2-2": [
+		{
+			id: "cpacc-2-2-x5",
+			question: {
+				ko: "WCAG의 '기법(Techniques)' 문서의 성격으로 옳은 것은?",
+				en: "What is the nature of WCAG 'Techniques' documents?",
+			},
+			options: {
+				a: { ko: "규범적(normative) — 반드시 그대로 구현해야 한다", en: "Normative — they must be implemented exactly" },
+				b: { ko: "정보성(informative) — 성공 기준을 달성하는 방법의 예시일 뿐, 다른 방법도 허용된다", en: "Informative — examples of meeting success criteria; other methods are allowed" },
+				c: { ko: "법적 구속력이 있는 규정", en: "Legally binding regulations" },
+				d: { ko: "브라우저 구현 명세", en: "Browser implementation specs" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "규범적인 것은 성공 기준 자체이고, 충분 기법·참고 기법 문서는 정보성입니다. 기법 문서에 없는 방법이라도 성공 기준을 충족하면 적합합니다.",
+				en: "The success criteria themselves are normative; sufficient and advisory techniques are informative. A method not listed in the techniques can still conform if it meets the criterion.",
+			},
+		},
 		{
 			id: "cpacc-2-2-x3",
 			question: {
@@ -496,6 +573,66 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	// ── Domain 3: 표준, 법률, 관리 전략 ──────────────────────────────────────
+	"cpacc-2-4": [
+		{
+			id: "cpacc-2-4-x1",
+			question: {
+				ko: "이러닝 콘텐츠에서 '같은 개념을 텍스트+음성+영상+그림으로 함께 제공'하는 것은 UDL의 어느 원칙인가?",
+				en: "Providing the same concept as text, audio, video, and graphics in e-learning applies which UDL principle?",
+			},
+			options: {
+				a: { ko: "다양한 표상 수단 제공 (Representation)", en: "Multiple Means of Representation" },
+				b: { ko: "다양한 참여 수단 제공 (Engagement)", en: "Multiple Means of Engagement" },
+				c: { ko: "다양한 행동·표현 수단 제공 (Action & Expression)", en: "Multiple Means of Action & Expression" },
+				d: { ko: "오류에 대한 관용 (Tolerance for Error)", en: "Tolerance for Error" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "표상(Representation)은 정보를 제시하는 '무엇'의 다양화입니다. 참여는 동기('왜'), 행동과 표현은 학습자가 아는 것을 보여주는 '어떻게'의 다양화입니다. 오류 관용은 UD 7원칙에 속합니다.",
+				en: "Representation diversifies the 'what' — how information is presented. Engagement is the 'why' (motivation); Action & Expression the 'how' learners demonstrate knowledge. Tolerance for Error belongs to the seven UD principles.",
+			},
+		},
+	],
+	"cpacc-2-5": [
+		{
+			id: "cpacc-2-5-x1",
+			question: {
+				ko: "'접근성 부채는 나중에 갚겠다'는 주장에 대한 반박으로 가장 적절한 것은?",
+				en: "What is the best rebuttal to 'we'll pay down accessibility debt later'?",
+			},
+			options: {
+				a: { ko: "부채는 기술 부채처럼 복리로 늘고, EAA 2025·ADA Title II 2026~27 같은 법적 시한은 기다려주지 않는다", en: "Debt compounds like technical debt, and legal deadlines (EAA 2025, ADA Title II 2026–27) won't wait" },
+				b: { ko: "접근성은 한 번에 완성되므로 미뤄도 된다", en: "Accessibility is completed all at once, so it can wait" },
+				c: { ko: "경쟁사도 미루고 있으므로 문제없다", en: "Competitors are delaying too, so it's fine" },
+				d: { ko: "자동 도구가 나중에 다 고쳐준다", en: "Automated tools will fix it all later" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "미룰수록 결함 위에 새 기능이 쌓여 수정 범위가 복리로 커지고, 유럽 접근성법(2025년 6월)과 ADA Title II 규칙(2026~27) 같은 법적 시한이 이미 정해져 있습니다.",
+				en: "Delay lets new features pile onto defects, compounding the fix scope — and legal deadlines like the EAA (June 2025) and the ADA Title II rule (2026–27) are already set.",
+			},
+		},
+	],
+	"cpacc-3-4": [
+		{
+			id: "cpacc-3-4-x1",
+			question: {
+				ko: "RFP(제안요청서) 단계에서 접근성을 다루는 올바른 방법은?",
+				en: "What is the correct way to address accessibility at the RFP stage?",
+			},
+			options: {
+				a: { ko: "접근성 요구 기준(WCAG 2.2 AA 등)과 ACR 제출 의무를 명시한다", en: "State the accessibility standard (e.g., WCAG 2.2 AA) and require ACR submission" },
+				b: { ko: "계약 후에 구두로 요청한다", en: "Ask verbally after contracting" },
+				c: { ko: "공급업체의 자율에 맡긴다", en: "Leave it to vendor discretion" },
+				d: { ko: "도입 1년 후 감사에서 처음 확인한다", en: "Check for the first time in an audit a year after deployment" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "조달 생애주기의 첫 단계인 요구 정의에서 기준과 ACR 제출을 명시해야 평가·계약·도입 후 단계의 근거가 생깁니다. 계약 후 구두 요청은 강제력이 없습니다.",
+				en: "Stating the standard and ACR requirement at the requirements stage creates the basis for evaluation, contracting, and post-deployment enforcement. Verbal requests after contracting carry no force.",
+			},
+		},
+	],
 	"cpacc-3-1": [
 		{
 			id: "cpacc-3-1-x3",
@@ -645,6 +782,24 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"cpacc-3-3": [
+		{
+			id: "cpacc-3-3-x5",
+			question: {
+				ko: "접근성을 '완료 정의(Definition of Done)'에 포함시키는 것의 의미는?",
+				en: "What does including accessibility in the 'Definition of Done' mean?",
+			},
+			options: {
+				a: { ko: "접근성 검수를 통과하기 전에는 작업이 완료로 간주되지 않는다", en: "Work is not considered complete until it passes accessibility review" },
+				b: { ko: "접근성 작업을 별도 프로젝트로 분리한다", en: "Separating accessibility into its own project" },
+				c: { ko: "출시 후에 접근성을 점검한다", en: "Checking accessibility after launch" },
+				d: { ko: "접근성 문서를 작성만 하면 된다", en: "Writing accessibility documentation suffices" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "완료 정의에 접근성을 포함하면 '접근성 검수 전에는 완료가 아니다'가 팀의 기본 규칙이 됩니다. 접근성을 선택 항목이 아닌 품질의 일부로 만드는 가장 실질적인 문화 장치입니다.",
+				en: "Including accessibility in the Definition of Done makes 'not done until it passes accessibility review' the team's default rule — the most practical cultural lever for making accessibility part of quality rather than an option.",
+			},
+		},
 		{
 			id: "cpacc-3-3-x3",
 			question: {

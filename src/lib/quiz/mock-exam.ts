@@ -2,25 +2,42 @@ import type { QuizQuestion } from "@/lib/content/types";
 import type { Cert } from "@/lib/content";
 
 /**
- * 모의시험 구성 — 문항 풀이 확충되면 실전 프리셋(100문항/120분)으로 승격 예정.
+ * 모의시험 구성 — 미니(짧은 연습)와 실전(실제 시험 규모) 두 프리셋.
+ * 실전 규모는 사이트 시험 정보 기준: CPACC 100문항/120분, WAS 75문항/90분.
  * 도메인 배분은 실제 시험 가중치 기준: CPACC 40/40/20, WAS 40/30/30.
  */
+export type MockExamMode = "mini" | "full";
+
 export interface MockExamPreset {
 	totalQuestions: number;
 	timeLimitMinutes: number;
 	distribution: Record<1 | 2 | 3, number>; // 도메인별 비중 (합 1)
 }
 
-export const MOCK_EXAM_PRESETS: Record<Cert, MockExamPreset> = {
+export const MOCK_EXAM_PRESETS: Record<Cert, Record<MockExamMode, MockExamPreset>> = {
 	cpacc: {
-		totalQuestions: 30,
-		timeLimitMinutes: 45,
-		distribution: { 1: 0.4, 2: 0.4, 3: 0.2 },
+		mini: {
+			totalQuestions: 30,
+			timeLimitMinutes: 45,
+			distribution: { 1: 0.4, 2: 0.4, 3: 0.2 },
+		},
+		full: {
+			totalQuestions: 100,
+			timeLimitMinutes: 120,
+			distribution: { 1: 0.4, 2: 0.4, 3: 0.2 },
+		},
 	},
 	was: {
-		totalQuestions: 30,
-		timeLimitMinutes: 45,
-		distribution: { 1: 0.4, 2: 0.3, 3: 0.3 },
+		mini: {
+			totalQuestions: 30,
+			timeLimitMinutes: 45,
+			distribution: { 1: 0.4, 2: 0.3, 3: 0.3 },
+		},
+		full: {
+			totalQuestions: 75,
+			timeLimitMinutes: 90,
+			distribution: { 1: 0.4, 2: 0.3, 3: 0.3 },
+		},
 	},
 };
 
@@ -38,8 +55,12 @@ function shuffled<T>(arr: T[]): T[] {
  * 도메인 가중치 비례로 문항을 추출해 셔플한 모의시험 세트 생성.
  * 도메인 풀이 부족하면 다른 도메인에서 보충하고, 전체 풀이 부족하면 가용 전체 사용.
  */
-export function buildMockExam(cert: Cert, pool: QuizQuestion[]): QuizQuestion[] {
-	const preset = MOCK_EXAM_PRESETS[cert];
+export function buildMockExam(
+	cert: Cert,
+	pool: QuizQuestion[],
+	mode: MockExamMode = "full"
+): QuizQuestion[] {
+	const preset = MOCK_EXAM_PRESETS[cert][mode];
 	const total = Math.min(preset.totalQuestions, pool.length);
 
 	const byDomain: Record<number, QuizQuestion[]> = { 1: [], 2: [], 3: [] };

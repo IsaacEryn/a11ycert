@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { QuizQuestion } from "@/lib/content/types";
 import type { Cert } from "@/lib/content";
-import { buildMockExam, computeDomainStats, MOCK_EXAM_PRESETS } from "@/lib/quiz/mock-exam";
+import { buildMockExam, computeDomainStats, MOCK_EXAM_PRESETS, type MockExamMode } from "@/lib/quiz/mock-exam";
 import { useLearningStore, type LocalAttempt } from "@/lib/store/learningStore";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { syncAttemptToDB, syncWrongAnswerToDB } from "@/lib/store/learning-sync";
@@ -31,7 +31,8 @@ function formatClock(totalSeconds: number): string {
 
 export default function MockExamClient({ pool, locale, cert }: Props) {
 	const t = useTranslations("mockExam");
-	const preset = MOCK_EXAM_PRESETS[cert];
+	const [mode, setMode] = useState<MockExamMode>("full");
+	const preset = MOCK_EXAM_PRESETS[cert][mode];
 
 	const [stage, setStage] = useState<Stage>("intro");
 	const [timerEnabled, setTimerEnabled] = useState(true);
@@ -144,7 +145,7 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 	}, [stage, timerEnabled, submit, t]);
 
 	const start = () => {
-		const exam = buildMockExam(cert, pool);
+		const exam = buildMockExam(cert, pool, mode);
 		if (exam.length === 0) return;
 		setQuestions(exam);
 		setAnswers({});
@@ -181,6 +182,21 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 						<p style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)", marginTop: "var(--space-3)" }}>
 							{t("introDesc")}
 						</p>
+						{/* 시험 구성 선택 — 미니 연습 / 실전 규모 */}
+						<div
+							role="group"
+							aria-label={t("presetLabel")}
+							className="lang-toggle"
+							style={{ marginTop: "var(--space-4)", width: "fit-content" }}
+						>
+							<button aria-pressed={mode === "full"} onClick={() => setMode("full")}>
+								{t("presetFull")}
+							</button>
+							<button aria-pressed={mode === "mini"} onClick={() => setMode("mini")}>
+								{t("presetMini")}
+							</button>
+						</div>
+
 						<ul style={{ marginTop: "var(--space-4)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
 							<li>· {t("questionCount", { count: Math.min(preset.totalQuestions, pool.length) })}</li>
 							<li>· {t("timeLimit", { minutes: preset.timeLimitMinutes })}</li>

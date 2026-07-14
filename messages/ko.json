@@ -213,7 +213,10 @@
 		"reviewTitle": "문항 리뷰",
 		"retake": "다시 응시",
 		"toStats": "성취도 보기",
-		"selectAnswer": "답을 선택하세요"
+		"selectAnswer": "답을 선택하세요",
+		"presetLabel": "시험 구성",
+		"presetMini": "미니 연습",
+		"presetFull": "실전 규모"
 	},
 	"stats": {
 		"title": "성취도 분석",
