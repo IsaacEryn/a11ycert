@@ -94,17 +94,23 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		initSession();
 
 		// 인증 상태 변경 리스너
+		// 주의: 콜백 안에서 다른 Supabase 호출을 await하면 auth 내부 락과 데드락이
+		// 발생해 로그인 지연·상태 튐이 생김 (Supabase 공식 문서의 알려진 함정).
+		// 콜백은 동기로 유지하고 후속 작업은 setTimeout으로 락 밖에서 실행한다.
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange(
-			async (event: AuthChangeEvent, newSession: Session | null) => {
+			(event: AuthChangeEvent, newSession: Session | null) => {
 				setSession(newSession);
 				setUser(newSession?.user ?? null);
 
 				if (event === "SIGNED_IN" && newSession?.user) {
-					await fetchProfile(newSession.user.id);
-					// localStorage → DB 마이그레이션 (비동기, UI 블로킹 없음)
-					migrateLocalStorageToDB(newSession.user.id).catch(() => {});
+					const userId = newSession.user.id;
+					setTimeout(() => {
+						fetchProfile(userId).catch(() => {});
+						// localStorage → DB 마이그레이션 (비동기, UI 블로킹 없음)
+						migrateLocalStorageToDB(userId).catch(() => {});
+					}, 0);
 				}
 
 				if (event === "SIGNED_OUT") {
