@@ -179,7 +179,9 @@
 		"format": "형식",
 		"currentLocation": "현재 위치",
 		"unitQuiz": "단원 퀴즈",
-		"unitQuizHint": "{count}문제 · 오답은 오답노트에 자동 저장됩니다"
+		"unitQuizHint": "{count}문제 · 오답은 오답노트에 자동 저장됩니다",
+		"references": "참고 자료",
+		"externalLink": "새 창으로 열림"
 	},
 	"mockExam": {
 		"title": "모의시험",

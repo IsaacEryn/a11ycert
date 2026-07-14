@@ -179,7 +179,9 @@
 		"format": "Format",
 		"currentLocation": "Current location",
 		"unitQuiz": "Unit Quiz",
-		"unitQuizHint": "{count} questions · Wrong answers are saved automatically"
+		"unitQuizHint": "{count} questions · Wrong answers are saved automatically",
+		"references": "References",
+		"externalLink": "opens in new window"
 	},
 	"mockExam": {
 		"title": "Mock Exam",

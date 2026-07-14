@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import type { StudyUnit } from "@/lib/content/types";
+import { useTranslations } from "next-intl";
+import type { StudyUnit, UnitReference } from "@/lib/content/types";
 
 interface Props {
   unit: StudyUnit;
@@ -9,6 +10,31 @@ interface Props {
   prevUnit?: { id: string; title: { ko: string; en: string } } | null;
   nextUnit?: { id: string; title: { ko: string; en: string } } | null;
   exam: "cpacc" | "was";
+}
+
+function ReferencesBlock({ refs, locale }: { refs: UnitReference[]; locale: string }) {
+  const t = useTranslations("cert");
+  const isKo = locale === "ko";
+  return (
+    <aside className="bilingual-card__refs" aria-label={t("references")}>
+      <span className="bilingual-card__refs-label">{t("references")}</span>
+      <ul>
+        {refs.map((ref) => (
+          <li key={ref.url}>
+            <a href={ref.url} target="_blank" rel="noopener noreferrer">
+              {isKo ? ref.label.ko : ref.label.en}
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              <span className="sr-only">({t("externalLink")})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
 }
 
 export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exam }: Props) {
@@ -92,6 +118,9 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
                     <p lang="en">{section.paragraphs.en[i] ?? ""}</p>
                   </div>
                 ))}
+                {section.references && section.references.length > 0 && (
+                  <ReferencesBlock refs={section.references} locale={locale} />
+                )}
               </div>
             ))
           : unit.content.ko.map((para, i) => (
@@ -101,6 +130,10 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
               </div>
             ))}
       </div>
+
+      {unit.references && unit.references.length > 0 && (
+        <ReferencesBlock refs={unit.references} locale={locale} />
+      )}
 
       <div className="bilingual-card__nav">
         {prevUnit ? (

@@ -14,10 +14,18 @@ export interface QuizQuestion {
 	difficulty?: "easy" | "medium" | "hard";
 }
 
+/** 외부 참고 자료 링크 — W3C Understanding, WAI 문서 등 (https URL 필수) */
+export interface UnitReference {
+	label: { ko: string; en: string };
+	url: string;
+}
+
 /** 소제목 + 문단 묶음 — 긴 본문을 구조화 (ko/en 문단 배열 길이 일치 필수) */
 export interface UnitSection {
 	heading: { ko: string; en: string };
 	paragraphs: { ko: string[]; en: string[] };
+	/** 섹션 하단에 표시할 참고 링크 */
+	references?: UnitReference[];
 }
 
 export interface StudyUnit {
@@ -32,6 +40,8 @@ export interface StudyUnit {
 	content: { ko: string[]; en: string[] }; // paragraph arrays
 	/** sections가 있으면 content 대신 렌더 — 전환 단원은 content를 빈 배열로 (이중 소스 방지) */
 	sections?: UnitSection[];
+	/** 단원 하단 '참고 자료' 블록에 표시할 링크 모음 */
+	references?: UnitReference[];
 	questions: QuizQuestion[];
 }
 

@@ -15,7 +15,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { getCertContent } from "../src/lib/content";
 import { glossaryTerms } from "../src/lib/content/glossary";
-import type { DomainGroup, QuizQuestion } from "../src/lib/content/types";
+import { unitReferences } from "../src/lib/content/references";
+import type { DomainGroup, QuizQuestion, UnitReference } from "../src/lib/content/types";
 
 // extra-questions까지 병합된 최종 콘텐츠를 검증
 const cpaccDomains = getCertContent("cpacc").domains;
@@ -27,6 +28,15 @@ function checkPair(label: string, pair: { ko: string; en: string } | undefined) 
 	if (!pair || !pair.ko?.trim() || !pair.en?.trim()) {
 		errors.push(`${label}: ko/en 짝 누락 또는 빈 문자열`);
 	}
+}
+
+function checkReferences(label: string, refs: UnitReference[] | undefined) {
+	if (!refs) return;
+	if (refs.length === 0) errors.push(`${label}: references 빈 배열`);
+	refs.forEach((r, i) => {
+		checkPair(`${label} references[${i}] label`, r.label);
+		if (!r.url?.startsWith("https://")) errors.push(`${label} references[${i}]: url은 https:// 로 시작해야 함 (${r.url})`);
+	});
 }
 
 function validateDomains(cert: string, domains: DomainGroup[]): QuizQuestion[] {
@@ -62,10 +72,12 @@ function validateDomains(cert: string, domains: DomainGroup[]): QuizQuestion[] {
 					if (sec.paragraphs.ko.length === 0) errors.push(`${u.id} sections[${si}]: paragraphs 비어 있음`);
 					sec.paragraphs.ko.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].ko[${i}] 빈 문자열`); });
 					sec.paragraphs.en.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].en[${i}] 빈 문자열`); });
+					checkReferences(`${u.id} sections[${si}]`, sec.references);
 				});
 			} else if (u.available && u.content.ko.length === 0) {
 				errors.push(`${u.id}: 활성 단원인데 content와 sections가 모두 비어 있음`);
 			}
+			checkReferences(u.id, u.references);
 			questions.push(...u.questions);
 		}
 	}
@@ -113,15 +125,17 @@ function reportDistribution(cert: string, domains: DomainGroup[]) {
 	const byDomain: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
 	let paragraphs = 0;
 	let units = 0;
+	let refs = 0;
 	for (const d of domains)
 		for (const u of d.units) {
 			byDomain[d.domain] += u.questions.length;
 			paragraphs += unitParagraphCount(u);
 			units += 1;
+			refs += (u.references?.length ?? 0) + (u.sections?.reduce((sum, s) => sum + (s.references?.length ?? 0), 0) ?? 0);
 		}
 	const total = Object.values(byDomain).reduce((a, b) => a + b, 0);
 	console.log(
-		`  ${cert.toUpperCase()}: ${units}단원 · 본문 ${paragraphs}문단 · 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
+		`  ${cert.toUpperCase()}: ${units}단원 · 본문 ${paragraphs}문단 · 참고링크 ${refs}개 · 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
 	);
 }
 
@@ -145,6 +159,16 @@ const glossaryIds = new Set<string>();
 for (const term of glossaryTerms) {
 	if (glossaryIds.has(term.id)) errors.push(`glossary id 중복: ${term.id}`);
 	glossaryIds.add(term.id);
+}
+
+// references.ts 고아 키 검사 — 존재하지 않는 unitId에 링크가 매달리지 않도록
+{
+	const unitIds = new Set(
+		[...cpaccDomains, ...wasDomains].flatMap((d) => d.units.map((u) => u.id))
+	);
+	for (const key of Object.keys(unitReferences)) {
+		if (!unitIds.has(key)) errors.push(`references: 존재하지 않는 단원 id '${key}'`);
+	}
 }
 
 validateMessages();

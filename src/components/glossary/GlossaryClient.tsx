@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type { GlossaryTerm } from "@/lib/content/glossary";
+import { useLearningStore } from "@/lib/store/learningStore";
 import { groupTerms, KO_INDEX, EN_INDEX, type GlossarySortMode } from "@/lib/glossary-utils";
 import Highlight from "./Highlight";
 import JumpIndex from "./JumpIndex";
@@ -17,6 +18,7 @@ type CertFilter = "all" | "cpacc" | "was";
 
 export default function GlossaryClient({ terms, locale }: Props) {
   const t = useTranslations("glossary");
+  const languageMode = useLearningStore((s) => s.languageMode);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -183,6 +185,17 @@ export default function GlossaryClient({ terms, locale }: Props) {
                       text={locale === "ko" ? term.definition.ko : term.definition.en}
                       query={query}
                     />
+                    {languageMode === "parallel" && (
+                      <span
+                        className="glossary-row__def-secondary"
+                        lang={locale === "ko" ? "en" : "ko"}
+                      >
+                        <Highlight
+                          text={locale === "ko" ? term.definition.en : term.definition.ko}
+                          query={query}
+                        />
+                      </span>
+                    )}
                   </div>
                   <div className="glossary-row__cert">
                     {term.certs.map((c) => (
