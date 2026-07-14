@@ -27,22 +27,61 @@ const units: StudyUnit[] = [
 				"Understand how semantic HTML impacts assistive technologies",
 			],
 		},
-		content: {
-			ko: [
-				"시맨틱 HTML(Semantic HTML)이란 태그의 시각적 표현이 아닌 의미와 역할에 맞는 HTML 요소를 사용하는 것입니다. 스크린리더는 시맨틱 마크업을 기반으로 페이지 구조를 파악하고 사용자에게 전달합니다.",
-				"HTML5 랜드마크 요소는 페이지의 주요 영역을 정의합니다: `<header>`(페이지 헤더), `<nav>`(내비게이션), `<main>`(주요 콘텐츠, 페이지당 하나), `<article>`(독립적인 콘텐츠), `<section>`(주제별 그룹), `<aside>`(부가 정보), `<footer>`(페이지 푸터). 스크린리더 사용자는 랜드마크를 통해 페이지를 빠르게 탐색합니다.",
-				"제목 계층 구조: `<h1>`은 페이지당 하나의 주요 제목으로 사용하고, `<h2>`~`<h6>`은 계층 순서대로 사용합니다. 제목 레벨을 건너뛰면 안 됩니다(예: h1 → h3). 제목은 시각적 스타일이 아닌 콘텐츠의 논리적 구조를 나타내야 합니다.",
-				"인터랙티브 요소의 올바른 선택: 클릭 시 동작이 실행되면 `<button>`, 다른 페이지나 위치로 이동하면 `<a href>`, 데이터 입력에는 `<input>`, 선택 목록에는 `<select>`를 사용합니다. `<div>`나 `<span>`에 onclick 이벤트를 달면 키보드 접근성과 스크린리더 지원이 기본적으로 제공되지 않습니다.",
-				"리스트 요소: 순서 없는 목록에는 `<ul>`, 순서 있는 목록에는 `<ol>`, 설명 목록에는 `<dl>`을 사용합니다. 스크린리더는 '목록, 3개 항목' 처럼 목록 항목 수와 현재 위치를 사용자에게 알려줍니다.",
-			],
-			en: [
-				"Semantic HTML means using HTML elements according to their meaning and purpose, not just their visual appearance. Screen readers use semantic markup to understand and communicate page structure.",
-				"HTML5 landmark elements define major page regions: `<header>`, `<nav>`, `<main>` (one per page), `<article>`, `<section>`, `<aside>`, `<footer>`. Screen reader users navigate pages via these landmarks.",
-				"Heading hierarchy: Use `<h1>` as the single main heading per page. Use `<h2>`–`<h6>` in order. Never skip heading levels (e.g., h1 → h3). Headings represent logical content structure, not visual styling.",
-				"Choosing interactive elements: Use `<button>` for actions, `<a href>` for navigation, `<input>` for data entry, `<select>` for selection lists. Adding onclick to `<div>` or `<span>` doesn't provide keyboard accessibility or screen reader support by default.",
-				"List elements: Use `<ul>` for unordered lists, `<ol>` for ordered lists, `<dl>` for description lists. Screen readers announce the number of items and the user's current position (e.g., 'list, 3 items').",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "시맨틱 HTML이 접근성의 기반인 이유", en: "Why Semantic HTML Is the Foundation" },
+				paragraphs: {
+					ko: [
+						"시맨틱 HTML이란 태그의 시각적 표현이 아닌 의미와 역할에 맞는 HTML 요소를 사용하는 것입니다. 브라우저는 마크업에서 접근성 트리(Accessibility Tree)를 생성해 각 요소의 이름(name), 역할(role), 상태(state), 값(value)을 보조기술에 전달합니다 — 시맨틱 요소를 쓰면 이 정보가 공짜로 제공됩니다.",
+						"`<div>`로 만든 버튼과 `<button>`의 차이를 생각해보세요. `<button>`은 키보드 포커스, Enter/Space 활성화, '버튼' 역할 낭독, 폼 제출 동작을 기본 제공합니다. `<div onclick>`은 이 모든 것을 JavaScript와 ARIA로 재구현해야 하고, 하나라도 빠뜨리면 접근성 결함이 됩니다. '기본 요소를 쓸 수 있으면 쓴다'가 WAS 전체를 관통하는 원칙입니다.",
+					],
+					en: [
+						"Semantic HTML means choosing elements by meaning and role, not visual appearance. The browser derives an Accessibility Tree from markup, exposing each element's name, role, state, and value to assistive technologies — semantic elements provide this information for free.",
+						"Compare a `<div>` styled as a button with a real `<button>`: the `<button>` gives you keyboard focus, Enter/Space activation, a 'button' role announcement, and form submission behavior out of the box. A `<div onclick>` requires re-implementing all of that with JavaScript and ARIA — and every omission is an accessibility defect. 'Use the native element when you can' is the principle running through all of WAS.",
+					],
+				},
+			},
+			{
+				heading: { ko: "랜드마크로 페이지 구조 만들기", en: "Structuring Pages with Landmarks" },
+				paragraphs: {
+					ko: [
+						"HTML5 랜드마크 요소는 페이지의 주요 영역을 정의합니다: `<header>`(배너), `<nav>`(내비게이션), `<main>`(주요 콘텐츠, 페이지당 하나), `<article>`(독립 콘텐츠), `<section>`(주제별 그룹), `<aside>`(부가 정보), `<footer>`(콘텐츠 정보). 스크린리더 사용자는 랜드마크 단축키로 영역 간을 빠르게 이동합니다.",
+						"실무 요령: 같은 유형의 랜드마크가 여러 개면 aria-label로 구분합니다(예: `<nav aria-label=\"주 메뉴\">`와 `<nav aria-label=\"페이지 내 목차\">`). 모든 콘텐츠는 어떤 랜드마크 안에든 속하는 것이 좋고, `<section>`은 접근 가능한 이름(aria-label/aria-labelledby)이 있을 때만 region 랜드마크로 노출됩니다.",
+					],
+					en: [
+						"HTML5 landmark elements define the page's major regions: `<header>` (banner), `<nav>`, `<main>` (one per page), `<article>`, `<section>`, `<aside>`, and `<footer>` (contentinfo). Screen reader users jump between regions with landmark shortcuts.",
+						"Practical tips: when multiple landmarks of the same type exist, distinguish them with aria-label (e.g., `<nav aria-label=\"Main menu\">` vs `<nav aria-label=\"Table of contents\">`). Ideally all content lives inside some landmark, and note that `<section>` is exposed as a region landmark only when it has an accessible name (aria-label/aria-labelledby).",
+					],
+				},
+			},
+			{
+				heading: { ko: "제목 계층 구조", en: "Heading Hierarchy" },
+				paragraphs: {
+					ko: [
+						"`<h1>`은 페이지당 하나의 주요 제목으로 사용하고, `<h2>`~`<h6>`은 계층 순서대로 사용합니다. 레벨을 건너뛰면 안 됩니다(h1 → h3 금지). 제목은 시각적 크기가 아니라 콘텐츠의 논리적 구조를 나타내야 하며, 크기 조정은 CSS로 합니다.",
+						"제목이 중요한 이유: 설문조사에서 스크린리더 사용자가 가장 많이 쓰는 페이지 탐색 방법이 제목 이동(H 키)입니다. 굵은 텍스트를 제목처럼 보이게 스타일링한 가짜 제목은 이 탐색에서 완전히 누락됩니다. 반대로 시각적 강조 목적으로 아무 데나 h 태그를 쓰면 구조가 왜곡됩니다.",
+					],
+					en: [
+						"Use `<h1>` as the single main heading per page, then `<h2>`–`<h6>` in order — never skip levels (no h1 → h3). Headings express the logical structure of content, not visual size; adjust size with CSS.",
+						"Why headings matter: surveys consistently find heading navigation (the H key) is screen reader users' most-used way to explore pages. Fake headings — bold text styled to look like headings — are entirely invisible to that navigation. Conversely, using h tags anywhere just for visual emphasis distorts the structure.",
+					],
+				},
+			},
+			{
+				heading: { ko: "인터랙티브 요소와 리스트", en: "Interactive Elements and Lists" },
+				paragraphs: {
+					ko: [
+						"인터랙티브 요소 선택 기준: 동작 실행은 `<button>`, 페이지·위치 이동은 `<a href>`, 데이터 입력은 `<input>`, 선택 목록은 `<select>`. 링크와 버튼의 구분은 시험 단골입니다 — '어디로 가는가'는 링크, '무엇을 하는가'는 버튼입니다. href 없는 `<a>`는 키보드 포커스를 받지 못한다는 점도 주의하세요.",
+						"리스트 요소: 순서 없는 목록 `<ul>`, 순서 있는 목록 `<ol>`, 용어-설명 쌍은 `<dl>`. 스크린리더는 '목록, 3개 항목'처럼 항목 수와 현재 위치를 알려주므로, 시각적으로만 목록처럼 배치한 `<div>` 나열과 실제 목록 마크업은 사용 경험이 완전히 다릅니다.",
+					],
+					en: [
+						"Choosing interactive elements: `<button>` for actions, `<a href>` for navigation, `<input>` for data entry, `<select>` for selection lists. The link-versus-button distinction is a favorite exam topic — 'where does it go' is a link; 'what does it do' is a button. Also note that an `<a>` without href cannot receive keyboard focus.",
+						"Lists: `<ul>` for unordered, `<ol>` for ordered, `<dl>` for term–description pairs. Screen readers announce 'list, 3 items' and your position within it — so a stack of `<div>`s that merely looks like a list is a completely different experience from real list markup.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-1-q1",
@@ -129,22 +168,74 @@ const units: StudyUnit[] = [
 				"Distinguish between aria-live='polite' and aria-live='assertive'",
 			],
 		},
-		content: {
-			ko: [
-				"WAI-ARIA(Web Accessibility Initiative - Accessible Rich Internet Applications)는 시맨틱 HTML만으로 표현하기 어려운 복잡한 UI 패턴의 접근성을 보완하는 W3C 표준입니다.",
-				'ARIA의 3가지 핵심 개념: ① 역할(Roles) - 요소의 용도를 정의합니다. 예: role="button", role="dialog", role="tablist", role="alert" ② 속성(Properties) - 요소에 대한 추가 정보를 제공합니다. 예: aria-label="닫기", aria-labelledby="title-id", aria-required="true" ③ 상태(States) - 요소의 현재 상태를 나타냅니다. 예: aria-expanded="true", aria-checked="false", aria-disabled="true"',
-				"ARIA 사용의 첫 번째 규칙(First Rule of ARIA Use): '시맨틱 HTML이 동일한 역할을 할 수 있다면 ARIA를 사용하지 않는다.' 예를 들어 `<button>`을 사용할 수 있다면 `<div role=\"button\">`을 사용하지 않아야 합니다.",
-				"주요 aria 속성: aria-label(레이블 직접 제공), aria-labelledby(다른 요소의 텍스트를 레이블로 참조), aria-describedby(추가 설명 제공), aria-hidden(보조기술에서 요소 숨기기), aria-required(필수 입력 표시), aria-invalid(유효성 검사 오류 표시).",
-				'aria-live 영역: 동적으로 변경되는 콘텐츠(알림, 오류 메시지, 로딩 상태 등)에 사용합니다. aria-live="polite"는 현재 읽기가 끝난 후 알리고, aria-live="assertive"는 현재 읽기를 중단하고 즉시 알립니다. assertive는 중요한 오류나 긴급 알림에만 사용해야 합니다.',
-			],
-			en: [
-				"WAI-ARIA (Web Accessibility Initiative – Accessible Rich Internet Applications) is a W3C standard that supplements semantic HTML to make complex UI patterns accessible.",
-				'Three core ARIA concepts: ① Roles – define the purpose of an element (e.g., role="button", role="dialog") ② Properties – provide additional information about an element (e.g., aria-label, aria-required) ③ States – communicate the current condition of an element (e.g., aria-expanded, aria-checked, aria-disabled).',
-				"First Rule of ARIA Use: 'If you can use a native HTML element with the semantics you need, don't use ARIA.' For example, use `<button>` instead of `<div role=\"button\">`.",
-				"Key aria attributes: aria-label (provide a label directly), aria-labelledby (reference another element as label), aria-describedby (provide additional description), aria-hidden (hide from assistive tech), aria-required (mark required fields), aria-invalid (mark validation errors).",
-				'aria-live regions: Used for dynamically updated content (notifications, errors, loading states). aria-live="polite" announces updates after the current speech finishes. aria-live="assertive" interrupts immediately. Use assertive only for critical errors or urgent alerts.',
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "ARIA란 무엇이고 무엇이 아닌가", en: "What ARIA Is — and Isn't" },
+				paragraphs: {
+					ko: [
+						"WAI-ARIA(Accessible Rich Internet Applications)는 시맨틱 HTML만으로 표현하기 어려운 복잡한 UI 패턴(탭, 트리, 콤보박스, 라이브 영역 등)의 의미를 보조기술에 전달하는 W3C 표준입니다. ARIA는 접근성 트리에 노출되는 이름·역할·상태 정보를 바꿉니다.",
+						"중요한 한계: ARIA는 의미만 바꿀 뿐 동작을 만들지 않습니다. `role=\"button\"`을 붙여도 키보드 포커스나 Enter/Space 활성화는 생기지 않으며, 개발자가 tabindex와 키 이벤트를 직접 구현해야 합니다. 'ARIA는 약속이다 — 역할을 선언했으면 그 역할답게 동작하게 만들 책임이 따라온다'는 관점이 중요합니다. 잘못 쓴 ARIA는 없느니만 못합니다(No ARIA is better than bad ARIA).",
+					],
+					en: [
+						"WAI-ARIA (Accessible Rich Internet Applications) is the W3C standard for conveying the semantics of complex UI patterns — tabs, trees, comboboxes, live regions — that semantic HTML alone cannot express. ARIA changes the name, role, and state information exposed in the accessibility tree.",
+						"A critical limitation: ARIA changes semantics only — it creates no behavior. Adding `role=\"button\"` provides no keyboard focus and no Enter/Space activation; the developer must implement tabindex and key handling. Think of ARIA as a promise: declaring a role obligates you to make the element behave like that role. Badly used ARIA is worse than none — 'No ARIA is better than bad ARIA.'",
+					],
+				},
+			},
+			{
+				heading: { ko: "역할·속성·상태", en: "Roles, Properties, and States" },
+				paragraphs: {
+					ko: [
+						'ARIA의 3가지 핵심 개념: ① 역할(Roles) — 요소의 용도를 정의합니다(role="button", role="dialog", role="tablist", role="alert"). ② 속성(Properties) — 비교적 고정적인 추가 정보를 제공합니다(aria-label, aria-labelledby, aria-required). ③ 상태(States) — 상호작용에 따라 변하는 현재 조건을 나타냅니다(aria-expanded, aria-checked, aria-selected, aria-disabled).',
+						"속성과 상태의 구분 요령: 상태는 사용자 상호작용으로 자주 바뀌고(아코디언 열림/닫힘), 속성은 잘 바뀌지 않습니다(필수 여부). 상태를 선언했다면 JavaScript로 실제 상태 변화에 맞춰 값을 갱신해야 합니다 — aria-expanded를 true로 박아두고 갱신하지 않는 것이 흔한 결함입니다.",
+					],
+					en: [
+						'Three core ARIA concepts: ① Roles define an element\'s purpose (role="button", role="dialog", role="tablist", role="alert"). ② Properties provide relatively fixed additional information (aria-label, aria-labelledby, aria-required). ③ States express current conditions that change with interaction (aria-expanded, aria-checked, aria-selected, aria-disabled).',
+						"Telling properties from states: states change frequently through interaction (accordion open/closed); properties rarely change (whether a field is required). If you declare a state, you must update it with JavaScript as the real state changes — hardcoding aria-expanded=\"true\" and never updating it is a classic defect.",
+					],
+				},
+			},
+			{
+				heading: { ko: "ARIA 사용의 다섯 규칙", en: "The Five Rules of ARIA Use" },
+				paragraphs: {
+					ko: [
+						"W3C가 정리한 ARIA 사용 규칙: ① 시맨틱 HTML로 가능하면 ARIA를 쓰지 않는다(제1규칙 — `<button>` 대신 `<div role=\"button\">` 금지). ② 꼭 필요한 경우가 아니면 기본 시맨틱을 바꾸지 않는다(예: `<h2 role=\"tab\">` 지양, 탭 안에 h2를 넣는 방식 선호). ③ 모든 인터랙티브 ARIA 컨트롤은 키보드로 사용 가능해야 한다.",
+						'④ 포커스 가능한 요소에 role="presentation"이나 aria-hidden="true"를 쓰지 않는다 — 포커스는 되는데 아무것도 낭독되지 않는 "유령 요소"가 됩니다. ⑤ 모든 인터랙티브 요소에는 접근 가능한 이름(accessible name)이 있어야 한다. 이 다섯 규칙은 ARIA 결함의 대부분을 예방합니다.',
+					],
+					en: [
+						"The W3C's rules of ARIA use: ① Don't use ARIA if native HTML can do it (the First Rule — `<button>` over `<div role=\"button\">`). ② Don't change native semantics unless you truly must (avoid `<h2 role=\"tab\">`; prefer a heading inside the tab). ③ All interactive ARIA controls must be keyboard-usable.",
+						'④ Never put role="presentation" or aria-hidden="true" on a focusable element — you create a \'ghost\': focusable but announcing nothing. ⑤ Every interactive element needs an accessible name. These five rules prevent most ARIA defects.',
+					],
+				},
+			},
+			{
+				heading: { ko: "이름 계산과 주요 속성", en: "Name Computation and Key Attributes" },
+				paragraphs: {
+					ko: [
+						"접근 가능한 이름(accessible name)은 우선순위에 따라 계산됩니다: aria-labelledby > aria-label > 네이티브 라벨(`<label>`, alt, `<caption>`) > 콘텐츠 텍스트. aria-labelledby는 다른 요소의 텍스트를 참조하고(여러 id 나열 가능), aria-label은 문자열을 직접 제공하며, aria-describedby는 이름이 아닌 보조 설명을 연결합니다.",
+						'그 밖의 주요 속성: aria-hidden="true"(보조기술에서 서브트리 숨김 — 시각적으로는 보임), aria-required(필수 입력), aria-invalid(유효성 오류), aria-current(현재 페이지/단계 표시). aria-label은 보이는 텍스트가 없는 아이콘 버튼 등에 쓰되, 보이는 라벨이 있으면 그 라벨을 이름에 포함해야 합니다(WCAG 2.5.3 Label in Name — 음성 제어 사용자).',
+					],
+					en: [
+						"The accessible name is computed by priority: aria-labelledby > aria-label > native labeling (`<label>`, alt, `<caption>`) > content text. aria-labelledby references other elements' text (multiple ids allowed); aria-label supplies a string directly; aria-describedby attaches supplementary description — not the name.",
+						'Other key attributes: aria-hidden="true" (hides a subtree from AT while remaining visible), aria-required, aria-invalid, and aria-current (current page/step). Use aria-label for controls with no visible text, such as icon buttons — but when a visible label exists, it must be contained in the name (WCAG 2.5.3 Label in Name, for voice control users).',
+					],
+				},
+			},
+			{
+				heading: { ko: "라이브 영역", en: "Live Regions" },
+				paragraphs: {
+					ko: [
+						'aria-live 영역은 동적으로 변경되는 콘텐츠(알림, 오류 메시지, 로딩 상태, 검색 결과 수)를 스크린리더가 자동으로 낭독하게 합니다. aria-live="polite"는 현재 낭독이 끝난 후 알리고, aria-live="assertive"는 즉시 중단하고 알립니다. assertive는 긴급 오류에만 사용하세요.',
+						'관련 역할: role="status"는 polite 라이브 영역, role="alert"는 assertive 라이브 영역과 동등합니다. 실무 요령: 라이브 영역은 페이지 로드 시점부터 DOM에 존재해야 안정적으로 동작하며(내용만 갱신), 요소 자체를 동적으로 삽입하면 낭독이 누락될 수 있습니다.',
+					],
+					en: [
+						'aria-live regions make screen readers announce dynamically changing content — notifications, error messages, loading states, result counts. aria-live="polite" waits for current speech to finish; aria-live="assertive" interrupts immediately. Reserve assertive for critical errors.',
+						'Related roles: role="status" is equivalent to a polite live region and role="alert" to an assertive one. Practical tip: live regions work reliably when the container exists in the DOM from page load and only its content updates — inserting the region element itself dynamically often drops announcements.',
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-2-q1",
@@ -240,22 +331,61 @@ const units: StudyUnit[] = [
 				"Understand the focus trap pattern for modals",
 			],
 		},
-		content: {
-			ko: [
-				"키보드 접근성은 마우스를 사용할 수 없는 사용자(지체 장애인, 화면낭독기 사용자, 임시 부상자 등)에게 필수적입니다. 모든 인터랙티브 기능은 키보드로 접근하고 조작할 수 있어야 합니다.",
-				'Tab 순서와 tabindex: Tab 키로 포커스 가능한 요소(링크, 버튼, 입력 필드)를 순서대로 이동합니다. tabindex="0"은 자연스러운 DOM 순서대로 포커스됩니다. tabindex="-1"은 탭 순서에서 제외되지만, JavaScript로 focus()를 호출하면 포커스 가능합니다(프로그래밍 포커스). tabindex="양수"는 탭 순서를 강제 조정하므로 사용을 피해야 합니다.',
-				"포커스 표시(Focus Indicator): 포커스된 요소는 시각적으로 명확하게 표시되어야 합니다(WCAG 2.4.7). CSS `outline: none`으로 포커스 표시를 완전히 제거하면 WCAG 위반입니다. `:focus-visible` 의사 클래스를 사용하면 키보드 사용 시에만 포커스 표시를 보여주고, 마우스 클릭 시에는 숨길 수 있어 시각 디자인과 접근성을 모두 만족합니다.",
-				"건너뛰기 링크(Skip Link): 페이지 첫 번째 요소로 '본문으로 바로가기' 링크를 제공합니다. 키보드 사용자가 매번 긴 내비게이션을 Tab으로 거치지 않고 바로 주요 콘텐츠로 이동할 수 있습니다. 일반적으로 평소에는 화면 밖에 숨겼다가 Tab을 누르면 화면에 나타납니다.",
-				"포커스 트랩(Focus Trap): 모달 다이얼로그가 열리면 포커스가 모달 내부에만 머물러야 합니다(모달 마지막 요소에서 Tab → 모달 첫 요소로). 모달이 닫히면 모달을 열었던 요소(예: 모달 열기 버튼)로 포커스를 되돌려야 합니다. SPA에서는 라우트 변경 시 포커스를 새 페이지의 주요 제목으로 이동해야 합니다.",
-			],
-			en: [
-				"Keyboard accessibility is essential for users who cannot use a mouse — people with motor disabilities, screen reader users, or those with temporary injuries. All interactive functionality must be accessible and operable via keyboard.",
-				'Tab order and tabindex: Tab navigates through focusable elements (links, buttons, inputs) in DOM order. tabindex="0" makes an element focusable in natural DOM order. tabindex="-1" removes from tab order but allows programmatic focus via JavaScript\'s focus() method. Positive tabindex values force a specific tab order and should be avoided.',
-				"Focus Indicator: Focused elements must be visually distinguishable (WCAG 2.4.7). Removing focus indicators with `outline: none` violates WCAG. Use `:focus-visible` to show focus indicators only for keyboard users while hiding them for mouse users, satisfying both design and accessibility needs.",
-				"Skip Link: Provide a 'Skip to main content' link as the first element on the page. This allows keyboard users to bypass repeated navigation and jump directly to main content. Skip links are typically hidden off-screen and appear on Tab press.",
-				"Focus Trap: When a modal dialog opens, focus must be contained within it (Tab from last modal element wraps to first modal element). When the modal closes, focus must return to the element that triggered it (e.g., the button that opened the modal). In SPAs, focus should move to the new page's main heading on route changes.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "키보드 접근성의 원칙", en: "Principles of Keyboard Accessibility" },
+				paragraphs: {
+					ko: [
+						"키보드 접근성은 마우스를 사용할 수 없는 사용자(운동 장애, 화면낭독기 사용자, 임시 부상자)에게 필수이며, 스위치·음성 제어 같은 보조기술도 내부적으로 키보드 인터페이스를 사용합니다. 모든 인터랙티브 기능은 키보드로 접근·조작할 수 있어야 하고(WCAG 2.1.1, Level A), 들어간 곳에서 빠져나올 수 있어야 합니다(2.1.2 키보드 트랩 없음).",
+						"기본 키 관례: Tab/Shift+Tab으로 컨트롤 간 이동, Enter로 링크·버튼 활성화, Space로 버튼·체크박스 토글, 화살표 키로 라디오 그룹·탭·메뉴 같은 복합 위젯 내부 이동, Esc로 모달·메뉴 닫기. 커스텀 위젯을 만들면 이 관례를 그대로 구현해야 사용자의 기대와 일치합니다.",
+					],
+					en: [
+						"Keyboard accessibility is essential for users who cannot use a mouse — motor disabilities, screen reader users, temporary injuries — and assistive technologies like switches and voice control operate through the keyboard interface internally. All interactive functionality must be keyboard accessible (WCAG 2.1.1, Level A), and users must be able to leave anything they enter (2.1.2 No Keyboard Trap).",
+						"Core key conventions: Tab/Shift+Tab move between controls; Enter activates links and buttons; Space toggles buttons and checkboxes; arrow keys move within composite widgets (radio groups, tabs, menus); Esc closes modals and menus. Custom widgets must implement these conventions to match user expectations.",
+					],
+				},
+			},
+			{
+				heading: { ko: "Tab 순서와 tabindex", en: "Tab Order and tabindex" },
+				paragraphs: {
+					ko: [
+						'Tab 키는 포커스 가능한 요소(링크, 버튼, 입력 필드)를 DOM 순서대로 이동합니다. tabindex="0"은 원래 포커스 불가능한 요소를 자연스러운 DOM 순서에 넣고, tabindex="-1"은 탭 순서에서 제외하되 JavaScript focus()로는 포커스 가능하게 합니다(프로그래밍 포커스 — 모달 진입, SPA 헤딩 포커스 등에 사용).',
+						'양수 tabindex는 탭 순서를 DOM과 다르게 강제하므로 피해야 합니다 — 유지보수가 어렵고 예측 불가능한 순서를 만듭니다. 근본 해결은 DOM 순서 자체를 논리적으로 배치하는 것입니다. 포커스 순서는 의미와 조작 순서에 맞아야 한다는 것이 WCAG 2.4.3(포커스 순서)의 요구입니다. CSS로 시각 순서만 바꾸면(flex order 등) 시각과 포커스 순서가 어긋나는 결함이 생깁니다.',
+					],
+					en: [
+						'Tab moves through focusable elements (links, buttons, inputs) in DOM order. tabindex="0" adds a normally unfocusable element into the natural order; tabindex="-1" removes an element from the tab order while allowing programmatic focus() — used for modal entry and SPA heading focus.',
+						"Avoid positive tabindex values: they force an order different from the DOM, are hard to maintain, and create unpredictable sequences. The real fix is arranging the DOM logically. WCAG 2.4.3 (Focus Order) requires focus order to match meaning and operation — reordering only visually with CSS (flex order) creates a mismatch defect between visual and focus order.",
+					],
+				},
+			},
+			{
+				heading: { ko: "포커스 표시와 건너뛰기 링크", en: "Focus Indicators and Skip Links" },
+				paragraphs: {
+					ko: [
+						"포커스된 요소는 시각적으로 명확히 표시되어야 합니다(WCAG 2.4.7 가시적 포커스, Level AA). CSS `outline: none`으로 포커스 표시를 제거하고 대안을 주지 않으면 위반입니다. `:focus-visible` 의사 클래스를 쓰면 키보드 사용 시에만 표시하고 마우스 클릭 시엔 숨길 수 있어 디자인과 접근성을 함께 만족합니다. WCAG 2.2는 포커스된 요소가 다른 콘텐츠에 가려지지 않을 것(2.4.11 포커스 가림 방지)도 요구합니다.",
+						"건너뛰기 링크(Skip Link)는 페이지 첫 요소로 '본문으로 바로가기'를 제공해, 키보드 사용자가 반복되는 내비게이션을 건너뛰고 주요 콘텐츠로 즉시 이동하게 합니다(WCAG 2.4.1 블록 건너뛰기, Level A). 평소엔 화면 밖에 숨겼다가 포커스를 받으면 나타나는 패턴이 일반적이며, 대상(`#main-content`)이 tabindex=\"-1\"로 포커스를 받을 수 있어야 완성됩니다.",
+					],
+					en: [
+						"Focused elements must be clearly visible (WCAG 2.4.7 Focus Visible, Level AA). Removing indicators with `outline: none` without an alternative is a violation. The `:focus-visible` pseudo-class shows indicators for keyboard use while hiding them on mouse clicks — satisfying both design and accessibility. WCAG 2.2 adds that the focused element must not be hidden by other content (2.4.11 Focus Not Obscured).",
+						"A skip link — 'Skip to main content' as the first element — lets keyboard users bypass repeated navigation (WCAG 2.4.1 Bypass Blocks, Level A). The common pattern hides it off-screen until focused; it's complete only when the target (`#main-content`) can receive focus via tabindex=\"-1\".",
+					],
+				},
+			},
+			{
+				heading: { ko: "포커스 관리 — 모달과 SPA", en: "Focus Management — Modals and SPAs" },
+				paragraphs: {
+					ko: [
+						"모달 다이얼로그가 열리면: 포커스를 모달 안으로 이동시키고, 포커스가 모달 내부에만 머물게 하며(마지막 요소에서 Tab → 첫 요소로 순환), 배경 콘텐츠는 inert 처리하고, Esc로 닫을 수 있어야 합니다. 모달이 닫히면 모달을 열었던 트리거 요소로 포커스를 되돌립니다. 네이티브 `<dialog>` 요소의 showModal()은 이 중 상당 부분을 기본 제공합니다.",
+						"SPA(단일 페이지 앱)에서는 라우트가 바뀌어도 전체 페이지가 새로 로드되지 않아 포커스와 낭독이 이전 상태에 머뭅니다. 라우트 변경 시 새 화면의 주요 제목(h1)에 tabindex=\"-1\"을 주고 포커스를 이동시키거나, 라이브 영역으로 페이지 전환을 알리는 패턴이 필요합니다. 동적으로 나타나는 콘텐츠(알림, 삭제 후 목록)도 포커스가 허공에 남지 않게 관리해야 합니다.",
+					],
+					en: [
+						"When a modal opens: move focus into it, contain focus inside (Tab from the last element wraps to the first), make the background inert, and support Esc to close. When it closes, return focus to the trigger element. The native `<dialog>` element's showModal() provides much of this for free.",
+						"In an SPA, route changes don't reload the page, so focus and announcements linger in the previous state. On route change, give the new screen's main heading tabindex=\"-1\" and move focus to it, or announce the transition via a live region. Dynamic content (toasts, lists after deletion) also needs focus management so focus never dangles on removed elements.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-3-q1",
@@ -360,20 +490,48 @@ const units: StudyUnit[] = [
 				"List color contrast checking tools",
 			],
 		},
-		content: {
-			ko: [
-				"WCAG 1.4.3(Level AA) 텍스트 대비 기준: 일반 텍스트는 최소 4.5:1, 큰 텍스트(18pt 이상 또는 14pt 굵은 글씨)는 최소 3:1의 대비 비율이 필요합니다. WCAG 1.4.6(Level AAA)은 일반 텍스트 7:1, 큰 텍스트 4.5:1을 요구합니다.",
-				"WCAG 1.4.11 비텍스트 대비(Level AA, WCAG 2.1 신규): UI 컴포넌트(버튼 테두리, 입력 필드, 체크박스 등)와 의미 있는 그래픽 요소(차트, 아이콘 등)는 배경 대비 최소 3:1을 충족해야 합니다. 비활성(disabled) 요소와 순수 장식 요소는 면제됩니다.",
-				"색상 대비 검사 도구: WebAIM Contrast Checker(온라인), Colour Contrast Analyser(CCA, 데스크톱), 브라우저 개발자 도구(Chrome DevTools의 색상 피커), axe/WAVE 등 자동화 도구도 대비 검사를 지원합니다. Figma에서는 Stark 플러그인이 널리 사용됩니다.",
-				"실무 팁: 회색 텍스트(#999)를 흰 배경(#fff)에 사용하면 대비 비율은 2.85:1로 AA 미달입니다. 최소 #767676(4.54:1) 이상을 사용해야 합니다. 플레이스홀더 텍스트도 대비 기준을 충족해야 하며, 색상만으로 정보를 전달하지 않아야 합니다(WCAG 1.4.1, Use of Color).",
-			],
-			en: [
-				"WCAG 1.4.3 (Level AA) text contrast: Normal text requires at least 4.5:1; large text (18pt+ or 14pt bold) requires at least 3:1. WCAG 1.4.6 (Level AAA) requires 7:1 for normal text and 4.5:1 for large text.",
-				"WCAG 1.4.11 Non-text Contrast (Level AA, new in WCAG 2.1): UI components (button borders, input fields, checkboxes) and meaningful graphical objects (charts, icons) need at least 3:1 contrast against their background. Disabled elements and purely decorative elements are exempt.",
-				"Contrast checking tools: WebAIM Contrast Checker (online), Colour Contrast Analyser (CCA, desktop), browser DevTools (Chrome's color picker), and automated tools like axe/WAVE also support contrast checking. In Figma, the Stark plugin is widely used.",
-				"Practical tip: Gray text (#999) on a white background (#fff) yields only 2.85:1 contrast ratio — failing AA. Use at least #767676 (4.54:1). Placeholder text must also meet contrast requirements. Never convey information through color alone (WCAG 1.4.1, Use of Color).",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "텍스트 대비 기준", en: "Text Contrast Requirements" },
+				paragraphs: {
+					ko: [
+						"WCAG 1.4.3(Level AA): 일반 텍스트는 최소 4.5:1, 큰 텍스트는 최소 3:1의 명도 대비가 필요합니다. 큰 텍스트의 정의는 18pt(약 24px) 이상, 또는 14pt(약 18.66px) 이상의 굵은 글씨입니다. WCAG 1.4.6(Level AAA)은 일반 7:1, 큰 텍스트 4.5:1을 요구합니다.",
+						"대비 비율은 색상(hue)이 아닌 상대 휘도(relative luminance)로 계산되며 1:1(동일)부터 21:1(흑백)까지입니다. 로고와 비활성 상태의 텍스트, 순수 장식 텍스트는 예외입니다. 배경이 이미지나 그라데이션이면 텍스트가 겹치는 가장 불리한 지점을 기준으로 판단합니다.",
+					],
+					en: [
+						"WCAG 1.4.3 (Level AA): normal text needs at least 4.5:1 luminance contrast; large text at least 3:1. Large text is defined as 18pt (~24px) or larger, or 14pt (~18.66px) or larger when bold. WCAG 1.4.6 (Level AAA) requires 7:1 and 4.5:1 respectively.",
+						"Contrast ratio is computed from relative luminance, not hue, and ranges from 1:1 (identical) to 21:1 (black on white). Logos, text in disabled states, and purely decorative text are exempt. Over images or gradients, judge against the worst-case point where the text overlaps.",
+					],
+				},
+			},
+			{
+				heading: { ko: "비텍스트 대비", en: "Non-text Contrast" },
+				paragraphs: {
+					ko: [
+						"WCAG 1.4.11 비텍스트 대비(Level AA, 2.1 신규): UI 컴포넌트(버튼·입력 필드의 경계, 체크박스, 포커스 표시)와 의미 전달에 필요한 그래픽 요소(차트 선, 아이콘)는 인접 색과 최소 3:1 대비가 필요합니다. 비활성 요소와 순수 장식은 면제됩니다.",
+						"자주 걸리는 사례: 옅은 회색 테두리의 입력 필드(어디까지가 입력 영역인지 저시력 사용자가 알 수 없음), 배경과 구분되지 않는 토글 스위치, 컬러 코드에만 의존하는 라인 차트. 상태 변화(선택됨·포커스됨)를 나타내는 시각 표시 자체도 3:1을 충족해야 합니다.",
+					],
+					en: [
+						"WCAG 1.4.11 Non-text Contrast (Level AA, new in 2.1): UI components (button and input boundaries, checkboxes, focus indicators) and graphics required to understand content (chart lines, icons) need at least 3:1 contrast against adjacent colors. Disabled elements and pure decoration are exempt.",
+						"Common failures: input fields with pale gray borders (low-vision users can't tell where the field is), toggle switches indistinguishable from the background, and line charts relying on color coding alone. Visual indicators of state (selected, focused) must themselves meet 3:1.",
+					],
+				},
+			},
+			{
+				heading: { ko: "검사 도구와 실무 팁", en: "Tools and Practical Tips" },
+				paragraphs: {
+					ko: [
+						"대비 검사 도구: WebAIM Contrast Checker(온라인), Colour Contrast Analyser(CCA, 데스크톱 — 스포이드로 화면 어디든 측정), Chrome DevTools 색상 피커(AA/AAA 표시), axe·WAVE 같은 자동화 도구, Figma의 Stark 플러그인. 대비는 자동 검사가 가장 잘 잡는 항목이지만, 이미지 위 텍스트·그라데이션은 수동 확인이 필요합니다.",
+						"실무 팁: 흰 배경의 회색 텍스트 #999는 2.85:1로 AA 미달 — 최소 #767676(4.54:1)을 쓰세요. 플레이스홀더 텍스트도 대비 기준 적용 대상입니다. 색상만으로 정보를 전달하지 마세요(WCAG 1.4.1) — 오류를 빨간 테두리로만 표시하지 말고 아이콘·텍스트를 병행합니다. 다크 모드는 별도 팔레트로 다시 검증해야 합니다.",
+					],
+					en: [
+						"Contrast tools: WebAIM Contrast Checker (online), Colour Contrast Analyser (CCA, desktop — eyedropper measures anywhere on screen), Chrome DevTools color picker (AA/AAA indicators), automated tools like axe and WAVE, and the Stark plugin in Figma. Contrast is what automation catches best, but text over images and gradients still needs manual checks.",
+						"Practical tips: gray #999 on white is 2.85:1 — an AA failure; use at least #767676 (4.54:1). Placeholder text is subject to contrast requirements too. Never convey information by color alone (WCAG 1.4.1) — pair error states with icons and text, not just a red border. Dark mode is a separate palette that must be re-verified.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-4-q1",
@@ -456,20 +614,63 @@ const units: StudyUnit[] = [
 				"Describe accessibility requirements for marking required fields",
 			],
 		},
-		content: {
-			ko: [
-				"레이블 연결: 모든 폼 입력 요소에는 연결된 레이블이 있어야 합니다. `<label for=\"id\">`로 명시적 연결하거나, 입력 요소를 `<label>` 안에 감싸는 암시적 연결이 가능합니다. 플레이스홀더만으로는 레이블을 대체할 수 없습니다 — 입력 시작 시 사라지기 때문입니다.",
-				"오류 메시지 패턴: 유효성 검사 오류는 오류 필드 근처에 인라인으로 표시하고, aria-describedby로 입력 필드와 연결합니다. aria-invalid=\"true\"로 오류 상태를 명시합니다. 페이지 상단에 오류 요약을 제공하고, 오류 요약이나 첫 오류 필드에 포커스를 이동합니다. 오류 메시지는 문제가 무엇인지와 수정 방법을 모두 설명해야 합니다.",
-				"fieldset/legend: 관련된 폼 요소를 그룹화할 때 사용합니다. 대표적 사례: 라디오 버튼 그룹, 체크박스 그룹, 주소 입력 필드 그룹. `<fieldset>`이 그룹 컨테이너, `<legend>`가 그룹의 제목입니다. 스크린리더는 legend 텍스트를 각 입력 필드 앞에 함께 읽어줍니다.",
-				"필수 필드: 필수 입력은 시각적 표시(빨간 별표 * 등)와 프로그래밍적 표시(aria-required=\"true\" 또는 required 속성)를 모두 제공해야 합니다. 시각적 표시만 있으면 스크린리더 사용자가 인식할 수 없고, 프로그래밍적 표시만 있으면 시각 사용자가 놓칠 수 있습니다. autocomplete 속성을 사용하면 자동완성을 지원하여 인지 장애 사용자에게 도움됩니다.",
-			],
-			en: [
-				"Label association: Every form input must have an associated label. Use explicit association with `<label for=\"id\">` or implicit association by wrapping the input inside `<label>`. Placeholder text alone cannot substitute for a label — it disappears when typing begins.",
-				"Error message patterns: Validation errors should be displayed inline near the error field and connected via aria-describedby. Use aria-invalid=\"true\" to mark the error state. Provide an error summary at the top and move focus to the error summary or first error field. Error messages should explain both what went wrong and how to fix it.",
-				"fieldset/legend: Used to group related form elements. Common use cases: radio button groups, checkbox groups, and address field groups. `<fieldset>` is the group container; `<legend>` is the group title. Screen readers read the legend text before each input field within the group.",
-				"Required fields: Required inputs need both visual indication (red asterisk *, etc.) and programmatic indication (aria-required=\"true\" or the required attribute). Visual-only marking is invisible to screen reader users; programmatic-only marking may be missed by sighted users. The autocomplete attribute supports autofill, helping users with cognitive disabilities.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "레이블 — 폼 접근성의 출발점", en: "Labels — Where Form Accessibility Starts" },
+				paragraphs: {
+					ko: [
+						"모든 폼 입력 요소에는 연결된 레이블이 있어야 합니다. `<label for=\"id\">`로 명시적으로 연결하거나, 입력 요소를 `<label>` 안에 감싸 암시적으로 연결합니다. 명시적 연결이 보조기술 호환성이 더 좋아 권장됩니다. 레이블 연결의 부수 효과로 레이블 클릭 시 입력에 포커스가 가는 큰 터치 영역도 생깁니다.",
+						"플레이스홀더만으로는 레이블을 대체할 수 없습니다 — 입력을 시작하면 사라져 참조할 수 없고, 기본 색은 대비 기준에도 미달하기 쉽습니다. 시각적으로 레이블을 숨겨야 하는 디자인이라면(검색창 등) sr-only 클래스나 aria-label을 사용하되, 보이는 텍스트가 있다면 접근 가능한 이름에 포함시켜야 합니다(2.5.3).",
+					],
+					en: [
+						"Every form input needs an associated label. Associate explicitly with `<label for=\"id\">` or implicitly by wrapping the input inside `<label>`. Explicit association has better AT compatibility and is preferred. A bonus: clicking the label focuses the input, creating a larger touch target.",
+						"Placeholder text cannot substitute for a label — it disappears when typing begins and its default color often fails contrast. If the design must hide the label visually (e.g., a search box), use an sr-only class or aria-label — and any visible text must be contained in the accessible name (2.5.3).",
+					],
+				},
+			},
+			{
+				heading: { ko: "그룹화 — fieldset과 legend", en: "Grouping — fieldset and legend" },
+				paragraphs: {
+					ko: [
+						"관련된 폼 요소는 `<fieldset>`으로 그룹화하고 `<legend>`로 그룹 제목을 제공합니다. 대표 사례: 라디오 버튼 그룹('배송 방법'), 체크박스 그룹, 주소 입력 그룹. 스크린리더는 그룹에 진입할 때 legend를 함께 낭독해, '표준 배송' 라디오가 무엇에 대한 선택지인지 맥락을 제공합니다.",
+						"legend 없이 라디오 버튼만 나열하면 각 선택지의 레이블('예', '아니오')만 들리고 질문이 무엇인지 알 수 없습니다 — 폼 접근성에서 가장 흔한 결함 중 하나입니다. 시각적 디자인상 fieldset을 쓰기 어려우면 role=\"group\"과 aria-labelledby로 동등한 의미를 제공할 수 있습니다.",
+					],
+					en: [
+						"Group related form elements with `<fieldset>` and title the group with `<legend>`. Classic cases: radio groups ('Shipping method'), checkbox groups, address field sets. Screen readers announce the legend when entering the group, giving context to what a 'Standard shipping' radio is a choice about.",
+						"Radio buttons without a legend leave users hearing only option labels ('Yes', 'No') with no idea what the question is — one of the most common form defects. Where the visual design resists fieldset, role=\"group\" with aria-labelledby provides equivalent semantics.",
+					],
+				},
+			},
+			{
+				heading: { ko: "오류 처리 패턴", en: "Error Handling Patterns" },
+				paragraphs: {
+					ko: [
+						"유효성 검사 오류의 접근성 패턴: 오류를 필드 근처에 인라인으로 표시하고 aria-describedby로 입력과 연결하며, aria-invalid=\"true\"로 오류 상태를 명시합니다. 제출 시 여러 오류가 있으면 상단에 오류 요약(각 오류로 가는 링크 포함)을 제공하고 요약이나 첫 오류 필드로 포커스를 이동합니다.",
+						"오류 메시지는 무엇이 잘못됐고 어떻게 고치는지를 함께 설명해야 합니다(WCAG 3.3.1 오류 식별, 3.3.3 오류 제안). '유효하지 않은 입력'보다 '생년월일은 YYYY-MM-DD 형식으로 입력하세요'가 좋은 메시지입니다. 색상만으로 오류를 표시하지 말고(1.4.1), 오류 발생을 aria-live 영역으로 알리면 스크린리더 사용자가 즉시 인지합니다.",
+						"오류 예방도 기준입니다: 법적·금융 거래에서는 제출 전 검토·수정 기회를 제공해야 하고(3.3.4), WCAG 2.2의 3.3.7(중복 입력)은 같은 정보를 다시 입력하게 하지 않도록 요구합니다. autocomplete 속성(1.3.5 입력 목적 식별)은 자동완성을 지원해 인지·운동 장애 사용자의 입력 부담을 줄입니다.",
+					],
+					en: [
+						"The accessible validation pattern: show errors inline near the field, connect them with aria-describedby, and mark the state with aria-invalid=\"true\". When submission produces multiple errors, provide an error summary at the top (with links to each error) and move focus to the summary or the first errored field.",
+						"Error messages must say what went wrong and how to fix it (WCAG 3.3.1 Error Identification, 3.3.3 Error Suggestion). 'Enter your date of birth as YYYY-MM-DD' beats 'Invalid input.' Don't mark errors by color alone (1.4.1), and announcing errors via a live region lets screen reader users notice immediately.",
+						"Prevention is also required: legal and financial transactions need review-and-correct opportunities before submission (3.3.4), and WCAG 2.2's 3.3.7 (Redundant Entry) forbids making users re-enter the same information. The autocomplete attribute (1.3.5 Identify Input Purpose) enables autofill, reducing input burden for users with cognitive and motor disabilities.",
+					],
+				},
+			},
+			{
+				heading: { ko: "필수 필드와 도움말", en: "Required Fields and Help Text" },
+				paragraphs: {
+					ko: [
+						"필수 입력은 시각적 표시(별표 등)와 프로그래밍적 표시(required 속성 또는 aria-required=\"true\")를 모두 제공합니다. 한쪽만 있으면 시각 사용자 또는 스크린리더 사용자 중 한쪽이 놓칩니다. 별표(*)의 의미는 폼 상단에서 설명해주는 것이 좋습니다.",
+						"형식 안내('비밀번호는 8자 이상')와 도움말은 필드와 aria-describedby로 연결해 스크린리더가 필드 진입 시 함께 낭독하게 합니다. 도움말을 시각적으로만 배치하면 스크린리더 사용자에게는 존재하지 않는 정보가 됩니다.",
+					],
+					en: [
+						"Mark required inputs both visually (asterisk) and programmatically (the required attribute or aria-required=\"true\"). Either alone means one audience misses it — sighted users or screen reader users. Explain what the asterisk means at the top of the form.",
+						"Connect format hints ('Password must be at least 8 characters') and help text to the field with aria-describedby so screen readers announce them on entry. Help text placed only visually simply doesn't exist for screen reader users.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-5-q1",
@@ -552,20 +753,61 @@ const units: StudyUnit[] = [
 				"Understand SVG accessibility markup methods",
 			],
 		},
-		content: {
-			ko: [
-				"이미지 접근성의 핵심은 alt 속성입니다(WCAG 1.1.1, Level A). 정보 이미지는 내용을 간결하게 전달하는 alt 텍스트를 제공합니다. 장식 이미지(순수 시각 장식)는 alt=\"\"(빈 alt)로 설정하여 스크린리더가 건너뛰도록 합니다. alt 속성 자체를 생략하면 스크린리더가 파일명을 읽어버립니다.",
-				"복잡한 이미지(차트, 그래프, 인포그래픽): 짧은 alt로 이미지를 요약하고, 상세한 데이터는 본문 텍스트, 데이터 테이블, 또는 aria-describedby로 연결된 별도 설명을 제공합니다. 텍스트로 된 이미지(로고 제외)는 가능하면 실제 텍스트를 사용해야 합니다.",
-				"비디오 자막: 미리 녹화된 비디오는 자막 필수(WCAG 1.2.2, Level A). 실시간 비디오는 자막 필수(WCAG 1.2.4, Level AA). 오디오 설명(Audio Description)은 시각적으로만 전달되는 정보를 음성으로 설명합니다(WCAG 1.2.5, Level AA). 음성 전용 콘텐츠(팟캐스트)는 텍스트 대본(Transcript)이 필요합니다(WCAG 1.2.1, Level A).",
-				"SVG 접근성: `<svg>` 요소에 role=\"img\"를 추가하고, `<title>` 요소로 짧은 설명을, `<desc>` 요소로 긴 설명을 제공합니다. aria-labelledby로 title과 desc를 연결합니다. 장식용 SVG는 aria-hidden=\"true\"로 숨깁니다.",
-			],
-			en: [
-				"The key to image accessibility is the alt attribute (WCAG 1.1.1, Level A). Informative images need concise alt text describing their content. Decorative images (pure visual decoration) use alt=\"\" (empty alt) so screen readers skip them. Omitting the alt attribute entirely causes screen readers to read the filename.",
-				"Complex images (charts, graphs, infographics): Provide a short alt summarizing the image, and detailed data through body text, data tables, or a separate description connected via aria-describedby. Images of text (except logos) should use actual text whenever possible.",
-				"Video captions: Prerecorded video requires captions (WCAG 1.2.2, Level A). Live video requires captions (WCAG 1.2.4, Level AA). Audio descriptions narrate visually-only conveyed information (WCAG 1.2.5, Level AA). Audio-only content (podcasts) requires a text transcript (WCAG 1.2.1, Level A).",
-				"SVG accessibility: Add role=\"img\" to the `<svg>` element, provide a short description with `<title>` and a long description with `<desc>`. Connect them using aria-labelledby. Decorative SVGs should use aria-hidden=\"true\".",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "alt 텍스트 — 판단 기준", en: "Alt Text — How to Decide" },
+				paragraphs: {
+					ko: [
+						"이미지 접근성의 핵심은 alt 속성입니다(WCAG 1.1.1, Level A). 정보 이미지는 내용과 기능을 간결하게 전달하는 alt를, 장식 이미지는 alt=\"\"(빈 alt)를 제공해 스크린리더가 건너뛰게 합니다. alt 속성 자체를 생략하면 스크린리더가 파일명을 읽습니다 — '빈 alt'와 'alt 없음'은 완전히 다릅니다.",
+						"판단 기준은 맥락입니다. 같은 사진이라도 본문이 이미 설명하는 분위기용이면 장식(alt=\"\"), 내용을 전달하면 정보 이미지입니다. 기능 이미지(링크·버튼 안의 아이콘)는 모양이 아니라 기능을 씁니다 — 돋보기 아이콘의 alt는 '돋보기'가 아니라 '검색'입니다. '이미지', '사진' 같은 중복 표현은 넣지 않습니다(스크린리더가 이미 유형을 알림). W3C의 alt 결정 트리(alt Decision Tree)가 실무 판단에 유용합니다.",
+					],
+					en: [
+						"The core of image accessibility is the alt attribute (WCAG 1.1.1, Level A). Informative images get concise alt conveying content and function; decorative images get alt=\"\" (empty alt) so screen readers skip them. Omitting the attribute makes screen readers read the filename — 'empty alt' and 'no alt' are completely different.",
+						"Context decides. The same photo is decorative (alt=\"\") when the body text already tells the story, informative when it carries content. Functional images (icons inside links and buttons) describe the function, not the appearance — a magnifier icon's alt is 'Search,' not 'magnifying glass.' Skip redundant phrases like 'image of' (screen readers already announce the type). The W3C alt Decision Tree is a useful practical guide.",
+					],
+				},
+			},
+			{
+				heading: { ko: "복잡한 이미지와 텍스트 이미지", en: "Complex Images and Images of Text" },
+				paragraphs: {
+					ko: [
+						"차트·그래프·인포그래픽 같은 복잡한 이미지는 짧은 alt로 요약하고, 상세 데이터는 본문 텍스트, 데이터 테이블, 또는 aria-describedby로 연결한 별도 설명으로 제공합니다. '2024년 매출 추이 차트'라는 alt만으로는 데이터가 전달되지 않습니다 — 핵심 경향('3분기에 40% 증가')을 요약하거나 표를 병행하세요.",
+						"텍스트를 이미지로 만든 콘텐츠(배너 속 문구 등)는 가능하면 실제 텍스트로 구현해야 합니다(WCAG 1.4.5 텍스트 이미지, Level AA — 로고는 예외). 이미지 속 텍스트는 확대 시 깨지고, 사용자 스타일(글꼴·간격) 적용이 불가능하며, 번역도 되지 않습니다.",
+					],
+					en: [
+						"For complex images — charts, graphs, infographics — provide a short summarizing alt and put the detail in body text, a data table, or a description linked via aria-describedby. Alt reading 'Chart of 2024 revenue' conveys no data — summarize the key trend ('40% growth in Q3') or pair it with a table.",
+						"Content rendered as images of text (banner slogans, etc.) should be real text wherever possible (WCAG 1.4.5 Images of Text, Level AA — logos exempt). Text in images pixelates when zoomed, can't receive user styles (font, spacing), and can't be translated.",
+					],
+				},
+			},
+			{
+				heading: { ko: "미디어 대안 — 기준 레벨 지도", en: "Media Alternatives — The Level Map" },
+				paragraphs: {
+					ko: [
+						"시간 기반 미디어의 WCAG 요구는 레벨별로 외워둘 가치가 있습니다. Level A: 오디오 전용·비디오 전용 콘텐츠의 대안(1.2.1 — 팟캐스트엔 대본), 녹화 비디오의 자막(1.2.2), 녹화 비디오의 오디오 설명 또는 미디어 대안(1.2.3). Level AA: 실시간 자막(1.2.4), 녹화 비디오의 오디오 설명(1.2.5).",
+						"오디오 설명(Audio Description)은 대사 사이에 화면에서 일어나는 시각 정보(장면 전환, 표정, 자막 없는 텍스트)를 내레이션으로 설명합니다. 대안으로 처음부터 시각 정보를 대사에 녹여 말하는 통합 설명(integrated description) 기법도 있습니다. 자동 재생 오디오는 3초 이상이면 정지 수단이 필요합니다(1.4.2).",
+					],
+					en: [
+						"The WCAG requirements for time-based media are worth memorizing by level. Level A: alternatives for audio-only and video-only content (1.2.1 — transcripts for podcasts), captions for prerecorded video (1.2.2), audio description or media alternative for prerecorded video (1.2.3). Level AA: live captions (1.2.4) and audio description for prerecorded video (1.2.5).",
+						"Audio description narrates visual information between lines of dialogue — scene changes, expressions, on-screen text. An alternative technique is integrated description: scripting the visuals into the dialogue from the start. Auto-playing audio longer than three seconds needs a way to stop it (1.4.2).",
+					],
+				},
+			},
+			{
+				heading: { ko: "SVG 접근성", en: "SVG Accessibility" },
+				paragraphs: {
+					ko: [
+						"인라인 SVG는 `<svg role=\"img\">`로 이미지 역할을 명시하고, `<title>`로 짧은 설명, 필요 시 `<desc>`로 긴 설명을 제공한 뒤 aria-labelledby로 연결합니다. `<img src=\"*.svg\">`로 삽입하면 일반 이미지처럼 alt 속성을 사용합니다.",
+						"장식용 SVG는 aria-hidden=\"true\"(그리고 focusable=\"false\" — 일부 구형 브라우저의 SVG 포커스 방지)로 숨깁니다. 인터랙티브 SVG(차트에 호버·클릭)는 그 자체가 커스텀 위젯이므로 키보드 조작과 상태 낭독까지 별도로 설계해야 합니다.",
+					],
+					en: [
+						"For inline SVG, declare image semantics with `<svg role=\"img\">`, provide a short `<title>` and, when needed, a longer `<desc>`, connected via aria-labelledby. When embedding with `<img src=\"*.svg\">`, use the alt attribute as with any image.",
+						"Hide decorative SVGs with aria-hidden=\"true\" (plus focusable=\"false\" to prevent SVG focus in some legacy browsers). Interactive SVGs (hover/click charts) are custom widgets in their own right, requiring keyboard operation and state announcements by design.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-1-6-q1",

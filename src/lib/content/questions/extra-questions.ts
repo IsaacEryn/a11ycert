@@ -721,6 +721,308 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 };
 
 export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
+	// ── Domain 1: 접근 가능한 웹 솔루션 제작 ─────────────────────────────────
+	"was-1-1": [
+		{
+			id: "was-1-1-x1",
+			question: {
+				ko: "브라우저가 마크업에서 생성해 보조기술에 전달하는 구조는?",
+				en: "What structure does the browser derive from markup and expose to assistive technologies?",
+			},
+			options: {
+				a: { ko: "렌더 트리", en: "The render tree" },
+				b: { ko: "접근성 트리 (Accessibility Tree)", en: "The Accessibility Tree" },
+				c: { ko: "이벤트 루프", en: "The event loop" },
+				d: { ko: "쿠키 저장소", en: "The cookie store" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "브라우저는 DOM에서 접근성 트리를 생성해 각 요소의 이름·역할·상태·값을 보조기술에 전달합니다. 시맨틱 요소를 쓰면 이 정보가 자동으로 제공됩니다.",
+				en: "The browser derives an Accessibility Tree from the DOM, exposing each element's name, role, state, and value to assistive technologies. Semantic elements provide this information automatically.",
+			},
+		},
+		{
+			id: "was-1-1-x2",
+			question: {
+				ko: "같은 유형의 랜드마크(nav)가 페이지에 여러 개 있을 때 올바른 처리는?",
+				en: "When a page has multiple landmarks of the same type (nav), what is the correct approach?",
+			},
+			options: {
+				a: { ko: "하나만 남기고 삭제한다", en: "Delete all but one" },
+				b: { ko: "aria-label로 각각을 구분한다", en: "Distinguish each with aria-label" },
+				c: { ko: "모두 div로 바꾼다", en: "Convert them all to divs" },
+				d: { ko: "아무 처리도 필요 없다", en: "No treatment is needed" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "같은 유형의 랜드마크가 여러 개면 aria-label(예: \"주 메뉴\", \"페이지 내 목차\")로 구분해야 스크린리더 사용자가 랜드마크 목록에서 원하는 영역을 식별할 수 있습니다.",
+				en: "Multiple landmarks of the same type should be distinguished with aria-label (e.g., \"Main menu\", \"Table of contents\") so screen reader users can identify them in the landmarks list.",
+			},
+		},
+		{
+			id: "was-1-1-x3",
+			question: {
+				ko: "굵은 텍스트를 제목처럼 스타일링한 '가짜 제목'의 문제는?",
+				en: "What is the problem with 'fake headings' — bold text styled to look like headings?",
+			},
+			options: {
+				a: { ko: "시각적으로 보기 나쁘다", en: "They look bad visually" },
+				b: { ko: "스크린리더의 제목 탐색(H 키)에서 완전히 누락된다", en: "They are entirely invisible to screen reader heading navigation (the H key)" },
+				c: { ko: "페이지 로딩이 느려진다", en: "They slow page loading" },
+				d: { ko: "SEO에만 영향을 준다", en: "They only affect SEO" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "제목 이동은 스크린리더 사용자가 가장 많이 쓰는 탐색 방법입니다. 시각적으로만 제목처럼 보이는 텍스트는 h1~h6 마크업이 없어 이 탐색에서 존재하지 않는 것과 같습니다.",
+				en: "Heading navigation is screen reader users' most-used exploration method. Text that merely looks like a heading, without h1–h6 markup, simply doesn't exist for that navigation.",
+			},
+		},
+	],
+	"was-1-2": [
+		{
+			id: "was-1-2-x1",
+			question: {
+				ko: "'ARIA는 의미만 바꾸고 동작을 만들지 않는다'가 뜻하는 것은?",
+				en: "What does 'ARIA changes semantics but creates no behavior' mean?",
+			},
+			options: {
+				a: { ko: "role=\"button\"을 붙이면 키보드 동작도 자동 제공된다", en: "Adding role=\"button\" automatically provides keyboard behavior" },
+				b: { ko: "role을 선언해도 tabindex와 키 이벤트는 개발자가 직접 구현해야 한다", en: "Declaring a role still requires the developer to implement tabindex and key handling" },
+				c: { ko: "ARIA는 시각 스타일을 바꾼다", en: "ARIA changes visual styling" },
+				d: { ko: "ARIA는 HTML을 대체한다", en: "ARIA replaces HTML" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "ARIA는 접근성 트리의 의미 정보만 바꿉니다. role=\"button\"을 붙여도 포커스·Enter/Space 활성화는 생기지 않으므로 개발자가 구현해야 하며, 역할 선언은 그 역할답게 동작하게 만들 책임을 수반합니다.",
+				en: "ARIA changes only the semantic information in the accessibility tree. role=\"button\" provides no focus or Enter/Space activation — the developer must implement them. Declaring a role obligates you to make it behave like that role.",
+			},
+		},
+		{
+			id: "was-1-2-x2",
+			question: {
+				ko: "포커스 가능한 요소에 aria-hidden=\"true\"를 쓰면 안 되는 이유는?",
+				en: "Why must aria-hidden=\"true\" never be placed on a focusable element?",
+			},
+			options: {
+				a: { ko: "CSS가 적용되지 않아서", en: "Because CSS stops applying" },
+				b: { ko: "포커스는 되는데 아무것도 낭독되지 않는 '유령 요소'가 되어서", en: "It becomes a 'ghost' — focusable but announcing nothing" },
+				c: { ko: "페이지가 새로고침되어서", en: "Because the page reloads" },
+				d: { ko: "브라우저가 오류를 던져서", en: "Because the browser throws an error" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "aria-hidden은 보조기술에서 서브트리를 숨깁니다. 포커스 가능한 요소에 쓰면 키보드 포커스는 도달하는데 낭독이 없어 사용자가 위치를 알 수 없는 유령 요소가 됩니다 — ARIA 사용 규칙 위반입니다.",
+				en: "aria-hidden hides a subtree from assistive technologies. On a focusable element, keyboard focus still lands there but nothing is announced — a ghost element that violates the rules of ARIA use.",
+			},
+		},
+		{
+			id: "was-1-2-x3",
+			question: {
+				ko: "접근 가능한 이름(accessible name) 계산의 우선순위로 옳은 것은?",
+				en: "What is the correct priority order in accessible name computation?",
+			},
+			options: {
+				a: { ko: "aria-labelledby > aria-label > 네이티브 라벨 > 콘텐츠 텍스트", en: "aria-labelledby > aria-label > native labeling > content text" },
+				b: { ko: "콘텐츠 텍스트 > aria-label > aria-labelledby", en: "Content text > aria-label > aria-labelledby" },
+				c: { ko: "aria-describedby > aria-label > alt", en: "aria-describedby > aria-label > alt" },
+				d: { ko: "우선순위 없이 모두 합쳐진다", en: "There is no priority; all are combined" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "이름 계산은 aria-labelledby, aria-label, 네이티브 라벨(label/alt/caption), 콘텐츠 텍스트 순으로 우선합니다. aria-describedby는 이름이 아닌 보조 설명입니다.",
+				en: "Name computation prioritizes aria-labelledby, then aria-label, then native labeling (label/alt/caption), then content text. aria-describedby supplies description, not the name.",
+			},
+		},
+	],
+	"was-1-3": [
+		{
+			id: "was-1-3-x1",
+			question: {
+				ko: "양수 tabindex(예: tabindex=\"3\")를 피해야 하는 이유는?",
+				en: "Why should positive tabindex values (e.g., tabindex=\"3\") be avoided?",
+			},
+			options: {
+				a: { ko: "브라우저가 지원하지 않아서", en: "Browsers don't support them" },
+				b: { ko: "DOM과 다른 강제 순서를 만들어 예측 불가능하고 유지보수가 어려워서", en: "They force an order different from the DOM — unpredictable and hard to maintain" },
+				c: { ko: "보안 취약점이 생겨서", en: "They create security vulnerabilities" },
+				d: { ko: "성능이 저하되어서", en: "They degrade performance" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "양수 tabindex는 모든 tabindex=\"0\" 요소보다 먼저 포커스되는 강제 순서를 만들어 예측을 깨뜨립니다. 근본 해결은 DOM 순서 자체를 논리적으로 배치하는 것입니다(WCAG 2.4.3).",
+				en: "Positive tabindex creates a forced order focused before all tabindex=\"0\" elements, breaking predictability. The real fix is a logically ordered DOM (WCAG 2.4.3).",
+			},
+		},
+		{
+			id: "was-1-3-x2",
+			question: {
+				ko: "모달이 닫힐 때 포커스는 어디로 이동해야 하는가?",
+				en: "Where should focus move when a modal closes?",
+			},
+			options: {
+				a: { ko: "페이지 최상단", en: "The top of the page" },
+				b: { ko: "모달을 열었던 트리거 요소", en: "The element that triggered the modal" },
+				c: { ko: "페이지 푸터", en: "The page footer" },
+				d: { ko: "아무 곳이나 상관없다", en: "Anywhere is fine" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "모달이 닫히면 포커스를 모달을 열었던 요소(예: 열기 버튼)로 되돌려야 사용자가 원래 맥락을 잃지 않습니다. 포커스가 허공(body)에 남으면 키보드·스크린리더 사용자는 위치를 잃습니다.",
+				en: "On close, focus must return to the triggering element (e.g., the open button) so users keep their context. Focus dangling on the body leaves keyboard and screen reader users lost.",
+			},
+		},
+		{
+			id: "was-1-3-x3",
+			question: {
+				ko: "SPA에서 라우트 변경 시 필요한 포커스 관리 패턴은?",
+				en: "What focus management pattern is needed on SPA route changes?",
+			},
+			options: {
+				a: { ko: "아무 처리도 필요 없다 — 브라우저가 자동 처리한다", en: "None — the browser handles it automatically" },
+				b: { ko: "새 화면의 주요 제목에 tabindex=\"-1\"을 주고 포커스를 이동시킨다", en: "Give the new screen's main heading tabindex=\"-1\" and move focus to it" },
+				c: { ko: "포커스를 강제로 제거한다", en: "Forcibly remove focus" },
+				d: { ko: "페이지를 강제 새로고침한다", en: "Force a full page reload" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "SPA는 전체 페이지를 다시 로드하지 않아 포커스·낭독이 이전 상태에 머뭅니다. 라우트 변경 시 새 화면의 h1에 프로그래밍 포커스를 이동시키거나 라이브 영역으로 전환을 알려야 합니다.",
+				en: "SPAs don't reload the page, so focus and announcements linger. On route change, move programmatic focus to the new screen's h1 or announce the transition via a live region.",
+			},
+		},
+	],
+	"was-1-4": [
+		{
+			id: "was-1-4-x1",
+			question: {
+				ko: "포커스 표시(focus indicator) 자체에 적용되는 대비 요구는?",
+				en: "What contrast requirement applies to focus indicators themselves?",
+			},
+			options: {
+				a: { ko: "요구 없음 — 색은 자유", en: "None — any color is fine" },
+				b: { ko: "인접 색과 최소 3:1 (WCAG 1.4.11 비텍스트 대비)", en: "At least 3:1 against adjacent colors (WCAG 1.4.11 Non-text Contrast)" },
+				c: { ko: "7:1 이상", en: "At least 7:1" },
+				d: { ko: "4.5:1 이상", en: "At least 4.5:1" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "포커스 표시는 UI 컴포넌트의 상태를 나타내는 시각 정보이므로 비텍스트 대비(1.4.11)에 따라 인접 색과 3:1 이상이어야 합니다. 옅은 회색 아웃라인은 흔한 미달 사례입니다.",
+				en: "A focus indicator is visual information conveying a UI component's state, so under Non-text Contrast (1.4.11) it needs at least 3:1 against adjacent colors. Pale gray outlines are a common failure.",
+			},
+		},
+		{
+			id: "was-1-4-x2",
+			question: {
+				ko: "다크 모드 구현 시 대비 검증에 대한 올바른 접근은?",
+				en: "What is the correct approach to contrast verification when implementing dark mode?",
+			},
+			options: {
+				a: { ko: "라이트 모드 검증으로 충분하다", en: "Light mode verification suffices" },
+				b: { ko: "다크 모드는 별도 팔레트이므로 다시 검증해야 한다", en: "Dark mode is a separate palette and must be re-verified" },
+				c: { ko: "다크 모드는 대비 기준이 면제된다", en: "Dark mode is exempt from contrast requirements" },
+				d: { ko: "색상을 단순 반전하면 항상 통과한다", en: "Simple color inversion always passes" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "대비 비율은 색 조합마다 다르므로 다크 모드 팔레트는 별도로 전 조합을 재검증해야 합니다. 단순 반전은 흰 배경에서 통과하던 색이 어두운 배경에서 미달하는 경우를 만듭니다.",
+				en: "Contrast is per color pair, so a dark palette needs full re-verification. Simple inversion often turns passing colors on white into failures on dark backgrounds.",
+			},
+		},
+	],
+	"was-1-5": [
+		{
+			id: "was-1-5-x1",
+			question: {
+				ko: "WCAG 2.2의 3.3.7 '중복 입력(Redundant Entry)'이 요구하는 것은?",
+				en: "What does WCAG 2.2's 3.3.7 'Redundant Entry' require?",
+			},
+			options: {
+				a: { ko: "모든 입력을 두 번 확인받는다", en: "Confirming every input twice" },
+				b: { ko: "같은 프로세스에서 이미 입력한 정보를 다시 입력하게 하지 않는다(자동 채움 또는 선택 제공)", en: "Not making users re-enter information already provided in the same process (auto-populate or allow selection)" },
+				c: { ko: "입력 필드를 절반으로 줄인다", en: "Halving the number of input fields" },
+				d: { ko: "모든 폼에 자동 저장을 붙인다", en: "Adding autosave to every form" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "3.3.7은 같은 프로세스에서 이전에 입력한 정보(예: 배송지=청구지)를 다시 입력하게 하지 않도록 요구합니다. 인지·운동 장애 사용자의 부담을 줄이는 WCAG 2.2 신규 기준입니다.",
+				en: "3.3.7 requires that information already entered in the same process (e.g., shipping = billing address) not be requested again — a new WCAG 2.2 criterion reducing burden for cognitive and motor disabilities.",
+			},
+		},
+		{
+			id: "was-1-5-x2",
+			question: {
+				ko: "여러 유효성 오류가 발생한 폼 제출 후 권장되는 패턴은?",
+				en: "After a form submission produces multiple validation errors, what is the recommended pattern?",
+			},
+			options: {
+				a: { ko: "페이지를 새로고침한다", en: "Reload the page" },
+				b: { ko: "상단에 오류 요약(각 오류로 가는 링크 포함)을 제공하고 그곳으로 포커스를 이동한다", en: "Provide an error summary at the top (with links to each error) and move focus there" },
+				c: { ko: "첫 번째 오류만 표시한다", en: "Show only the first error" },
+				d: { ko: "오류를 콘솔에만 기록한다", en: "Log errors only to the console" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "오류 요약+포커스 이동 패턴은 스크린리더 사용자가 무엇이 잘못됐는지 즉시 파악하고 각 필드로 이동해 수정할 수 있게 합니다. 개별 필드에는 인라인 오류와 aria-describedby 연결을 병행합니다.",
+				en: "The summary-plus-focus pattern lets screen reader users immediately learn what failed and jump to each field. Pair it with inline errors connected via aria-describedby on each field.",
+			},
+		},
+		{
+			id: "was-1-5-x3",
+			question: {
+				ko: "autocomplete 속성과 관련된 WCAG 성공 기준은?",
+				en: "Which WCAG success criterion relates to the autocomplete attribute?",
+			},
+			options: {
+				a: { ko: "1.3.5 입력 목적 식별 (Identify Input Purpose)", en: "1.3.5 Identify Input Purpose" },
+				b: { ko: "2.4.7 가시적 포커스", en: "2.4.7 Focus Visible" },
+				c: { ko: "1.4.3 대비(최소)", en: "1.4.3 Contrast (Minimum)" },
+				d: { ko: "2.1.1 키보드", en: "2.1.1 Keyboard" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "1.3.5(Level AA)는 사용자 정보를 수집하는 필드의 목적을 프로그래밍적으로 식별할 수 있게 요구하며, autocomplete 속성(name, email, tel 등)이 대표 구현 방법입니다. 자동완성은 인지·운동 장애 사용자의 입력 부담을 줄입니다.",
+				en: "1.3.5 (Level AA) requires that the purpose of fields collecting user information be programmatically determinable — implemented with autocomplete values (name, email, tel). Autofill reduces input burden for cognitive and motor disabilities.",
+			},
+		},
+	],
+	"was-1-6": [
+		{
+			id: "was-1-6-x1",
+			question: {
+				ko: "링크 안의 돋보기 아이콘 이미지에 적절한 대체 텍스트는?",
+				en: "What is the appropriate alt text for a magnifier icon image inside a link?",
+			},
+			options: {
+				a: { ko: "\"돋보기\"", en: "\"Magnifying glass\"" },
+				b: { ko: "\"검색\" — 모양이 아닌 기능", en: "\"Search\" — the function, not the appearance" },
+				c: { ko: "\"아이콘 이미지\"", en: "\"Icon image\"" },
+				d: { ko: "alt=\"\" (빈 값)", en: "alt=\"\" (empty)" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "기능 이미지(링크·버튼 안 아이콘)의 대체 텍스트는 모양이 아니라 기능을 설명해야 합니다. 이 아이콘의 역할은 '검색'이므로 alt=\"검색\"이 올바릅니다. 빈 alt를 쓰면 링크에 이름이 없어집니다.",
+				en: "Functional images (icons inside links/buttons) get alt describing the function, not the appearance — here, \"Search.\" Empty alt would leave the link without a name.",
+			},
+		},
+		{
+			id: "was-1-6-x2",
+			question: {
+				ko: "텍스트를 이미지로 만드는 것을 제한하는 WCAG 기준과 그 예외는?",
+				en: "Which WCAG criterion restricts images of text, and what is its exception?",
+			},
+			options: {
+				a: { ko: "1.4.5 텍스트 이미지 (Level AA) — 로고는 예외", en: "1.4.5 Images of Text (Level AA) — logos are exempt" },
+				b: { ko: "1.1.1 텍스트 대안 (Level A) — 사진은 예외", en: "1.1.1 Non-text Content (Level A) — photos are exempt" },
+				c: { ko: "1.4.3 대비 (Level AA) — 배너는 예외", en: "1.4.3 Contrast (Level AA) — banners are exempt" },
+				d: { ko: "제한하는 기준이 없다", en: "No criterion restricts it" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "1.4.5는 같은 표현이 실제 텍스트로 가능하면 텍스트 이미지를 쓰지 않도록 요구합니다(로고·브랜드명은 예외). 이미지 속 텍스트는 확대 시 깨지고 사용자 스타일·번역이 적용되지 않습니다.",
+				en: "1.4.5 requires real text where the same presentation is possible (logos exempt). Text in images pixelates on zoom and can't receive user styles or translation.",
+			},
+		},
+	],
+
 	// ── Domain 2: 테스트와 평가 ──────────────────────────────────────────────
 	"was-2-1": [
 		{
