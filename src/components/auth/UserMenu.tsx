@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
 interface UserMenuProps {
@@ -10,10 +11,10 @@ interface UserMenuProps {
 
 export default function UserMenu({ locale }: UserMenuProps) {
 	const auth = useOptionalAuth();
+	const t = useTranslations("userMenu");
 	const [open, setOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const triggerRef = useRef<HTMLButtonElement>(null);
-	const isKo = locale === "ko";
 
 	useEffect(() => {
 		function handleClickOutside(e: PointerEvent) {
@@ -58,6 +59,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 
 	if (!auth || auth.isLoading || !auth.user) return null;
 
+	const isAdmin = auth.profile?.role === "admin";
 	const displayName = auth.profile?.nickname || auth.user.email?.split("@")[0] || "User";
 	const avatarUrl = auth.profile?.avatar_url;
 	const initial = displayName.charAt(0).toUpperCase();
@@ -95,7 +97,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 				}}
 				aria-haspopup="menu"
 				aria-expanded={open}
-				aria-label={isKo ? "사용자 메뉴 열기" : "Open user menu"}
+				aria-label={t("open")}
 			>
 				{avatarUrl ? (
 					<img
@@ -150,7 +152,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 						overflow: "hidden",
 					}}
 					role="menu"
-					aria-label={isKo ? "사용자 메뉴" : "User menu"}
+					aria-label={t("label")}
 				>
 					{/* 사용자 정보 헤더 */}
 					<div style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }} aria-hidden="true">
@@ -176,7 +178,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 								<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 									<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/>
 								</svg>
-								{isKo ? "오답노트 · 저장 문제" : "Wrong Answers · Saved"}
+								{t("examRoom")}
 							</span>
 						</Link>
 						<Link
@@ -191,10 +193,31 @@ export default function UserMenu({ locale }: UserMenuProps) {
 								<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 									<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
 								</svg>
-								{isKo ? "나의 정보" : "My Profile"}
+								{t("myProfile")}
 							</span>
 						</Link>
 					</div>
+
+					{/* 관리자 콘솔 (admin 전용) */}
+					{isAdmin && (
+						<div style={{ borderTop: "1px solid var(--divider)", padding: "var(--space-1) 0" }}>
+							<Link
+								href={`/${locale}/cert-manage`}
+								style={{ ...menuItemStyle, color: "var(--accent)", fontWeight: 600 }}
+								role="menuitem"
+								onClick={() => setOpen(false)}
+								onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-muted)")}
+								onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
+							>
+								<span style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+									<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+										<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+									</svg>
+									{t("adminConsole")}
+								</span>
+							</Link>
+						</div>
+					)}
 
 					{/* 로그아웃 */}
 					<div style={{ borderTop: "1px solid var(--divider)", padding: "var(--space-1) 0" }}>
@@ -209,7 +232,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 								<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 									<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
 								</svg>
-								{isKo ? "로그아웃" : "Sign Out"}
+								{t("signOut")}
 							</span>
 						</button>
 					</div>

@@ -44,11 +44,24 @@ export async function GET(request: NextRequest) {
 		},
 	});
 
-	const { error } = await supabase.auth.exchangeCodeForSession(code);
+	const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
 	if (error) {
 		console.error("[Auth Callback] exchangeCodeForSession error:", error.message);
 		return NextResponse.redirect(`${origin}/?auth_error=true`);
+	}
+
+	// 로그인 활동 로그 (실패해도 로그인 흐름은 막지 않음)
+	try {
+		const provider = data.user?.app_metadata?.provider ?? null;
+		const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+		const { error: logError } = await supabase.rpc("log_user_login", {
+			p_provider: provider,
+			p_ip: ip,
+		});
+		if (logError) console.error("[Auth Callback] log_user_login:", logError.message);
+	} catch (e) {
+		console.error("[Auth Callback] log_user_login:", e);
 	}
 
 	return response;

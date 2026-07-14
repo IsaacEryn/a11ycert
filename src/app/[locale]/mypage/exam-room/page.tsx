@@ -28,25 +28,7 @@ export default function ExamRoomPage() {
 	}
 
 	return (
-		<div style={{ maxWidth: 768, margin: "0 auto", padding: "var(--space-10) var(--space-4)" }}>
-			{/* Breadcrumb */}
-			<nav style={{ marginBottom: "var(--space-6)", fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>
-				<ol style={{ display: "flex", alignItems: "center", gap: "var(--space-1)", listStyle: "none", margin: 0, padding: 0 }}>
-					<li>
-						<Link href={`/${locale}/mypage`} style={{ color: "var(--fg-subtle)", textDecoration: "none" }}
-							onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-							onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-subtle)")}
-						>
-							{isKo ? "나의 정보" : "My Profile"}
-						</Link>
-					</li>
-					<li aria-hidden="true" style={{ color: "var(--fg-subtle)" }}>/</li>
-					<li style={{ color: "var(--fg-muted)" }} aria-current="page">
-						{isKo ? "나의 시험장" : "My Exam Room"}
-					</li>
-				</ol>
-			</nav>
-
+		<div>
 			<h1 style={{ fontSize: "var(--fs-xl)", fontWeight: 700, color: "var(--fg)" }}>
 				{isKo ? "나의 시험장" : "My Exam Room"}
 			</h1>

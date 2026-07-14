@@ -18,7 +18,8 @@ interface Profile {
 	nickname: string;
 	avatar_url: string | null;
 	provider: string | null;
-	tier: string;
+	tier: "free" | "premium";
+	role: "user" | "admin";
 	created_at: string;
 }
 
