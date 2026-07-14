@@ -892,20 +892,59 @@ const units: StudyUnit[] = [
 				"Describe the different roles of automated vs manual testing",
 			],
 		},
-		content: {
-			ko: [
-				"주요 자동화 도구: axe(Deque Systems) — 브라우저 확장, API, CI 통합 지원. 업계 표준 엔진. WAVE(WebAIM) — 시각적으로 페이지 위에 오류를 표시. 교육적 용도에 적합. Lighthouse(Google) — Chrome DevTools 내장, 접근성 외에 성능·SEO도 점검. Pa11y — 커맨드라인 도구, CI/CD 통합에 강점.",
-				"자동화 도구의 한계: 전체 접근성 이슈의 약 30~40%만 발견 가능합니다. 감지 가능: 누락된 alt, 색상 대비 부족, 빈 링크, 중복 ID, 누락 레이블. 감지 불가: alt 텍스트의 적절성, 키보드 탐색 순서의 논리성, 포커스 관리, 콘텐츠의 이해 가능성, 시각적 정보의 논리적 순서.",
-				"CI/CD 통합: axe-core를 Jest, Cypress, Playwright 등의 테스트 프레임워크와 통합하여 PR마다 자동 접근성 검사를 실행합니다. 자동화 테스트를 '게이트키퍼'로 사용해 새로운 접근성 문제 유입을 방지하고, 기존 이슈는 수동 감사로 발견합니다.",
-				"자동화와 수동 테스트의 상호보완: 자동화 도구는 빠르고 반복 가능한 기술적 검사에 강합니다. 수동 테스트는 사용자 경험, 맥락, 의미론적 정확성을 평가합니다. 최선의 전략은 자동화 → 수동 → 사용자 테스트를 병행하는 것입니다.",
-			],
-			en: [
-				"Major automated tools: axe (Deque Systems) — browser extension, API, CI integration, industry-standard engine. WAVE (WebAIM) — visually overlays errors on the page, great for education. Lighthouse (Google) — built into Chrome DevTools, checks accessibility plus performance and SEO. Pa11y — command-line tool, strong CI/CD integration.",
-				"Limitations of automated tools: They can detect only about 30-40% of accessibility issues. Detectable: missing alt, insufficient contrast, empty links, duplicate IDs, missing labels. Not detectable: appropriateness of alt text, logical keyboard navigation order, focus management, content understandability, logical visual reading order.",
-				"CI/CD integration: Integrate axe-core with test frameworks like Jest, Cypress, or Playwright to run automated accessibility checks on every PR. Use automated testing as a 'gatekeeper' to prevent new accessibility issues while relying on manual audits for existing ones.",
-				"Complementary roles: Automated tools excel at fast, repeatable technical checks. Manual testing evaluates user experience, context, and semantic accuracy. The best strategy combines automated → manual → user testing.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "도구 지형도", en: "The Tool Landscape" },
+				paragraphs: {
+					ko: [
+						"주요 자동화 도구: axe(Deque Systems)는 업계 표준 엔진으로 브라우저 확장, API, CI 통합을 지원합니다. WAVE(WebAIM)는 페이지 위에 오류를 시각적으로 겹쳐 표시해 교육용으로 좋습니다. Lighthouse(Google)는 Chrome DevTools에 내장되어 접근성 외에 성능·SEO도 점검하며, 내부적으로 axe-core를 사용합니다. Pa11y는 커맨드라인 기반으로 CI/CD 통합에 강합니다.",
+						"도구 선택의 관점: 단발 점검엔 브라우저 확장(axe DevTools, WAVE), 회귀 방지엔 CI 통합(axe-core, Pa11y), 대규모 사이트 상시 모니터링엔 크롤링형 플랫폼(Siteimprove, Deque WorldSpace류)이 어울립니다. 어떤 도구든 같은 엔진 계열이면 결과가 비슷하므로, 도구 수를 늘리는 것보다 수동 테스트를 병행하는 것이 커버리지를 실제로 넓힙니다.",
+					],
+					en: [
+						"Major automated tools: axe (Deque Systems) is the industry-standard engine with browser extensions, APIs, and CI integration. WAVE (WebAIM) overlays errors visually on the page — great for education. Lighthouse (Google), built into Chrome DevTools, checks performance and SEO alongside accessibility, and uses axe-core internally. Pa11y is command-line based with strong CI/CD integration.",
+						"Choosing tools: browser extensions (axe DevTools, WAVE) suit spot checks; CI integrations (axe-core, Pa11y) suit regression prevention; crawling platforms (Siteimprove, Deque WorldSpace-class) suit continuous monitoring of large sites. Tools sharing the same engine family produce similar results — adding manual testing widens real coverage more than adding tools.",
+					],
+				},
+			},
+			{
+				heading: { ko: "무엇을 잡고 무엇을 놓치는가", en: "What Automation Catches — and Misses" },
+				paragraphs: {
+					ko: [
+						"자동화 도구는 전체 접근성 이슈의 약 30~40%만 발견합니다. 감지 가능: 누락된 alt 속성, 색상 대비 부족, 빈 링크·버튼, 중복 ID, 누락된 폼 레이블, 잘못된 ARIA 속성 값. 감지 불가: alt 텍스트의 적절성, 키보드 탐색 순서의 논리성, 포커스 관리 품질, 콘텐츠의 이해 가능성, 시각적 읽기 순서와 DOM 순서의 일치.",
+						"거짓 양성(false positive)과 거짓 음성도 이해해야 합니다. 도구는 판단이 필요한 항목을 '검토 필요(needs review)'로 표시하는데(예: 배경 이미지 위 텍스트 대비), 이를 무시하면 실제 결함이 숨습니다. 반대로 규칙에 걸리지 않았다고 접근 가능한 것은 아닙니다 — '자동 검사 0건'은 시작점이지 합격증이 아닙니다.",
+					],
+					en: [
+						"Automated tools find only about 30–40% of accessibility issues. Detectable: missing alt attributes, insufficient contrast, empty links and buttons, duplicate IDs, missing form labels, invalid ARIA attribute values. Not detectable: appropriateness of alt text, logical keyboard order, focus management quality, content understandability, and whether visual reading order matches DOM order.",
+						"Understand false positives and negatives too. Tools flag judgment-required items as 'needs review' (e.g., text contrast over background images) — ignoring these hides real defects. Conversely, passing the rules doesn't mean accessible: 'zero automated findings' is a starting point, not a pass certificate.",
+					],
+				},
+			},
+			{
+				heading: { ko: "CI/CD 통합 패턴", en: "CI/CD Integration Patterns" },
+				paragraphs: {
+					ko: [
+						"axe-core를 Jest(jest-axe), Cypress(cypress-axe), Playwright(@axe-core/playwright) 같은 테스트 프레임워크와 통합해 PR마다 자동 검사를 실행합니다. 자동화 테스트는 '게이트키퍼'로서 새 접근성 결함의 유입을 막고, 기존 이슈 발굴은 수동 감사가 담당합니다.",
+						"실무 요령: 처음부터 전체 실패를 빌드 차단으로 걸면 기존 부채 때문에 도입이 좌초합니다. 새 코드·변경된 화면에만 엄격 기준을 적용하고 기존 부채는 베이스라인으로 관리하며 점진 상환하는 전략이 현실적입니다. 컴포넌트 단위 테스트(Storybook + axe)는 결함을 가장 이른 단계에서 잡습니다.",
+					],
+					en: [
+						"Integrate axe-core with test frameworks — Jest (jest-axe), Cypress (cypress-axe), Playwright (@axe-core/playwright) — to run checks on every PR. Automation acts as a gatekeeper against new defects, while manual audits surface existing issues.",
+						"Practical tip: blocking builds on all failures from day one founders on existing debt. A realistic strategy applies strict rules to new code and changed screens while managing existing debt as a baseline paid down incrementally. Component-level testing (Storybook + axe) catches defects at the earliest possible stage.",
+					],
+				},
+			},
+			{
+				heading: { ko: "자동화·수동·사용자 테스트의 상호보완", en: "Automated, Manual, and User Testing Together" },
+				paragraphs: {
+					ko: [
+						"자동화 도구는 빠르고 반복 가능한 기술 검사에 강하고, 수동 테스트는 사용자 경험·맥락·의미의 정확성을 평가하며, 사용자 테스트는 실제 과업 수행 가능성을 검증합니다. 최선의 전략은 셋의 병행입니다: 자동화로 기본기를 상시 방어하고, 릴리스 주기마다 수동 감사를 돌리고, 주요 개편에는 장애인 사용자 테스트를 포함합니다.",
+					],
+					en: [
+						"Automation excels at fast, repeatable technical checks; manual testing evaluates experience, context, and semantic accuracy; user testing validates real task completion. The best strategy combines all three: automation defends the basics continuously, manual audits run each release cycle, and major redesigns include testing with disabled users.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-2-1-q1",
@@ -988,20 +1027,63 @@ const units: StudyUnit[] = [
 				"Understand the importance and methods of user testing",
 			],
 		},
-		content: {
-			ko: [
-				"키보드 수동 테스트: Tab으로 모든 인터랙티브 요소에 도달 가능한지, 포커스 순서가 논리적인지, 포커스 표시가 시각적으로 명확한지, Enter/Space로 버튼과 링크가 작동하는지, Esc로 모달/팝업이 닫히는지, 키보드 트랩(빠져나올 수 없는 영역)이 없는지 점검합니다.",
-				"화면낭독기 테스트: NVDA(Windows, 무료) — Insert+Space로 탐색/포커스 모드 전환, H로 제목 간 이동, D로 랜드마크 이동. VoiceOver(macOS) — Cmd+F5로 켜기, VO키(Ctrl+Option)+방향키로 탐색. JAWS(Windows, 유료) — Insert+F6으로 제목 목록, Insert+F7로 링크 목록. 테스트 시 모든 정보가 음성으로 전달되는지, 동적 변경 사항이 알림되는지 확인합니다.",
-				"수동 테스트 체크리스트(핵심 항목): 모든 이미지에 적절한 대체 텍스트가 있는가, 제목 계층이 논리적인가, 폼 레이블이 올바르게 연결되었는가, 색상만으로 정보를 전달하지 않는가, 확대(200%~400%)해도 콘텐츠가 사용 가능한가, 자동 재생 콘텐츠를 정지할 수 있는가.",
-				"사용자 테스트: 실제 장애인 사용자가 참여하는 테스트가 가장 가치 있습니다. 다양한 장애 유형(시각, 청각, 운동, 인지)의 사용자를 포함합니다. 사용자 테스트에서는 자동화/수동 테스트에서 발견할 수 없는 실질적 사용성 문제를 발견할 수 있습니다. 최소 5명 이상의 사용자로 테스트하는 것이 권장됩니다.",
-			],
-			en: [
-				"Keyboard manual testing: Check if Tab reaches all interactive elements, focus order is logical, focus indicators are visually clear, Enter/Space activates buttons and links, Esc closes modals/popups, and there are no keyboard traps (areas users can't escape).",
-				"Screen reader testing: NVDA (Windows, free) — Insert+Space toggles browse/focus mode, H for heading navigation, D for landmarks. VoiceOver (macOS) — Cmd+F5 to activate, VO key (Ctrl+Option)+arrows to navigate. JAWS (Windows, commercial) — Insert+F6 for headings, Insert+F7 for links. Verify all information is conveyed via speech and dynamic changes are announced.",
-				"Manual testing checklist (key items): All images have appropriate alt text, heading hierarchy is logical, form labels are correctly associated, information is not conveyed by color alone, content remains usable at 200-400% zoom, auto-playing content can be paused.",
-				"User testing: Testing with actual users with disabilities is the most valuable approach. Include users with various disability types (visual, auditory, motor, cognitive). User testing reveals real-world usability issues that automated and manual testing cannot find. Testing with at least 5 users is recommended.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "키보드 수동 테스트 프로토콜", en: "The Keyboard Testing Protocol" },
+				paragraphs: {
+					ko: [
+						"수동 테스트의 첫 단계는 마우스를 치우는 것입니다. 점검 항목: Tab으로 모든 인터랙티브 요소에 도달 가능한가, 포커스 순서가 시각적·논리적 순서와 일치하는가, 포커스 표시가 항상 명확히 보이는가, Enter/Space로 버튼·링크가 작동하는가, 복합 위젯 내부는 화살표 키로 이동되는가, Esc로 모달·메뉴가 닫히는가, 키보드 트랩이 없는가.",
+						"자주 발견되는 결함 패턴: 마우스 호버로만 열리는 드롭다운(키보드로 열 수 없음), 커스텀 체크박스가 Space에 반응하지 않음, 캐러셀 다음 슬라이드로 포커스가 따라가지 않음, 무한 스크롤 뒤 푸터에 도달 불가. 키보드 테스트는 도구 없이 몇 분 만에 심각한 결함을 드러내는 가장 가성비 높은 검사입니다.",
+					],
+					en: [
+						"Step one of manual testing: put the mouse away. Check that Tab reaches every interactive element, focus order matches the visual and logical order, the focus indicator is always clearly visible, Enter/Space activate buttons and links, arrow keys move within composite widgets, Esc closes modals and menus, and there are no keyboard traps.",
+						"Common defect patterns: dropdowns that open only on mouse hover, custom checkboxes ignoring Space, carousels whose focus doesn't follow the next slide, footers unreachable behind infinite scroll. Keyboard testing is the highest-value check there is — minutes, no tools, and it exposes severe defects.",
+					],
+				},
+			},
+			{
+				heading: { ko: "화면낭독기 테스트", en: "Screen Reader Testing" },
+				paragraphs: {
+					ko: [
+						"주요 조합과 기본 조작: NVDA(Windows, 무료)는 Insert+Space로 탐색/포커스 모드 전환, H로 제목 이동, D로 랜드마크 이동. JAWS(Windows, 유료)는 Insert+F6 제목 목록, Insert+F7 링크 목록. VoiceOver(macOS)는 Cmd+F5로 켜고 VO키(Ctrl+Option)+방향키로 탐색, VO+U로 로터 메뉴. 권장 조합: NVDA+Chrome/Firefox, JAWS+Chrome/Edge, VoiceOver+Safari.",
+						"탐색 모드와 포커스 모드의 구분이 중요합니다. 탐색(browse) 모드에서는 H·D·K 같은 단축키가 문서 탐색에 쓰이고, 입력 필드에 들어가면 포커스(forms) 모드로 전환되어 키 입력이 필드로 전달됩니다. 커스텀 위젯이 모드 전환을 방해하면 낭독기 사용자는 입력을 못 하거나 탐색을 못 하게 됩니다.",
+						"확인할 것: 모든 정보가 음성으로 전달되는가, 이미지·버튼의 이름이 의미 있는가, 동적 변경(오류, 알림, 결과 갱신)이 낭독되는가, 표는 행·열 헤더와 함께 읽히는가. 첫 화면낭독기 테스트라면 눈을 감거나 화면을 끄고 과업을 수행해보는 것이 가장 배우는 것이 많습니다.",
+					],
+					en: [
+						"Key pairings and basics: NVDA (Windows, free) — Insert+Space toggles browse/focus mode, H moves by heading, D by landmark. JAWS (Windows, commercial) — Insert+F6 headings list, Insert+F7 links list. VoiceOver (macOS) — Cmd+F5 to toggle, VO key (Ctrl+Option)+arrows to navigate, VO+U for the rotor. Recommended pairings: NVDA+Chrome/Firefox, JAWS+Chrome/Edge, VoiceOver+Safari.",
+						"The browse-versus-focus mode distinction matters. In browse mode, keys like H, D, and K navigate the document; entering an input switches to focus (forms) mode where keystrokes go to the field. Custom widgets that break mode switching leave users unable to type — or unable to navigate.",
+						"Verify: is all information conveyed in speech; do images and buttons have meaningful names; are dynamic changes (errors, notifications, updated results) announced; are tables read with row and column headers? For your first screen reader test, closing your eyes or turning off the display while completing a task teaches the most.",
+					],
+				},
+			},
+			{
+				heading: { ko: "확대·대비·표시 설정 점검", en: "Zoom, Contrast, and Display Checks" },
+				paragraphs: {
+					ko: [
+						"저시력 관점 수동 점검: 브라우저 확대 200%에서 콘텐츠와 기능이 유지되는가(1.4.4), 400%(320px 폭 상당)에서 가로 스크롤 없이 리플로우되는가(1.4.10), 텍스트 간격을 사용자 스타일로 키워도 잘리지 않는가(1.4.12), OS 고대비 모드에서 UI가 살아있는가.",
+						"그 밖의 수동 체크리스트: 이미지 대체 텍스트의 적절성, 제목 계층의 논리성, 폼 레이블 연결, 색상 단독 정보 전달 여부, 자동 재생 콘텐츠 정지 수단, prefers-reduced-motion 반영 여부. 이 항목들이 자동 도구가 놓치는 60~70%의 핵심입니다.",
+					],
+					en: [
+						"Low-vision manual checks: does content survive 200% browser zoom (1.4.4); does it reflow without horizontal scrolling at 400% (equivalent to 320px width, 1.4.10); does text remain intact when user styles increase text spacing (1.4.12); does the UI hold up in OS high-contrast modes?",
+						"The rest of the manual checklist: appropriateness of alt text, logical heading hierarchy, form label association, color-only information, means to stop auto-playing content, and honoring prefers-reduced-motion. These items are the heart of the 60–70% that automation misses.",
+					],
+				},
+			},
+			{
+				heading: { ko: "장애인 사용자 테스트", en: "Testing with Disabled Users" },
+				paragraphs: {
+					ko: [
+						"실제 장애인 사용자가 참여하는 테스트가 가장 가치 있습니다. 시각·청각·운동·인지 등 다양한 장애 유형과 보조기술 사용자를 포함하고, 과업 기반 시나리오(회원가입 완료하기, 상품 결제하기)로 진행합니다. 참가자가 5명 안팎이어도 주요 사용성 문제의 대부분이 드러납니다.",
+						"운영 시 유의점: 참가자의 자기 기기·자기 보조기술 사용을 우선하고(익숙한 설정이 실제 사용을 반영), 보상·모집 문서·테스트 장소의 접근성을 보장하며, '사용자를 테스트하는 것이 아니라 제품을 테스트한다'는 점을 명확히 합니다. 발견 사항은 적합성 위반이 아니어도 개선 백로그에 담을 가치가 있습니다.",
+					],
+					en: [
+						"Testing with actual disabled users is the most valuable. Include diverse disability types — visual, auditory, motor, cognitive — and AT users, and run task-based scenarios (complete signup, check out a product). Even around five participants surface most major usability problems.",
+						"Operational notes: prefer participants' own devices and assistive technologies (familiar settings reflect real use), ensure the accessibility of compensation, recruitment materials, and venues, and make clear you are testing the product, not the user. Findings deserve a place in the improvement backlog even when they aren't conformance violations.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-2-2-q1",
@@ -1086,20 +1168,48 @@ const units: StudyUnit[] = [
 				"Describe strategies to reduce remediation costs",
 			],
 		},
-		content: {
-			ko: [
-				"우선순위 지정 기준: WCAG 적합성 수준(A > AA > AAA)이 기본입니다. 영향 범위(많은 사용자에게 영향을 미치는 이슈 우선), 심각도(콘텐츠를 전혀 사용할 수 없는 이슈 우선), 사용 빈도(자주 사용되는 페이지/기능 우선), 법적 리스크(소송 가능성이 높은 이슈 우선)를 종합적으로 고려합니다.",
-				"퀵윈(Quick Win) 수정 항목: 누락된 alt 속성 추가, 누락된 폼 레이블 연결, 색상 대비 조정, 빈 링크/버튼에 텍스트 추가, 페이지 언어(lang) 속성 추가, 건너뛰기 링크 추가. 이들은 적은 노력으로 큰 접근성 개선 효과를 얻을 수 있습니다.",
-				"임시 대안(Interim Fix): 근본적 수정이 오래 걸리는 경우 임시 대안을 먼저 제공합니다. 예: 접근 불가능한 PDF 대신 접근 가능한 HTML 버전 제공, 접근 불가능한 차트에 데이터 테이블 추가, 접근성 문제를 알리는 연락처 제공. 임시 대안은 근본적 수정을 대체하지 않습니다.",
-				"수정 비용 절감 전략: 초기 설계 단계에서 접근성을 고려하면 비용이 가장 적습니다(Shift Left). 출시 후 수정은 초기 대비 30배 이상 비용이 증가할 수 있습니다. 접근 가능한 디자인 시스템과 컴포넌트 라이브러리를 사용하면 반복적 이슈를 방지합니다. 개발자 교육에 투자하면 장기적으로 수정 비용이 감소합니다.",
-			],
-			en: [
-				"Prioritization criteria: WCAG conformance level (A > AA > AAA) is the baseline. Consider impact scope (issues affecting many users first), severity (issues making content completely unusable first), usage frequency (frequently used pages/features first), and legal risk (issues with high litigation potential first).",
-				"Quick Win items: Add missing alt attributes, connect missing form labels, adjust color contrast, add text to empty links/buttons, add page language (lang) attribute, add skip links. These provide significant accessibility improvements with minimal effort.",
-				"Interim fixes: When fundamental fixes take time, provide temporary alternatives first. Examples: offer an accessible HTML version instead of an inaccessible PDF, add data tables alongside inaccessible charts, provide contact information for accessibility issues. Interim fixes do not replace permanent remediation.",
-				"Cost reduction strategies: Considering accessibility from the design stage costs the least (Shift Left). Post-launch fixes can cost 30x more than early-stage integration. Using accessible design systems and component libraries prevents recurring issues. Investing in developer training reduces long-term remediation costs.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "우선순위 프레임워크", en: "A Prioritization Framework" },
+				paragraphs: {
+					ko: [
+						"감사가 끝나면 보통 수백 건의 발견 사항이 남습니다. 우선순위의 기본 축은 WCAG 적합성 수준(A > AA > AAA)이지만, 그것만으로는 부족합니다. 사용자 영향(과업을 차단하는가), 영향 범위(공용 컴포넌트라 여러 페이지에 반복되는가), 사용 빈도(핵심 사용자 여정에 있는가), 법적 리스크를 함께 매트릭스로 평가합니다.",
+						"실무 등급 예시: 차단(blocker) — 특정 사용자 집단이 핵심 과업을 완료할 수 없음(키보드로 결제 불가), 중대(major) — 과업이 심각하게 어려움, 경미(minor) — 불편하지만 우회 가능. 같은 Level A 위반이라도 랜딩 페이지의 결함이 아카이브 페이지의 결함보다 먼저입니다. 우선순위 결과는 백로그 티켓으로 만들어 일반 개발 프로세스에 태웁니다.",
+					],
+					en: [
+						"An audit typically leaves hundreds of findings. WCAG level (A > AA > AAA) is the baseline axis, but not enough alone. Assess a matrix of user impact (does it block tasks), scope (does a shared component repeat it across pages), usage frequency (is it on a critical journey), and legal risk.",
+						"A practical severity scale: blocker — a user group cannot complete a core task (checkout impossible by keyboard); major — tasks are severely difficult; minor — inconvenient but avoidable. The same Level A violation matters more on a landing page than in an archive. Turn prioritized findings into backlog tickets that ride the normal development process.",
+					],
+				},
+			},
+			{
+				heading: { ko: "퀵윈과 임시 대안", en: "Quick Wins and Interim Fixes" },
+				paragraphs: {
+					ko: [
+						"퀵윈(Quick Win)은 적은 노력으로 큰 개선을 주는 수정입니다: 누락 alt 추가, 폼 레이블 연결, 색상 대비 조정, 빈 링크·버튼에 이름 부여, 페이지 lang 속성, 건너뛰기 링크. 프로그램 초기에 퀵윈을 먼저 처리하면 가시적 성과가 조직의 동력을 만듭니다.",
+						"근본 수정이 오래 걸릴 때는 임시 대안(interim fix)을 먼저 제공합니다: 접근 불가능한 PDF에 HTML 버전 병행, 차트에 데이터 테이블 추가, 문제를 겪는 사용자를 위한 대체 채널(전화·이메일) 안내. 단, 임시 대안은 근본 수정을 대체하지 않으며, 접근성 성명에 알려진 한계로 공개하는 것이 정직한 운영입니다.",
+					],
+					en: [
+						"Quick wins deliver large improvement for little effort: adding missing alt, connecting form labels, adjusting contrast, naming empty links and buttons, the page lang attribute, skip links. Tackling quick wins first creates visible progress that fuels organizational momentum.",
+						"When root fixes take time, ship interim fixes first: an HTML version alongside an inaccessible PDF, data tables next to charts, alternative channels (phone, email) for affected users. Interim fixes never replace permanent remediation — and disclosing them as known limitations in your accessibility statement is the honest practice.",
+					],
+				},
+			},
+			{
+				heading: { ko: "근본 원인 수정과 비용", en: "Root-Cause Fixes and Cost" },
+				paragraphs: {
+					ko: [
+						"반복되는 결함은 증상이 아니라 근본 원인을 고쳐야 합니다. 100개 페이지의 버튼 대비 미달은 페이지 100번 수정이 아니라 디자인 토큰 1번 수정입니다. 접근 가능한 디자인 시스템과 컴포넌트 라이브러리는 결함의 재발 자체를 막는 가장 효과적인 수정 전략입니다.",
+						"비용의 법칙: 초기 설계 단계 통합이 가장 저렴하고(Shift Left), 출시 후 소급 수정은 초기 대비 30배 이상 비쌀 수 있습니다. 개발자·디자이너 교육 투자는 신규 결함 발생률을 낮춰 장기 수정 비용을 줄입니다. 수정 후에는 반드시 재검증(자동+수동)으로 실제 해결을 확인하고 회귀 테스트에 편입시킵니다.",
+					],
+					en: [
+						"Recurring defects call for root-cause fixes, not symptom patches. Sub-par button contrast on 100 pages is one design-token fix, not 100 page fixes. An accessible design system and component library is the most effective remediation strategy because it prevents recurrence itself.",
+						"The law of cost: integration at design time is cheapest (Shift Left); post-launch retrofits can cost 30x or more. Investing in developer and designer training lowers the new-defect rate and long-term cost. After fixing, always re-verify (automated plus manual) and fold the case into regression tests.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-3-1-q1",
@@ -1182,20 +1292,61 @@ const units: StudyUnit[] = [
 				"Describe the components of an accessibility statement",
 			],
 		},
-		content: {
-			ko: [
-				"접근성 코드 리뷰 기준: 모든 인터랙티브 요소가 키보드로 접근 가능한가, 시맨틱 HTML을 올바르게 사용했는가, 이미지에 적절한 alt가 있는가, 폼 레이블이 연결되었는가, ARIA가 올바르게 사용되었는가(불필요한 ARIA가 없는가), 색상 대비가 충분한가, 포커스 관리가 적절한가를 점검합니다.",
-				"접근 가능한 컴포넌트 설계: 시맨틱 HTML을 기반으로 구축합니다. 키보드 상호작용 패턴을 WAI-ARIA Authoring Practices Guide(APG)에 따라 구현합니다. 상태 변경 시 ARIA 상태를 업데이트합니다. 반응형 디자인에서 터치 타겟 크기를 최소 44×44px로 유지합니다(WCAG 2.5.5). 컴포넌트 문서에 접근성 사용법을 포함합니다.",
-				"프레임워크 접근성 지원: React — JSX에서 htmlFor(for 대체), aria-* 속성 직접 사용, Fragment로 불필요한 DOM 방지. Next.js — next/image의 alt 필수, next/link의 자동 접근성 처리. Vue — v-bind로 동적 ARIA 속성 바인딩. Angular — CDK a11y 모듈(FocusTrap, LiveAnnouncer). ESLint 플러그인(eslint-plugin-jsx-a11y)으로 정적 분석 강화.",
-				"접근성 정책 성명서(Accessibility Statement): WCAG 적합성 수준과 목표를 명시합니다. 알려진 접근성 제한 사항을 솔직하게 공개합니다. 접근성 관련 문의/피드백 연락처를 제공합니다. 최근 접근성 평가일을 명시합니다. 지속적 개선 의지를 표명합니다. EU WAD에서는 접근성 성명서가 법적 필수입니다.",
-			],
-			en: [
-				"Accessibility code review criteria: Are all interactive elements keyboard-accessible? Is semantic HTML used correctly? Do images have appropriate alt? Are form labels connected? Is ARIA used correctly (no unnecessary ARIA)? Is color contrast sufficient? Is focus management proper?",
-				"Accessible component design: Build on semantic HTML. Implement keyboard interaction patterns per the WAI-ARIA Authoring Practices Guide (APG). Update ARIA states on state changes. Maintain touch target sizes of at least 44×44px in responsive design (WCAG 2.5.5). Include accessibility usage in component documentation.",
-				"Framework accessibility support: React — htmlFor (replacing for in JSX), direct aria-* attributes, Fragment to avoid unnecessary DOM. Next.js — alt required on next/image, automatic accessibility handling in next/link. Vue — v-bind for dynamic ARIA attributes. Angular — CDK a11y module (FocusTrap, LiveAnnouncer). ESLint plugins (eslint-plugin-jsx-a11y) strengthen static analysis.",
-				"Accessibility Statement: State the WCAG conformance level and goals. Honestly disclose known accessibility limitations. Provide contact information for accessibility inquiries/feedback. State the date of the last accessibility evaluation. Express commitment to continuous improvement. Under EU WAD, accessibility statements are legally required.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "접근성 코드 리뷰", en: "Accessibility in Code Review" },
+				paragraphs: {
+					ko: [
+						"코드 리뷰 체크 항목: 모든 인터랙티브 요소가 키보드로 접근 가능한가, 시맨틱 HTML을 올바르게 사용했는가, 이미지에 적절한 alt가 있는가, 폼 레이블이 연결되었는가, ARIA가 올바르게 쓰였는가(불필요한 ARIA는 없는가), 색상 대비가 충분한가, 포커스 관리가 적절한가.",
+						"리뷰를 지속 가능하게 만드는 장치: 체크리스트를 PR 템플릿에 포함하고, eslint-plugin-jsx-a11y 같은 린터로 기계가 잡을 수 있는 것은 기계에 맡기며, 접근성을 완료 정의(Definition of Done)에 포함시킵니다. '접근성 리뷰 통과 전에는 머지하지 않는다'는 규칙이 리뷰 문화를 만듭니다.",
+					],
+					en: [
+						"Code review checklist: are all interactive elements keyboard-accessible; is semantic HTML used correctly; do images have appropriate alt; are form labels associated; is ARIA used correctly (and none unnecessarily); is contrast sufficient; is focus managed properly?",
+						"Making review sustainable: put the checklist in the PR template, let linters like eslint-plugin-jsx-a11y catch what machines can, and include accessibility in the Definition of Done. A 'no merge before accessibility review' rule is what builds the culture.",
+					],
+				},
+			},
+			{
+				heading: { ko: "APG와 접근 가능한 컴포넌트", en: "The APG and Accessible Components" },
+				paragraphs: {
+					ko: [
+						"커스텀 위젯(탭, 아코디언, 콤보박스, 모달)을 만들 때의 표준 참고서는 WAI-ARIA Authoring Practices Guide(APG)입니다. 각 패턴의 역할 구조, 키보드 상호작용, ARIA 상태 관리를 예제와 함께 제공합니다 — 새 위젯을 만들기 전에 해당 APG 패턴부터 확인하는 습관이 중요합니다.",
+						"컴포넌트 설계 원칙: 시맨틱 HTML 기반 위에 구축하고, 상태 변경 시 ARIA 상태를 갱신하며, 터치 타깃을 충분히 크게 유지합니다(WCAG 2.5.5 AAA는 44×44px, 2.2의 2.5.8 AA는 최소 24×24px). 컴포넌트 문서에 접근성 사용법(필수 prop, 키보드 동작)을 포함하면 라이브러리 사용자 전체의 품질이 올라갑니다.",
+					],
+					en: [
+						"The standard reference for custom widgets (tabs, accordions, comboboxes, modals) is the WAI-ARIA Authoring Practices Guide (APG). It provides each pattern's role structure, keyboard interaction, and ARIA state management with examples — check the APG pattern before building any new widget.",
+						"Component design principles: build on semantic HTML, update ARIA states on change, and keep touch targets large (WCAG 2.5.5 AAA: 44×44px; 2.2's 2.5.8 AA: at least 24×24px). Documenting accessibility usage (required props, keyboard behavior) in component docs raises quality for every consumer of the library.",
+					],
+				},
+			},
+			{
+				heading: { ko: "프레임워크별 지원", en: "Framework Support" },
+				paragraphs: {
+					ko: [
+						"React: JSX에서 htmlFor(for 대체), aria-* 속성 직접 사용, Fragment로 불필요한 래퍼 DOM 방지. Next.js: next/image의 alt 필수화, 라우팅 시 접근성 알림 내장. Vue: v-bind로 동적 ARIA 바인딩. Angular: CDK a11y 모듈(FocusTrap, LiveAnnouncer, 고대비 감지).",
+						"프레임워크는 도와줄 뿐 보장하지 않습니다. SPA 프레임워크의 기본 라우팅은 포커스·낭독 관리를 스스로 해주지 않는 경우가 많고, 인기 UI 라이브러리도 접근성 품질이 제각각입니다. '라이브러리를 채택하기 전 키보드·낭독기로 샘플 테스트한다'가 실무 원칙입니다.",
+					],
+					en: [
+						"React: htmlFor in JSX (replacing for), direct aria-* attributes, Fragments to avoid wrapper DOM. Next.js: enforced alt on next/image, built-in route announcements. Vue: dynamic ARIA via v-bind. Angular: the CDK a11y module (FocusTrap, LiveAnnouncer, high-contrast detection).",
+						"Frameworks help but don't guarantee. SPA routing often doesn't manage focus and announcements by itself, and popular UI libraries vary widely in accessibility quality. The working rule: sample-test any library with keyboard and screen reader before adopting it.",
+					],
+				},
+			},
+			{
+				heading: { ko: "접근성 성명 작성", en: "Writing the Accessibility Statement" },
+				paragraphs: {
+					ko: [
+						"접근성 성명(Accessibility Statement)의 구성 요소: 목표·준수 표준과 적합성 수준(예: WCAG 2.2 AA), 알려진 제한 사항의 솔직한 공개, 접근성 문의·피드백 연락처, 최근 평가일과 평가 방법, 지속 개선 의지. EU 공공 부문(WAD)에서는 법적 필수이며, W3C가 성명 생성 도구를 제공합니다.",
+						"성명은 마케팅 문서가 아니라 책임성 문서입니다. '완벽히 접근 가능합니다'라는 과장은 신뢰를 깎고 법적 리스크를 키웁니다. 알려진 문제와 수정 일정, 우회 방법을 공개하는 것이 사용자와 규제 기관 모두에게 좋은 신호입니다.",
+					],
+					en: [
+						"Elements of an accessibility statement: the target standard and conformance level (e.g., WCAG 2.2 AA), honest disclosure of known limitations, a contact for accessibility feedback, the date and method of the last evaluation, and a commitment to improvement. It's legally required in the EU public sector (WAD), and the W3C offers a statement generator.",
+						"A statement is an accountability document, not marketing. Claiming 'fully accessible' erodes trust and increases legal risk. Disclosing known issues, remediation timelines, and workarounds sends the right signal to users and regulators alike.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "was-3-2-q1",

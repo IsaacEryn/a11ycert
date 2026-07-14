@@ -1026,6 +1026,42 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 	// ── Domain 2: 테스트와 평가 ──────────────────────────────────────────────
 	"was-2-1": [
 		{
+			id: "was-2-1-x4",
+			question: {
+				ko: "자동 검사 결과의 '검토 필요(needs review)' 항목에 대한 올바른 처리는?",
+				en: "How should 'needs review' items in automated scan results be handled?",
+			},
+			options: {
+				a: { ko: "오류가 아니므로 무시한다", en: "Ignore them — they aren't errors" },
+				b: { ko: "사람이 판단해야 하는 항목이므로 수동으로 확인한다", en: "Verify them manually — they require human judgment" },
+				c: { ko: "자동으로 통과 처리한다", en: "Mark them as passed automatically" },
+				d: { ko: "도구를 바꿔서 다시 돌린다", en: "Re-run with a different tool" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "'검토 필요'는 배경 이미지 위 텍스트 대비처럼 도구가 확정 판단할 수 없는 항목입니다. 무시하면 실제 결함이 숨으므로 반드시 수동 확인해야 합니다.",
+				en: "'Needs review' flags items tools cannot conclusively judge — like text contrast over background images. Ignoring them hides real defects; they must be verified manually.",
+			},
+		},
+		{
+			id: "was-2-1-x5",
+			question: {
+				ko: "기존 접근성 부채가 많은 프로젝트에 CI 자동 검사를 도입하는 현실적인 전략은?",
+				en: "What is a realistic strategy for introducing CI accessibility checks to a project with existing debt?",
+			},
+			options: {
+				a: { ko: "모든 실패를 즉시 빌드 차단으로 설정한다", en: "Immediately block builds on every failure" },
+				b: { ko: "새 코드·변경 화면에만 엄격 기준을 적용하고 기존 부채는 베이스라인으로 점진 상환한다", en: "Apply strict rules to new code and changed screens, managing existing debt as a baseline paid down incrementally" },
+				c: { ko: "자동 검사를 도입하지 않는다", en: "Don't introduce automated checks" },
+				d: { ko: "경고를 모두 끈다", en: "Silence all warnings" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "처음부터 전체 실패를 차단하면 기존 부채 때문에 도입이 좌초합니다. 신규·변경분에 엄격 기준, 기존 부채는 베이스라인 관리 후 점진 상환이 현실적인 도입 전략입니다.",
+				en: "Blocking everything from day one founders on existing debt. Strict rules for new and changed code, with existing debt baselined and paid down incrementally, is the realistic adoption strategy.",
+			},
+		},
+		{
 			id: "was-2-1-x1",
 			question: {
 				ko: "자동 접근성 검사 도구(axe, WAVE 등)의 한계에 대한 설명으로 옳은 것은?",
@@ -1081,6 +1117,42 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"was-2-2": [
+		{
+			id: "was-2-2-x4",
+			question: {
+				ko: "화면낭독기의 '탐색(browse) 모드'와 '포커스(forms) 모드'의 차이는?",
+				en: "What is the difference between a screen reader's browse mode and focus (forms) mode?",
+			},
+			options: {
+				a: { ko: "탐색 모드는 H·D 등 단축키로 문서를 탐색하고, 포커스 모드는 키 입력을 입력 필드로 전달한다", en: "Browse mode navigates the document with keys like H and D; focus mode passes keystrokes to the input field" },
+				b: { ko: "두 모드는 동일하다", en: "The two modes are identical" },
+				c: { ko: "포커스 모드는 마우스 전용이다", en: "Focus mode is mouse-only" },
+				d: { ko: "탐색 모드는 음성을 끈다", en: "Browse mode turns speech off" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "탐색 모드에서는 H(제목)·D(랜드마크) 같은 키가 문서 탐색에 쓰이고, 입력 필드에 들어가면 포커스 모드로 전환되어 키 입력이 필드에 입력됩니다. 커스텀 위젯이 이 전환을 방해하면 입력이나 탐색이 불가능해집니다.",
+				en: "In browse mode, keys like H (headings) and D (landmarks) navigate the document; entering an input switches to focus mode where keystrokes type into the field. Widgets that break this switching leave users unable to type or navigate.",
+			},
+		},
+		{
+			id: "was-2-2-x5",
+			question: {
+				ko: "WCAG 1.4.10 '리플로우'의 수동 점검 방법으로 옳은 것은?",
+				en: "What is the correct manual check for WCAG 1.4.10 'Reflow'?",
+			},
+			options: {
+				a: { ko: "100% 배율에서 가로 스크롤 확인", en: "Check horizontal scrolling at 100% zoom" },
+				b: { ko: "400% 확대(320px 폭 상당)에서 가로 스크롤 없이 콘텐츠가 이용 가능한지 확인", en: "Verify content is usable without horizontal scrolling at 400% zoom (equivalent to 320px width)" },
+				c: { ko: "모바일 앱에서만 확인", en: "Check only in mobile apps" },
+				d: { ko: "인쇄 미리보기로 확인", en: "Check via print preview" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "1.4.10(Level AA)은 400% 확대 — 320 CSS픽셀 폭 상당 — 에서 두 방향 스크롤 없이 콘텐츠를 이용할 수 있을 것을 요구합니다. 반응형 설계로 충족하며, 저시력 확대 사용자를 위한 기준입니다.",
+				en: "1.4.10 (Level AA) requires content to be usable without two-dimensional scrolling at 400% zoom — equivalent to 320 CSS pixels width. Met through responsive design, it serves low-vision zoom users.",
+			},
+		},
 		{
 			id: "was-2-2-x1",
 			question: {
@@ -1139,6 +1211,42 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 	// ── Domain 3: 개선과 모범 사례 ───────────────────────────────────────────
 	"was-3-1": [
 		{
+			id: "was-3-1-x4",
+			question: {
+				ko: "100개 페이지에서 반복되는 버튼 대비 미달의 올바른 수정 접근은?",
+				en: "What is the right approach to sub-par button contrast repeated across 100 pages?",
+			},
+			options: {
+				a: { ko: "페이지 100개를 각각 수정한다", en: "Fix each of the 100 pages individually" },
+				b: { ko: "디자인 토큰/공용 컴포넌트 한 곳을 수정한다 (근본 원인 수정)", en: "Fix the design token or shared component once (root-cause fix)" },
+				c: { ko: "가장 방문이 많은 10개만 수정한다", en: "Fix only the 10 most-visited pages" },
+				d: { ko: "AAA 기준이므로 무시한다", en: "Ignore it as an AAA criterion" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "반복 결함은 증상이 아니라 근본 원인을 고칩니다. 공용 컴포넌트·디자인 토큰 수정 한 번이 100개 페이지를 동시에 고치고 재발도 막습니다. 참고로 텍스트 대비 4.5:1은 AA 기준입니다.",
+				en: "Recurring defects call for root-cause fixes: one change to the shared component or design token fixes all 100 pages and prevents recurrence. (And 4.5:1 text contrast is an AA criterion.)",
+			},
+		},
+		{
+			id: "was-3-1-x5",
+			question: {
+				ko: "접근성 이슈 수정 후 반드시 해야 하는 일은?",
+				en: "What must follow every accessibility fix?",
+			},
+			options: {
+				a: { ko: "티켓을 바로 종료한다", en: "Close the ticket immediately" },
+				b: { ko: "재검증(자동+수동)으로 해결을 확인하고 회귀 테스트에 편입한다", en: "Re-verify (automated plus manual) and fold the case into regression tests" },
+				c: { ko: "관련 코드를 리팩터링한다", en: "Refactor the surrounding code" },
+				d: { ko: "새 감사를 처음부터 시작한다", en: "Start a brand-new audit from scratch" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "수정이 실제로 문제를 해결했는지 자동·수동 재검증으로 확인하고, 같은 결함이 재발하지 않도록 회귀 테스트에 편입하는 것이 수정 사이클의 완결입니다.",
+				en: "The remediation cycle completes only when re-verification (automated and manual) confirms the fix and the case joins the regression suite so the defect cannot silently return.",
+			},
+		},
+		{
 			id: "was-3-1-x1",
 			question: {
 				ko: "WCAG-EM(웹 접근성 평가 방법론)의 5단계 순서로 옳은 것은?",
@@ -1194,6 +1302,42 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"was-3-2": [
+		{
+			id: "was-3-2-x4",
+			question: {
+				ko: "커스텀 위젯(탭, 콤보박스 등)을 만들기 전에 참고해야 하는 표준 문서는?",
+				en: "Which standard reference should be consulted before building a custom widget (tabs, combobox, etc.)?",
+			},
+			options: {
+				a: { ko: "WAI-ARIA Authoring Practices Guide (APG)", en: "The WAI-ARIA Authoring Practices Guide (APG)" },
+				b: { ko: "HTTP 명세", en: "The HTTP specification" },
+				c: { ko: "CSS 선택자 명세", en: "The CSS Selectors specification" },
+				d: { ko: "robots.txt 표준", en: "The robots.txt standard" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "APG는 탭·아코디언·콤보박스·모달 등 패턴별 역할 구조, 키보드 상호작용, ARIA 상태 관리를 예제와 함께 제공합니다. 새 위젯 제작 전 해당 패턴 확인이 표준 절차입니다.",
+				en: "The APG provides each pattern's role structure, keyboard interaction, and ARIA state management with examples — checking the relevant pattern before building is standard procedure.",
+			},
+		},
+		{
+			id: "was-3-2-x5",
+			question: {
+				ko: "접근성 성명에 '완벽히 접근 가능합니다'라고만 쓰는 것이 문제인 이유는?",
+				en: "Why is writing only 'fully accessible' in an accessibility statement a problem?",
+			},
+			options: {
+				a: { ko: "문장이 너무 짧아서", en: "The sentence is too short" },
+				b: { ko: "과장 주장은 신뢰를 깎고 법적 리스크를 키우며, 알려진 한계·연락처·평가일 공개가 성명의 본질이기 때문", en: "Overclaiming erodes trust and raises legal risk — disclosing known limitations, a contact, and the evaluation date is the statement's essence" },
+				c: { ko: "성명은 영어로만 써야 해서", en: "Statements must be written in English" },
+				d: { ko: "성명은 개발자만 볼 수 있어서", en: "Only developers can see statements" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "접근성 성명은 책임성 문서입니다. 준수 수준·알려진 제한·피드백 연락처·최근 평가일을 정직하게 공개하는 것이 사용자와 규제 기관 모두에게 좋은 신호이며, EU 공공 부문에서는 법적 필수입니다.",
+				en: "A statement is an accountability document: honestly disclosing conformance level, known limitations, a feedback contact, and the last evaluation date is what serves users and regulators — and it's legally required in the EU public sector.",
+			},
+		},
 		{
 			id: "was-3-2-x1",
 			question: {
