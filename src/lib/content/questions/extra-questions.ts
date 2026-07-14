@@ -275,6 +275,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 	// ── Domain 2: 접근성 및 보편적 설계 ──────────────────────────────────────
 	"cpacc-2-1": [
 		{
+			id: "cpacc-2-1-x3",
+			question: {
+				ko: "'연석 경사로 효과(Curb Cut Effect)'가 의미하는 것은?",
+				en: "What does the 'Curb Cut Effect' refer to?",
+			},
+			options: {
+				a: { ko: "경사로 설치 비용이 예산을 초과하는 현상", en: "Ramp installation costs exceeding budget" },
+				b: { ko: "특정 집단을 위한 설계가 모든 사람에게 혜택을 주는 현상", en: "Design for a specific group ending up benefiting everyone" },
+				c: { ko: "경사로가 계단보다 위험한 현상", en: "Ramps being more dangerous than stairs" },
+				d: { ko: "장애인 전용 시설의 분리 효과", en: "The segregating effect of disability-only facilities" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "연석 경사로는 휠체어 사용자를 위해 도입됐지만 유모차·자전거·여행 가방 사용자 모두에게 혜택을 주었습니다. 접근성 설계가 모두의 경험을 개선한다는 보편적 설계의 핵심 통찰입니다.",
+				en: "Curb cuts were introduced for wheelchair users but benefit everyone with strollers, bicycles, and suitcases — the core Universal Design insight that accessible design improves everyone's experience.",
+			},
+		},
+		{
+			id: "cpacc-2-1-x4",
+			question: {
+				ko: "'레버형 문손잡이'는 보편적 설계 7원칙 중 어디에 가장 잘 부합하는가?",
+				en: "A lever door handle best exemplifies which Universal Design principle?",
+			},
+			options: {
+				a: { ko: "낮은 신체적 노력 (Low Physical Effort)", en: "Low Physical Effort" },
+				b: { ko: "인지 가능한 정보 (Perceptible Information)", en: "Perceptible Information" },
+				c: { ko: "오류에 대한 관용 (Tolerance for Error)", en: "Tolerance for Error" },
+				d: { ko: "공평한 사용 (Equitable Use)", en: "Equitable Use" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "레버형 손잡이는 손목을 비틀지 않고 팔꿈치 등으로도 열 수 있어 최소한의 힘과 피로로 사용 가능합니다 — 낮은 신체적 노력 원칙의 대표 사례입니다.",
+				en: "A lever handle can be opened without twisting the wrist — even with an elbow — requiring minimal force and fatigue: the classic example of Low Physical Effort.",
+			},
+		},
+		{
 			id: "cpacc-2-1-x1",
 			question: {
 				ko: "유니버설 디자인 7원칙 중 '오류에 대한 관용(Tolerance for Error)'의 예로 가장 적절한 것은?",
@@ -313,6 +349,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 	],
 	"cpacc-2-2": [
 		{
+			id: "cpacc-2-2-x3",
+			question: {
+				ko: "WCAG 2.0이 채택된 국제 표준(ISO) 번호는?",
+				en: "Under which ISO standard was WCAG 2.0 adopted?",
+			},
+			options: {
+				a: { ko: "ISO 9001", en: "ISO 9001" },
+				b: { ko: "ISO/IEC 40500", en: "ISO/IEC 40500" },
+				c: { ko: "ISO 27001", en: "ISO 27001" },
+				d: { ko: "ISO 9241", en: "ISO 9241" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "WCAG 2.0은 ISO/IEC 40500:2012로 채택되어 각국 법률·표준이 참조하는 국제 표준의 지위를 갖습니다.",
+				en: "WCAG 2.0 was adopted as ISO/IEC 40500:2012, giving it international-standard status referenced by laws and standards worldwide.",
+			},
+		},
+		{
+			id: "cpacc-2-2-x4",
+			question: {
+				ko: "WCAG 2.1이 특히 보강한 사용자 영역이 아닌 것은?",
+				en: "Which user area was NOT a particular focus of WCAG 2.1's additions?",
+			},
+			options: {
+				a: { ko: "모바일 사용자", en: "Mobile users" },
+				b: { ko: "저시력 사용자", en: "Low-vision users" },
+				c: { ko: "인지 장애 사용자", en: "Users with cognitive disabilities" },
+				d: { ko: "서버 관리자", en: "Server administrators" },
+			},
+			answer: "d",
+			explanation: {
+				ko: "WCAG 2.1(2018)은 모바일, 저시력, 인지 장애 사용자를 위한 17개 성공 기준을 추가했습니다(리플로우, 텍스트 간격, 포인터 제스처 등). 서버 관리는 WCAG의 범위가 아닙니다.",
+				en: "WCAG 2.1 (2018) added 17 success criteria focused on mobile, low-vision, and cognitive users (Reflow, Text Spacing, Pointer Gestures, etc.). Server administration is outside WCAG's scope.",
+			},
+		},
+		{
 			id: "cpacc-2-2-x1",
 			question: {
 				ko: "WCAG의 4대 원칙(POUR) 중 '견고성(Robust)'이 의미하는 것은?",
@@ -350,6 +422,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"cpacc-2-3": [
+		{
+			id: "cpacc-2-3-x3",
+			question: {
+				ko: "사용자 댓글 등 제3자 콘텐츠 때문에 페이지가 완전히 적합할 수 없을 때 사용할 수 있는 것은?",
+				en: "When third-party content such as user comments prevents full conformance, what can be used?",
+			},
+			options: {
+				a: { ko: "부분 적합 선언 (Statement of Partial Conformance)", en: "A Statement of Partial Conformance" },
+				b: { ko: "Level AAA 선언", en: "A Level AAA claim" },
+				c: { ko: "적합성 선언 생략은 불가능하다", en: "Conformance claims can never be qualified" },
+				d: { ko: "해당 페이지 삭제", en: "Deleting the page" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "부분 적합 선언은 제3자 콘텐츠를 제외하면 페이지가 적합함을 밝히는 방식입니다. 통제할 수 없는 외부 콘텐츠가 있는 페이지를 위한 WCAG의 공식 장치입니다.",
+				en: "A Statement of Partial Conformance states the page would conform except for specified third-party content — WCAG's official mechanism for pages containing uncontrolled external content.",
+			},
+		},
+		{
+			id: "cpacc-2-3-x4",
+			question: {
+				ko: "'접근성 지원(accessibility supported)' 조건이 의미하는 것은?",
+				en: "What does the 'accessibility supported' conformance requirement mean?",
+			},
+			options: {
+				a: { ko: "사용된 기술이 실제 보조기술·브라우저와 호환되게 동작해야 한다", en: "Technologies used must actually work with users' assistive technologies and browsers" },
+				b: { ko: "사이트가 접근성 전담 부서를 운영해야 한다", en: "The site must operate a dedicated accessibility department" },
+				c: { ko: "고객 지원 채널이 있어야 한다", en: "A customer support channel must exist" },
+				d: { ko: "정부 인증을 받아야 한다", en: "Government certification is required" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "이론상 접근 가능해도 실제 보조기술이 지원하지 않는 방식이라면 적합성에 기여할 수 없습니다. 적합성 선언의 다섯 조건 중 하나입니다.",
+				en: "A technique that is accessible in theory but unsupported by real assistive technologies cannot be relied on for conformance — one of the five conformance requirements.",
+			},
+		},
 		{
 			id: "cpacc-2-3-x1",
 			question: {
@@ -390,6 +498,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 	// ── Domain 3: 표준, 법률, 관리 전략 ──────────────────────────────────────
 	"cpacc-3-1": [
 		{
+			id: "cpacc-3-1-x3",
+			question: {
+				ko: "2024년 발효된 미국 ADA Title II 최종 규칙의 내용은?",
+				en: "What does the 2024 US ADA Title II final rule require?",
+			},
+			options: {
+				a: { ko: "모든 민간 기업 웹사이트에 WCAG 2.2 AAA 적용", en: "WCAG 2.2 AAA for all private company websites" },
+				b: { ko: "주·지방 정부의 웹 콘텐츠·모바일 앱에 WCAG 2.1 Level AA 명시적 요구", en: "Explicit WCAG 2.1 Level AA for state and local government web content and mobile apps" },
+				c: { ko: "연방 정부 조달 기준을 WCAG 3.0으로 변경", en: "Changing federal procurement standards to WCAG 3.0" },
+				d: { ko: "항공사 키오스크 접근성 의무화", en: "Mandating accessible airline kiosks" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "2024년 4월 ADA Title II 최종 규칙은 주·지방 정부의 웹 콘텐츠와 모바일 앱에 WCAG 2.1 Level AA를 명시적 기술 기준으로 요구합니다(규모별 2026~2027년까지 준수). 민간(Title III)에는 아직 명시 기준이 없습니다.",
+				en: "The April 2024 Title II final rule sets WCAG 2.1 Level AA as the explicit technical standard for state/local government web content and mobile apps (compliance by 2026–2027 by entity size). Title III (private) still has no explicit standard.",
+			},
+		},
+		{
+			id: "cpacc-3-1-x4",
+			question: {
+				ko: "미국 CVAA(21세기 통신·영상 접근성법)가 다루는 영역은?",
+				en: "What does the US CVAA (21st Century Communications and Video Accessibility Act) cover?",
+			},
+			options: {
+				a: { ko: "연방 정부의 ICT 조달", en: "Federal ICT procurement" },
+				b: { ko: "첨단 통신 서비스와 인터넷 영상 프로그램의 접근성", en: "Accessibility of advanced communications and internet video programming" },
+				c: { ko: "건축물의 물리적 접근성", en: "Physical accessibility of buildings" },
+				d: { ko: "고용 차별 금지", en: "Employment discrimination" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "CVAA(2010)는 통신 서비스(VoIP, 메시징 등)와 인터넷으로 배포되는 영상 프로그램의 접근성(자막 등)을 요구합니다. 조달은 508조, 건축은 ADA·ABA, 고용은 ADA Title I의 영역입니다.",
+				en: "The CVAA (2010) requires accessibility of communications services (VoIP, messaging) and internet-delivered video programming (e.g., captions). Procurement is Section 508; buildings are ADA/ABA; employment is ADA Title I.",
+			},
+		},
+		{
 			id: "cpacc-3-1-x1",
 			question: {
 				ko: "UN 장애인권리협약(CRPD)에서 '합리적 편의제공(Reasonable Accommodation)'의 정의로 옳은 것은?",
@@ -428,6 +572,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 	],
 	"cpacc-3-2": [
 		{
+			id: "cpacc-3-2-x3",
+			question: {
+				ko: "유럽 접근성법(EAA)의 적용 면제 대상은?",
+				en: "Which entities are exempt from the European Accessibility Act (EAA)?",
+			},
+			options: {
+				a: { ko: "모든 비영리 단체", en: "All non-profit organizations" },
+				b: { ko: "10인 미만이면서 연매출·자산 200만 유로 미만인 소기업(서비스 의무)", en: "Microenterprises — fewer than 10 employees and under €2 million turnover/assets (service obligations)" },
+				c: { ko: "EU 밖에 본사를 둔 모든 기업", en: "All companies headquartered outside the EU" },
+				d: { ko: "공공 기관", en: "Public sector bodies" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "EAA는 10인 미만·200만 유로 미만의 소기업을 서비스 의무에서 면제합니다. 반대로 EU 밖 기업이라도 EU 시장에 제품·서비스를 제공하면 적용 대상입니다.",
+				en: "The EAA exempts microenterprises (fewer than 10 employees and under €2 million) from service obligations. Conversely, non-EU companies offering products or services in the EU market are covered.",
+			},
+		},
+		{
+			id: "cpacc-3-2-x4",
+			question: {
+				ko: "EU 웹접근성 지침(WAD)이 공공 기관에 요구하는 공개 문서는?",
+				en: "What public document does the EU Web Accessibility Directive require from public bodies?",
+			},
+			options: {
+				a: { ko: "접근성 성명 (Accessibility Statement)", en: "An Accessibility Statement" },
+				b: { ko: "VPAT", en: "A VPAT" },
+				c: { ko: "개인정보처리방침", en: "A privacy policy" },
+				d: { ko: "연간 재무제표", en: "Annual financial statements" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "WAD는 공공 기관이 접근성 성명을 게시해 준수 상태, 알려진 한계, 피드백 경로를 공개하도록 요구합니다. 회원국의 주기적 모니터링·보고 의무와 함께 WAD의 특징적 요구사항입니다.",
+				en: "The WAD requires public bodies to publish an Accessibility Statement disclosing compliance status, known limitations, and a feedback channel — a distinctive WAD requirement alongside member-state monitoring and reporting.",
+			},
+		},
+		{
 			id: "cpacc-3-2-x1",
 			question: {
 				ko: "미국 재활법 Section 508의 적용 대상은?",
@@ -465,6 +645,42 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 		},
 	],
 	"cpacc-3-3": [
+		{
+			id: "cpacc-3-3-x3",
+			question: {
+				ko: "VPAT의 네 가지 에디션에 해당하지 않는 것은?",
+				en: "Which is NOT one of the four VPAT editions?",
+			},
+			options: {
+				a: { ko: "508 에디션", en: "508 edition" },
+				b: { ko: "EU(EN 301 549) 에디션", en: "EU (EN 301 549) edition" },
+				c: { ko: "WCAG 에디션", en: "WCAG edition" },
+				d: { ko: "KWCAG 에디션", en: "KWCAG edition" },
+			},
+			answer: "d",
+			explanation: {
+				ko: "VPAT는 참조 표준에 따라 508, EU(EN 301 549), WCAG, 그리고 셋을 통합한 INT 네 가지 에디션으로 제공됩니다. KWCAG 에디션은 존재하지 않습니다.",
+				en: "VPAT comes in four editions by reference standard: 508, EU (EN 301 549), WCAG, and INT (combining all three). There is no KWCAG edition.",
+			},
+		},
+		{
+			id: "cpacc-3-3-x4",
+			question: {
+				ko: "접근성 성숙도 평가의 본질적 목적으로 가장 적절한 것은?",
+				en: "What is the essential purpose of accessibility maturity assessment?",
+			},
+			options: {
+				a: { ko: "조직 간 순위를 매겨 경쟁시키기 위해", en: "Ranking organizations against each other" },
+				b: { ko: "일회성 프로젝트에서 지속 가능한 프로그램으로 가는 경로를 설계하기 위해", en: "Designing the path from one-off projects to a sustainable program" },
+				c: { ko: "법적 처벌을 피하기 위한 증빙 서류 생성", en: "Producing paperwork to avoid legal penalties" },
+				d: { ko: "자동화 도구의 점수를 높이기 위해", en: "Improving automated tool scores" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "성숙도 모델(초기→계획→관리→정착→최적화)의 목적은 등급 매기기가 아니라 현재 위치를 진단하고 지속 가능한 접근성 프로그램으로 발전하는 로드맵을 만드는 것입니다.",
+				en: "The point of maturity models (ad hoc → planned → managed → embedded → optimized) is not grading but diagnosing where you are and building a roadmap toward a sustainable accessibility program.",
+			},
+		},
 		{
 			id: "cpacc-3-3-x1",
 			question: {

@@ -843,20 +843,74 @@ const units: StudyUnit[] = [
 				"Describe the origin of Universal Design and Ronald Mace's role",
 			],
 		},
-		content: {
-			ko: [
-				"보편적 설계(Universal Design)란 장애 여부, 연령, 언어에 관계없이 모든 사람이 사용할 수 있도록 처음부터 설계하는 개념입니다. 미국 NC State University의 Ronald Mace가 제창했습니다.",
-				"보편적 설계 7원칙: ① 공평한 사용(Equitable Use) - 모든 능력의 사용자에게 동일하거나 동등한 방식으로 유용함 ② 사용의 유연성(Flexibility in Use) - 다양한 취향과 능력을 수용 ③ 간단하고 직관적인 사용(Simple and Intuitive Use) - 경험, 지식, 언어 능력과 관계없이 사용이 쉬움 ④ 인지 가능한 정보(Perceptible Information) - 필요한 정보를 효과적으로 전달 ⑤ 오류에 대한 관용(Tolerance for Error) - 우발적 행동의 위험 최소화 ⑥ 낮은 신체적 노력(Low Physical Effort) - 효율적이고 편안하게 사용 ⑦ 접근과 사용을 위한 충분한 공간(Size and Space for Approach and Use).",
-				"보편적 설계 vs 개별 편의 제공(Reasonable Accommodation): 보편적 설계는 처음부터 모든 사람을 위해 설계하는 것입니다. 개별 편의 제공은 특정 개인의 필요에 맞춰 사후에 제공하는 것으로, 시간과 비용이 더 많이 들 수 있습니다. 보편적 설계가 더 선호되지만, 항상 가능하지는 않습니다.",
-				"보편적 설계의 실제 예시: 경사로(계단과 함께 제공), 자막(청각 장애인뿐 아니라 소음 환경에서도 유용), 큰 글씨 버튼(노인, 임시 부상자, 일반 사용자 모두에게 유용), 자동문(유모차, 휠체어, 짐을 든 사람 모두에게 편리). 이처럼 보편적 설계는 특정 장애인만을 위한 것이 아니라 모든 사람의 경험을 개선합니다.",
-			],
-			en: [
-				"Universal Design is the design of products and environments to be usable by all people, to the greatest extent possible, without the need for adaptation. It was pioneered by Ronald Mace at NC State University.",
-				"The 7 Principles of Universal Design: ① Equitable Use - useful to people with diverse abilities ② Flexibility in Use - accommodates a wide range of preferences and abilities ③ Simple and Intuitive Use - easy to understand regardless of experience or language ④ Perceptible Information - communicates necessary information effectively ⑤ Tolerance for Error - minimizes hazards and adverse consequences of accidental actions ⑥ Low Physical Effort - efficient and comfortable to use ⑦ Size and Space for Approach and Use - appropriate size and space for approach, reach, and use.",
-				"Universal Design vs Reasonable Accommodation: Universal Design means designing for everyone from the start. Reasonable Accommodation means making adjustments for a specific individual after the fact — it can be more costly and time-consuming. Universal Design is preferred but not always achievable.",
-				"Real-world examples: ramps (alongside stairs), captions (useful for people with hearing loss and in noisy environments), large buttons (helpful for elderly, people with temporary injuries, and everyone), automatic doors (convenient for wheelchair users, parents with strollers, and anyone carrying loads). Universal Design improves the experience for all users, not just those with disabilities.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "보편적 설계란 무엇인가", en: "What Is Universal Design?" },
+				paragraphs: {
+					ko: [
+						"보편적 설계(Universal Design)란 별도의 개조나 특수 설계 없이, 가능한 한 모든 사람이 사용할 수 있도록 제품과 환경을 처음부터 설계하는 개념입니다. 미국 NC State University의 건축가 Ronald Mace가 제창했으며, 그 자신이 휠체어 사용자였습니다.",
+						"'연석 경사로 효과(Curb Cut Effect)'가 이 철학을 잘 보여줍니다. 보도 턱을 깎아 만든 경사로는 휠체어 사용자를 위해 도입됐지만, 유모차·자전거·여행 가방·배달 카트 사용자 모두에게 혜택을 주었습니다. 특정 집단을 위한 설계가 모두의 경험을 개선한다는 것이 보편적 설계의 핵심 통찰입니다.",
+					],
+					en: [
+						"Universal Design is the design of products and environments to be usable by all people, to the greatest extent possible, without the need for adaptation or specialized design. It was pioneered by architect Ronald Mace at NC State University — himself a wheelchair user.",
+						"The 'Curb Cut Effect' captures the philosophy. Curb cuts were introduced for wheelchair users, but they benefit everyone with strollers, bicycles, suitcases, and delivery carts. The core insight of Universal Design: designing for a specific group improves the experience for all.",
+					],
+				},
+			},
+			{
+				heading: { ko: "7원칙 — 앞의 네 가지", en: "The Seven Principles — First Four" },
+				paragraphs: {
+					ko: [
+						"① 공평한 사용(Equitable Use): 다양한 능력의 사용자에게 동일하거나 동등한 사용 방식을 제공하고, 누구도 분리하거나 낙인찍지 않습니다. 예: 모두가 같은 입구로 들어가는 자동문. ② 사용의 유연성(Flexibility in Use): 다양한 취향과 능력을 수용합니다. 예: 왼손·오른손 모두 쓸 수 있는 가위, 속도 조절이 되는 동영상 플레이어.",
+						"③ 간단하고 직관적인 사용(Simple and Intuitive Use): 경험, 지식, 언어 능력, 집중도와 관계없이 사용법을 쉽게 이해할 수 있어야 합니다. 예: 그림으로 표시된 조립 설명서. ④ 인지 가능한 정보(Perceptible Information): 주변 조건이나 사용자의 감각 능력과 무관하게 필요한 정보를 효과적으로 전달합니다. 예: 시각+청각+촉각으로 함께 알리는 승강기 도착 신호.",
+					],
+					en: [
+						"① Equitable Use: provide the same or equivalent means of use for people with diverse abilities, segregating or stigmatizing no one. Example: automatic doors everyone enters through. ② Flexibility in Use: accommodate a wide range of preferences and abilities. Examples: scissors usable left- or right-handed; a video player with adjustable speed.",
+						"③ Simple and Intuitive Use: easy to understand regardless of experience, knowledge, language skills, or concentration. Example: assembly instructions using pictures. ④ Perceptible Information: communicate necessary information effectively regardless of ambient conditions or the user's sensory abilities. Example: elevator arrival signaled visually, audibly, and tactilely at once.",
+					],
+				},
+			},
+			{
+				heading: { ko: "7원칙 — 나머지 세 가지", en: "The Seven Principles — Last Three" },
+				paragraphs: {
+					ko: [
+						"⑤ 오류에 대한 관용(Tolerance for Error): 우발적이거나 의도치 않은 행동의 위험과 부정적 결과를 최소화합니다. 예: 실행 취소(Undo), 삭제 전 확인 대화상자, 위험 요소를 가장 멀리 배치하는 배열. ⑥ 낮은 신체적 노력(Low Physical Effort): 효율적이고 편안하게, 최소한의 피로로 사용할 수 있어야 합니다. 예: 레버형 문손잡이, 원터치 수전.",
+						"⑦ 접근과 사용을 위한 충분한 크기와 공간(Size and Space for Approach and Use): 사용자의 신체 크기, 자세, 이동성과 무관하게 접근·조작할 수 있는 공간을 제공합니다. 예: 휠체어가 회전할 수 있는 넓은 통로, 앉거나 서서 닿는 조작부 높이. 시험에서는 각 원칙의 이름과 사례를 정확히 짝지을 수 있어야 합니다.",
+					],
+					en: [
+						"⑤ Tolerance for Error: minimize hazards and adverse consequences of accidental or unintended actions. Examples: undo functions, confirmation dialogs before deletion, arranging hazardous elements farthest away. ⑥ Low Physical Effort: usable efficiently and comfortably with minimal fatigue. Examples: lever door handles, single-touch faucets.",
+						"⑦ Size and Space for Approach and Use: provide appropriate size and space for approach, reach, and operation regardless of body size, posture, or mobility. Examples: corridors wide enough for a wheelchair to turn; controls reachable seated or standing. For the exam, be able to match each principle's name with its examples precisely.",
+					],
+				},
+			},
+			{
+				heading: { ko: "보편적 설계 vs 접근성 vs 개별 편의 제공", en: "Universal Design vs Accessibility vs Accommodation" },
+				paragraphs: {
+					ko: [
+						"보편적 설계는 처음부터 모든 사람을 위해 설계하는 사전적(proactive) 접근입니다. 개별 편의 제공(Reasonable Accommodation)은 특정 개인의 필요에 맞춰 사후에 조정하는 사후적(reactive) 접근으로, 시간과 비용이 더 들 수 있습니다. 보편적 설계가 선호되지만 모든 개인의 필요를 예측할 수는 없으므로, 실무에서는 두 접근이 상호 보완적으로 쓰입니다.",
+						"접근성(Accessibility)이 장애인의 사용 가능성에 초점을 둔다면, 보편적 설계는 장애를 포함한 모든 다양성(연령, 언어, 상황)을 대상으로 하는 더 넓은 설계 철학입니다. 유사 개념으로 포용적 설계(Inclusive Design)가 있으며, 이는 배제된 사용자로부터 배우고 다양성을 설계 과정에 참여시키는 방법론적 측면을 강조합니다.",
+					],
+					en: [
+						"Universal Design is proactive — designing for everyone from the start. Reasonable Accommodation is reactive — adjusting after the fact for a specific individual, often at greater time and cost. Universal Design is preferred, but no design anticipates every individual need, so in practice the two approaches complement each other.",
+						"Where accessibility focuses on usability for people with disabilities, Universal Design is a broader design philosophy addressing all human diversity — age, language, circumstance — including disability. The related concept of Inclusive Design emphasizes methodology: learning from excluded users and involving diverse people in the design process.",
+					],
+				},
+			},
+			{
+				heading: { ko: "실생활과 디지털의 적용", en: "Applications: Physical and Digital" },
+				paragraphs: {
+					ko: [
+						"물리적 예시: 경사로(계단과 함께 제공), 자동문(유모차·휠체어·짐을 든 사람 모두에게 편리), 큰 글씨 버튼(노인·임시 부상자·모든 사용자에게 유용), 저상 버스, 레버형 손잡이.",
+						"디지털 예시: 자막(청각 장애인뿐 아니라 소음 환경·언어 학습자에게도 유용), 음성 비서, 다크 모드와 글자 크기 설정, 자동 완성, 명확한 오류 메시지. 이처럼 보편적 설계는 특정 장애인만을 위한 것이 아니라 모든 사람의 경험을 개선하며, 이것이 접근성의 비즈니스 사례를 구성하는 핵심 논거이기도 합니다.",
+					],
+					en: [
+						"Physical examples: ramps (alongside stairs), automatic doors (convenient for strollers, wheelchairs, anyone carrying loads), large-print buttons (useful for older adults, people with temporary injuries, everyone), low-floor buses, lever handles.",
+						"Digital examples: captions (useful not only for hearing loss but in noisy places and for language learners), voice assistants, dark mode and text-size settings, autocomplete, clear error messages. Universal Design improves the experience for all users — which is also a core argument in the business case for accessibility.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-2-1-q1",
@@ -949,20 +1003,61 @@ const units: StudyUnit[] = [
 				"Describe the evolution from WCAG 2.0 to 2.1 to 2.2",
 			],
 		},
-		content: {
-			ko: [
-				"WCAG(Web Content Accessibility Guidelines)는 W3C의 WAI(Web Accessibility Initiative)에서 개발한 웹 접근성 국제 표준입니다. 웹 콘텐츠를 장애인이 사용할 수 있도록 하는 기술적 기준을 제공합니다. WCAG 2.0(2008), 2.1(2018), 2.2(2023)로 발전했으며, 각 버전은 이전 버전과 하위 호환됩니다.",
-				"POUR 4원칙은 WCAG의 최상위 구조입니다. ① 인식 가능(Perceivable) — 정보와 UI 구성요소가 사용자에게 인식 가능한 방식으로 제공되어야 합니다. 텍스트 대안, 자막, 색상 대비 등이 여기에 속합니다. ② 운용 가능(Operable) — UI 구성요소와 내비게이션이 조작 가능해야 합니다. 키보드 접근, 충분한 시간, 발작 방지 등이 포함됩니다.",
-				"③ 이해 가능(Understandable) — 정보와 UI 조작 방법을 이해할 수 있어야 합니다. 읽기 쉬운 텍스트, 예측 가능한 동작, 입력 도움 등이 해당됩니다. ④ 견고(Robust) — 콘텐츠가 보조기술을 포함한 다양한 사용자 에이전트에서 안정적으로 해석되어야 합니다. 올바른 HTML 마크업, ARIA 사용 등이 포함됩니다.",
-				"WCAG의 계층 구조: 4개 원칙(POUR) → 13개 지침(Guidelines) → 성공 기준(Success Criteria, 각 A/AA/AAA 등급) → 충분 기법(Sufficient Techniques)과 참고 기법(Advisory Techniques). 성공 기준은 테스트 가능한 구체적 요구사항이며, 기법은 성공 기준을 달성하는 구체적 방법입니다. WCAG 2.2에서는 총 87개 성공 기준이 있습니다.",
-			],
-			en: [
-				"WCAG (Web Content Accessibility Guidelines) is the international web accessibility standard developed by the W3C's Web Accessibility Initiative (WAI). It provides technical criteria for making web content accessible to people with disabilities. WCAG evolved from 2.0 (2008) to 2.1 (2018) to 2.2 (2023), with each version backward-compatible.",
-				"The four POUR principles are WCAG's top-level structure: ① Perceivable — Information and UI components must be presentable in ways users can perceive. Includes text alternatives, captions, and color contrast. ② Operable — UI components and navigation must be operable. Includes keyboard access, enough time, and seizure prevention.",
-				"③ Understandable — Information and UI operation must be understandable. Includes readable text, predictable behavior, and input assistance. ④ Robust — Content must be robust enough to be reliably interpreted by a wide variety of user agents, including assistive technologies. Includes proper HTML markup and ARIA usage.",
-				"WCAG hierarchy: 4 Principles (POUR) → 13 Guidelines → Success Criteria (rated A/AA/AAA) → Sufficient Techniques and Advisory Techniques. Success criteria are specific, testable requirements. Techniques are concrete methods to meet success criteria. WCAG 2.2 contains 87 success criteria in total.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "WCAG의 위상과 역사", en: "What WCAG Is and Where It Came From" },
+				paragraphs: {
+					ko: [
+						"WCAG(Web Content Accessibility Guidelines)는 W3C의 WAI(Web Accessibility Initiative)에서 개발한 웹 접근성 국제 표준으로, 웹 콘텐츠를 장애인이 사용할 수 있게 하는 기술적 기준을 제공합니다. WCAG 1.0(1999)에서 출발해 2.0(2008), 2.1(2018), 2.2(2023)로 발전했으며, 각 버전은 이전 버전과 하위 호환됩니다.",
+						"WCAG 2.0은 ISO/IEC 40500 국제 표준으로도 채택되어, 전 세계 접근성 법률과 표준(Section 508, EN 301 549, KWCAG 등)의 공통 기반이 되었습니다. '웹' 지침이지만 원칙과 다수 기준은 문서·모바일 앱 등 비웹 ICT에도 준용됩니다(WCAG2ICT).",
+					],
+					en: [
+						"WCAG (Web Content Accessibility Guidelines) is the international web accessibility standard developed by the W3C's Web Accessibility Initiative (WAI), providing technical criteria for making web content accessible to people with disabilities. Starting from WCAG 1.0 (1999), it evolved through 2.0 (2008), 2.1 (2018), and 2.2 (2023), each backward-compatible.",
+						"WCAG 2.0 was also adopted as international standard ISO/IEC 40500, making it the common foundation of accessibility laws and standards worldwide — Section 508, EN 301 549, KWCAG, and more. Though written for the web, its principles and many criteria are applied to non-web ICT such as documents and mobile apps (WCAG2ICT).",
+					],
+				},
+			},
+			{
+				heading: { ko: "POUR — 인식 가능과 운용 가능", en: "POUR — Perceivable and Operable" },
+				paragraphs: {
+					ko: [
+						"① 인식 가능(Perceivable): 정보와 UI 구성요소는 사용자가 인식할 수 있는 방식으로 제공되어야 합니다. 어떤 감각으로도 닿을 수 없는 정보는 존재하지 않는 것과 같습니다. 텍스트 대안(1.1), 시간 기반 미디어의 자막·대본(1.2), 적응 가능한 구조(1.3), 색상 대비와 구별 가능성(1.4)이 여기에 속합니다.",
+						"② 운용 가능(Operable): UI 구성요소와 내비게이션은 조작 가능해야 합니다. 사용자가 수행할 수 없는 상호작용을 요구하면 안 됩니다. 키보드 접근(2.1), 충분한 시간(2.2), 발작 예방(2.3), 탐색 가능성(2.4), 다양한 입력 방식(2.5)이 포함됩니다.",
+					],
+					en: [
+						"① Perceivable: information and UI components must be presentable in ways users can perceive — information no sense can reach might as well not exist. This covers text alternatives (1.1), captions and transcripts for time-based media (1.2), adaptable structure (1.3), and contrast and distinguishability (1.4).",
+						"② Operable: UI components and navigation must be operable — the interface cannot require an interaction the user cannot perform. This covers keyboard access (2.1), enough time (2.2), seizure prevention (2.3), navigability (2.4), and input modalities (2.5).",
+					],
+				},
+			},
+			{
+				heading: { ko: "POUR — 이해 가능과 견고", en: "POUR — Understandable and Robust" },
+				paragraphs: {
+					ko: [
+						"③ 이해 가능(Understandable): 정보와 UI의 조작 방법을 이해할 수 있어야 합니다. 읽기 쉬움과 언어 명시(3.1), 예측 가능한 동작(3.2), 입력 도움과 오류 처리(3.3)가 해당됩니다. 콘텐츠가 인식·조작 가능해도 이해할 수 없다면 사용할 수 없습니다.",
+						"④ 견고(Robust): 콘텐츠는 보조기술을 포함한 다양한 사용자 에이전트가 신뢰성 있게 해석할 수 있어야 합니다. 올바른 HTML 마크업과 name/role/value 노출(4.1)이 핵심이며, 기술이 발전해도 콘텐츠가 계속 접근 가능하도록 하는 미래 호환성의 원칙입니다.",
+					],
+					en: [
+						"③ Understandable: information and the operation of the UI must be understandable — readability and language declaration (3.1), predictable behavior (3.2), input assistance and error handling (3.3). Content that can be perceived and operated but not understood is still unusable.",
+						"④ Robust: content must be reliably interpretable by a wide variety of user agents, including assistive technologies. Proper HTML markup and exposing name/role/value (4.1) are central — a forward-compatibility principle keeping content accessible as technology evolves.",
+					],
+				},
+			},
+			{
+				heading: { ko: "계층 구조와 버전별 변화", en: "The Hierarchy and What Each Version Added" },
+				paragraphs: {
+					ko: [
+						"WCAG의 계층 구조: 4개 원칙(POUR) → 13개 지침(Guidelines) → 성공 기준(Success Criteria, A/AA/AAA 등급) → 충분 기법과 참고 기법. 성공 기준은 테스트 가능한 구체적 요구사항이고, 기법은 이를 달성하는 방법 예시(규범이 아닌 정보성)입니다. WCAG 2.2 기준 총 87개(2.0의 61개 + 2.1의 17개 + 2.2의 9개)이며, 2.2에서 4.1.1 구문 분석이 제거되었습니다.",
+						"버전별 초점: 2.1은 모바일, 저시력, 인지 장애 사용자를 위한 기준을 추가했고(예: 리플로우, 텍스트 간격, 포인터 제스처), 2.2는 인지 접근성과 운동 접근성을 더 강화했습니다(예: 접근 가능한 인증, 포커스 가림 방지, 드래그 대안, 타깃 크기). 차기 WCAG 3(Silver)는 등급 체계 자체를 바꾸는 큰 개편으로 개발 중입니다.",
+					],
+					en: [
+						"WCAG's hierarchy: 4 Principles (POUR) → 13 Guidelines → Success Criteria (graded A/AA/AAA) → Sufficient and Advisory Techniques. Success criteria are specific, testable requirements; techniques are informative (non-normative) examples of how to meet them. WCAG 2.2 totals 87 criteria (61 from 2.0 + 17 from 2.1 + 9 from 2.2), with 4.1.1 Parsing removed in 2.2.",
+						"Version focus: 2.1 added criteria for mobile, low-vision, and cognitive users (e.g., Reflow, Text Spacing, Pointer Gestures); 2.2 further strengthened cognitive and motor accessibility (e.g., Accessible Authentication, Focus Not Obscured, Dragging Movements, Target Size). WCAG 3 (Silver), a major overhaul rethinking the grading system itself, is under development.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-2-2-q1",
@@ -1045,20 +1140,52 @@ const units: StudyUnit[] = [
 				"Understand conformance claim conditions",
 			],
 		},
-		content: {
-			ko: [
-				"WCAG는 세 가지 적합성 수준을 정의합니다. Level A는 가장 기본적인 접근성으로, 충족하지 않으면 장애인이 콘텐츠를 전혀 사용할 수 없는 수준입니다. 예: 텍스트 대안(1.1.1), 키보드 접근(2.1.1), 3번 번쩍임 방지(2.3.1). Level AA는 중간 수준으로, 대부분의 법률과 정책에서 요구하는 표준입니다. 예: 색상 대비 4.5:1(1.4.3), 텍스트 크기 조절(1.4.4), 일관된 내비게이션(3.2.3).",
-				"Level AAA는 가장 높은 접근성 수준입니다. 모든 콘텐츠에 적용하기 어려울 수 있지만, 가능한 한 충족하는 것이 권장됩니다. 예: 색상 대비 7:1(1.4.6), 수어 제공(1.2.6), 단축키 비활성화(2.1.4). WCAG는 전체 사이트에 Level AAA 적합성을 선언하는 것을 현실적이지 않다고 인정합니다.",
-				"적합성 선언 5가지 조건: ① 적합성 수준을 명시해야 합니다 ② 전체 페이지에 적용됩니다(페이지 일부만 적합하다고 할 수 없음) ③ 여러 페이지로 구성된 프로세스는 모든 페이지가 적합해야 합니다 ④ 접근성 지원 기술만 사용해야 합니다 ⑤ 비간섭(non-interference) — 부적합 콘텐츠가 나머지 페이지의 접근성을 방해하면 안 됩니다.",
-				"실무에서 가장 중요한 수준은 Level AA입니다. 미국 ADA, EU WAD, 한국 장애인차별금지법 등 대부분의 법률이 WCAG 2.1 Level AA를 요구합니다. Level A 기준을 모두 충족해야 Level AA를 선언할 수 있고, Level AA까지 충족해야 Level AAA를 선언할 수 있습니다(누적적 구조).",
-			],
-			en: [
-				"WCAG defines three conformance levels. Level A is the most basic — failure to meet it means people with disabilities cannot use the content at all. Examples: text alternatives (1.1.1), keyboard access (2.1.1), three flashes prevention (2.3.1). Level AA is the mid-level standard required by most laws and policies. Examples: color contrast 4.5:1 (1.4.3), text resize (1.4.4), consistent navigation (3.2.3).",
-				"Level AAA is the highest accessibility level. It may not be achievable for all content, but meeting it where possible is recommended. Examples: color contrast 7:1 (1.4.6), sign language (1.2.6), shortcut key deactivation (2.1.4). WCAG acknowledges that full Level AAA conformance across an entire site is not always realistic.",
-				"Five conformance conditions: ① The level must be stated ② It applies to entire pages (partial pages cannot be claimed) ③ Multi-page processes require all pages to conform ④ Only accessibility-supported technologies may be used ⑤ Non-interference — non-conforming content must not block access to the rest of the page.",
-				"Level AA is the most practically important level. Most laws — including the US ADA, EU WAD, and Korea's Anti-Discrimination Act — require WCAG 2.1 Level AA. Meeting Level A is a prerequisite for Level AA, and meeting Level AA is a prerequisite for Level AAA (cumulative structure).",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "세 가지 적합성 수준", en: "The Three Conformance Levels" },
+				paragraphs: {
+					ko: [
+						"WCAG는 세 가지 적합성 수준을 정의합니다. Level A는 가장 기본적인 접근성으로, 충족하지 않으면 일부 장애인이 콘텐츠를 전혀 사용할 수 없는 수준입니다. 예: 텍스트 대안(1.1.1), 키보드 접근(2.1.1), 세 번의 번쩍임 방지(2.3.1).",
+						"Level AA는 대부분의 법률과 정책이 요구하는 사실상의 표준입니다. 예: 색상 대비 4.5:1(1.4.3), 텍스트 크기 조절(1.4.4), 가시적 포커스(2.4.7), 일관된 내비게이션(3.2.3). Level AAA는 가장 높은 수준으로 색상 대비 7:1(1.4.6), 수어 제공(1.2.6) 등이 있으며, W3C는 일부 콘텐츠에는 AAA 기준을 적용할 수 없어 사이트 전체 AAA 요구를 권장하지 않습니다.",
+						"수준은 누적적입니다. Level AA 적합은 모든 Level A 기준의 충족을 포함하고, Level AAA는 A와 AA를 모두 포함합니다. 'AA만 하고 A는 건너뛴다'는 것은 성립하지 않습니다.",
+					],
+					en: [
+						"WCAG defines three conformance levels. Level A is the most basic — failing it means some people with disabilities cannot use the content at all. Examples: text alternatives (1.1.1), keyboard access (2.1.1), three-flashes prevention (2.3.1).",
+						"Level AA is the de facto standard required by most laws and policies. Examples: 4.5:1 color contrast (1.4.3), text resize (1.4.4), visible focus (2.4.7), consistent navigation (3.2.3). Level AAA is the highest — 7:1 contrast (1.4.6), sign language (1.2.6) — and the W3C does not recommend requiring AAA site-wide because some content cannot satisfy all AAA criteria.",
+						"Levels are cumulative: AA conformance includes meeting every Level A criterion, and AAA includes both A and AA. 'AA without A' is not a thing.",
+					],
+				},
+			},
+			{
+				heading: { ko: "법률이 요구하는 수준", en: "What the Law Requires" },
+				paragraphs: {
+					ko: [
+						"실무에서 가장 중요한 수준은 Level AA입니다. 미국 ADA Title II 규칙(2024)과 Section 508, EU 웹접근성 지침과 EN 301 549, 한국 장애인차별금지법 등 대부분의 법률·정책이 WCAG 2.0 또는 2.1 Level AA를 기준으로 삼습니다.",
+						"법률이 참조하는 WCAG 버전은 제정 시점에 따라 다릅니다(508은 2.0, EU와 ADA Title II는 2.1). 하위 호환 덕분에 최신 버전(2.2) AA를 충족하면 이전 버전 요구도 자동으로 충족됩니다 — 신규 프로젝트가 2.2 AA를 목표로 삼는 이유입니다.",
+					],
+					en: [
+						"In practice, Level AA is what matters. The US ADA Title II rule (2024) and Section 508, the EU Web Accessibility Directive and EN 301 549, and Korea's Anti-Discrimination Act all reference WCAG 2.0 or 2.1 Level AA.",
+						"The referenced WCAG version varies by when each law was written (508 uses 2.0; the EU and ADA Title II use 2.1). Thanks to backward compatibility, meeting the latest version (2.2) at AA automatically satisfies earlier requirements — which is why new projects target 2.2 AA.",
+					],
+				},
+			},
+			{
+				heading: { ko: "적합성 선언의 다섯 가지 조건", en: "The Five Conformance Requirements" },
+				paragraphs: {
+					ko: [
+						"적합성을 선언하려면 다섯 조건을 만족해야 합니다: ① 적합성 수준 명시 ② 전체 페이지 단위 적용(페이지 일부만 적합하다고 선언할 수 없음) ③ 여러 페이지로 이어지는 프로세스(예: 결제 흐름)는 모든 페이지가 적합해야 함 ④ 접근성 지원(accessibility-supported) 방식의 기술 사용만 인정 ⑤ 비간섭(non-interference) — 부적합 콘텐츠가 나머지 페이지의 사용을 방해하면 안 됨.",
+						"'접근성 지원'이란 해당 기술이 사용자의 보조기술 및 브라우저와 실제로 호환되게 동작한다는 의미입니다. 이론상 접근 가능해도 실제 보조기술이 지원하지 않는 방식이면 적합성에 기여할 수 없습니다.",
+						"완전한 적합이 어려운 경우 '부분 적합 선언(Statement of Partial Conformance)'이 있습니다 — 제3자 콘텐츠(사용자 댓글, 외부 위젯) 때문에 적합하지 못할 때, 해당 콘텐츠를 제외하면 적합함을 밝히는 방식입니다.",
+					],
+					en: [
+						"A conformance claim must satisfy five requirements: ① the level is stated ② it applies to full pages (you cannot claim conformance for part of a page) ③ in a multi-page process (e.g., checkout), every page in the process conforms ④ only accessibility-supported ways of using technologies are relied upon ⑤ non-interference — non-conforming content must not block use of the rest of the page.",
+						"'Accessibility supported' means the technology actually works with users' assistive technologies and browsers. A technique that is accessible in theory but unsupported by real AT cannot be relied on for conformance.",
+						"When full conformance is impossible, a Statement of Partial Conformance exists — for pages that would conform except for third-party content (user comments, external widgets), you may state conformance excluding that content.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-2-3-q1",
@@ -1146,20 +1273,61 @@ const units: StudyUnit[] = [
 				"Know the roles of W3C standards like ATAG and UAAG",
 			],
 		},
-		content: {
-			ko: [
-				"UN 장애인권리협약(CRPD: Convention on the Rights of Persons with Disabilities, 2006)은 장애인의 인권을 보장하는 최초의 포괄적 국제 인권 조약입니다. 사회 모델 관점을 채택하며, 접근성(제9조)을 핵심 원칙으로 포함합니다. 한국(2008), 미국(미비준), EU 등 180개 이상의 국가가 비준했습니다. 주요 원칙: 비차별, 완전한 참여, 접근성, 기회의 평등.",
-				"미국 장애인법(ADA: Americans with Disabilities Act, 1990)은 장애인에 대한 차별을 금지하는 미국의 민권법입니다. Title I(고용), Title II(주·지방 정부), Title III(공공 시설 — 민간 사업장)로 구성됩니다. 웹 접근성은 명시적으로 언급되지 않았지만, 법원 판례를 통해 웹사이트도 ADA의 적용을 받는다고 해석됩니다. 2024년 4월 Title II 규칙이 WCAG 2.1 Level AA를 명시적으로 요구합니다.",
-				"재활법(Rehabilitation Act) 508조는 미국 연방 정부 기관이 개발·구매·유지하는 전자 및 정보 기술(ICT)이 장애인에게 접근 가능해야 한다고 요구합니다. 2017년 개정(Section 508 Refresh)에서 WCAG 2.0 Level AA를 직접 참조하도록 업데이트되었습니다. 연방 정부와 계약하는 민간 기업도 적용 대상입니다.",
-				"W3C의 추가 접근성 표준: ATAG(Authoring Tool Accessibility Guidelines)는 웹 저작 도구(CMS, 에디터)가 접근 가능한 콘텐츠를 생성하도록 안내합니다. UAAG(User Agent Accessibility Guidelines)는 브라우저와 미디어 플레이어 등 사용자 에이전트의 접근성 기준입니다. WAI-ARIA는 동적 웹 콘텐츠와 위젯의 접근성을 개선하는 기술 사양입니다.",
-			],
-			en: [
-				"The UN Convention on the Rights of Persons with Disabilities (CRPD, 2006) is the first comprehensive international human rights treaty on disability. It adopts the Social Model and includes accessibility (Article 9) as a core principle. Over 180 countries have ratified it, including South Korea (2008) and the EU; the US has not ratified. Key principles: non-discrimination, full participation, accessibility, and equality of opportunity.",
-				"The Americans with Disabilities Act (ADA, 1990) is a US civil rights law prohibiting discrimination against people with disabilities. It covers Title I (employment), Title II (state/local government), and Title III (public accommodations — private businesses). Web accessibility is not explicitly mentioned, but courts have interpreted websites as covered under the ADA. The 2024 Title II rule explicitly requires WCAG 2.1 Level AA.",
-				"Section 508 of the Rehabilitation Act requires US federal agencies to make their electronic and information technology (ICT) accessible to people with disabilities. The 2017 Section 508 Refresh updated the standards to directly reference WCAG 2.0 Level AA. Private companies contracting with the federal government are also covered.",
-				"Additional W3C accessibility standards: ATAG (Authoring Tool Accessibility Guidelines) guides web authoring tools (CMS, editors) to produce accessible content. UAAG (User Agent Accessibility Guidelines) covers accessibility of browsers and media players. WAI-ARIA is a technical specification for improving accessibility of dynamic web content and widgets.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "UN 장애인권리협약 (CRPD)", en: "The UN CRPD" },
+				paragraphs: {
+					ko: [
+						"UN 장애인권리협약(CRPD, 2006)은 장애인의 인권을 보장하는 최초의 포괄적 국제 인권 조약입니다. 사회 모델과 인권 접근을 채택하며, 접근성(제9조)을 핵심 원칙으로 포함합니다. 주요 원칙: 존엄성 존중, 비차별, 완전하고 효과적인 사회 참여, 차이에 대한 존중, 기회의 평등, 접근성.",
+						"한국(2008)과 EU를 포함해 180개 이상의 국가·기구가 비준했으며, 미국은 서명했으나 비준하지 않았습니다. 제2조는 '합리적 편의제공'을 정의하고 그 거부를 장애를 이유로 한 차별로 명시합니다. 선택의정서를 비준한 국가에서는 개인이 권리 침해를 UN 위원회에 직접 진정할 수 있습니다. CRPD는 직접 처벌하는 법이 아니라 각국이 국내법으로 이행해야 하는 국제 규범 틀이라는 점을 기억하세요.",
+					],
+					en: [
+						"The UN Convention on the Rights of Persons with Disabilities (CRPD, 2006) is the first comprehensive international human rights treaty on disability. It adopts the Social Model and a human-rights approach, with accessibility (Article 9) as a core principle. Key principles: respect for dignity, non-discrimination, full and effective participation, respect for difference, equality of opportunity, and accessibility.",
+						"Over 180 states and bodies have ratified it, including South Korea (2008) and the EU; the US signed but never ratified. Article 2 defines 'reasonable accommodation' and declares its denial to be disability-based discrimination. Where the Optional Protocol is ratified, individuals can petition the UN committee directly. Remember: the CRPD is not directly enforceable law but an international framework each state implements through national legislation.",
+					],
+				},
+			},
+			{
+				heading: { ko: "미국 장애인법 (ADA)", en: "The Americans with Disabilities Act (ADA)" },
+				paragraphs: {
+					ko: [
+						"미국 장애인법(ADA, 1990)은 장애인에 대한 차별을 금지하는 민권법입니다. Title I(고용), Title II(주·지방 정부), Title III(공공 편의시설 — 민간 사업장)로 구성됩니다. 1990년 제정 당시 웹은 언급되지 않았지만, 법원 판례(예: 도미노 피자 사건)를 통해 웹사이트·앱도 적용 대상으로 해석되어 왔습니다.",
+						"2024년 4월 발효된 Title II 최종 규칙은 주·지방 정부의 웹 콘텐츠와 모바일 앱에 WCAG 2.1 Level AA를 명시적으로 요구합니다(규모에 따라 2026~2027년까지 준수). 민간(Title III)에는 아직 명시적 기술 기준이 없어 소송을 통한 집행이 계속되고 있으며, 미국 내 디지털 접근성 소송의 대부분이 ADA에 근거합니다.",
+					],
+					en: [
+						"The Americans with Disabilities Act (ADA, 1990) is a civil rights law prohibiting disability discrimination. It comprises Title I (employment), Title II (state and local government), and Title III (public accommodations — private businesses). The 1990 text never mentioned the web, but courts (e.g., the Domino's Pizza case) have interpreted websites and apps as covered.",
+						"The Title II final rule effective April 2024 explicitly requires WCAG 2.1 Level AA for state and local government web content and mobile apps (compliance by 2026–2027 depending on entity size). Title III still has no explicit technical standard, so enforcement continues through litigation — most US digital accessibility lawsuits are ADA-based.",
+					],
+				},
+			},
+			{
+				heading: { ko: "Section 508과 그 밖의 미국 법률", en: "Section 508 and Other US Laws" },
+				paragraphs: {
+					ko: [
+						"재활법(Rehabilitation Act) 508조는 연방 정부 기관이 개발·구매·유지·사용하는 전자정보기술(ICT)이 장애인에게 접근 가능해야 한다고 요구합니다. 2017년 개정(508 Refresh)에서 WCAG 2.0 Level AA를 직접 참조하도록 갱신되었고, 연방 정부와 계약하는 민간 기업의 납품물에도 적용됩니다. 조달 시장이 크기 때문에 VPAT/ACR 문서 관행을 만들어낸 법이기도 합니다.",
+						"함께 알아둘 법률: CVAA(21세기 통신·영상 접근성법, 2010)는 첨단 통신 서비스와 인터넷 영상 프로그램의 접근성(자막 등)을 요구합니다. ACAA(항공운송접근법)는 항공사 웹사이트·키오스크에 접근성을 요구합니다. 재활법 504조는 연방 재정 지원을 받는 프로그램의 차별을 금지하는 상위 원칙 조항입니다.",
+					],
+					en: [
+						"Section 508 of the Rehabilitation Act requires that electronic and information technology (ICT) developed, procured, maintained, or used by federal agencies be accessible. The 2017 Refresh updated it to directly reference WCAG 2.0 Level AA, and deliverables from federal contractors are covered too. Because the procurement market is huge, 508 effectively created the VPAT/ACR documentation practice.",
+						"Also know: the CVAA (21st Century Communications and Video Accessibility Act, 2010) requires accessibility of advanced communications and internet video programming (e.g., captions). The ACAA (Air Carrier Access Act) requires accessible airline websites and kiosks. Section 504 of the Rehabilitation Act is the broader provision prohibiting discrimination in federally funded programs.",
+					],
+				},
+			},
+			{
+				heading: { ko: "W3C 접근성 표준 생태계", en: "The W3C Accessibility Standards Ecosystem" },
+				paragraphs: {
+					ko: [
+						"WCAG만으로 웹 접근성 생태계가 완성되지 않습니다. ATAG(저작 도구 접근성 지침)는 CMS·에디터 같은 저작 도구가 (A) 도구 자체로 접근 가능하고 (B) 접근 가능한 콘텐츠 생산을 돕도록 안내합니다. UAAG(사용자 에이전트 접근성 지침)는 브라우저·미디어 플레이어의 접근성 기준입니다.",
+						"WAI-ARIA는 동적 웹 콘텐츠와 커스텀 위젯의 역할(role)·속성·상태를 보조기술에 전달하는 기술 사양입니다. 세 표준의 관계: 저작 도구(ATAG)로 만든 콘텐츠(WCAG)를 사용자 에이전트(UAAG)가 보조기술과 함께 렌더링하는 사슬 전체가 접근 가능해야 완전한 접근성이 이루어집니다.",
+					],
+					en: [
+						"WCAG alone does not complete the web accessibility ecosystem. ATAG (Authoring Tool Accessibility Guidelines) guides authoring tools such as CMSs and editors to be (A) accessible themselves and (B) supportive of producing accessible content. UAAG (User Agent Accessibility Guidelines) covers browsers and media players.",
+						"WAI-ARIA is the technical specification that conveys roles, properties, and states of dynamic content and custom widgets to assistive technologies. The three standards form a chain: content (WCAG) created with authoring tools (ATAG) is rendered by user agents (UAAG) together with AT — full accessibility requires the whole chain.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-3-1-q1",
@@ -1245,20 +1413,72 @@ const units: StudyUnit[] = [
 				"Understand Korea's Anti-Discrimination Act and KWCAG",
 			],
 		},
-		content: {
-			ko: [
-				"EU 웹접근성 지침(WAD: Web Accessibility Directive, 2016)은 EU 회원국의 공공 부문 웹사이트와 모바일 앱이 WCAG 2.1 Level AA를 준수하도록 요구합니다. 2019년부터 신규 웹사이트, 2020년부터 기존 웹사이트, 2021년부터 모바일 앱에 적용되었습니다. 회원국은 각자의 국내법으로 이 지침을 이행해야 합니다.",
-				"EN 301 549는 ICT 제품·서비스의 접근성 요구사항을 정의하는 유럽 표준(European Standard)입니다. WCAG 2.1 Level AA 성공 기준을 직접 참조하며, 웹뿐 아니라 소프트웨어, 하드웨어, 문서, 지원 서비스 등 폭넓은 ICT를 포괄합니다. EU 공공 조달에서 접근성 기준으로 사용됩니다.",
-				"유럽 접근성법(EAA: European Accessibility Act, 2019)은 WAD를 넘어 민간 부문까지 접근성 의무를 확대합니다. 2025년 6월부터 시행되며, 전자상거래, 은행 서비스, 전자책, 교통 티켓팅 등 민간 서비스에도 적용됩니다. 소규모 기업(10인 미만/매출 200만 유로 미만)은 면제됩니다.",
-				"한국 장애인차별금지법(2008)은 장애를 이유로 한 차별을 금지하며, 웹 접근성 의무를 포함합니다. 한국형 웹 콘텐츠 접근성 지침(KWCAG 2.2)은 WCAG 2.1을 기반으로 한국 상황에 맞게 조정한 국내 표준(KS X OT0003)입니다. 공공기관은 의무, 민간기관은 단계적 적용이 이루어지고 있습니다. 한국정보화진흥원(NIA)이 웹접근성 인증 심사를 수행합니다.",
-			],
-			en: [
-				"The EU Web Accessibility Directive (WAD, 2016) requires public sector websites and mobile apps in EU member states to comply with WCAG 2.1 Level AA. It applied to new websites from 2019, existing websites from 2020, and mobile apps from 2021. Member states must implement the directive through national laws.",
-				"EN 301 549 is a European Standard defining accessibility requirements for ICT products and services. It directly references WCAG 2.1 Level AA success criteria and covers not just web, but software, hardware, documents, and support services. It is used as the accessibility criterion in EU public procurement.",
-				"The European Accessibility Act (EAA, 2019) extends accessibility obligations beyond WAD to the private sector. Effective from June 2025, it covers e-commerce, banking, e-books, transport ticketing, and more. Micro-enterprises (fewer than 10 employees/turnover under €2 million) are exempt.",
-				"Korea's Anti-Discrimination Against and Remedies for Persons with Disabilities Act (2008) prohibits disability-based discrimination and includes web accessibility obligations. KWCAG 2.2 is Korea's national standard (KS X OT0003) based on WCAG 2.1, adapted for the Korean context. Public institutions have mandatory compliance; private sector compliance is being phased in. The National Information Society Agency (NIA) conducts web accessibility certification.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "EU 웹접근성 지침 (WAD)", en: "The EU Web Accessibility Directive (WAD)" },
+				paragraphs: {
+					ko: [
+						"EU 웹접근성 지침(WAD, 2016)은 EU 회원국의 공공 부문 웹사이트와 모바일 앱이 WCAG 2.1 Level AA(EN 301 549 경유)를 준수하도록 요구합니다. 2019년 신규 웹사이트, 2020년 기존 웹사이트, 2021년 모바일 앱 순으로 적용되었고, 회원국은 각자의 국내법으로 지침을 이행해야 합니다.",
+						"WAD의 특징적 요구 두 가지: 공공 기관은 접근성 성명(Accessibility Statement)을 게시해 준수 상태와 피드백 경로를 공개해야 하고, 회원국은 주기적 모니터링과 보고 체계를 운영해야 합니다. '지침(Directive)'은 회원국이 국내법으로 옮겨야 효력이 생기는 EU 입법 형식이라는 점도 기억하세요.",
+					],
+					en: [
+						"The EU Web Accessibility Directive (WAD, 2016) requires public sector websites and mobile apps in member states to comply with WCAG 2.1 Level AA (via EN 301 549). It applied to new websites from 2019, existing websites from 2020, and mobile apps from 2021; member states implement it through national law.",
+						"Two distinctive WAD requirements: public bodies must publish an Accessibility Statement disclosing compliance status and a feedback channel, and member states must run periodic monitoring and reporting. Also remember that a 'Directive' is an EU legislative form that takes effect only once transposed into national law.",
+					],
+				},
+			},
+			{
+				heading: { ko: "EN 301 549 — 유럽 ICT 접근성 표준", en: "EN 301 549 — The European ICT Standard" },
+				paragraphs: {
+					ko: [
+						"EN 301 549는 ICT 제품·서비스의 접근성 요구사항을 정의하는 유럽 표준입니다. WCAG 2.1 Level AA 성공 기준을 직접 참조하면서, 웹을 넘어 소프트웨어, 하드웨어, 전자문서, 지원 서비스, 생체인식 등 폭넓은 ICT를 포괄합니다.",
+						"이 표준은 EU 공공 조달의 접근성 기준이자, WAD와 EAA의 '적합성 추정' 기준으로 사용됩니다 — EN 301 549를 충족하면 해당 법률의 접근성 요구를 충족한 것으로 추정됩니다. 미국 Section 508이 연방 조달 기준이라면, EN 301 549는 유럽의 대응물이라고 이해하면 됩니다.",
+					],
+					en: [
+						"EN 301 549 is the European Standard defining accessibility requirements for ICT products and services. It directly references WCAG 2.1 Level AA and extends beyond the web to software, hardware, electronic documents, support services, and biometrics.",
+						"It serves as the accessibility criterion in EU public procurement and as the 'presumption of conformity' standard for both the WAD and the EAA — meeting EN 301 549 is presumed to satisfy those laws' accessibility requirements. Think of it as Europe's counterpart to the US Section 508 procurement standard.",
+					],
+				},
+			},
+			{
+				heading: { ko: "유럽 접근성법 (EAA)", en: "The European Accessibility Act (EAA)" },
+				paragraphs: {
+					ko: [
+						"유럽 접근성법(EAA, 2019)은 접근성 의무를 공공을 넘어 민간 부문으로 확대한 지침입니다. 2025년 6월 28일부터 시행되어 전자상거래, 소비자 은행 서비스, 전자책과 전용 단말기, 교통 티켓팅·체크인, 스마트폰·컴퓨터 운영체제, ATM·키오스크 등이 적용 대상입니다.",
+						"소규모 기업(10인 미만이면서 연매출·자산 200만 유로 미만)은 서비스 의무에서 면제되고, '불균형한 부담'을 입증하면 일부 의무를 완화받을 수 있습니다. EU 밖 기업이라도 EU 시장에 제품·서비스를 제공하면 적용 대상이므로, 한국 기업에게도 실무적 의미가 큽니다.",
+					],
+					en: [
+						"The European Accessibility Act (EAA, 2019) extends accessibility obligations beyond the public sector into the private market. In force from June 28, 2025, it covers e-commerce, consumer banking, e-books and e-readers, transport ticketing and check-in, smartphones and computer operating systems, ATMs, and kiosks.",
+						"Microenterprises (fewer than 10 employees and under €2 million turnover/assets) are exempt from the service obligations, and a proven 'disproportionate burden' can relax some duties. Companies outside the EU are covered when they offer products or services in the EU market — making the EAA practically significant for Korean businesses too.",
+					],
+				},
+			},
+			{
+				heading: { ko: "한국의 법률과 표준", en: "Korean Laws and Standards" },
+				paragraphs: {
+					ko: [
+						"한국 장애인차별금지법(장애인차별금지 및 권리구제 등에 관한 법률, 2008)은 장애를 이유로 한 차별을 금지하고, 전자정보 접근에서의 정당한 편의 제공을 요구합니다. 웹 접근성 의무의 법적 근거이며, 위반 시 국가인권위원회 진정과 법원 구제가 가능합니다. 지능정보화 기본법도 공공 부문의 정보 접근성 책무를 규정합니다.",
+						"한국형 웹 콘텐츠 접근성 지침(KWCAG 2.2)은 WCAG 2.1을 기반으로 한국 상황에 맞게 조정한 국내 표준(KS X OT0003)입니다. 공공기관은 준수 의무가 있고 민간은 단계적으로 적용됩니다. 과학기술정보통신부 지정 인증기관들이 웹 접근성 품질인증 마크를 심사·발급하며, 이 인증은 법적 의무가 아닌 임의 인증입니다.",
+					],
+					en: [
+						"Korea's Anti-Discrimination Against and Remedies for Persons with Disabilities Act (2008) prohibits disability-based discrimination and requires reasonable accommodation in access to electronic information — the legal basis for web accessibility obligations, enforceable via the National Human Rights Commission and the courts. The Framework Act on Intelligent Informatization also assigns public-sector information accessibility duties.",
+						"KWCAG 2.2, Korea's national standard (KS X OT0003), is based on WCAG 2.1 and adapted to the Korean context. Compliance is mandatory for public institutions and being phased in for the private sector. Certification bodies designated by the Ministry of Science and ICT review and issue the Web Accessibility Quality Certification Mark — a voluntary certification, not a legal requirement.",
+					],
+				},
+			},
+			{
+				heading: { ko: "그 밖의 주요 국가", en: "Other Notable Jurisdictions" },
+				paragraphs: {
+					ko: [
+						"캐나다 온타리오주의 AODA는 공공·민간 조직에 WCAG 2.0 AA 준수를 단계적으로 의무화한 선구적 법률이고, 연방 차원의 접근성 캐나다법(ACA, 2019)도 있습니다. 영국은 평등법(Equality Act 2010), 호주는 장애차별금지법(DDA 1992)이 디지털 접근성의 근거가 됩니다. 시험에서는 각 법률의 관할(국제/국가/지역), 적용 대상(공공/민간), 참조 표준을 구분하는 것이 핵심입니다.",
+					],
+					en: [
+						"Ontario's AODA pioneered phased mandatory WCAG 2.0 AA compliance for public and private organizations, complemented federally by the Accessible Canada Act (ACA, 2019). The UK's Equality Act 2010 and Australia's Disability Discrimination Act 1992 ground digital accessibility in those countries. For the exam, focus on distinguishing each law's jurisdiction (international/national/regional), covered sector (public/private), and referenced standard.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-3-2-q1",
@@ -1344,20 +1564,74 @@ const units: StudyUnit[] = [
 				"Describe strategies for building an accessibility culture within an organization",
 			],
 		},
-		content: {
-			ko: [
-				"접근성 성숙도 모델은 조직의 접근성 수준을 단계적으로 평가합니다. 초기(Ad hoc): 접근성이 체계적으로 관리되지 않음. 계획(Planned): 정책과 목표를 수립하기 시작. 관리(Managed): 프로세스에 접근성을 통합하고 모니터링. 정착(Embedded): 접근성이 조직 문화의 일부로 정착. 최적화(Optimized): 지속적 개선과 혁신이 이루어짐.",
-				"VPAT(Voluntary Product Accessibility Template)는 ICT 제품/서비스의 WCAG 적합성 수준을 문서화하는 표준 양식입니다. 작성된 문서를 ACR(Accessibility Conformance Report)이라 합니다. 조달 담당자가 제품의 접근성 수준을 평가할 때 사용합니다. 솔직하고 정확한 보고가 중요하며, '지원(Supports)', '부분 지원(Partially Supports)', '미지원(Does Not Support)' 등으로 평가합니다.",
-				"접근성 감사(Audit)의 유형: 자동화 테스트(axe, WAVE, Lighthouse 등)는 빠르게 기술적 문제를 감지하지만, 전체 이슈의 약 30~40%만 발견할 수 있습니다. 수동 테스트(키보드 탐색, 화면낭독기 테스트)는 자동화가 놓치는 사용성 문제를 발견합니다. 사용자 테스트는 실제 장애인 사용자가 참여하여 실질적 사용성을 평가합니다. 최선의 접근은 세 가지를 병행하는 것입니다.",
-				"조직 내 접근성 문화 구축: 경영진의 지원과 예산 확보가 필수적입니다. 접근성 챔피언(Accessibility Champion)을 팀마다 배치합니다. 디자인·개발·QA 각 단계에서 접근성을 통합합니다(Shift Left 접근법). 정기적인 교육과 워크숍을 실시합니다. 장애인 사용자 관점의 페르소나를 활용합니다. 접근성 정책 성명서(Accessibility Statement)를 게시하여 공개적으로 의지를 표명합니다.",
-			],
-			en: [
-				"Accessibility maturity models assess an organization's accessibility level in stages. Ad hoc: accessibility is not systematically managed. Planned: policies and goals begin to be established. Managed: accessibility is integrated into processes with monitoring. Embedded: accessibility becomes part of organizational culture. Optimized: continuous improvement and innovation occur.",
-				"VPAT (Voluntary Product Accessibility Template) is a standard form for documenting the WCAG conformance level of ICT products/services. The completed document is called an ACR (Accessibility Conformance Report). Procurement officers use it to evaluate product accessibility. Honest and accurate reporting is critical, with ratings like 'Supports', 'Partially Supports', and 'Does Not Support'.",
-				"Accessibility audit types: Automated testing (axe, WAVE, Lighthouse) quickly detects technical issues but finds only about 30-40% of all issues. Manual testing (keyboard navigation, screen reader testing) catches usability issues automation misses. User testing involves actual users with disabilities to evaluate real-world usability. The best approach combines all three.",
-				"Building an accessibility culture: Executive support and budget allocation are essential. Place accessibility champions on each team. Integrate accessibility at every stage — design, development, and QA (Shift Left approach). Conduct regular training and workshops. Use personas representing users with disabilities. Publish an Accessibility Statement to publicly demonstrate commitment.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "접근성 성숙도 모델", en: "Accessibility Maturity Models" },
+				paragraphs: {
+					ko: [
+						"접근성 성숙도 모델은 조직의 접근성 수준을 단계적으로 평가하고 다음 단계로의 로드맵을 제공합니다. 일반적 단계: 초기(Ad hoc) — 체계 없이 개별 대응 → 계획(Planned) — 정책·목표 수립 시작 → 관리(Managed) — 프로세스 통합과 모니터링 → 정착(Embedded) — 조직 문화의 일부 → 최적화(Optimized) — 지속적 개선과 혁신.",
+						"W3C도 접근성 성숙도 모델(Accessibility Maturity Model)을 발행해 커뮤니케이션, 지식·역량, 지원, 인사, 조달, 문화 등 차원별로 성숙도를 진단하게 합니다. 성숙도 평가의 목적은 등급 매기기가 아니라, 일회성 프로젝트에서 지속 가능한 프로그램으로 옮겨가는 경로를 설계하는 것입니다.",
+					],
+					en: [
+						"Accessibility maturity models assess an organization's accessibility level in stages and provide a roadmap forward. Typical stages: Ad hoc — unsystematic, case-by-case reactions → Planned — policies and goals emerging → Managed — integrated into processes with monitoring → Embedded — part of organizational culture → Optimized — continuous improvement and innovation.",
+						"The W3C also publishes an Accessibility Maturity Model that assesses dimensions such as communications, knowledge and skills, support, personnel, procurement, and culture. The point of maturity assessment is not grading but designing the path from one-off projects to a sustainable program.",
+					],
+				},
+			},
+			{
+				heading: { ko: "정책과 거버넌스", en: "Policy and Governance" },
+				paragraphs: {
+					ko: [
+						"효과적인 접근성 프로그램은 경영진의 후원(sponsorship)에서 출발합니다. 접근성 정책에는 적용 범위, 목표 표준(예: WCAG 2.2 AA), 역할과 책임, 예외 처리 절차, 검토 주기가 명시되어야 합니다. 정책 없이 개인의 선의에 의존하는 접근성은 담당자가 떠나면 함께 사라집니다.",
+						"접근성 성명(Accessibility Statement)은 사이트의 준수 수준, 알려진 한계, 피드백 연락처를 공개하는 문서로, EU 공공 부문에서는 법적 의무이고 그 외에도 신뢰와 책임성의 표지로 널리 권장됩니다. 조직 규모가 커지면 접근성 사무국(Accessibility Office)이나 전담 리더(예: Chief Accessibility Officer)를 두어 거버넌스를 중앙화합니다.",
+					],
+					en: [
+						"An effective accessibility program starts with executive sponsorship. An accessibility policy should specify scope, target standard (e.g., WCAG 2.2 AA), roles and responsibilities, exception procedures, and review cycles. Accessibility that relies on individual goodwill without policy disappears when that person leaves.",
+						"An Accessibility Statement publicly discloses a site's conformance level, known limitations, and a feedback contact — legally required for the EU public sector and widely recommended elsewhere as a marker of trust and accountability. As organizations grow, an Accessibility Office or dedicated leader (e.g., a Chief Accessibility Officer) centralizes governance.",
+					],
+				},
+			},
+			{
+				heading: { ko: "조달과 VPAT/ACR", en: "Procurement and VPAT/ACR" },
+				paragraphs: {
+					ko: [
+						"조직이 사용하는 ICT의 상당수는 직접 만들지 않고 구매합니다. 그래서 조달 단계의 접근성 검증이 중요합니다. VPAT(Voluntary Product Accessibility Template)는 공급업체가 자사 제품의 접근성 적합성을 기준 항목별로 자가 보고하는 표준 양식이고, 작성 완료된 문서를 ACR(Accessibility Conformance Report)이라 부릅니다.",
+						"VPAT에는 참조 표준에 따라 508, EU(EN 301 549), WCAG, 통합(INT) 네 가지 에디션이 있습니다. 각 기준을 '지원(Supports)', '부분 지원(Partially Supports)', '미지원(Does Not Support)', '해당 없음(Not Applicable)'으로 평가하며, 솔직하고 구체적인 비고가 문서의 신뢰도를 결정합니다. 조달 담당자는 ACR을 요구하고, 주장 검증(데모·샘플 테스트)과 계약상 접근성 조항으로 보완해야 합니다.",
+					],
+					en: [
+						"Much of an organization's ICT is bought, not built — which makes accessibility verification at procurement critical. The VPAT (Voluntary Product Accessibility Template) is the standard form vendors use to self-report their product's conformance criterion by criterion; the completed document is an ACR (Accessibility Conformance Report).",
+						"VPAT comes in four editions by reference standard: 508, EU (EN 301 549), WCAG, and INT (combined). Each criterion is rated 'Supports', 'Partially Supports', 'Does Not Support', or 'Not Applicable' — honest, specific remarks determine the document's credibility. Procurement officers should require ACRs and supplement them with verification (demos, sample testing) and contractual accessibility clauses.",
+					],
+				},
+			},
+			{
+				heading: { ko: "감사와 모니터링", en: "Auditing and Monitoring" },
+				paragraphs: {
+					ko: [
+						"접근성 감사에는 세 축이 있습니다. 자동화 테스트(axe, WAVE, Lighthouse)는 빠르고 반복 가능하지만 전체 이슈의 약 30~40%만 감지합니다. 수동 테스트(키보드 탐색, 화면낭독기, 확대·대비 점검)는 자동화가 놓치는 문제를 찾습니다. 장애인 사용자 테스트는 실제 과업 수행 가능성과 사용성을 검증합니다. 최선의 접근은 세 가지의 병행입니다.",
+						"감사는 일회성 이벤트가 아니라 주기적 모니터링으로 운영되어야 합니다. 릴리스 파이프라인에 자동 검사를 통합하고(회귀 조기 차단), 주요 사용자 여정에 대해 정기 수동 감사를 수행하며, 발견 이슈는 심각도(차단/중대/경미)와 사용자 영향 기준으로 우선순위를 정해 백로그로 관리합니다.",
+					],
+					en: [
+						"Accessibility auditing has three pillars. Automated testing (axe, WAVE, Lighthouse) is fast and repeatable but detects only about 30–40% of issues. Manual testing (keyboard navigation, screen readers, zoom and contrast checks) finds what automation misses. Testing with disabled users validates real task completion and usability. The best approach combines all three.",
+						"Auditing should be periodic monitoring, not a one-off event: integrate automated checks into the release pipeline (catching regressions early), run scheduled manual audits of key user journeys, and manage findings in a backlog prioritized by severity (blocker/major/minor) and user impact.",
+					],
+				},
+			},
+			{
+				heading: { ko: "접근성 문화 만들기", en: "Building an Accessibility Culture" },
+				paragraphs: {
+					ko: [
+						"지속 가능한 접근성은 문화에서 나옵니다. 핵심 전략: 팀마다 접근성 챔피언을 두어 지식을 분산시키고, 디자인·개발·QA 각 단계에 접근성을 통합하며(Shift Left — 초기 단계로 앞당기기), 역할별 맞춤 교육(디자이너에겐 대비·포커스, 개발자에겐 시맨틱·ARIA)을 정기적으로 실시합니다.",
+						"장애인 사용자 관점의 페르소나와 실제 사용자 참여는 공감을 넘어 요구사항을 구체화합니다. 채용·인사에서도 장애인 고용과 접근 가능한 사내 도구가 문화의 일부입니다. 마지막으로, 접근성을 품질의 정의(Definition of Done)에 포함시키는 것 — '접근성 검수 전에는 완료가 아니다' — 이 문화 정착의 가장 실질적인 장치입니다.",
+					],
+					en: [
+						"Sustainable accessibility comes from culture. Key strategies: place accessibility champions on each team to distribute knowledge; integrate accessibility into design, development, and QA (Shift Left — moving it earlier); and run role-specific training regularly (contrast and focus for designers, semantics and ARIA for developers).",
+						"Personas representing disabled users — and better, real user participation — turn empathy into concrete requirements. Hiring people with disabilities and providing accessible internal tools are part of the culture too. Finally, the most practical lever: include accessibility in the Definition of Done — 'not done until it passes accessibility review.'",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-3-3-q1",
