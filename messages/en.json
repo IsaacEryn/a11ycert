@@ -373,6 +373,26 @@
 				"set_post_state": "Post State Changed",
 				"set_comment_deleted": "Comment Hidden/Restored",
 				"update_report_status": "Report Status Changed"
+			},
+			"detailKey": {
+				"provider": "Provider",
+				"ip": "IP Address",
+				"title": "Title",
+				"preview": "Preview",
+				"page_path": "Page",
+				"category": "Category",
+				"post_id": "Post ID",
+				"board_post_id": "Linked Post ID",
+				"target_type": "Target Type",
+				"target_id": "Target ID",
+				"type": "Type",
+				"tier": "Tier",
+				"joined_at": "Joined",
+				"from": "From",
+				"to": "To",
+				"is_active": "Active",
+				"is_pinned": "Pinned",
+				"is_deleted": "Hidden"
 			}
 		}
 	},

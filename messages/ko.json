@@ -373,6 +373,26 @@
 				"set_post_state": "게시글 상태 변경",
 				"set_comment_deleted": "댓글 숨김/복원",
 				"update_report_status": "제보 상태 변경"
+			},
+			"detailKey": {
+				"provider": "로그인 방식",
+				"ip": "IP 주소",
+				"title": "제목",
+				"preview": "내용 미리보기",
+				"page_path": "페이지",
+				"category": "카테고리",
+				"post_id": "게시글 ID",
+				"board_post_id": "연결 게시글 ID",
+				"target_type": "대상 유형",
+				"target_id": "대상 ID",
+				"type": "유형",
+				"tier": "등급",
+				"joined_at": "가입일",
+				"from": "변경 전",
+				"to": "변경 후",
+				"is_active": "활성 여부",
+				"is_pinned": "고정 여부",
+				"is_deleted": "숨김 여부"
 			}
 		}
 	},

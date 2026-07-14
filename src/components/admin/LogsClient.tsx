@@ -55,6 +55,28 @@ const KNOWN_MODERATION_ACTIONS = [
 	"update_report_status",
 ] as const;
 
+/** detail JSONB에서 라벨 매핑을 제공하는 알려진 키 */
+const KNOWN_DETAIL_KEYS = [
+	"provider",
+	"ip",
+	"title",
+	"preview",
+	"page_path",
+	"category",
+	"post_id",
+	"board_post_id",
+	"target_type",
+	"target_id",
+	"type",
+	"tier",
+	"joined_at",
+	"from",
+	"to",
+	"is_active",
+	"is_pinned",
+	"is_deleted",
+] as const;
+
 export default function LogsClient({ locale }: { locale: string }) {
 	const t = useTranslations("admin");
 	const [tab, setTab] = useState<"activity" | "audit">("activity");
@@ -135,6 +157,23 @@ export default function LogsClient({ locale }: { locale: string }) {
 		(KNOWN_MODERATION_ACTIONS as readonly string[]).includes(a)
 			? t(`logs.moderationAction.${a}`)
 			: a;
+
+	const detailKeyLabel = (k: string) =>
+		(KNOWN_DETAIL_KEYS as readonly string[]).includes(k) ? t(`logs.detailKey.${k}`) : k;
+
+	/** 로그인 로그는 대상 열에 provider·IP를 바로 요약 표시 */
+	const loginSummary = (log: ActivityLogRow) => {
+		if (log.action !== "user_login") return null;
+		const provider = typeof log.detail?.provider === "string" ? log.detail.provider : null;
+		const ip = typeof log.detail?.ip === "string" ? log.detail.ip : null;
+		if (!provider && !ip) return null;
+		return (
+			<span style={{ display: "inline-flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+				{provider && <StateBadge tone="info">{provider}</StateBadge>}
+				{ip && <span style={{ fontFamily: "monospace" }}>{ip}</span>}
+			</span>
+		);
+	};
 
 	const categories: { value: Category; label: string }[] = [
 		{ value: "all", label: t("logs.catAll") },
@@ -294,8 +333,12 @@ export default function LogsClient({ locale }: { locale: string }) {
 													</span>
 												}
 												action={actionLabel(log.action)}
-												target={log.target_type ? `${log.target_type}${log.target_id ? ` · ${log.target_id}` : ""}` : "—"}
+												target={
+													loginSummary(log) ??
+													(log.target_type ? `${log.target_type}${log.target_id ? ` · ${log.target_id}` : ""}` : "—")
+												}
 												detail={log.detail}
+												detailKeyLabel={detailKeyLabel}
 												toggleLabel={t("logs.toggleDetail")}
 											/>
 										))}
@@ -339,6 +382,7 @@ export default function LogsClient({ locale }: { locale: string }) {
 											action={moderationActionLabel(row.action)}
 											target={row.target_type ? `${row.target_type}${row.target_id ? ` · ${row.target_id}` : ""}` : "—"}
 											detail={row.detail}
+											detailKeyLabel={detailKeyLabel}
 											toggleLabel={t("logs.toggleDetail")}
 										/>
 									))}
@@ -352,6 +396,20 @@ export default function LogsClient({ locale }: { locale: string }) {
 	);
 }
 
+function formatDetailValue(value: unknown): string {
+	if (value === null || value === undefined) return "—";
+	if (typeof value === "boolean") return value ? "true" : "false";
+	if (typeof value === "string") {
+		// ISO 날짜 문자열은 로컬 표기로
+		if (/^\d{4}-\d{2}-\d{2}T/.test(value)) {
+			const d = new Date(value);
+			if (!Number.isNaN(d.getTime())) return d.toLocaleString();
+		}
+		return value;
+	}
+	return JSON.stringify(value);
+}
+
 function LogRowGroup({
 	expanded,
 	onToggle,
@@ -360,6 +418,7 @@ function LogRowGroup({
 	action,
 	target,
 	detail,
+	detailKeyLabel,
 	toggleLabel,
 }: {
 	expanded: boolean;
@@ -367,11 +426,13 @@ function LogRowGroup({
 	when: string;
 	actor: React.ReactNode;
 	action: string;
-	target: string;
+	target: React.ReactNode;
 	detail: Record<string, unknown>;
+	detailKeyLabel: (key: string) => string;
 	toggleLabel: string;
 }) {
-	const hasDetail = detail && Object.keys(detail).length > 0;
+	const entries = detail ? Object.entries(detail) : [];
+	const hasDetail = entries.length > 0;
 	return (
 		<>
 			<tr>
@@ -395,17 +456,24 @@ function LogRowGroup({
 			{expanded && hasDetail && (
 				<tr>
 					<td colSpan={5} style={{ ...td, background: "var(--bg-sunk)" }}>
-						<pre
+						<dl
 							style={{
 								margin: 0,
+								display: "grid",
+								gridTemplateColumns: "max-content 1fr",
+								gap: "4px var(--space-4)",
 								fontSize: "var(--fs-xs)",
-								whiteSpace: "pre-wrap",
-								wordBreak: "break-all",
-								fontFamily: "monospace",
 							}}
 						>
-							{JSON.stringify(detail, null, 2)}
-						</pre>
+							{entries.map(([key, value]) => (
+								<div key={key} style={{ display: "contents" }}>
+									<dt style={{ color: "var(--fg-subtle)", fontWeight: 600, whiteSpace: "nowrap" }}>
+										{detailKeyLabel(key)}
+									</dt>
+									<dd style={{ margin: 0, wordBreak: "break-all" }}>{formatDetailValue(value)}</dd>
+								</div>
+							))}
+						</dl>
 					</td>
 				</tr>
 			)}

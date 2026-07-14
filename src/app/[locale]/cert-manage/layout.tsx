@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 /**
  * 관리자 가드 레이아웃 — 하위 전 페이지에 1회 적용.
- * 비로그인·비관리자는 redirect가 아닌 notFound()로 경로 존재 자체를 숨긴다.
+ * 비로그인·비관리자는 홈으로 조용히 리다이렉트 (로그아웃 후 404 노출 방지).
  * 데이터 접근의 최종 방어선은 RLS/RPC의 is_admin() (005/006 마이그레이션).
  */
 export default async function AdminLayout({
@@ -28,14 +28,14 @@ export default async function AdminLayout({
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-	if (!user) notFound();
+	if (!user) redirect(`/${locale}`);
 
 	const { data: profile } = await supabase
 		.from("profiles")
 		.select("role")
 		.eq("id", user.id)
 		.single();
-	if (profile?.role !== "admin") notFound();
+	if (profile?.role !== "admin") redirect(`/${locale}`);
 
 	const t = await getTranslations({ locale, namespace: "admin" });
 
