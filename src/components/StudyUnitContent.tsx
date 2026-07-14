@@ -27,70 +27,59 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
         </div>
       </div>
 
-      <div className="bilingual-card__cols">
-        {/* Korean column */}
-        <div className="bilingual-card__col bilingual-card__col--ko">
-          <h4>
+      {/* 문단 쌍(pair) 정렬 — 한글 문단과 대응 영어 문단이 같은 행에서 시작 */}
+      <div className="bilingual-card__pairs">
+        {/* 컬럼 헤더 */}
+        <div className="bilingual-pair">
+          <h4 className="bilingual-card__col-head">
             한국어 해설 <span className="lang-pill">KO</span>
           </h4>
+          <h4 className="bilingual-card__col-head">
+            Original Text <span className="lang-pill">EN</span>
+          </h4>
+        </div>
 
-          {/* Summary */}
-          <p style={{ borderLeft: "3px solid var(--accent)", paddingLeft: "var(--space-3)", color: "var(--fg-muted)", marginBottom: "var(--space-4)" }}>
+        {/* Summary */}
+        <div className="bilingual-pair">
+          <p lang="ko" style={{ borderLeft: "3px solid var(--accent)", paddingLeft: "var(--space-3)", color: "var(--fg-muted)" }}>
             {unit.summary.ko}
           </p>
+          <p lang="en" style={{ borderLeft: "3px solid var(--border-strong)", paddingLeft: "var(--space-3)" }}>
+            {unit.summary.en}
+          </p>
+        </div>
 
-          {/* Objectives */}
-          {unit.objectives.ko.length > 0 && (
-            <>
-              <p style={{ fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--fg-subtle)", marginBottom: "var(--space-2)" }}>
-                {isKo ? "학습 목표" : "Objectives"}
-              </p>
+        {/* Objectives — 블록 단위 쌍 */}
+        {(unit.objectives.ko.length > 0 || unit.objectives.en.length > 0) && (
+          <div className="bilingual-pair">
+            <div lang="ko">
+              <p className="bilingual-card__label">{isKo ? "학습 목표" : "Objectives"}</p>
               {unit.objectives.ko.map((obj, i) => (
                 <p key={i} style={{ display: "flex", gap: 8 }}>
                   <span aria-hidden="true" style={{ color: "var(--accent)", flexShrink: 0 }}>•</span>
                   {obj}
                 </p>
               ))}
-            </>
-          )}
-
-          {/* Content */}
-          {unit.content.ko.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
-
-        {/* English column */}
-        <div className="bilingual-card__col bilingual-card__col--en">
-          <h4>
-            Original Text <span className="lang-pill">EN</span>
-          </h4>
-
-          {/* Summary */}
-          <p style={{ borderLeft: "3px solid var(--border-strong)", paddingLeft: "var(--space-3)", marginBottom: "var(--space-4)" }}>
-            {unit.summary.en}
-          </p>
-
-          {/* Objectives */}
-          {unit.objectives.en.length > 0 && (
-            <>
-              <p style={{ fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--fg-subtle)", marginBottom: "var(--space-2)" }}>
-                Learning Objectives
-              </p>
+            </div>
+            <div lang="en">
+              <p className="bilingual-card__label">Learning Objectives</p>
               {unit.objectives.en.map((obj, i) => (
                 <p key={i} style={{ display: "flex", gap: 8 }}>
                   <span aria-hidden="true" style={{ color: "var(--fg-subtle)", flexShrink: 0 }}>•</span>
                   {obj}
                 </p>
               ))}
-            </>
-          )}
+            </div>
+          </div>
+        )}
 
-          {/* Content */}
-          {unit.content.en.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
+        {/* Content — 문단별 쌍 (ko/en 배열 길이는 validate-content가 일치 보장) */}
+        {unit.content.ko.map((para, i) => (
+          <div className="bilingual-pair" key={i}>
+            <p lang="ko">{para}</p>
+            <p lang="en">{unit.content.en[i] ?? ""}</p>
+          </div>
+        ))}
       </div>
 
       <div className="bilingual-card__nav">

@@ -1036,12 +1036,18 @@ button { font-family: inherit; cursor: pointer; }
 .bilingual-card__num { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-subtle); letter-spacing: 0.06em; }
 .bilingual-card__title { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
 .bilingual-card__title-en { color: var(--fg-muted); font-size: var(--fs-base); font-weight: 500; font-style: italic; }
-.bilingual-card__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-.bilingual-card__col h4 { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); margin-bottom: var(--space-3); }
-.bilingual-card__col h4 .lang-pill { background: var(--accent-soft); color: var(--accent-soft-fg); padding: 1px 6px; border-radius: 4px; font-size: 10px; }
-.bilingual-card__col p { margin-bottom: var(--space-3); line-height: 1.7; font-size: var(--fs-base); }
-.bilingual-card__col p:last-child { margin-bottom: 0; }
-.bilingual-card__col--en p { color: var(--fg-muted); font-size: var(--fs-sm); }
+/* 문단 쌍(pair) 정렬 — ko/en 대응 문단이 같은 그리드 행에서 시작 (번역 대조 용이) */
+.bilingual-card__pairs { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--space-6); }
+.bilingual-pair { display: contents; }
+.bilingual-pair > * { min-width: 0; margin-bottom: var(--space-4); }
+.bilingual-card__pairs p { line-height: 1.7; font-size: var(--fs-base); }
+.bilingual-pair > [lang="en"] p,
+.bilingual-pair > p[lang="en"] { color: var(--fg-muted); font-size: var(--fs-sm); }
+.bilingual-pair [lang="ko"] p { margin-bottom: var(--space-2); }
+.bilingual-pair [lang="en"] p { margin-bottom: var(--space-2); }
+.bilingual-card__col-head { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); }
+.bilingual-card__col-head .lang-pill { background: var(--accent-soft); color: var(--accent-soft-fg); padding: 1px 6px; border-radius: 4px; font-size: 10px; }
+.bilingual-card__label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); margin-bottom: var(--space-2); }
 .term { display: inline; background: var(--highlight-bg); color: var(--highlight-fg); padding: 1px 4px; border-radius: 3px; font-weight: 600; cursor: help; border-bottom: 1px dashed currentColor; }
 .bilingual-card__nav { display: flex; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-5); margin-top: var(--space-6); border-top: 1px solid var(--divider); align-items: center; }
 .bilingual-card__nav-help { font-size: var(--fs-xs); color: var(--fg-subtle); display: flex; gap: var(--space-3); align-items: center; }
@@ -1177,7 +1183,12 @@ button { font-family: inherit; cursor: pointer; }
   .section { padding: var(--space-10) 0; }
   .app-layout { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-5) 0 var(--space-10); }
   .sidebar { position: static; max-height: none; }
-  .bilingual-card__cols { grid-template-columns: 1fr; gap: var(--space-5); }
+  /* 모바일: 문단 쌍을 ko→en 순으로 교차 배치 */
+  .bilingual-card__pairs { display: block; }
+  .bilingual-pair { display: block; margin-bottom: var(--space-5); padding-bottom: var(--space-4); border-bottom: 1px dashed var(--divider); }
+  .bilingual-pair:last-child { border-bottom: none; }
+  .bilingual-pair > * { margin-bottom: var(--space-2); }
+  .bilingual-pair > .bilingual-card__col-head { margin-right: var(--space-4); }
   .bilingual-card { padding: var(--space-6); }
   .bilingual-card__title { font-size: var(--fs-xl); }
   .bilingual-card__nav { flex-wrap: wrap; }
