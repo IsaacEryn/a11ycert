@@ -583,6 +583,35 @@ export const glossaryTerms: GlossaryTerm[] = [
     certs: ["cpacc"],
   },
   {
+    id: "atag",
+    term: { ko: "ATAG (저작 도구 접근성 지침)", en: "ATAG (Authoring Tool Accessibility Guidelines)" },
+    definition: {
+      ko: "CMS·편집기 등 저작 도구에 적용되는 W3C 지침. Part A는 도구 UI 자체의 접근성, Part B는 접근 가능한 콘텐츠 생산 지원(alt 프롬프트, 접근 가능한 템플릿, 자동 검사)을 요구합니다.",
+      en: "W3C guidelines for authoring tools such as CMSs and editors. Part A requires an accessible tool UI; Part B requires supporting accessible content production (alt prompts, accessible templates, automated checks).",
+    },
+    certs: ["was", "cpacc"],
+    aliases: ["authoring tool", "저작 도구"],
+  },
+  {
+    id: "uaag",
+    term: { ko: "UAAG (사용자 에이전트 접근성 지침)", en: "UAAG (User Agent Accessibility Guidelines)" },
+    definition: {
+      ko: "브라우저·미디어 플레이어 등 사용자 에이전트의 접근성 책임을 다루는 W3C 지침. 사용자 제어(확대·색상 재정의), 키보드 조작, 접근성 API 지원을 요구하며, 2.0은 작업 그룹 노트로 발행되었습니다.",
+      en: "W3C guidelines for user agents — browsers, media players. They address user controls (zoom, color overrides), keyboard operability, and accessibility API support; version 2.0 was published as a Working Group Note.",
+    },
+    certs: ["was", "cpacc"],
+    aliases: ["user agent", "사용자 에이전트"],
+  },
+  {
+    id: "accessibility-supported",
+    term: { ko: "접근성 지원", en: "Accessibility Supported" },
+    definition: {
+      ko: "WCAG 적합성의 전제 조건 — 콘텐츠가 사용하는 기술의 사용 방식이 사용자의 보조기술·브라우저에서 실제로 작동해야 한다는 요구. 명세에 있어도 지원되지 않는 방식에 의존하면 적합성 주장이 성립하지 않습니다.",
+      en: "A precondition of WCAG conformance — the ways content uses technologies must actually work in users' assistive technologies and browsers. Relying on unsupported methods invalidates a conformance claim even if they exist in a spec.",
+    },
+    certs: ["was"],
+  },
+  {
     id: "marrakesh-treaty",
     term: { ko: "마라케시 조약", en: "Marrakesh Treaty" },
     definition: {

@@ -510,4 +510,428 @@ export const wasExtraUnits: StudyUnit[] = [
 			},
 		],
 	},
+	// ── Domain 1 신규 (BoK 커버리지 배치 C-3) ─────────────────────────────────
+	{
+		id: "was-1-10",
+		exam: "was",
+		domain: 1,
+		order: 10,
+		available: true,
+		title: { ko: "접근성 표준 생태계", en: "The Accessibility Standards Ecosystem" },
+		summary: {
+			ko: "WCAG를 둘러싼 W3C 표준 가족 — ATAG, UAAG, WAI-ARIA — 과 유럽 표준 EN 301 549, 규범/비규범 문서의 구분, '접근성 지원' 개념을 학습합니다. WAS BoK Domain 1A의 핵심입니다.",
+			en: "Learn the W3C standards family around WCAG — ATAG, UAAG, WAI-ARIA — plus the European standard EN 301 549, the normative/non-normative distinction, and the concept of 'accessibility supported.' Core to WAS BoK Domain 1A.",
+		},
+		objectives: {
+			ko: [
+				"ATAG의 두 파트(저작 도구 UI 접근성, 접근 가능한 콘텐츠 생산 지원)를 설명할 수 있다",
+				"UAAG가 다루는 사용자 에이전트의 책임을 설명할 수 있다",
+				"EN 301 549와 WCAG의 관계, 적용 범위 차이를 설명할 수 있다",
+				"규범(normative)과 비규범(non-normative) 문서를 구분하고 예를 들 수 있다",
+				"'접근성 지원(accessibility supported)' 기술 사용의 의미를 설명할 수 있다",
+			],
+			en: [
+				"Explain ATAG's two parts (accessible authoring tool UI; support for producing accessible content)",
+				"Describe the user agent responsibilities UAAG addresses",
+				"Explain how EN 301 549 relates to WCAG and how their scopes differ",
+				"Distinguish normative from non-normative documents with examples",
+				"Explain what 'accessibility supported' use of technologies means",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "W3C 표준 가족 한눈에 보기", en: "The W3C Standards Family at a Glance" },
+				paragraphs: {
+					ko: [
+						"W3C WAI의 접근성 표준은 역할별로 나뉩니다. WCAG는 '콘텐츠'의 접근성을, ATAG는 콘텐츠를 만드는 '저작 도구'를, UAAG는 콘텐츠를 소비하는 '사용자 에이전트(브라우저·미디어 플레이어 등)'를 다룹니다. WAI-ARIA는 표준이라기보다 콘텐츠에 시맨틱을 더하는 '기술 명세'로, WCAG 충족의 수단이 됩니다.",
+						"세 축이 함께 작동해야 접근성이 완성됩니다: 저작 도구가 접근 가능한 콘텐츠 생산을 돕고(ATAG), 그 콘텐츠가 WCAG를 충족하며, 브라우저와 보조기술이 이를 올바르게 전달(UAAG)하는 구조입니다. 시험에서는 각 표준이 '누구의 책임'을 다루는지 정확히 짝지어야 합니다.",
+					],
+					en: [
+						"W3C WAI's accessibility standards divide by role. WCAG covers the accessibility of content; ATAG covers the authoring tools that create content; UAAG covers the user agents — browsers, media players — that consume it. WAI-ARIA is less a standard than a technical specification adding semantics to content, serving as a means of meeting WCAG.",
+						"Accessibility requires all three working together: authoring tools help produce accessible content (ATAG), that content meets WCAG, and browsers plus assistive technologies convey it correctly (UAAG). The exam requires matching each standard to whose responsibility it addresses.",
+					],
+				},
+			},
+			{
+				heading: { ko: "ATAG — 저작 도구 접근성 지침", en: "ATAG — Authoring Tool Accessibility Guidelines" },
+				paragraphs: {
+					ko: [
+						"ATAG 2.0(2015 W3C 권고안)은 CMS, 위지위그 편집기, 블로그 플랫폼, 코드 편집기, SNS의 글쓰기 UI 등 '콘텐츠를 만들어내는 모든 소프트웨어'에 적용됩니다. 두 파트로 구성됩니다: Part A — 저작 도구의 UI 자체가 장애가 있는 저작자에게 접근 가능할 것, Part B — 도구가 모든 저작자로 하여금 접근 가능한 콘텐츠를 만들도록 지원·유도할 것.",
+						"Part B의 예: 이미지 삽입 시 대체 텍스트 입력을 요구하는 프롬프트, 접근 가능한 기본 템플릿 제공, 자동 검사와 수정 제안, 저작자가 입력한 접근성 정보(alt 등)의 보존. 실무 함의: 조직이 CMS를 도입할 때 ATAG 적합성을 평가 기준에 넣으면 콘텐츠 접근성이 구조적으로 개선됩니다.",
+					],
+					en: [
+						"ATAG 2.0 (W3C Recommendation, 2015) applies to any software that produces content — CMSs, WYSIWYG editors, blogging platforms, code editors, social media posting UIs. It has two parts: Part A — the authoring tool's own UI must be accessible to authors with disabilities; Part B — the tool must support and guide all authors in producing accessible content.",
+						"Part B examples: prompting for alt text when inserting images, providing accessible default templates, automated checks with repair suggestions, and preserving accessibility information the author entered. The practical implication: putting ATAG conformance in CMS procurement criteria structurally improves content accessibility.",
+					],
+				},
+			},
+			{
+				heading: { ko: "UAAG — 사용자 에이전트 접근성 지침", en: "UAAG — User Agent Accessibility Guidelines" },
+				paragraphs: {
+					ko: [
+						"UAAG 2.0(2015, W3C 노트)은 브라우저·미디어 플레이어·확장 프로그램 등 사용자 에이전트의 접근성 책임을 다룹니다. 예: 사용자 스타일시트·텍스트 확대·색상 재정의 같은 사용자 제어 제공, 키보드만으로 모든 UI 조작 가능, 콘텐츠의 접근성 정보(대체 텍스트, 캡션)를 사용자에게 전달, 보조기술과의 프로그래밍 인터페이스(접근성 API) 지원.",
+						"UAAG 2.0은 권고안(Recommendation)까지 가지 못하고 작업 그룹 노트(Working Group Note)로 발행되었습니다 — 규범적 표준은 아니지만 브라우저 접근성 기능의 사실상 참조 문서입니다. 콘텐츠 제작자 입장에서는 '브라우저가 해줄 일'과 '콘텐츠가 해야 할 일'의 경계를 이해하는 데 유용합니다: 예컨대 텍스트 확대는 브라우저 기능이지만, 확대 시 깨지지 않는 레이아웃(리플로우)은 콘텐츠의 책임입니다.",
+					],
+					en: [
+						"UAAG 2.0 (2015, W3C Note) addresses the accessibility responsibilities of user agents — browsers, media players, extensions. Examples: user controls such as user stylesheets, text zoom, and color overrides; full keyboard operability of the UI; conveying content accessibility information (alt text, captions) to users; and supporting programmatic interfaces (accessibility APIs) for assistive technologies.",
+						"UAAG 2.0 was published as a Working Group Note rather than reaching Recommendation — not a normative standard, but the de facto reference for browser accessibility features. For content authors it clarifies the boundary between what the browser does and what content must do: text zoom is a browser feature, but a layout that survives zoom (reflow) is the content's responsibility.",
+					],
+				},
+			},
+			{
+				heading: { ko: "EN 301 549 — 유럽 ICT 접근성 표준", en: "EN 301 549 — The European ICT Accessibility Standard" },
+				paragraphs: {
+					ko: [
+						"EN 301 549는 유럽 표준화 기구(ETSI·CEN·CENELEC)가 발행하는 ICT 접근성 요구사항 표준입니다. 웹은 물론 소프트웨어, 하드웨어, 문서, 모바일 앱, 지원 서비스까지 포괄하며, 웹 관련 조항(9장)은 WCAG 2.1 Level AA를 그대로 통합합니다. EU 웹 접근성 지침(WAD)과 유럽 접근성법(EAA)의 적합성 추정 기준으로 사용되어 유럽 시장에서 법적 효력을 갖는 참조 표준입니다.",
+						"WCAG와의 차이: WCAG는 웹 콘텐츠만 다루지만 EN 301 549는 ICT 전반을 다루며, 웹 밖 영역(하드웨어의 물리적 조작부, 실시간 양방향 통신, 문서)에 고유 요구사항을 둡니다. WAS 시험 관점: 'WCAG를 포함하되 더 넓은 범위'라는 관계, 그리고 EU 공공 조달·EAA 준수에서의 역할을 기억하세요.",
+					],
+					en: [
+						"EN 301 549 is the ICT accessibility requirements standard published by the European standardization organizations (ETSI, CEN, CENELEC). It covers software, hardware, documents, mobile apps, and support services as well as the web; its web clauses (Chapter 9) incorporate WCAG 2.1 Level AA directly. As the presumption-of-conformity standard for the EU Web Accessibility Directive and the European Accessibility Act, it carries legal weight in the European market.",
+						"Versus WCAG: WCAG covers web content only, while EN 301 549 spans ICT broadly, with requirements beyond the web (physical hardware controls, real-time two-way communication, documents). For the WAS exam, remember the relationship — 'includes WCAG but broader' — and its role in EU public procurement and EAA compliance.",
+					],
+				},
+			},
+			{
+				heading: { ko: "규범 vs 비규범, 접근성 지원", en: "Normative vs. Non-Normative, and Accessibility Supported" },
+				paragraphs: {
+					ko: [
+						"규범(normative) 문서는 적합성 판정의 기준이 되는 부분입니다 — WCAG의 성공 기준과 적합성 요구사항이 여기 해당합니다. 비규범(non-normative, informative) 문서는 이해와 구현을 돕는 참고 자료로, Understanding 문서, Techniques(기법), ARIA APG가 대표적입니다. 기법 문서를 그대로 따라도 그것이 적합성을 보장하지 않으며, 반대로 기법 문서에 없는 방법으로도 성공 기준을 충족할 수 있습니다.",
+						"'접근성 지원(accessibility supported)'은 WCAG 적합성의 전제 조건입니다: 콘텐츠가 사용하는 웹 기술(HTML, ARIA, JavaScript 등)의 사용 방식이 사용자의 보조기술과 브라우저에서 실제로 작동해야 합니다. 예컨대 최신 ARIA 속성이 명세에 있어도 주요 스크린 리더가 지원하지 않으면 그 방식에 의존한 적합성 주장은 성립하지 않습니다. 그래서 실무에서는 '잘 지원되는 기법 선택'이 성공 기준 암기만큼 중요합니다.",
+					],
+					en: [
+						"Normative documents are what conformance is judged against — WCAG's success criteria and conformance requirements. Non-normative (informative) documents aid understanding and implementation: the Understanding documents, Techniques, and the ARIA APG. Following a technique verbatim does not guarantee conformance, and success criteria can equally be met by methods not in any technique document.",
+						"'Accessibility supported' is a precondition of WCAG conformance: the way content uses web technologies (HTML, ARIA, JavaScript) must actually work in users' assistive technologies and browsers. A new ARIA attribute may exist in the spec, but if major screen readers don't support it, a conformance claim relying on it fails. In practice, choosing well-supported techniques matters as much as memorizing success criteria.",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "W3C — ATAG 개요", en: "W3C — ATAG at a Glance" }, url: "https://www.w3.org/WAI/standards-guidelines/atag/" },
+			{ label: { ko: "W3C — UAAG 개요", en: "W3C — UAAG Overview" }, url: "https://www.w3.org/WAI/standards-guidelines/uaag/" },
+			{ label: { ko: "ETSI — EN 301 549", en: "ETSI — EN 301 549" }, url: "https://www.etsi.org/human-factors-accessibility/en-301-549-v3-the-harmonized-european-standard-for-ict-accessibility" },
+			{ label: { ko: "WCAG — 접근성 지원 이해하기", en: "WCAG — Understanding Accessibility Support" }, url: "https://www.w3.org/WAI/WCAG22/Understanding/conformance#accessibility-support" },
+		],
+		questions: [
+			{
+				id: "was-1-10-q1",
+				question: {
+					ko: "ATAG Part B가 요구하는 것은?",
+					en: "What does ATAG Part B require?",
+				},
+				options: {
+					a: { ko: "저작 도구가 접근 가능한 콘텐츠 생산을 지원·유도할 것", en: "The authoring tool supports and guides production of accessible content" },
+					b: { ko: "저작 도구 UI 자체의 접근성", en: "Accessibility of the authoring tool's own UI" },
+					c: { ko: "브라우저의 키보드 조작성", en: "Keyboard operability of browsers" },
+					d: { ko: "웹 콘텐츠의 색상 대비", en: "Color contrast of web content" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "ATAG는 Part A(도구 UI의 접근성)와 Part B(접근 가능한 콘텐츠 생산 지원 — alt 프롬프트, 접근 가능한 템플릿, 자동 검사 등)로 구성됩니다. b는 Part A, c는 UAAG의 영역입니다.",
+					en: "ATAG comprises Part A (accessible tool UI) and Part B (supporting accessible content production — alt prompts, accessible templates, automated checks). Option b is Part A; c belongs to UAAG.",
+				},
+			},
+			{
+				id: "was-1-10-q2",
+				question: {
+					ko: "브라우저·미디어 플레이어의 접근성 책임을 다루는 지침은?",
+					en: "Which guidelines address the accessibility responsibilities of browsers and media players?",
+				},
+				options: {
+					a: { ko: "WCAG", en: "WCAG" },
+					b: { ko: "ATAG", en: "ATAG" },
+					c: { ko: "UAAG", en: "UAAG" },
+					d: { ko: "WCAG-EM", en: "WCAG-EM" },
+				},
+				answer: "c",
+				explanation: {
+					ko: "UAAG(User Agent Accessibility Guidelines)는 브라우저 등 사용자 에이전트의 책임 — 사용자 제어, 키보드 조작, 접근성 API 지원 — 을 다룹니다. WCAG는 콘텐츠, ATAG는 저작 도구입니다.",
+					en: "UAAG covers user agents — user controls, keyboard operability, accessibility API support. WCAG covers content; ATAG covers authoring tools.",
+				},
+			},
+			{
+				id: "was-1-10-q3",
+				question: {
+					ko: "EN 301 549와 WCAG의 관계로 옳은 것은?",
+					en: "Which correctly describes the relationship between EN 301 549 and WCAG?",
+				},
+				options: {
+					a: { ko: "EN 301 549는 웹 조항에 WCAG를 통합하되 ICT 전반으로 범위가 더 넓다", en: "EN 301 549 incorporates WCAG for its web clauses but spans ICT more broadly" },
+					b: { ko: "서로 무관한 경쟁 표준이다", en: "They are unrelated competing standards" },
+					c: { ko: "WCAG가 EN 301 549를 포함한다", en: "WCAG includes EN 301 549" },
+					d: { ko: "EN 301 549는 웹사이트에만 적용된다", en: "EN 301 549 applies only to websites" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "EN 301 549의 9장은 WCAG 2.1 AA를 그대로 통합하며, 그 외 소프트웨어·하드웨어·문서·지원 서비스에 고유 요구사항을 둡니다. EU WAD·EAA의 적합성 추정 기준입니다.",
+					en: "Chapter 9 of EN 301 549 incorporates WCAG 2.1 AA directly, adding requirements for software, hardware, documents, and support services. It underpins the EU WAD and EAA.",
+				},
+			},
+			{
+				id: "was-1-10-q4",
+				question: {
+					ko: "WCAG에서 규범(normative) 문서에 해당하는 것은?",
+					en: "Which is a normative part of WCAG?",
+				},
+				options: {
+					a: { ko: "Understanding 문서", en: "The Understanding documents" },
+					b: { ko: "성공 기준과 적합성 요구사항", en: "The success criteria and conformance requirements" },
+					c: { ko: "Techniques 문서", en: "The Techniques documents" },
+					d: { ko: "ARIA APG", en: "The ARIA APG" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "적합성 판정의 기준이 되는 성공 기준·적합성 요구사항이 규범입니다. Understanding·Techniques·APG는 이해와 구현을 돕는 비규범(informative) 자료로, 따라도 적합성을 보장하지 않습니다.",
+					en: "Success criteria and conformance requirements are normative. Understanding, Techniques, and the APG are informative — following them does not guarantee conformance.",
+				},
+			},
+			{
+				id: "was-1-10-q5",
+				question: {
+					ko: "'접근성 지원(accessibility supported)' 조건의 의미로 옳은 것은?",
+					en: "What does the 'accessibility supported' condition mean?",
+				},
+				options: {
+					a: { ko: "사용한 기술의 사용 방식이 사용자의 보조기술·브라우저에서 실제로 작동해야 적합성이 성립한다", en: "The way technologies are used must actually work in users' assistive technologies and browsers for conformance to hold" },
+					b: { ko: "모든 브라우저에서 픽셀 단위로 동일하게 보여야 한다", en: "Pages must look pixel-identical in all browsers" },
+					c: { ko: "명세에 존재하는 속성은 무조건 사용해도 된다", en: "Any attribute in a spec is always safe to rely on" },
+					d: { ko: "보조기술 없이도 쓸 수 있어야 한다", en: "Content must be usable without assistive technology" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "명세에 있어도 주요 보조기술이 지원하지 않는 방식에 의존하면 적합성 주장이 성립하지 않습니다. 잘 지원되는 기법을 선택하는 것이 WCAG 적합성의 전제 조건입니다.",
+					en: "Relying on a technique major assistive technologies don't support invalidates a conformance claim, even if it's in the spec. Choosing well-supported techniques is a precondition of WCAG conformance.",
+				},
+			},
+			{
+				id: "was-1-10-q6",
+				question: {
+					ko: "CMS 도입 시 콘텐츠 접근성을 구조적으로 개선하려면 어떤 표준의 적합성을 평가 기준에 넣어야 하는가?",
+					en: "To structurally improve content accessibility when adopting a CMS, conformance to which standard should be an evaluation criterion?",
+				},
+				options: {
+					a: { ko: "UAAG", en: "UAAG" },
+					b: { ko: "ATAG", en: "ATAG" },
+					c: { ko: "ISO 9001", en: "ISO 9001" },
+					d: { ko: "WCAG-EM", en: "WCAG-EM" },
+				},
+				answer: "b",
+				explanation: {
+					ko: "CMS는 저작 도구이므로 ATAG가 기준입니다. ATAG 적합 도구는 alt 프롬프트, 접근 가능한 템플릿, 자동 검사 등으로 모든 저작자가 접근 가능한 콘텐츠를 만들도록 돕습니다.",
+					en: "A CMS is an authoring tool, so ATAG applies. ATAG-conformant tools guide all authors toward accessible content via alt prompts, accessible templates, and automated checks.",
+				},
+			},
+		],
+	},
+	{
+		id: "was-1-11",
+		exam: "was",
+		domain: 1,
+		order: 11,
+		available: true,
+		title: { ko: "장애 사용자의 웹 이용 전략", en: "How People with Disabilities Use the Web" },
+		summary: {
+			ko: "여섯 사용자 그룹 — 전맹, 저시력, 읽기 제한, 인지, 운동, 청각 — 이 실제로 웹을 탐색하는 전략을 학습합니다. WAS BoK Domain 1H로, 기술 결정의 '왜'를 제공하는 토대입니다.",
+			en: "Learn the strategies six user groups — blind, low vision, limited reading, cognitive, motor, auditory — actually use to navigate the web. This is WAS BoK Domain 1H, the 'why' behind technical decisions.",
+		},
+		objectives: {
+			ko: [
+				"스크린 리더 사용자의 대표 탐색 전략(헤딩·랜드마크·링크 목록)을 설명할 수 있다",
+				"저시력 사용자의 확대·고대비·리플로우 의존을 설명할 수 있다",
+				"운동 장애 사용자의 키보드·스위치·음성 입력 전략을 설명할 수 있다",
+				"인지·읽기 제한·청각 사용자의 대응 전략과 콘텐츠 요구사항을 연결할 수 있다",
+				"사용자 선호 방식과 사이트 특정 방식의 차이를 설명할 수 있다",
+			],
+			en: [
+				"Explain screen reader users' primary navigation strategies (headings, landmarks, link lists)",
+				"Explain low-vision users' reliance on zoom, high contrast, and reflow",
+				"Explain keyboard, switch, and voice input strategies of users with motor disabilities",
+				"Connect the coping strategies of cognitive, limited-reading, and auditory users to content requirements",
+				"Explain user-preferred methods versus website-specific methods",
+			],
+		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "전맹 사용자 — 스크린 리더 탐색", en: "Users Without Vision — Screen Reader Navigation" },
+				paragraphs: {
+					ko: [
+						"스크린 리더 사용자는 페이지를 위에서 아래로 다 듣지 않습니다. 대표 전략: 헤딩 단축키(H, 1~6)로 구조를 건너뛰며 훑기, 랜드마크(main, nav 등)로 영역 간 이동, 링크 목록·헤딩 목록 대화상자(예: NVDA 요소 목록, VoiceOver 로터)에서 알파벳 탐색, 첫 글자 내비게이션, 찾기 기능. WebAIM 설문에서 헤딩 탐색은 수년째 압도적 1위 전략입니다.",
+						"이 전략들이 작동하려면: 논리적 헤딩 계층, 올바른 랜드마크, 맥락 없이도 이해되는 링크 텍스트('여기를 클릭' 금지), 정확한 폼 레이블이 필요합니다. 또한 스크린 리더는 '가상 버퍼/브라우즈 모드'와 '포커스/폼 모드'를 전환하며 작동하므로, 커스텀 위젯이 role과 키보드 처리를 제대로 구현해야 모드 전환이 자연스럽습니다.",
+					],
+					en: [
+						"Screen reader users don't listen to pages top to bottom. Primary strategies: skimming structure with heading shortcuts (H, 1–6), jumping between regions via landmarks (main, nav), alphabetical browsing in link/heading list dialogs (NVDA's elements list, VoiceOver's rotor), first-letter navigation, and find. In WebAIM's surveys, heading navigation has been the dominant strategy for years.",
+						"For these to work you need: a logical heading hierarchy, correct landmarks, link text that makes sense out of context (no 'click here'), and accurate form labels. Screen readers also switch between virtual buffer/browse mode and focus/forms mode, so custom widgets must implement roles and keyboard handling correctly for smooth mode switching.",
+					],
+				},
+			},
+			{
+				heading: { ko: "저시력·읽기 제한 사용자", en: "Users with Low Vision and Limited Reading" },
+				paragraphs: {
+					ko: [
+						"저시력 사용자의 도구는 다양합니다: 브라우저 확대(200~400%), 화면 확대 프로그램(부분 확대·따라가기), 고대비/색상 반전 모드, 사용자 지정 글꼴·색상, 큰 커서. 핵심 요구: 400% 확대에서 가로 스크롤 없이 읽히는 리플로우(1.4.10), 확대해도 잘리지 않는 콘텐츠, 색에만 의존하지 않는 구분, 충분한 기본 대비. 일부는 스크린 리더를 병행합니다.",
+						"읽기 제한(난독증 등) 사용자는 텍스트 음성 변환(TTS)으로 읽기를 보완하고, 읽기 도구(줄 강조, 글꼴 교체, 배경색 변경)를 씁니다. 콘텐츠 요구: 명확한 언어, 짧은 문단, 목록·헤딩으로 구조화, lang 속성의 정확한 지정(TTS 발음 결정), 텍스트를 이미지로 만들지 않기(도구가 조작할 수 없음).",
+					],
+					en: [
+						"Low-vision users employ varied tools: browser zoom (200–400%), screen magnifiers (partial zoom with focus tracking), high-contrast/inverted modes, custom fonts and colors, large cursors. Key requirements: reflow at 400% zoom without horizontal scrolling (1.4.10), content that doesn't clip when enlarged, distinctions not by color alone, and adequate default contrast. Some also run a screen reader alongside.",
+						"Users with limited reading (e.g., dyslexia) supplement reading with text-to-speech and reading tools (line highlighting, font swapping, background tinting). Content requirements: clear language, short paragraphs, structure via lists and headings, accurate lang attributes (which drive TTS pronunciation), and never rendering text as images (tools cannot manipulate them).",
+					],
+				},
+			},
+			{
+				heading: { ko: "운동 장애 사용자 — 키보드·스위치·음성", en: "Users with Motor Disabilities — Keyboard, Switch, Voice" },
+				paragraphs: {
+					ko: [
+						"마우스를 못 쓰거나 정밀 조작이 어려운 사용자의 전략: 키보드 전용 탐색(Tab/Shift+Tab, Enter/Space), 스위치 접근(한두 개의 스위치 + 스캐닝), 음성 제어(Dragon, 음성 컨트롤 — 보이는 레이블을 말해 클릭), 헤드 포인터·시선 추적, 키가드와 대체 키보드. 트랙볼이나 조이스틱으로 마우스를 대신하기도 합니다.",
+						"콘텐츠 요구사항: 모든 기능의 키보드 접근(2.1.1)과 보이는 포커스(2.4.7), 논리적 포커스 순서, 건너뛰기 링크, 충분한 타깃 크기(2.5.8), 드래그의 대안(2.5.7), 시간 제한 조절(2.2.1). 음성 제어 사용자를 위해 접근 가능한 이름에 보이는 레이블 텍스트가 포함되어야 합니다(2.5.3 Label in Name) — 화면에 '검색'이라 쓰인 버튼의 접근 가능한 이름이 '찾기'라면 '검색 클릭'이 실패합니다.",
+					],
+					en: [
+						"Users who can't use a mouse or lack fine motor control rely on: keyboard-only navigation (Tab/Shift+Tab, Enter/Space), switch access (one or two switches plus scanning), voice control (Dragon, Voice Control — speaking visible labels to click), head pointers and eye tracking, keyguards and alternative keyboards. Trackballs or joysticks may replace mice.",
+						"Content requirements: keyboard access to everything (2.1.1) with visible focus (2.4.7), logical focus order, skip links, adequate target size (2.5.8), alternatives to dragging (2.5.7), adjustable time limits (2.2.1). For voice control users, the accessible name must contain the visible label text (2.5.3 Label in Name) — if a button showing '검색' has an accessible name of '찾기', saying 'click 검색' fails.",
+					],
+				},
+			},
+			{
+				heading: { ko: "인지·청각 사용자", en: "Users with Cognitive and Auditory Disabilities" },
+				paragraphs: {
+					ko: [
+						"인지 장애 사용자의 전략과 대응: 익숙한 패턴에 의존하므로 일관된 내비게이션(3.2.3)과 예측 가능한 동작(3.2.1~2)이 중요합니다. 주의 분산에 취약하므로 움직임 정지 수단(2.2.2), 시간 연장(2.2.1)이 필요하고, 기억 부담을 줄이는 자동 완성(1.3.5)·로그인 간소화(3.3.8)·오류 복구 안내(3.3.3)가 돕습니다. 일부는 광고 차단기, 리더 모드, 단순화 확장을 사용합니다.",
+						"농·난청 사용자의 전략: 자막(라이브는 실시간 자막)과 대본에 의존하고, 일부 농인은 수어가 제1언어라 복잡한 문어 텍스트가 제2언어일 수 있음을 기억해야 합니다. 콘텐츠 요구: 모든 오디오의 자막(1.2.2)·대본, 음성 전용 안내 금지, 소리 알림의 시각적 대응물, 고객 지원의 텍스트 채널(채팅·이메일 — 전화 전용 금지).",
+					],
+					en: [
+						"Cognitive strategies and responses: users rely on familiar patterns, so consistent navigation (3.2.3) and predictable behavior (3.2.1–2) matter. Vulnerable to distraction, they need ways to stop motion (2.2.2) and extend time (2.2.1); autocomplete (1.3.5), simpler logins (3.3.8), and error recovery guidance (3.3.3) reduce memory burden. Some use ad blockers, reader modes, and simplification extensions.",
+						"Deaf and hard-of-hearing strategies: reliance on captions (live captions for live content) and transcripts; remember that for some Deaf users sign language is their first language, making complex written text a second language. Content requirements: captions (1.2.2) and transcripts for all audio, no voice-only flows, visual counterparts to sound alerts, and text channels for support (chat, email — never phone-only).",
+					],
+				},
+			},
+			{
+				heading: { ko: "사용자 선호 방식 vs 사이트 특정 방식", en: "User-Preferred vs. Website-Specific Methods" },
+				paragraphs: {
+					ko: [
+						"BoK가 강조하는 원칙: 사용자는 자신의 보조기술과 몸에 밴 전략(사용자 선호 방식)으로 모든 사이트를 탐색하고 싶어 하며, 사이트마다 다른 특수 장치(사이트 특정 방식 — 자체 접근성 위젯, 독자적 단축키, '접근성 모드' 별도 페이지)를 새로 배우기를 원하지 않습니다. 별도 접근성 오버레이 위젯이 비판받는 이유가 여기 있습니다 — 표준 시맨틱을 올바르게 쓰면 사용자의 기존 도구가 그대로 작동합니다.",
+						"실무 결론: 표준 HTML 시맨틱과 WCAG 준수로 '사용자의 방식'을 지원하는 것이 우선이고, 사이트 고유 편의 기능(예: 단축키)은 표준을 보완하는 선택지로만 제공하며 충돌을 피해야 합니다(2.1.4 문자 단축키). 이 관점은 시험 전반 — 커스텀 위젯, 오버레이, 접근성 기능 설계 문항 — 의 판단 기준이 됩니다.",
+					],
+					en: [
+						"The BoK's principle: users want to navigate every site with their own assistive technology and ingrained strategies (user-preferred methods), not to learn a new site-specific apparatus per site (custom accessibility widgets, proprietary shortcuts, separate 'accessibility mode' pages). This is why accessibility overlay widgets draw criticism — correct standard semantics let users' existing tools just work.",
+						"The practical conclusion: supporting users' own methods through standard HTML semantics and WCAG conformance comes first; site-specific conveniences (e.g., shortcuts) are optional supplements that must avoid conflicts (2.1.4 Character Key Shortcuts). This perspective is the judgment standard across exam questions on custom widgets, overlays, and accessibility feature design.",
+					],
+				},
+			},
+		],
+		references: [
+			{ label: { ko: "W3C WAI — 사람들이 웹을 사용하는 방법", en: "W3C WAI — How People with Disabilities Use the Web" }, url: "https://www.w3.org/WAI/people-use-web/" },
+			{ label: { ko: "WebAIM — 스크린 리더 사용자 설문", en: "WebAIM — Screen Reader User Survey" }, url: "https://webaim.org/projects/screenreadersurvey10/" },
+			{ label: { ko: "WCAG 2.5.3 이름의 레이블 — 이해하기", en: "Understanding SC 2.5.3 Label in Name" }, url: "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html" },
+		],
+		questions: [
+			{
+				id: "was-1-11-q1",
+				question: {
+					ko: "WebAIM 설문에서 스크린 리더 사용자의 압도적 1위 페이지 탐색 전략은?",
+					en: "In WebAIM surveys, what is screen reader users' dominant page navigation strategy?",
+				},
+				options: {
+					a: { ko: "헤딩 단위 탐색", en: "Navigating by headings" },
+					b: { ko: "페이지 전체를 처음부터 듣기", en: "Listening to the whole page from the top" },
+					c: { ko: "마우스 호버", en: "Mouse hovering" },
+					d: { ko: "사이트맵 이용", en: "Using sitemaps" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "헤딩 단축키로 구조를 훑는 것이 수년째 1위 전략입니다. 논리적 헤딩 계층이 그래서 중요합니다.",
+					en: "Skimming structure via heading shortcuts has been the top strategy for years — which is why a logical heading hierarchy matters.",
+				},
+			},
+			{
+				id: "was-1-11-q2",
+				question: {
+					ko: "화면에 '검색'이라 표시된 버튼의 접근 가능한 이름이 '찾기'일 때 발생하는 문제는?",
+					en: "A button visibly labeled 'Search' has an accessible name of 'Find.' What problem does this cause?",
+				},
+				options: {
+					a: { ko: "음성 제어 사용자가 '검색 클릭'으로 버튼을 활성화하지 못한다 (2.5.3 위반)", en: "Voice control users can't activate it by saying 'click Search' (violates 2.5.3)" },
+					b: { ko: "색상 대비가 낮아진다", en: "Color contrast decreases" },
+					c: { ko: "키보드 포커스가 사라진다", en: "Keyboard focus disappears" },
+					d: { ko: "아무 문제 없다", en: "No problem at all" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "음성 제어 사용자는 보이는 레이블을 말해 조작합니다. 접근 가능한 이름에 보이는 텍스트가 포함되어야 한다는 것이 2.5.3(Label in Name)입니다.",
+					en: "Voice control users speak visible labels. SC 2.5.3 (Label in Name) requires the accessible name to contain the visible text.",
+				},
+			},
+			{
+				id: "was-1-11-q3",
+				question: {
+					ko: "스위치 접근(switch access) 사용자의 입력 방식은?",
+					en: "How do switch access users provide input?",
+				},
+				options: {
+					a: { ko: "한두 개의 스위치와 스캐닝으로 항목을 순차 선택", en: "One or two switches plus scanning to select items sequentially" },
+					b: { ko: "마우스 더블클릭", en: "Double-clicking a mouse" },
+					c: { ko: "멀티터치 제스처", en: "Multi-touch gestures" },
+					d: { ko: "스타일러스 필기", en: "Stylus handwriting" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "스위치 사용자는 하이라이트가 항목을 순회(스캐닝)할 때 스위치를 눌러 선택합니다. 키보드 접근성이 확보된 콘텐츠가 스위치 접근의 전제입니다.",
+					en: "Switch users press a switch as a highlight cycles (scans) through items. Keyboard-accessible content is the precondition for switch access.",
+				},
+			},
+			{
+				id: "was-1-11-q4",
+				question: {
+					ko: "일부 농인 사용자에게 복잡한 문어 텍스트가 어려울 수 있는 이유는?",
+					en: "Why can complex written text be difficult for some Deaf users?",
+				},
+				options: {
+					a: { ko: "수어가 제1언어이고 문어는 제2언어일 수 있기 때문", en: "Sign language may be their first language, making written text a second language" },
+					b: { ko: "화면을 볼 수 없기 때문", en: "They cannot see the screen" },
+					c: { ko: "스크린 리더가 텍스트를 읽지 못하기 때문", en: "Screen readers cannot read text" },
+					d: { ko: "키보드를 쓸 수 없기 때문", en: "They cannot use keyboards" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "수어는 독자적 문법을 가진 언어입니다. 수어가 제1언어인 농인에게 문어는 제2언어일 수 있어, 명확하고 단순한 언어가 청각 장애 대응에서도 중요합니다.",
+					en: "Sign languages are full languages with their own grammar. For Deaf users whose first language is sign, written text is a second language — clear, simple language matters for auditory accessibility too.",
+				},
+			},
+			{
+				id: "was-1-11-q5",
+				question: {
+					ko: "접근성 오버레이 위젯이 비판받는 근본 이유는?",
+					en: "What is the fundamental criticism of accessibility overlay widgets?",
+				},
+				options: {
+					a: { ko: "사용자는 자신의 보조기술·전략(사용자 선호 방식)을 쓰고 싶어 하는데, 사이트마다 다른 특수 장치를 강요하기 때문", en: "Users want their own AT and strategies (user-preferred methods), but overlays impose a different site-specific apparatus per site" },
+					b: { ko: "시각적으로 예쁘지 않기 때문", en: "They are not visually attractive" },
+					c: { ko: "로딩 속도가 빨라지기 때문", en: "They make pages load faster" },
+					d: { ko: "표준 시맨틱을 과도하게 사용하기 때문", en: "They overuse standard semantics" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "표준 시맨틱과 WCAG 준수는 사용자의 기존 도구가 그대로 작동하게 합니다. 오버레이는 사이트 특정 방식을 새로 배우게 하고 기존 보조기술과 충돌하기도 합니다.",
+					en: "Standard semantics and WCAG conformance let users' existing tools just work. Overlays force learning site-specific methods and can conflict with existing AT.",
+				},
+			},
+			{
+				id: "was-1-11-q6",
+				question: {
+					ko: "저시력 사용자를 위한 리플로우(1.4.10)의 요구사항은?",
+					en: "What does Reflow (1.4.10) require for low-vision users?",
+				},
+				options: {
+					a: { ko: "400% 확대(320px 폭 상당)에서 가로 스크롤 없이 콘텐츠를 읽을 수 있어야 한다", en: "Content readable without horizontal scrolling at 400% zoom (equivalent to 320px width)" },
+					b: { ko: "모든 텍스트를 이미지로 제공해야 한다", en: "All text must be provided as images" },
+					c: { ko: "확대 기능을 차단해야 한다", en: "Zoom must be disabled" },
+					d: { ko: "고정 폭 레이아웃을 사용해야 한다", en: "Fixed-width layouts must be used" },
+				},
+				answer: "a",
+				explanation: {
+					ko: "1.4.10은 320 CSS 픽셀 폭(데스크톱 400% 확대 상당)에서 양방향 스크롤 없이 콘텐츠 이용이 가능하도록 요구합니다. 반응형 레이아웃이 표준 해법입니다(표·지도 등 예외 있음).",
+					en: "1.4.10 requires content usable without two-dimensional scrolling at 320 CSS pixels (desktop 400% zoom). Responsive layout is the standard solution (with exceptions like tables and maps).",
+				},
+			},
+		],
+	},
 ];
