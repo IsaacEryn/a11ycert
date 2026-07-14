@@ -106,10 +106,21 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 				if (event === "SIGNED_IN" && newSession?.user) {
 					const userId = newSession.user.id;
+					const provider = newSession.user.app_metadata?.provider ?? null;
 					setTimeout(() => {
 						fetchProfile(userId).catch(() => {});
 						// localStorage → DB 마이그레이션 (비동기, UI 블로킹 없음)
 						migrateLocalStorageToDB(userId).catch(() => {});
+						// 로그인 활동 로그 — 서버 콜백이 실행되지 않는 흐름
+						// (Redirect URL 미허용 시 클라이언트 코드 교환)도 커버.
+						// RPC 내부 1분 dedupe로 서버 로그와 중복되지 않음.
+						void (async () => {
+							const { error } = await supabase.rpc("log_user_login", {
+								p_provider: provider,
+								p_ip: null,
+							});
+							if (error) console.error("[AuthProvider] log_user_login:", error.message);
+						})();
 					}, 0);
 				}
 
