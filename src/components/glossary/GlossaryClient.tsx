@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type { GlossaryTerm } from "@/lib/content/glossary";
 import { useLearningStore } from "@/lib/store/learningStore";
+import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { syncDictEntryToDB, removeDictEntryFromDB } from "@/lib/store/learning-sync";
 import { groupTerms, KO_INDEX, EN_INDEX, type GlossarySortMode } from "@/lib/glossary-utils";
 import Highlight from "./Highlight";
 import JumpIndex from "./JumpIndex";
@@ -18,7 +21,11 @@ type CertFilter = "all" | "cpacc" | "was";
 
 export default function GlossaryClient({ terms, locale }: Props) {
   const t = useTranslations("glossary");
+  const td = useTranslations("dictionary");
   const languageMode = useLearningStore((s) => s.languageMode);
+  const dictionary = useLearningStore((s) => s.dictionary);
+  const toggleDictTerm = useLearningStore((s) => s.toggleDictTerm);
+  const auth = useOptionalAuth();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -36,6 +43,32 @@ export default function GlossaryClient({ terms, locale }: Props) {
     return s === "ko" || s === "en" ? s : defaultSort;
   });
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [dictStatus, setDictStatus] = useState<"saved" | "removed" | null>(null);
+
+  const savedTermIds = useMemo(() => new Set(dictionary?.saved ?? []), [dictionary]);
+
+  const handleToggleDict = useCallback(
+    (termId: string) => {
+      const nowSaved = toggleDictTerm(termId);
+      setDictStatus(nowSaved ? "saved" : "removed");
+      const userId = auth?.user?.id;
+      if (userId) {
+        if (nowSaved) {
+          syncDictEntryToDB(userId, {
+            entry_id: termId,
+            source: "glossary",
+            word_ko: null,
+            word_en: null,
+            meaning_ko: null,
+            meaning_en: null,
+          });
+        } else {
+          removeDictEntryFromDB(userId, termId);
+        }
+      }
+    },
+    [toggleDictTerm, auth?.user?.id]
+  );
 
   // 상태 → URL 미러링 (q는 300ms 디바운스, 기본값이면 파라미터 생략)
   useEffect(() => {
@@ -150,6 +183,14 @@ export default function GlossaryClient({ terms, locale }: Props) {
             </button>
           ))}
         </div>
+
+        <Link
+          href={`/${locale}/mypage/dictionary`}
+          className="btn btn--sm"
+          style={{ marginLeft: "auto" }}
+        >
+          {td("title")}
+        </Link>
       </div>
 
       <JumpIndex letters={indexLetters} activeLetters={activeLetters} />
@@ -157,6 +198,7 @@ export default function GlossaryClient({ terms, locale }: Props) {
       <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {(query || certFilter !== "all") && t("resultCount", { count: filtered.length })}
         {copiedId && t("copied")}
+        {dictStatus && (dictStatus === "saved" ? td("termSaved") : td("termRemoved"))}
       </div>
 
       {grouped.length === 0 ? (
@@ -201,6 +243,22 @@ export default function GlossaryClient({ terms, locale }: Props) {
                     {term.certs.map((c) => (
                       <span key={c} className="tag">{c.toUpperCase()}</span>
                     ))}
+                    <button
+                      type="button"
+                      className="glossary-row__copy"
+                      aria-pressed={savedTermIds.has(term.id)}
+                      aria-label={
+                        savedTermIds.has(term.id)
+                          ? td("removeTerm", { term: locale === "ko" ? term.term.ko : term.term.en })
+                          : td("saveTerm", { term: locale === "ko" ? term.term.ko : term.term.en })
+                      }
+                      onClick={() => handleToggleDict(term.id)}
+                      style={savedTermIds.has(term.id) ? { color: "var(--accent)", borderColor: "var(--accent)" } : undefined}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill={savedTermIds.has(term.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                      </svg>
+                    </button>
                     <button
                       type="button"
                       className="glossary-row__copy"

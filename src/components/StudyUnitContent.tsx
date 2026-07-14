@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { StudyUnit, UnitReference } from "@/lib/content/types";
+import AddWordButton from "@/components/dictionary/AddWordButton";
 
 interface Props {
   unit: StudyUnit;
@@ -51,6 +52,8 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
           </h1>
           <div className="bilingual-card__title-en">{unit.title.en}</div>
         </div>
+        {/* 본문 텍스트를 드래그한 뒤 누르면 선택 텍스트가 단어란에 프리필됨 */}
+        <AddWordButton small />
       </div>
 
       {/* 문단 쌍(pair) 정렬 — 한글 문단과 대응 영어 문단이 같은 행에서 시작 */}

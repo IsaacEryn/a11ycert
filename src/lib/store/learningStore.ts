@@ -28,9 +28,35 @@ interface PerCertData {
   attempts: LocalAttempt[];
 }
 
+/** 나의 사전 — 직접 등록한 단어 */
+export interface CustomWord {
+  id: string; // "custom-<random>"
+  word: { ko: string; en: string };
+  meaning: { ko: string; en: string };
+  createdAt: string;
+}
+
+/** 나의 사전 데이터 — cert 무관 전역 (용어는 CPACC/WAS 공용) */
+export interface DictionaryData {
+  saved: string[]; // 용어집 term id
+  custom: CustomWord[];
+  srs: Record<string, SrsCardState>; // entryId(termId | customId) → Leitner 상태
+}
+
 interface LearningState {
   perCert: Record<string, PerCertData>;
   languageMode: LanguageMode;
+  dictionary?: DictionaryData;
+
+  // 나의 사전 actions
+  toggleDictTerm: (termId: string) => boolean;
+  addCustomWord: (word: CustomWord["word"], meaning: CustomWord["meaning"]) => CustomWord;
+  removeDictEntry: (entryId: string) => void;
+  gradeDictEntry: (entryId: string, grade: SrsGrade) => SrsCardState;
+
+  // 나의 사전 queries
+  getDictionary: () => DictionaryData;
+  isDictSaved: (entryId: string) => boolean;
 
   // Per-cert actions
   markUnitComplete: (cert: Cert, unitId: string) => void;
@@ -56,6 +82,11 @@ interface LearningState {
 
 function emptyCert(): PerCertData {
   return { completedUnits: [], bookmarks: [], wrongNotes: [], srs: {}, attempts: [] };
+}
+
+function getDict(state: Pick<LearningState, "dictionary">): DictionaryData {
+  // 구버전 persist 데이터에 없는 dictionary를 기본값으로 보정
+  return { saved: [], custom: [], srs: {}, ...state.dictionary };
 }
 
 function getCert(state: LearningState, cert: string): PerCertData {
@@ -142,6 +173,65 @@ export const useLearningStore = create<LearningState>()(
       getAttempts: (cert) => getCert(get(), cert).attempts,
 
       setLanguageMode: (mode) => set({ languageMode: mode }),
+
+      // ── 나의 사전 ─────────────────────────────────────────────────────────
+      toggleDictTerm: (termId) => {
+        const d = getDict(get());
+        const nowSaved = !d.saved.includes(termId);
+        set((s) => {
+          const dict = getDict(s);
+          if (nowSaved) return { dictionary: { ...dict, saved: [...dict.saved, termId] } };
+          const srs = { ...dict.srs };
+          delete srs[termId];
+          return {
+            dictionary: { ...dict, saved: dict.saved.filter((x) => x !== termId), srs },
+          };
+        });
+        return nowSaved;
+      },
+
+      addCustomWord: (word, meaning) => {
+        const entry: CustomWord = {
+          id: `custom-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`,
+          word,
+          meaning,
+          createdAt: new Date().toISOString(),
+        };
+        set((s) => {
+          const dict = getDict(s);
+          return { dictionary: { ...dict, custom: [entry, ...dict.custom] } };
+        });
+        return entry;
+      },
+
+      removeDictEntry: (entryId) =>
+        set((s) => {
+          const dict = getDict(s);
+          const srs = { ...dict.srs };
+          delete srs[entryId];
+          return {
+            dictionary: {
+              saved: dict.saved.filter((x) => x !== entryId),
+              custom: dict.custom.filter((c) => c.id !== entryId),
+              srs,
+            },
+          };
+        }),
+
+      gradeDictEntry: (entryId, grade) => {
+        const next = gradeCard(getDict(get()).srs[entryId], grade);
+        set((s) => {
+          const dict = getDict(s);
+          return { dictionary: { ...dict, srs: { ...dict.srs, [entryId]: next } } };
+        });
+        return next;
+      },
+
+      getDictionary: () => getDict(get()),
+      isDictSaved: (entryId) => {
+        const d = getDict(get());
+        return d.saved.includes(entryId) || d.custom.some((c) => c.id === entryId);
+      },
     }),
     {
       name: "a11ycert.learning.v2",

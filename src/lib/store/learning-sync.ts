@@ -130,6 +130,49 @@ export async function syncAttemptToDB(
 	if (error) console.error("[learning-sync] quiz_attempt insert failed:", error.message);
 }
 
+// ── 나의 사전 ───────────────────────────────────────────────────────────────
+
+export interface DictEntryRow {
+	entry_id: string;
+	source: "glossary" | "custom";
+	word_ko: string | null;
+	word_en: string | null;
+	meaning_ko: string | null;
+	meaning_en: string | null;
+	box: number;
+	due_at: string;
+	created_at?: string;
+}
+
+export async function syncDictEntryToDB(
+	userId: string,
+	entry: Pick<DictEntryRow, "entry_id" | "source" | "word_ko" | "word_en" | "meaning_ko" | "meaning_en">
+) {
+	const { error } = await supabase.from("dictionary_entries").upsert(
+		{ user_id: userId, ...entry },
+		{ onConflict: "user_id,entry_id", ignoreDuplicates: true }
+	);
+	if (error) console.error("[learning-sync] dictionary_entry upsert failed:", error.message);
+}
+
+export async function removeDictEntryFromDB(userId: string, entryId: string) {
+	const { error } = await supabase
+		.from("dictionary_entries")
+		.delete()
+		.eq("user_id", userId)
+		.eq("entry_id", entryId);
+	if (error) console.error("[learning-sync] dictionary_entry delete failed:", error.message);
+}
+
+export async function syncDictSrsToDB(userId: string, entryId: string, box: number, dueAt: string) {
+	const { error } = await supabase
+		.from("dictionary_entries")
+		.update({ box, due_at: dueAt, updated_at: new Date().toISOString() })
+		.eq("user_id", userId)
+		.eq("entry_id", entryId);
+	if (error) console.error("[learning-sync] dictionary_srs update failed:", error.message);
+}
+
 // ── localStorage → DB 전체 마이그레이션 ──────────────────────────────────────
 
 export async function migrateLocalStorageToDB(userId: string) {
@@ -143,6 +186,16 @@ export async function migrateLocalStorageToDB(userId: string) {
 				bookmarks?: string[];
 				wrongNotes?: string[];
 			}>;
+			dictionary?: {
+				saved?: string[];
+				custom?: {
+					id: string;
+					word: { ko: string; en: string };
+					meaning: { ko: string; en: string };
+					createdAt?: string;
+				}[];
+				srs?: Record<string, { box: number; due: string }>;
+			};
 		};
 	};
 	try {
@@ -199,6 +252,46 @@ export async function migrateLocalStorageToDB(userId: string) {
 						.from("completed_units")
 						.upsert(rows, { onConflict: "user_id,unit_id", ignoreDuplicates: true });
 					if (error) console.error("[migration] completed_units:", error.message);
+				})()
+			);
+		}
+	}
+
+	// 나의 사전 마이그레이션 (용어집 저장 + 직접 등록 + SRS 상태)
+	const dict = parsed?.state?.dictionary;
+	if (dict) {
+		const srs = dict.srs ?? {};
+		const rows: (DictEntryRow & { user_id: string })[] = [
+			...(dict.saved ?? []).map((termId) => ({
+				user_id: userId,
+				entry_id: termId,
+				source: "glossary" as const,
+				word_ko: null,
+				word_en: null,
+				meaning_ko: null,
+				meaning_en: null,
+				box: srs[termId]?.box ?? 1,
+				due_at: srs[termId]?.due ?? now,
+			})),
+			...(dict.custom ?? []).map((c) => ({
+				user_id: userId,
+				entry_id: c.id,
+				source: "custom" as const,
+				word_ko: c.word.ko,
+				word_en: c.word.en,
+				meaning_ko: c.meaning.ko,
+				meaning_en: c.meaning.en,
+				box: srs[c.id]?.box ?? 1,
+				due_at: srs[c.id]?.due ?? now,
+			})),
+		];
+		if (rows.length) {
+			promises.push(
+				(async () => {
+					const { error } = await supabase
+						.from("dictionary_entries")
+						.upsert(rows, { onConflict: "user_id,entry_id", ignoreDuplicates: true });
+					if (error) console.error("[migration] dictionary_entries:", error.message);
 				})()
 			);
 		}

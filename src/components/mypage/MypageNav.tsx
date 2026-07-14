@@ -16,6 +16,7 @@ export default function MypageNav({ locale }: { locale: string }) {
 	const items = [
 		{ href: base, label: t("nav.home") },
 		{ href: `${base}/exam-room`, label: t("nav.examRoom") },
+		{ href: `${base}/dictionary`, label: t("nav.dictionary") },
 		{ href: `${base}/stats`, label: t("nav.stats") },
 		{ href: `${base}/activity`, label: t("nav.activity") },
 		{ href: `${base}/settings`, label: t("nav.settings") },

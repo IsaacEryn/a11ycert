@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import BilingualText from "@/components/BilingualText";
 import ReportButton from "@/components/report/ReportButton";
+import AddWordButton from "@/components/dictionary/AddWordButton";
 import QuestionCard from "./QuestionCard";
 import QuizResult from "./QuizResult";
 import { useQuizSession, type OptionKey } from "./useQuizSession";
@@ -230,7 +231,12 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 				isKo={isKo}
 				languageMode={session.languageMode}
 				variant="single"
-				explanationAction={<ReportButton locale={locale} targetType="quiz" targetId={q.id} />}
+				explanationAction={
+					<div style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+						<AddWordButton small />
+						<ReportButton locale={locale} targetType="quiz" targetId={q.id} />
+					</div>
+				}
 			/>
 
 			{/* Next */}
