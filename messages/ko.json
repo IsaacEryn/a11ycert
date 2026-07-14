@@ -38,7 +38,8 @@
 			"submit": "제출",
 			"retry": "다시 풀기",
 			"saveWrongAnswers": "오답 저장"
-		}
+		},
+		"adLabel": "광고"
 	},
 	"home": {
 		"hero": {

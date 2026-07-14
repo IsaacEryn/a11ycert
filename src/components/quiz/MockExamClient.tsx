@@ -10,6 +10,7 @@ import { useLearningStore, type LocalAttempt } from "@/lib/store/learningStore";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { syncAttemptToDB, syncWrongAnswerToDB } from "@/lib/store/learning-sync";
 import BilingualText from "@/components/BilingualText";
+import AdSlot from "@/components/ads/AdSlot";
 import { OPTION_KEYS, type OptionKey } from "./useQuizSession";
 
 interface Props {
@@ -303,6 +304,9 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 							</Link>
 						</div>
 					</div>
+
+					{/* 광고는 결과 화면에서만 — 시험 진행 중 금지 (PROJECT_SPEC §5) */}
+					<AdSlot slotKey="mockExamResult" />
 
 					{/* 문항 리뷰 */}
 					<section aria-labelledby="mock-review" style={{ marginTop: "var(--space-6)" }}>

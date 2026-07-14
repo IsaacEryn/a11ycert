@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import BilingualText from "@/components/BilingualText";
 import ReportButton from "@/components/report/ReportButton";
+import AdSlot from "@/components/ads/AdSlot";
 import type { OptionKey } from "./useQuizSession";
 
 interface QuizResultProps {
@@ -95,6 +96,9 @@ export default function QuizResult({
 					</Link>
 				)}
 			</div>
+
+			{/* 광고는 결과 화면에서만 — 풀이 중 금지 (PROJECT_SPEC §5) */}
+			<AdSlot slotKey="quizResult" />
 		</div>
 	);
 }

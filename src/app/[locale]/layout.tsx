@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/lib/auth/AuthProvider";
 import { PrefsProvider } from "@/lib/prefs/PrefsContext";
+import AdSenseScript from "@/components/ads/AdSenseScript";
 import "../globals.css";
 
 export async function generateMetadata({
@@ -80,6 +81,7 @@ export default async function LocaleLayout({
 							</main>
 
 							<Footer locale={locale} />
+							<AdSenseScript />
 						</PrefsProvider>
 					</AuthProvider>
 				</NextIntlClientProvider>

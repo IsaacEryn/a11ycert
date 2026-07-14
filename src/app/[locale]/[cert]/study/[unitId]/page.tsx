@@ -11,6 +11,7 @@ import StudySidebar from "@/components/study/StudySidebar";
 import CommentSection from "@/components/comments/CommentSection";
 import StudyNoteEditor from "@/components/notes/StudyNoteEditor";
 import ReportButton from "@/components/report/ReportButton";
+import AdSlot from "@/components/ads/AdSlot";
 
 export function generateStaticParams() {
 	const locales = ["ko", "en"];
@@ -123,6 +124,9 @@ export default async function CertUnitPage({
 
 					{/* Comments */}
 					<CommentSection pagePath={`/${cert}/study/${unitId}`} locale={locale} />
+
+					{/* 광고는 페이지 최하단만 — 콘텐츠 상단·본문 중간 금지 (PROJECT_SPEC §5) */}
+					<AdSlot slotKey="studyBottom" />
 				</div>
 			</div>
 		</div>
