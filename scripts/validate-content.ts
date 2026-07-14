@@ -47,6 +47,25 @@ function validateDomains(cert: string, domains: DomainGroup[]): QuizQuestion[] {
 			u.objectives.en.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} objectives.en[${i}] 빈 문자열`); });
 			u.content.ko.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} content.ko[${i}] 빈 문자열`); });
 			u.content.en.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} content.en[${i}] 빈 문자열`); });
+
+			// sections/content 상호배타 + 섹션 무결성
+			if (u.sections) {
+				if (u.sections.length === 0) errors.push(`${u.id}: sections 빈 배열`);
+				if (u.content.ko.length > 0 || u.content.en.length > 0) {
+					errors.push(`${u.id}: sections가 있으면 content는 빈 배열이어야 함 (이중 소스 방지)`);
+				}
+				u.sections.forEach((sec, si) => {
+					checkPair(`${u.id} sections[${si}] heading`, sec.heading);
+					if (sec.paragraphs.ko.length !== sec.paragraphs.en.length) {
+						errors.push(`${u.id} sections[${si}]: paragraphs ko(${sec.paragraphs.ko.length}) ≠ en(${sec.paragraphs.en.length})`);
+					}
+					if (sec.paragraphs.ko.length === 0) errors.push(`${u.id} sections[${si}]: paragraphs 비어 있음`);
+					sec.paragraphs.ko.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].ko[${i}] 빈 문자열`); });
+					sec.paragraphs.en.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].en[${i}] 빈 문자열`); });
+				});
+			} else if (u.available && u.content.ko.length === 0) {
+				errors.push(`${u.id}: 활성 단원인데 content와 sections가 모두 비어 있음`);
+			}
 			questions.push(...u.questions);
 		}
 	}
@@ -85,12 +104,24 @@ function validateMessages() {
 	for (const k of enKeys) if (!koKeys.has(k)) errors.push(`messages: ko.json에 '${k}' 누락`);
 }
 
+function unitParagraphCount(u: { content: { ko: string[] }; sections?: { paragraphs: { ko: string[] } }[] }): number {
+	if (u.sections) return u.sections.reduce((sum, s) => sum + s.paragraphs.ko.length, 0);
+	return u.content.ko.length;
+}
+
 function reportDistribution(cert: string, domains: DomainGroup[]) {
 	const byDomain: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
-	for (const d of domains) for (const u of d.units) byDomain[d.domain] += u.questions.length;
+	let paragraphs = 0;
+	let units = 0;
+	for (const d of domains)
+		for (const u of d.units) {
+			byDomain[d.domain] += u.questions.length;
+			paragraphs += unitParagraphCount(u);
+			units += 1;
+		}
 	const total = Object.values(byDomain).reduce((a, b) => a + b, 0);
 	console.log(
-		`  ${cert.toUpperCase()}: 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
+		`  ${cert.toUpperCase()}: ${units}단원 · 본문 ${paragraphs}문단 · 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
 	);
 }
 
@@ -103,6 +134,12 @@ for (const term of glossaryTerms) {
 	checkPair(`glossary ${term.id} term`, term.term);
 	checkPair(`glossary ${term.id} definition`, term.definition);
 	if (!term.certs?.length) errors.push(`glossary ${term.id}: certs 비어 있음`);
+	if (term.aliases) {
+		if (term.aliases.length === 0) errors.push(`glossary ${term.id}: aliases 빈 배열`);
+		term.aliases.forEach((a, i) => {
+			if (!a.trim()) errors.push(`glossary ${term.id}: aliases[${i}] 빈 문자열`);
+		});
+	}
 }
 const glossaryIds = new Set<string>();
 for (const term of glossaryTerms) {

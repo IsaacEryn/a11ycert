@@ -467,5 +467,22 @@
 			"deleteMismatch": "닉네임이 일치하지 않습니다.",
 			"deleteError": "탈퇴 처리에 실패했습니다: {message}"
 		}
+	},
+	"glossary": {
+		"title": "용어집",
+		"description": "접근성 핵심 용어를 한국어·영어로 확인하세요.",
+		"searchLabel": "용어 검색",
+		"searchPlaceholder": "용어 검색…",
+		"certFilterLabel": "자격증 필터",
+		"all": "전체",
+		"sortLabel": "정렬 기준",
+		"sortKo": "가나다",
+		"sortEn": "ABC",
+		"resultCount": "{count}개 용어가 검색되었습니다.",
+		"noResults": "검색 결과가 없습니다.",
+		"jumpIndexLabel": "글자로 이동",
+		"jumpTo": "{letter} 그룹으로 이동",
+		"copyLink": "{term} 링크 복사",
+		"copied": "링크가 복사되었습니다."
 	}
 }

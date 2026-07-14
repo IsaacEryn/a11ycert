@@ -2,6 +2,8 @@ import type { DomainGroup, StudyUnit, QuizQuestion } from "./types";
 import { cpaccDomains } from "./cpacc-units";
 import { wasDomains } from "./was-units";
 import { cpaccExtraQuestions, wasExtraQuestions } from "./questions/extra-questions";
+import { cpaccExtraUnits } from "./cpacc-extra-units";
+import { wasExtraUnits } from "./was-extra-units";
 
 export type Cert = "cpacc" | "was";
 
@@ -31,6 +33,16 @@ function withExtraQuestions(
 	}));
 }
 
+/** 신규 단원({cert}-extra-units.ts)을 해당 도메인에 병합 후 order 정렬 */
+function withExtraUnits(domains: DomainGroup[], extraUnits: StudyUnit[]): DomainGroup[] {
+	if (extraUnits.length === 0) return domains;
+	return domains.map((d) => {
+		const extras = extraUnits.filter((u) => u.domain === d.domain);
+		if (extras.length === 0) return d;
+		return { ...d, units: [...d.units, ...extras].sort((a, b) => a.order - b.order) };
+	});
+}
+
 function buildCertContent(domains: DomainGroup[]): CertContent {
 	const units = domains.flatMap((d) => d.units);
 	return {
@@ -42,8 +54,12 @@ function buildCertContent(domains: DomainGroup[]): CertContent {
 }
 
 const contentByCert: Record<Cert, CertContent> = {
-	cpacc: buildCertContent(withExtraQuestions(cpaccDomains, cpaccExtraQuestions)),
-	was: buildCertContent(withExtraQuestions(wasDomains, wasExtraQuestions)),
+	cpacc: buildCertContent(
+		withExtraQuestions(withExtraUnits(cpaccDomains, cpaccExtraUnits), cpaccExtraQuestions)
+	),
+	was: buildCertContent(
+		withExtraQuestions(withExtraUnits(wasDomains, wasExtraUnits), wasExtraQuestions)
+	),
 };
 
 /** cert별 콘텐츠(단원·도메인·문항) 접근 지점 — cpacc/was 분기를 한 곳으로 집약 */

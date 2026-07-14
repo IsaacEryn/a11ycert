@@ -467,5 +467,22 @@
 			"deleteMismatch": "Nickname does not match.",
 			"deleteError": "Failed to delete account: {message}"
 		}
+	},
+	"glossary": {
+		"title": "Glossary",
+		"description": "Key accessibility terms in Korean and English.",
+		"searchLabel": "Search glossary terms",
+		"searchPlaceholder": "Search terms…",
+		"certFilterLabel": "Certification filter",
+		"all": "All",
+		"sortLabel": "Sort by",
+		"sortKo": "가나다",
+		"sortEn": "ABC",
+		"resultCount": "{count, plural, one {# term found.} other {# terms found.}}",
+		"noResults": "No results found.",
+		"jumpIndexLabel": "Jump to letter",
+		"jumpTo": "Jump to {letter}",
+		"copyLink": "Copy link to {term}",
+		"copied": "Link copied."
 	}
 }

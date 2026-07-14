@@ -14,6 +14,12 @@ export interface QuizQuestion {
 	difficulty?: "easy" | "medium" | "hard";
 }
 
+/** 소제목 + 문단 묶음 — 긴 본문을 구조화 (ko/en 문단 배열 길이 일치 필수) */
+export interface UnitSection {
+	heading: { ko: string; en: string };
+	paragraphs: { ko: string[]; en: string[] };
+}
+
 export interface StudyUnit {
 	id: string;
 	exam: "cpacc" | "was";
@@ -24,6 +30,8 @@ export interface StudyUnit {
 	summary: { ko: string; en: string };
 	objectives: { ko: string[]; en: string[] };
 	content: { ko: string[]; en: string[] }; // paragraph arrays
+	/** sections가 있으면 content 대신 렌더 — 전환 단원은 content를 빈 배열로 (이중 소스 방지) */
+	sections?: UnitSection[];
 	questions: QuizQuestion[];
 }
 

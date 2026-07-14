@@ -73,13 +73,33 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
           </div>
         )}
 
-        {/* Content — 문단별 쌍 (ko/en 배열 길이는 validate-content가 일치 보장) */}
-        {unit.content.ko.map((para, i) => (
-          <div className="bilingual-pair" key={i}>
-            <p lang="ko">{para}</p>
-            <p lang="en">{unit.content.en[i] ?? ""}</p>
-          </div>
-        ))}
+        {/* Content — sections가 있으면 소제목+문단 쌍, 없으면 문단 쌍
+            (ko/en 배열 길이는 validate-content가 일치 보장) */}
+        {unit.sections
+          ? unit.sections.map((section, si) => (
+              <div key={si} style={{ display: "contents" }}>
+                <div className="bilingual-pair">
+                  <h2 className="bilingual-card__section-head" lang="ko">
+                    {section.heading.ko}
+                  </h2>
+                  <h2 className="bilingual-card__section-head bilingual-card__section-head--en" lang="en">
+                    {section.heading.en}
+                  </h2>
+                </div>
+                {section.paragraphs.ko.map((para, i) => (
+                  <div className="bilingual-pair" key={i}>
+                    <p lang="ko">{para}</p>
+                    <p lang="en">{section.paragraphs.en[i] ?? ""}</p>
+                  </div>
+                ))}
+              </div>
+            ))
+          : unit.content.ko.map((para, i) => (
+              <div className="bilingual-pair" key={i}>
+                <p lang="ko">{para}</p>
+                <p lang="en">{unit.content.en[i] ?? ""}</p>
+              </div>
+            ))}
       </div>
 
       <div className="bilingual-card__nav">

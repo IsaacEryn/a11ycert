@@ -30,22 +30,80 @@ const units: StudyUnit[] = [
 				"Describe the disability perspective adopted by the UN CRPD",
 			],
 		},
-		content: {
-			ko: [
-				"장애를 어떻게 정의하느냐에 따라 해결 접근 방식이 크게 달라집니다. CPACC 시험에서는 세 가지 장애 모델이 핵심적으로 다루어집니다.",
-				"의료 모델(Medical Model)은 장애를 개인의 신체적·정신적 결함으로 바라봅니다. 이 관점에서 해결책은 치료, 재활, 교정을 통해 개인을 '정상' 상태에 가깝게 만드는 것이며, 장벽 제거의 책임은 주로 개인에게 있습니다.",
-				"사회 모델(Social Model)은 CPACC 시험에서 가장 중요한 모델입니다. 이 모델은 장애가 개인의 손상(impairment) 자체에서 오는 것이 아니라, 접근 불가능한 환경과 사회적 장벽이 만들어내는 것이라고 주장합니다. 예를 들어 휠체어 사용자가 계단 때문에 건물에 들어갈 수 없다면, 문제는 신체가 아니라 계단이라는 설계 장벽입니다. 접근성 전문가는 사회 모델 관점에서 환경의 장벽을 제거하는 것을 목표로 합니다.",
-				"생체심리사회 모델(Biopsychosocial Model)은 생물학적, 심리적, 사회적 요인을 모두 통합합니다. WHO의 국제기능장애건강분류(ICF: International Classification of Functioning, Disability and Health)가 이 모델을 기반으로 합니다. ICF는 장애를 단순히 손상의 문제가 아니라 개인과 환경의 상호작용으로 봅니다.",
-				"유엔 장애인권리협약(CRPD: Convention on the Rights of Persons with Disabilities)은 사회 모델 관점을 채택하며, 장애인의 인권을 보장하기 위한 국제 협약입니다. 한국을 포함한 많은 국가가 이 협약을 비준했습니다.",
-			],
-			en: [
-				"How we define disability shapes our approach to solutions. CPACC focuses on three core models of disability.",
-				"The Medical Model views disability as a personal deficiency — a physical or mental impairment to be treated, rehabilitated, or corrected. The responsibility for overcoming barriers lies with the individual.",
-				"The Social Model is the most important model for the CPACC exam. It argues that disability arises not from impairment itself, but from inaccessible environments and societal barriers. If a wheelchair user cannot enter a building because of stairs, the problem is the stairs — not the person. Accessibility professionals aim to remove those barriers.",
-				"The Biopsychosocial Model integrates biological, psychological, and social factors. The WHO's International Classification of Functioning, Disability and Health (ICF) is based on this model, viewing disability as an interaction between an individual and their environment.",
-				"The UN Convention on the Rights of Persons with Disabilities (CRPD) adopts a Social Model perspective and is the key international treaty ensuring the human rights of people with disabilities. Many countries, including South Korea, have ratified it.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "관점이 해결책을 결정한다", en: "Perspective Shapes the Solution" },
+				paragraphs: {
+					ko: [
+						"장애를 어떻게 정의하느냐에 따라 문제의 위치와 해결 접근 방식이 크게 달라집니다. 장애를 개인의 결함으로 보면 해결책은 치료가 되고, 사회의 장벽으로 보면 해결책은 환경 개선이 됩니다. CPACC 시험은 여러 장애 모델을 구분하고 각 모델이 이끄는 해결 방식을 이해하는지를 확인합니다.",
+						"어떤 모델도 그 자체로 완전하지는 않습니다. 각 모델은 장애의 특정 측면을 조명하는 렌즈이며, 접근성 전문가는 상황에 따라 여러 모델의 강점과 한계를 함께 고려해야 합니다. 다만 접근성 실무의 기본 관점은 사회 모델입니다.",
+					],
+					en: [
+						"How we define disability determines where we locate the problem and how we approach solutions. If disability is a personal deficiency, the solution is treatment; if it is a societal barrier, the solution is changing the environment. The CPACC exam tests whether you can distinguish the models and the solutions each one leads to.",
+						"No single model is complete on its own. Each is a lens that illuminates certain aspects of disability, and accessibility professionals should weigh the strengths and limits of several models depending on context. That said, the default perspective of accessibility practice is the Social Model.",
+					],
+				},
+			},
+			{
+				heading: { ko: "의료 모델과 자선 모델", en: "The Medical and Charity Models" },
+				paragraphs: {
+					ko: [
+						"의료 모델(Medical Model)은 장애를 개인의 신체적·정신적 결함으로 바라봅니다. 이 관점에서 해결책은 치료, 재활, 교정을 통해 개인을 '정상' 상태에 가깝게 만드는 것이며, 장벽 제거의 책임은 주로 개인에게 있습니다. 의료적 개입 자체는 필요하고 유익할 수 있으나, 이 모델만으로는 환경의 책임을 놓치게 됩니다.",
+						"자선 모델(Charity Model)은 장애인을 동정과 도움이 필요한 비극적 존재로 바라봅니다. 선의에서 출발하지만 장애인을 수동적 수혜자로 위치시키고, 권리의 주체가 아닌 시혜의 대상으로 취급한다는 비판을 받습니다. 모금 캠페인에서 장애를 극적으로 묘사하는 방식이 대표적 사례입니다.",
+						"두 모델의 공통 한계는 문제를 개인 안에 둔다는 점입니다. 개인이 치료되거나 도움을 받기 전까지 사회는 바뀔 필요가 없다는 결론으로 이어지기 쉽습니다.",
+					],
+					en: [
+						"The Medical Model views disability as a personal physical or mental deficiency. The solution is to bring the individual closer to 'normal' through treatment, rehabilitation, or correction, and the responsibility for overcoming barriers rests with the individual. Medical intervention itself can be necessary and beneficial, but this model alone overlooks the environment's responsibility.",
+						"The Charity Model sees disabled people as tragic figures deserving pity and help. Though well-intentioned, it is criticized for positioning disabled people as passive recipients — objects of benevolence rather than holders of rights. Fundraising campaigns that dramatize disability are a classic example.",
+						"The shared limitation of both models is that they locate the problem inside the person. They easily lead to the conclusion that society need not change until the individual is cured or helped.",
+					],
+				},
+			},
+			{
+				heading: { ko: "사회 모델 — CPACC의 중심", en: "The Social Model — Central to CPACC" },
+				paragraphs: {
+					ko: [
+						"사회 모델(Social Model)은 CPACC 시험에서 가장 중요한 모델입니다. 이 모델은 장애(disability)가 개인의 손상(impairment) 자체에서 오는 것이 아니라, 접근 불가능한 환경과 사회적 장벽이 만들어내는 것이라고 주장합니다. 손상과 장애를 구분하는 것이 핵심입니다: 손상은 개인의 신체적·정신적 특성이고, 장애는 그 특성을 가진 사람이 사회에 참여하지 못하게 만드는 장벽의 결과입니다.",
+						"예를 들어 휠체어 사용자가 계단 때문에 건물에 들어갈 수 없다면, 문제는 신체가 아니라 계단이라는 설계 장벽입니다. 장벽은 물리적 환경(계단, 좁은 통로)뿐 아니라 태도(편견, 낮은 기대), 제도(차별적 정책), 정보·통신(대체 텍스트 없는 이미지, 자막 없는 영상)에도 존재합니다.",
+						"유엔 장애인권리협약(CRPD)은 사회 모델과 인권 접근을 채택한 국제 협약으로, 접근성을 시혜가 아닌 권리로 규정합니다. 한국을 포함한 190여 개국이 비준했으며, 합리적 편의제공 거부를 차별로 명시합니다. 접근성 전문가의 일은 사회 모델 관점에서 이러한 장벽을 찾아 제거하는 것입니다.",
+					],
+					en: [
+						"The Social Model is the most important model for the CPACC exam. It argues that disability arises not from impairment itself, but from inaccessible environments and societal barriers. The key is distinguishing impairment from disability: impairment is a characteristic of a person's body or mind; disability is the result of barriers that prevent a person with that characteristic from participating in society.",
+						"If a wheelchair user cannot enter a building because of stairs, the problem is the stairs — a design barrier — not the person. Barriers exist not only in the physical environment (stairs, narrow passages) but also in attitudes (prejudice, low expectations), institutions (discriminatory policies), and information and communication (images without alt text, videos without captions).",
+						"The UN Convention on the Rights of Persons with Disabilities (CRPD) is the international treaty that adopts the Social Model and a human-rights approach, framing accessibility as a right rather than charity. Ratified by some 190 countries including South Korea, it explicitly defines denial of reasonable accommodation as discrimination. The accessibility professional's job is to identify and remove these barriers from a Social Model perspective.",
+					],
+				},
+			},
+			{
+				heading: { ko: "생체심리사회 모델과 WHO ICF", en: "The Biopsychosocial Model and the WHO ICF" },
+				paragraphs: {
+					ko: [
+						"생체심리사회 모델(Biopsychosocial Model)은 의료 모델과 사회 모델을 통합하려는 시도로, 생물학적·심리적·사회적 요인이 함께 장애 경험을 형성한다고 봅니다. WHO의 국제기능장애건강분류(ICF: International Classification of Functioning, Disability and Health)가 이 모델을 기반으로 합니다.",
+						"ICF는 장애를 신체 기능·구조(body functions and structures), 활동(activities), 참여(participation)의 세 수준에서 파악하고, 여기에 환경적 요인과 개인적 요인이 상호작용한다고 설명합니다. 같은 손상이라도 환경에 따라 참여 제한의 정도가 달라진다는 점에서 사회 모델의 통찰을 수용하면서도, 건강 상태라는 의료적 측면을 함께 다룹니다.",
+					],
+					en: [
+						"The Biopsychosocial Model attempts to integrate the Medical and Social Models, holding that biological, psychological, and social factors together shape the experience of disability. The WHO's International Classification of Functioning, Disability and Health (ICF) is based on this model.",
+						"The ICF describes disability at three levels — body functions and structures, activities, and participation — interacting with environmental and personal factors. It embraces the Social Model's insight that the same impairment leads to different participation restrictions depending on the environment, while also addressing the medical dimension of health conditions.",
+					],
+				},
+			},
+			{
+				heading: { ko: "그 밖의 모델들", en: "Other Models to Know" },
+				paragraphs: {
+					ko: [
+						"경제 모델(Economic Model)은 장애를 노동 능력과 생산성의 관점에서 정의합니다. 복지 급여 자격 판정 등 정책에서 사용되지만, 사람의 가치를 경제적 기여로 축소한다는 비판이 있습니다.",
+						"기능적 해결 모델(Functional Solutions Model)은 장애가 야기하는 기능적 제한을 기술과 서비스로 해결하는 실용적 접근입니다. 보조기술 개발이 대표적이며, 접근성 실무와 친화적이지만 근본적인 사회 변화보다 개별 해결에 치우칠 수 있습니다.",
+						"사회 정체성/문화 소속 모델(Social Identity/Cultural Affiliation Model)은 장애를 자부심의 원천이자 문화적 정체성으로 봅니다. 수어를 제1언어로 쓰는 농(Deaf) 공동체가 대표적 예로, 자신들을 장애 집단이 아닌 언어적 소수자로 이해합니다. 시험에서는 각 모델의 이름, 관점, 장단점을 짝지을 수 있어야 합니다.",
+					],
+					en: [
+						"The Economic Model defines disability in terms of ability to work and productivity. It underpins policies such as benefit eligibility, but is criticized for reducing a person's worth to economic contribution.",
+						"The Functional Solutions Model is a pragmatic approach that addresses the functional limitations caused by disability through technology and services. Assistive technology development is the classic example. It aligns well with accessibility practice, but can favor individual fixes over deeper social change.",
+						"The Social Identity/Cultural Affiliation Model views disability as a source of pride and cultural identity. The Deaf community, which uses sign language as its primary language, is the prime example — understanding itself as a linguistic minority rather than a disability group. For the exam, be able to match each model's name, perspective, strengths, and weaknesses.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-1-1-q1",
@@ -162,22 +220,78 @@ const units: StudyUnit[] = [
 				"Understand design principles for users with color blindness",
 			],
 		},
-		content: {
-			ko: [
-				"시각 장애는 크게 전맹(blind), 저시력(low vision), 색각 이상(color blindness)으로 구분됩니다. 각 유형에 따라 적합한 보조기술이 다릅니다.",
-				"화면낭독기(Screen Reader)는 화면의 텍스트와 인터페이스 정보를 음성 또는 점자로 변환하는 소프트웨어입니다. 주요 제품: JAWS(Windows, 유료), NVDA(Windows, 무료 오픈소스), VoiceOver(macOS·iOS, 내장), TalkBack(Android, 내장), Narrator(Windows, 내장). 화면낭독기 사용자는 제목, 랜드마크, 링크 목록을 통해 페이지를 탐색합니다.",
-				"화면확대기(Screen Magnifier)는 화면을 확대하여 저시력 사용자가 콘텐츠를 볼 수 있게 합니다. ZoomText, MAGic이 대표적이며, Windows 돋보기, macOS 줌 기능도 있습니다. 확대율은 최대 20배 이상까지 지원됩니다.",
-				"점자 단말기(Braille Display)는 화면낭독기와 함께 사용됩니다. 전자적으로 점자 핀을 올리고 내려 텍스트를 점자로 실시간 표시하는 갱신형(refreshable) 방식입니다. 주로 전맹이거나 청각 장애도 함께 있는 사용자가 사용합니다.",
-				"색각 이상 사용자를 위한 설계 원칙: 색상만으로 정보를 전달하지 않아야 합니다. 예를 들어 '빨간색 필드는 오류'처럼 색상만 사용하면 안 되고, 아이콘이나 텍스트('오류')를 함께 제공해야 합니다. WCAG 기준에 따라 충분한 색상 대비도 확보해야 합니다.",
-			],
-			en: [
-				"Visual disabilities include blindness, low vision, and color blindness. Each type requires different assistive technologies.",
-				"Screen readers convert on-screen text and interface information into speech or Braille. Major products: JAWS (Windows, commercial), NVDA (Windows, free/open-source), VoiceOver (macOS/iOS, built-in), TalkBack (Android, built-in), Narrator (Windows, built-in). Screen reader users navigate by headings, landmarks, and link lists.",
-				"Screen magnifiers enlarge content for users with low vision. Products include ZoomText and MAGic, plus built-in tools like Windows Magnifier and macOS Zoom. Magnification can reach 20x or more.",
-				"Braille displays work alongside screen readers to render text as refreshable Braille output in real time using electrically raised pins. They are primarily used by people who are blind or DeafBlind.",
-				"Design principle for color blindness: never convey information through color alone. For example, don't rely solely on a red border to indicate an error — always pair color with text or icons ('Error'). Sufficient color contrast per WCAG is also required.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "시각 장애의 스펙트럼", en: "The Spectrum of Visual Disabilities" },
+				paragraphs: {
+					ko: [
+						"시각 장애는 크게 전맹(blindness), 저시력(low vision), 색각 이상(color blindness)으로 구분됩니다. WHO 추산으로 전 세계 약 22억 명이 어떤 형태로든 시각 손상을 갖고 있으며, 대부분은 전맹이 아니라 저시력입니다. 각 유형에 따라 사용하는 보조기술과 필요한 설계 배려가 다릅니다.",
+						"전맹은 시각 정보를 전혀 또는 거의 활용할 수 없는 상태로, 화면의 모든 정보가 음성이나 점자 등 비시각적 형태로 제공되어야 합니다. 저시력은 교정 후에도 남는 상당한 시력 저하로, 시야 결손(중심·주변), 흐림, 눈부심 민감 등 양상이 다양합니다. 색각 이상은 특정 색 구분이 어려운 상태로 남성의 약 8%에서 나타나며, 적록 색각 이상이 가장 흔합니다.",
+						"고령화도 중요한 맥락입니다. 황반변성, 녹내장, 백내장, 당뇨망막병증 등 주요 시각 질환은 연령과 함께 급증하므로, 시각 접근성은 노인 인구 전체와 직결됩니다.",
+					],
+					en: [
+						"Visual disabilities are broadly divided into blindness, low vision, and color blindness. The WHO estimates about 2.2 billion people worldwide have some form of vision impairment — most with low vision rather than blindness. Each type calls for different assistive technologies and design considerations.",
+						"Blindness means little or no usable vision: all on-screen information must be available in non-visual form such as speech or braille. Low vision is significant vision loss remaining after correction, with varied patterns — central or peripheral field loss, blur, glare sensitivity. Color blindness affects the ability to distinguish certain colors; it occurs in roughly 8% of men, with red-green deficiency most common.",
+						"Aging is a critical context. Major eye conditions — macular degeneration, glaucoma, cataracts, diabetic retinopathy — rise sharply with age, making visual accessibility directly relevant to the entire older population.",
+					],
+				},
+			},
+			{
+				heading: { ko: "화면낭독기와 탐색 방식", en: "Screen Readers and How Users Navigate" },
+				paragraphs: {
+					ko: [
+						"화면낭독기(Screen Reader)는 화면의 텍스트와 인터페이스 정보를 음성 또는 점자로 변환하는 소프트웨어입니다. 주요 제품: JAWS(Windows, 유료), NVDA(Windows, 무료 오픈소스), VoiceOver(macOS·iOS, 내장), TalkBack(Android, 내장), Narrator(Windows, 내장).",
+						"숙련된 화면낭독기 사용자는 페이지를 처음부터 끝까지 순서대로 듣지 않습니다. 제목(headings) 목록으로 구조를 훑고, 랜드마크로 영역을 건너뛰고, 링크 목록과 첫 글자 탐색으로 원하는 지점에 바로 이동합니다. 그래서 올바른 제목 계층과 랜드마크, 의미 있는 링크 텍스트가 화면낭독기 사용성의 핵심이 됩니다.",
+						"화면낭독기는 개발자가 작성한 마크업을 재료로 동작합니다. 대체 텍스트가 없는 이미지는 파일명이 읽히거나 건너뛰어지고, 라벨 없는 입력 필드는 용도를 알 수 없습니다. 보조기술의 품질은 콘텐츠의 품질을 넘어설 수 없다는 점이 CPACC의 중요한 관점입니다.",
+					],
+					en: [
+						"A screen reader converts on-screen text and interface information into speech or braille. Major products: JAWS (Windows, commercial), NVDA (Windows, free/open-source), VoiceOver (macOS/iOS, built-in), TalkBack (Android, built-in), and Narrator (Windows, built-in).",
+						"Experienced screen reader users do not listen to a page from top to bottom. They skim structure through the headings list, jump between regions via landmarks, and move directly to targets using link lists and first-letter navigation. Proper heading hierarchy, landmarks, and meaningful link text are therefore central to screen reader usability.",
+						"A screen reader can only work with the markup developers provide. Images without alt text are skipped or read as file names; unlabeled inputs give no clue to their purpose. A key CPACC insight: assistive technology can never be better than the content it is given.",
+					],
+				},
+			},
+			{
+				heading: { ko: "저시력 보조기술", en: "Assistive Technology for Low Vision" },
+				paragraphs: {
+					ko: [
+						"화면확대기(Screen Magnifier)는 화면을 확대하여 저시력 사용자가 콘텐츠를 볼 수 있게 합니다. ZoomText, MAGic이 대표적이며 Windows 돋보기, macOS 줌 기능도 널리 쓰입니다. 확대율은 20배 이상까지 지원되고, 확대와 음성 출력을 결합한 제품(예: ZoomText Fusion)도 있습니다.",
+						"확대만이 전부가 아닙니다. 저시력 사용자는 고대비 모드, 색 반전, 큰 글꼴 설정, 커서·포인터 강조 등 운영체제의 다양한 시각 설정을 조합해 사용합니다. 콘텐츠가 200%로 확대해도 깨지지 않고(WCAG 1.4.4), 사용자 설정을 덮어쓰지 않는 것이 중요한 설계 요구사항입니다.",
+					],
+					en: [
+						"Screen magnifiers enlarge on-screen content for users with low vision. ZoomText and MAGic are leading products, and built-in tools such as Windows Magnifier and macOS Zoom are widely used. Magnification can exceed 20x, and some products combine magnification with speech output (e.g., ZoomText Fusion).",
+						"Magnification is not the whole story. Low-vision users combine operating-system settings — high contrast modes, color inversion, large fonts, cursor and pointer enhancement. Content must remain usable when enlarged to 200% (WCAG 1.4.4) and must not override user settings — key design requirements.",
+					],
+				},
+			},
+			{
+				heading: { ko: "점자와 농맹", en: "Braille and DeafBlindness" },
+				paragraphs: {
+					ko: [
+						"점자 단말기(Refreshable Braille Display)는 화면낭독기와 함께 사용되며, 전자적으로 점자 핀을 올리고 내려 텍스트를 실시간 점자로 표시합니다. 음성보다 정밀한 읽기(철자, 코드, 서식)가 필요할 때 특히 유용합니다.",
+						"농맹(DeafBlind)은 시각과 청각 손상이 함께 있는 상태로, 음성 출력을 사용할 수 없기 때문에 점자 단말기가 사실상 유일한 디지털 접근 수단인 경우가 많습니다. 텍스트로 제공되지 않는 정보(자막 없는 오디오, 이미지 속 글자)는 농맹 사용자에게 완전히 차단된다는 점을 기억해야 합니다.",
+					],
+					en: [
+						"A refreshable braille display works alongside a screen reader, raising and lowering pins electronically to render text as braille in real time. It is especially valuable when precise reading matters — spelling, code, formatting.",
+						"DeafBlindness combines vision and hearing loss. Because speech output is unusable, a braille display is often the only practical means of digital access. Information not available as text — uncaptioned audio, text inside images — is completely blocked for DeafBlind users.",
+					],
+				},
+			},
+			{
+				heading: { ko: "색각 이상과 설계 원칙", en: "Color Blindness and Design Principles" },
+				paragraphs: {
+					ko: [
+						"색각 이상 사용자를 위한 첫 번째 원칙은 색상만으로 정보를 전달하지 않는 것입니다(WCAG 1.4.1, Level A). '빨간색 필드는 오류'처럼 색상 하나에 의존하면 안 되고, 아이콘·텍스트('오류')·패턴을 함께 제공해야 합니다. 차트에서는 색과 함께 모양이나 직접 라벨을 사용합니다.",
+						"두 번째 원칙은 충분한 명도 대비입니다. WCAG AA는 일반 텍스트 4.5:1, 큰 텍스트와 UI 컴포넌트 3:1 이상을 요구합니다. 대비는 색각 이상뿐 아니라 저시력, 밝은 야외 화면 등 상황적 제약에도 함께 도움이 됩니다 — 접근성 개선이 모두를 돕는 전형적인 예입니다.",
+					],
+					en: [
+						"The first principle for color blindness: never convey information through color alone (WCAG 1.4.1, Level A). Do not rely on 'red border means error' — pair color with icons, text ('Error'), or patterns. In charts, use shapes or direct labels alongside color.",
+						"The second principle is sufficient luminance contrast. WCAG AA requires at least 4.5:1 for normal text and 3:1 for large text and UI components. Contrast helps not only color-blind users but also low-vision users and everyone facing situational constraints like sunlight glare — a classic example of accessibility benefiting all.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-1-2-q1",
@@ -264,20 +378,69 @@ const units: StudyUnit[] = [
 				"List assistive technologies for users with speech disabilities",
 			],
 		},
-		content: {
-			ko: [
-				"청각 장애는 크게 농(Deaf)과 난청(Hard of Hearing)으로 구분됩니다. 농인은 일상적인 말소리를 들을 수 없는 수준의 청력 손실을 가진 사람으로, 주로 수어를 제1언어로 사용합니다. 난청은 부분적 청력 손실로, 보청기 등의 도움으로 음성을 일부 인식할 수 있습니다. 문화적으로 'Deaf(대문자 D)'는 농인 공동체와 문화적 정체성을 의미합니다.",
-				"자막(Captions)은 동영상 콘텐츠에서 대화뿐 아니라 효과음, 음악, 화자 식별 등의 비음성 정보도 텍스트로 제공합니다. 개방형 자막(Open Captions)은 항상 표시되고, 폐쇄형 자막(Closed Captions)은 사용자가 켜고 끌 수 있습니다. 자막번역(Subtitles)은 주로 다른 언어의 대화를 번역한 것으로, 효과음 등은 포함하지 않습니다. WCAG에서 미리 녹화된(prerecorded) 오디오/영상은 자막이 필수(Level A)입니다.",
-				"보청기(Hearing Aid)는 소리를 증폭하여 난청인이 더 잘 들을 수 있게 합니다. 인공와우(Cochlear Implant)는 외과적으로 이식하는 장치로, 소리를 전기 신호로 변환하여 청신경을 직접 자극합니다. 이 두 기술은 난청 정도와 원인에 따라 선택됩니다. 보조청취장치(ALD: Assistive Listening Device)는 텔레코일(T-coil)을 통해 공공장소에서 음성을 직접 보청기로 전달합니다.",
-				"언어 장애(Speech Disability)는 말을 생성하거나 명확하게 발음하는 데 어려움이 있는 상태입니다. 말더듬(Stuttering), 실어증(Aphasia), 구음 장애(Dysarthria) 등이 포함됩니다. 보완대체의사소통(AAC: Augmentative and Alternative Communication) 장치가 주요 보조기술로, 텍스트를 음성으로 변환하는 음성생성장치(SGD: Speech-Generating Device)나 그림 기호판 등을 포함합니다. 웹에서는 전화 전용 서비스 대신 텍스트 기반 대안(채팅, 이메일)을 함께 제공해야 합니다.",
-			],
-			en: [
-				"Hearing disabilities are broadly classified as Deaf or Hard of Hearing. Deaf individuals have profound hearing loss and typically use sign language as their primary language. Hard of Hearing refers to partial hearing loss; individuals may benefit from hearing aids. Culturally, 'Deaf' (capital D) refers to the Deaf community and cultural identity.",
-				"Captions provide text for dialogue and non-speech information (sound effects, music, speaker identification) in video content. Open captions are always visible; closed captions can be toggled by the user. Subtitles are translations of dialogue into another language and typically don't include non-speech sounds. WCAG requires captions for prerecorded audio/video at Level A.",
-				"Hearing aids amplify sound for people who are hard of hearing. Cochlear implants are surgically implanted devices that convert sound into electrical signals to stimulate the auditory nerve directly. Assistive Listening Devices (ALDs) use telecoils (T-coils) to deliver audio directly to hearing aids in public venues.",
-				"Speech disabilities affect the ability to produce or clearly articulate speech. They include stuttering, aphasia, and dysarthria. Augmentative and Alternative Communication (AAC) devices are key assistive technologies, including Speech-Generating Devices (SGDs) that convert text to speech and picture symbol boards. Websites should provide text-based alternatives (chat, email) alongside phone-only services.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "청각 장애의 유형과 농 문화", en: "Types of Hearing Loss and Deaf Culture" },
+				paragraphs: {
+					ko: [
+						"청각 장애는 크게 농(Deaf)과 난청(Hard of Hearing)으로 구분됩니다. 농인은 일상적인 말소리를 들을 수 없는 수준의 청력 손실을 가진 사람으로, 주로 수어를 제1언어로 사용합니다. 난청은 부분적 청력 손실로, 보청기 등의 도움으로 음성을 일부 인식할 수 있습니다.",
+						"문화적으로 'Deaf(대문자 D)'는 농인 공동체와 문화적 정체성을 의미합니다. 농 공동체는 스스로를 결핍된 집단이 아니라 고유한 언어(수어)와 문화를 가진 언어적 소수자로 이해합니다 — 1단원에서 배운 사회 정체성 모델의 대표 사례입니다.",
+						"수어는 국가별로 다른 독립된 언어라는 점이 자주 출제됩니다. 한국수어(KSL), 미국수어(ASL), 영국수어(BSL)는 서로 다른 문법과 어휘를 가지며, 음성 언어를 손으로 옮긴 것이 아닙니다. 수어를 제1언어로 쓰는 농인에게 문어(글)는 제2언어일 수 있어, 긴 텍스트가 반드시 쉬운 대안이 아닐 수 있습니다.",
+					],
+					en: [
+						"Hearing disabilities are broadly classified as Deaf and Hard of Hearing. Deaf individuals have profound hearing loss and typically use sign language as their primary language. Hard of Hearing refers to partial hearing loss; individuals may benefit from hearing aids.",
+						"Culturally, 'Deaf' with a capital D refers to the Deaf community and cultural identity. The Deaf community understands itself not as a deficient group but as a linguistic minority with its own language (sign language) and culture — the prime example of the Social Identity Model from Unit 1.",
+						"A frequently tested point: sign languages are independent languages that differ by country. Korean Sign Language (KSL), American Sign Language (ASL), and British Sign Language (BSL) have distinct grammar and vocabulary — they are not spoken language rendered by hand. For Deaf people whose first language is sign, written text can be a second language, so long text is not automatically an easy alternative.",
+					],
+				},
+			},
+			{
+				heading: { ko: "자막과 대본", en: "Captions and Transcripts" },
+				paragraphs: {
+					ko: [
+						"자막(Captions)은 동영상에서 대화뿐 아니라 효과음, 음악, 화자 식별 등 비음성 정보도 텍스트로 제공합니다. 개방형 자막(Open Captions)은 영상에 새겨져 항상 표시되고, 폐쇄형 자막(Closed Captions)은 사용자가 켜고 끌 수 있습니다. 자막번역(Subtitles)은 주로 다른 언어의 대화를 번역한 것으로 비음성 정보는 포함하지 않습니다.",
+						"WCAG 기준: 미리 녹화된(prerecorded) 오디오·영상의 자막은 Level A(1.2.2), 실시간(live) 자막은 Level AA(1.2.4)입니다. 대본(Transcript)은 오디오 전체의 텍스트 기록으로, 팟캐스트 같은 오디오 전용 콘텐츠의 대안이며 검색·훑어읽기가 가능하다는 장점이 있습니다.",
+						"자동 자막(ASR)의 품질 한계도 알아두어야 합니다. 자동 생성 자막은 고유명사·전문용어에서 오류가 잦아 그대로는 접근성 요구를 충족하기 어렵고, 사람의 검수·교정이 필요합니다.",
+					],
+					en: [
+						"Captions provide text for dialogue plus non-speech information — sound effects, music, speaker identification. Open captions are burned into the video and always visible; closed captions can be toggled. Subtitles translate dialogue into another language and do not include non-speech information.",
+						"WCAG levels: captions for prerecorded audio/video are Level A (1.2.2); captions for live content are Level AA (1.2.4). A transcript is a full text record of the audio — the alternative for audio-only content such as podcasts, with the added benefits of searchability and skimming.",
+						"Know the limits of automatic captions (ASR). Auto-generated captions frequently err on proper nouns and technical terms, so they rarely meet accessibility requirements as-is — human review and correction are needed.",
+					],
+				},
+			},
+			{
+				heading: { ko: "청각 보조기술", en: "Hearing Assistive Technologies" },
+				paragraphs: {
+					ko: [
+						"보청기(Hearing Aid)는 소리를 증폭하여 난청인이 더 잘 들을 수 있게 합니다. 인공와우(Cochlear Implant)는 외과적으로 이식하는 장치로, 소리를 전기 신호로 변환하여 청신경을 직접 자극합니다. 두 기술은 난청의 정도와 원인에 따라 선택됩니다.",
+						"보조청취장치(ALD: Assistive Listening Device)는 강연장·극장 같은 공공장소에서 음원을 잡음 없이 직접 전달합니다. 히어링 루프(유도 루프)와 텔레코일(T-coil), FM/적외선 시스템이 대표적이며, 건축 환경 접근성의 일부로 CPACC에 출제됩니다.",
+						"통신 중계 서비스(Relay Service)는 농·난청인이 전화를 사용할 수 있게 하는 서비스로, 문자 중계(TRS)와 영상 수어 중계(VRS)가 있습니다. 디지털 서비스에서는 전화 전용 고객 지원 대신 채팅·이메일 등 텍스트 채널을 함께 제공해야 합니다.",
+					],
+					en: [
+						"Hearing aids amplify sound for people who are hard of hearing. Cochlear implants are surgically implanted devices that convert sound into electrical signals and stimulate the auditory nerve directly. The choice depends on the degree and cause of hearing loss.",
+						"Assistive Listening Devices (ALDs) deliver audio directly and cleanly in public venues such as lecture halls and theaters. Key examples: hearing (induction) loops with telecoils (T-coils), and FM/infrared systems — tested in CPACC as part of built-environment accessibility.",
+						"Relay services enable Deaf and hard-of-hearing people to use the telephone: text relay (TRS) and video relay with sign language interpreters (VRS). Digital services should offer text channels (chat, email) alongside any phone-only support.",
+					],
+				},
+			},
+			{
+				heading: { ko: "언어 장애와 AAC", en: "Speech Disabilities and AAC" },
+				paragraphs: {
+					ko: [
+						"언어 장애(Speech Disability)는 말을 생성하거나 명확하게 발음하는 데 어려움이 있는 상태로, 말더듬(Stuttering), 실어증(Aphasia), 구음 장애(Dysarthria), 무발화(Mutism) 등이 포함됩니다. 실어증은 뇌 손상으로 언어의 이해·표현에 영향을 주며, 구음 장애는 발음 근육의 조절 문제입니다.",
+						"보완대체의사소통(AAC: Augmentative and Alternative Communication)이 핵심 보조기술입니다. 텍스트를 음성으로 변환하는 음성생성장치(SGD), 그림 기호판, 태블릿 기반 AAC 앱 등이 있습니다. 물리학자 스티븐 호킹이 사용한 장치가 SGD의 유명한 예입니다.",
+						"설계 시사점: 음성만 요구하는 인터페이스(음성 전용 인증, 전화 전용 접수)는 언어 장애 사용자를 배제합니다. WCAG의 관점에서도 음성 입력의 대안을 항상 제공해야 합니다.",
+					],
+					en: [
+						"Speech disabilities affect producing or clearly articulating speech — including stuttering, aphasia, dysarthria, and mutism. Aphasia, caused by brain injury, affects understanding and expressing language; dysarthria involves control of the speech muscles.",
+						"Augmentative and Alternative Communication (AAC) is the key assistive technology: Speech-Generating Devices (SGDs) that convert text to speech, picture symbol boards, and tablet-based AAC apps. The device used by physicist Stephen Hawking is a famous SGD example.",
+						"Design implication: interfaces that require speech (voice-only verification, phone-only intake) exclude users with speech disabilities. Always provide alternatives to voice input.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-1-3-q1",
@@ -384,20 +547,65 @@ const units: StudyUnit[] = [
 				"Understand why keyboard accessibility is essential",
 			],
 		},
-		content: {
-			ko: [
-				"운동·신체 장애는 손, 팔, 다리 등 신체 부위의 움직임에 제한이 있는 상태를 말합니다. 사지마비(Quadriplegia/Tetraplegia), 하반신 마비(Paraplegia), 근이영양증(Muscular Dystrophy), 관절염(Arthritis), 파킨슨병(Parkinson's Disease), 절단(Amputation), 반복사용 긴장 손상(RSI: Repetitive Strain Injury) 등이 포함됩니다.",
-				"스위치 접근(Switch Access)은 하나 또는 소수의 버튼(스위치)만으로 컴퓨터를 조작하는 방법입니다. 화면 위의 항목을 순차적으로 하이라이트하고(스캐닝), 원하는 항목에서 스위치를 누르는 방식입니다. 스위치는 손가락, 머리, 입, 눈 등 움직일 수 있는 어떤 신체 부위로든 작동 가능합니다. 시프&퍼프(Sip-and-Puff)는 호흡으로 작동하는 특수 스위치입니다.",
-				"음성 인식(Voice/Speech Recognition) 기술은 음성 명령으로 컴퓨터를 조작합니다. Dragon NaturallySpeaking이 대표적이며, 타이핑이나 마우스 사용이 어려운 사용자에게 유용합니다. 시선 추적(Eye Tracking/Gaze Tracking)은 눈의 움직임으로 화면 커서를 제어하는 기술로, 사지마비 사용자에게 도움됩니다. 머리 추적(Head Tracking)은 머리 움직임으로 마우스를 제어합니다.",
-				"키보드 접근성은 운동 장애 사용자에게 특히 중요합니다. 마우스를 사용할 수 없는 사용자는 키보드만으로 모든 기능에 접근할 수 있어야 합니다. WCAG 2.1.1(키보드)은 Level A 성공 기준으로, 모든 기능이 키보드로 작동 가능해야 합니다. 적응형 키보드(Adaptive Keyboard)는 큰 키, 키가드(키 사이 경계판), 한 손 키보드 등 다양한 형태로 제공됩니다.",
-			],
-			en: [
-				"Motor and physical disabilities affect movement of hands, arms, legs, or other body parts. They include quadriplegia/tetraplegia, paraplegia, muscular dystrophy, arthritis, Parkinson's disease, amputation, and repetitive strain injury (RSI).",
-				"Switch access allows computer operation using one or a few buttons (switches). Items on screen are sequentially highlighted (scanning), and the user activates the switch when the desired item is highlighted. Switches can be operated by any movable body part — finger, head, mouth, or eyes. A sip-and-puff switch is operated by breathing.",
-				"Voice/speech recognition technology enables computer control through voice commands. Dragon NaturallySpeaking is a leading product. Eye tracking/gaze tracking controls the cursor using eye movements — essential for people with quadriplegia. Head tracking uses head movements to control the mouse cursor.",
-				"Keyboard accessibility is crucial for users with motor disabilities. Users who cannot use a mouse must be able to access all functionality via keyboard alone. WCAG 2.1.1 (Keyboard) is a Level A success criterion requiring all functionality to be keyboard-operable. Adaptive keyboards come in various forms including large-key keyboards, keyguards (raised borders between keys), and one-handed keyboards.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "운동·신체 장애의 유형", en: "Types of Physical and Motor Disabilities" },
+				paragraphs: {
+					ko: [
+						"운동·신체 장애는 손, 팔, 다리 등 신체 부위의 움직임에 제한이 있는 상태를 말합니다. 사지마비(Quadriplegia/Tetraplegia), 하반신 마비(Paraplegia), 근이영양증(Muscular Dystrophy), 뇌성마비(Cerebral Palsy), 관절염(Arthritis), 파킨슨병(Parkinson's Disease), 절단(Amputation), 반복사용 긴장 손상(RSI) 등이 포함됩니다.",
+						"영향의 양상은 다양합니다. 어떤 사용자는 정밀한 조작(작은 버튼 클릭, 드래그)이 어렵고, 어떤 사용자는 떨림(진전) 때문에 의도치 않은 입력이 발생하며, 어떤 사용자는 지구력이 제한되어 긴 입력 과정에서 피로가 누적됩니다. 일시적 손상(팔 골절)과 상황적 제약(아기를 안은 한 손 조작)도 같은 설계 배려의 수혜자입니다.",
+						"디지털 인터페이스에서의 함의: 클릭 대상은 충분히 크게(WCAG 2.5.8 타깃 크기, 24×24px 이상), 시간 제한은 조절 가능하게, 드래그 같은 복잡한 제스처에는 단순한 대안을 제공해야 합니다(WCAG 2.5.7).",
+					],
+					en: [
+						"Physical and motor disabilities limit movement of the hands, arms, legs, or other body parts. They include quadriplegia/tetraplegia, paraplegia, muscular dystrophy, cerebral palsy, arthritis, Parkinson's disease, amputation, and repetitive strain injury (RSI).",
+						"The effects vary. Some users struggle with precise operations (clicking small buttons, dragging); some experience tremor causing unintended input; others have limited stamina, with fatigue building through long input sequences. Temporary impairments (a broken arm) and situational limitations (one hand holding a baby) benefit from the same design considerations.",
+						"Implications for digital interfaces: make click targets large enough (WCAG 2.5.8 Target Size, at least 24×24px), make time limits adjustable, and provide simple alternatives to complex gestures like dragging (WCAG 2.5.7).",
+					],
+				},
+			},
+			{
+				heading: { ko: "스위치 접근과 스캐닝", en: "Switch Access and Scanning" },
+				paragraphs: {
+					ko: [
+						"스위치 접근(Switch Access)은 하나 또는 소수의 버튼(스위치)만으로 컴퓨터를 조작하는 방법입니다. 화면 위의 항목을 순차적으로 하이라이트하고(스캐닝), 원하는 항목에서 스위치를 누르는 방식입니다. 스위치는 손가락, 머리, 무릎, 입, 눈 깜빡임 등 움직일 수 있는 어떤 신체 부위로든 작동할 수 있습니다.",
+						"시프&퍼프(Sip-and-Puff)는 호흡(들이쉬기/내쉬기)으로 작동하는 특수 스위치로, 사지마비 사용자가 널리 사용합니다. 스캐닝 기반 입력은 항목 수가 많을수록 시간이 오래 걸리므로, 논리적인 포커스 순서와 단순한 구조가 스위치 사용자의 효율을 크게 좌우합니다.",
+					],
+					en: [
+						"Switch access allows computer operation with one or a few buttons (switches). Items on screen are highlighted sequentially (scanning), and the user activates the switch when the desired item is highlighted. A switch can be operated by any movable body part — finger, head, knee, mouth, or an eye blink.",
+						"A sip-and-puff switch is operated by breathing (inhale/exhale) and is widely used by people with quadriplegia. Because scanning takes longer as the number of items grows, logical focus order and simple structure strongly determine efficiency for switch users.",
+					],
+				},
+			},
+			{
+				heading: { ko: "음성·시선·머리 제어", en: "Voice, Eye, and Head Control" },
+				paragraphs: {
+					ko: [
+						"음성 인식(Voice/Speech Recognition)은 음성 명령으로 컴퓨터를 조작합니다. Dragon NaturallySpeaking이 대표적이며 운영체제 내장 음성 제어(Windows Voice Access, macOS Voice Control)도 발전했습니다. 타이핑이나 마우스 사용이 어려운 사용자에게 유용합니다.",
+						"음성 제어 사용자는 화면에 보이는 라벨을 말해서 컨트롤을 실행합니다. 그래서 보이는 라벨과 접근 가능한 이름(accessible name)이 일치해야 한다는 WCAG 2.5.3(라벨 인 네임) 기준이 이 사용자층과 직결됩니다.",
+						"시선 추적(Eye Tracking)은 눈의 움직임으로 커서를 제어하고, 머리 추적(Head Tracking)은 머리 움직임으로 포인터를 움직입니다. 온스크린 키보드, 드웰 클릭(일정 시간 응시로 클릭)과 결합해 손을 전혀 쓰지 않는 조작을 가능하게 합니다.",
+					],
+					en: [
+						"Voice/speech recognition operates the computer through spoken commands. Dragon NaturallySpeaking is the leading product, and built-in OS voice control (Windows Voice Access, macOS Voice Control) has matured. It helps users who find typing or mouse use difficult.",
+						"Voice control users activate controls by speaking their visible labels. This is why WCAG 2.5.3 (Label in Name) — the visible label must be contained in the accessible name — directly serves this user group.",
+						"Eye tracking controls the cursor with eye movements; head tracking moves the pointer with head movements. Combined with on-screen keyboards and dwell clicking (fixating to click), they enable fully hands-free operation.",
+					],
+				},
+			},
+			{
+				heading: { ko: "키보드 접근성과 적응형 하드웨어", en: "Keyboard Accessibility and Adaptive Hardware" },
+				paragraphs: {
+					ko: [
+						"키보드 접근성은 운동 장애 사용자에게 특히 중요합니다. 많은 보조기술(스위치, 음성 제어, 대체 키보드)이 내부적으로 키보드 인터페이스를 거쳐 동작하기 때문에, 키보드로 안 되는 기능은 이들 기술로도 사용할 수 없습니다. WCAG 2.1.1(키보드)이 Level A인 이유입니다.",
+						"적응형 하드웨어: 큰 키 키보드, 키가드(키 사이 경계판 — 떨림이 있는 사용자의 오타 방지), 한 손 키보드, 트랙볼·조이스틱 마우스, 발 스위치 등이 있습니다. 운영체제의 고정 키(Sticky Keys), 필터 키, 마우스 키 같은 소프트웨어 설정도 함께 알아두세요.",
+					],
+					en: [
+						"Keyboard accessibility matters especially for motor disabilities. Many assistive technologies — switches, voice control, alternative keyboards — operate through the keyboard interface internally, so anything that can't be done with a keyboard can't be done with those technologies either. That is why WCAG 2.1.1 (Keyboard) is Level A.",
+						"Adaptive hardware includes large-key keyboards, keyguards (raised borders between keys that prevent stray presses for users with tremor), one-handed keyboards, trackballs and joystick mice, and foot switches. Also know OS software features: Sticky Keys, Filter Keys, and Mouse Keys.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-1-4-q1",
@@ -483,20 +691,65 @@ const units: StudyUnit[] = [
 				"Understand WCAG success criteria related to cognitive accessibility",
 			],
 		},
-		content: {
-			ko: [
-				"인지 장애는 학습, 기억, 주의력, 문제 해결 등 정신적 과정에 영향을 미치는 광범위한 상태를 포함합니다. 주요 유형: 지적 장애(Intellectual Disability), 학습 장애(Learning Disability) — 난독증(Dyslexia, 읽기), 난산증(Dyscalculia, 수학), 난필증(Dysgraphia, 쓰기), ADHD(주의력결핍 과잉행동장애), ASD(자폐 스펙트럼 장애).",
-				"신경 장애로는 발작 장애(Seizure Disorder/Epilepsy)가 중요합니다. 광과민성 발작(Photosensitive Epilepsy)은 특정 패턴의 깜빡이는 빛이나 빠른 시각 변화에 의해 발작이 유발될 수 있습니다. WCAG 2.3.1(세 번의 번쩍임 또는 임계값 이하)은 Level A 기준으로, 1초에 3번 이상 번쩍이는 콘텐츠를 금지합니다. 이 기준은 실제 생명과 직결됩니다.",
-				"인지 장애 사용자를 위한 설계 원칙: 간단하고 명확한 언어를 사용합니다. 일관된 내비게이션과 레이아웃을 유지합니다. 충분한 시간을 제공합니다(WCAG 2.2.1 시간 조절, Level A). 산만한 요소(자동 재생 동영상, 깜빡이는 광고)를 최소화합니다. 오류 예방과 복구를 쉽게 합니다. WCAG 2.2에서는 인지 접근성을 강화하는 여러 성공 기준이 추가되었습니다.",
-				"보조기술과 지원: 텍스트 음성 변환(TTS: Text-to-Speech)은 난독증 사용자가 텍스트를 음성으로 들을 수 있게 합니다. 워드 프레딕션(Word Prediction)은 입력 중 단어를 예측하여 타이핑 부담을 줄입니다. 마인드 맵 소프트웨어는 아이디어를 시각적으로 정리합니다. 캘린더/알림 앱은 기억 장애를 보완합니다. 읽기 용이한 글꼴(OpenDyslexic 등)은 난독증 사용자를 위해 설계되었습니다.",
-			],
-			en: [
-				"Cognitive disabilities encompass a broad range of conditions affecting learning, memory, attention, and problem-solving. Key types: Intellectual Disability, Learning Disabilities — Dyslexia (reading), Dyscalculia (math), Dysgraphia (writing), ADHD (Attention Deficit Hyperactivity Disorder), and ASD (Autism Spectrum Disorder).",
-				"Among neurological disabilities, seizure disorders (epilepsy) are critical. Photosensitive epilepsy can be triggered by specific patterns of flashing light or rapid visual changes. WCAG 2.3.1 (Three Flashes or Below Threshold) is a Level A criterion prohibiting content that flashes more than three times per second. This criterion is literally life-critical.",
-				"Design principles for cognitive accessibility: Use simple, clear language. Maintain consistent navigation and layout. Provide enough time (WCAG 2.2.1 Timing Adjustable, Level A). Minimize distractions (auto-playing videos, flashing ads). Make error prevention and recovery easy. WCAG 2.2 added several success criteria specifically strengthening cognitive accessibility.",
-				"Assistive technologies and supports: Text-to-Speech (TTS) helps people with dyslexia hear text read aloud. Word prediction reduces typing effort by suggesting words during input. Mind mapping software helps organize ideas visually. Calendar and reminder apps compensate for memory difficulties. Fonts designed for dyslexia (e.g., OpenDyslexic) improve readability.",
-			],
-		},
+		content: { ko: [], en: [] },
+		sections: [
+			{
+				heading: { ko: "인지 장애의 유형", en: "Types of Cognitive Disabilities" },
+				paragraphs: {
+					ko: [
+						"인지 장애는 학습, 기억, 주의력, 문제 해결 등 정신적 과정에 영향을 미치는 광범위한 상태를 포함하며, 전 세계에서 가장 흔한 장애 범주입니다. 주요 유형: 지적 장애(Intellectual Disability), 학습 장애 — 난독증(Dyslexia, 읽기), 난산증(Dyscalculia, 수학), 난필증(Dysgraphia, 쓰기) —, ADHD(주의력결핍 과잉행동장애), ASD(자폐 스펙트럼 장애).",
+						"기억에 영향을 주는 상태(치매, 뇌 손상 후유증)와 정신 건강 상태(불안, 우울)도 인지 부담과 상호작용합니다. 인지 장애는 겉으로 드러나지 않는 비가시적 장애인 경우가 많아, 설계 단계에서 잊히기 가장 쉬운 사용자층이기도 합니다.",
+						"학습 장애는 지능의 문제가 아니라 특정 정보 처리 경로의 차이라는 점이 중요합니다. 난독증이 있는 사람은 듣기로는 동일한 내용을 잘 이해할 수 있습니다 — 대안 형식(음성, 영상)이 강력한 이유입니다.",
+					],
+					en: [
+						"Cognitive disabilities encompass a broad range of conditions affecting learning, memory, attention, and problem-solving — the most common disability category worldwide. Key types: Intellectual Disability; learning disabilities — Dyslexia (reading), Dyscalculia (math), Dysgraphia (writing); ADHD; and Autism Spectrum Disorder (ASD).",
+						"Conditions affecting memory (dementia, effects of brain injury) and mental health conditions (anxiety, depression) also interact with cognitive load. Cognitive disabilities are often invisible, making these users the easiest to forget during design.",
+						"Learning disabilities are not a matter of intelligence but differences in specific information-processing pathways. A person with dyslexia may understand the same content perfectly well by listening — which is why alternative formats (audio, video) are powerful.",
+					],
+				},
+			},
+			{
+				heading: { ko: "발작 장애 — 생명과 직결되는 기준", en: "Seizure Disorders — A Life-Critical Criterion" },
+				paragraphs: {
+					ko: [
+						"신경 장애 중 발작 장애(Seizure Disorder/Epilepsy)는 접근성에서 특별한 위치를 갖습니다. 광과민성 발작(Photosensitive Epilepsy)은 특정 패턴의 깜빡이는 빛이나 빠른 시각 변화에 의해 유발될 수 있습니다.",
+						"WCAG 2.3.1(세 번의 번쩍임 또는 임계값 이하, Level A)은 1초에 3번을 초과해 번쩍이는 콘텐츠를 금지합니다. 대부분의 접근성 기준이 '사용 가능성'에 관한 것이라면 이 기준은 신체적 해를 예방하는 기준으로, 문자 그대로 생명과 직결됩니다. 애니메이션·비디오·광고 검수에서 반드시 확인해야 합니다.",
+					],
+					en: [
+						"Among neurological disabilities, seizure disorders (epilepsy) hold a special place in accessibility. Photosensitive epilepsy can be triggered by particular patterns of flashing light or rapid visual change.",
+						"WCAG 2.3.1 (Three Flashes or Below Threshold, Level A) prohibits content that flashes more than three times per second. While most accessibility criteria concern usability, this one prevents physical harm — it is literally life-critical, and must be checked when reviewing animation, video, and ads.",
+					],
+				},
+			},
+			{
+				heading: { ko: "인지 접근성 설계 원칙", en: "Design Principles for Cognitive Accessibility" },
+				paragraphs: {
+					ko: [
+						"핵심 원칙: 간단하고 명확한 언어를 사용하고, 일관된 내비게이션과 레이아웃을 유지하며, 충분한 시간을 제공하고(WCAG 2.2.1 시간 조절, Level A), 산만한 요소(자동 재생 동영상, 움직이는 광고)를 최소화하고, 오류 예방과 복구를 쉽게 만듭니다.",
+						"WCAG 2.2는 인지 접근성을 강화하는 기준을 추가했습니다: 3.3.8 접근 가능한 인증(퍼즐·암기 없이 로그인), 3.2.6 일관된 도움(도움 수단의 일관된 위치), 3.3.7 중복 입력(같은 정보 재입력 방지). 인지 과부하를 줄이는 방향성이 공통점입니다.",
+						"W3C의 COGA(인지 접근성 태스크포스)는 'Making Content Usable' 가이드를 발행해 WCAG 기준 너머의 인지 접근성 지침을 제공합니다. 쉬운 언어(plain language), 명확한 구조, 사용자 통제가 핵심 주제입니다.",
+					],
+					en: [
+						"Core principles: use simple, clear language; keep navigation and layout consistent; provide enough time (WCAG 2.2.1 Timing Adjustable, Level A); minimize distractions (auto-playing video, animated ads); and make error prevention and recovery easy.",
+						"WCAG 2.2 added criteria that strengthen cognitive accessibility: 3.3.8 Accessible Authentication (login without puzzles or memorization), 3.2.6 Consistent Help (help found in a consistent place), 3.3.7 Redundant Entry (no re-entering the same information). Their common thread is reducing cognitive load.",
+						"The W3C's COGA (Cognitive Accessibility) Task Force publishes 'Making Content Usable,' guidance that goes beyond WCAG criteria — plain language, clear structure, and user control are its central themes.",
+					],
+				},
+			},
+			{
+				heading: { ko: "보조기술과 지원 도구", en: "Assistive Technologies and Supports" },
+				paragraphs: {
+					ko: [
+						"텍스트 음성 변환(TTS)은 난독증 사용자가 텍스트를 음성으로 들을 수 있게 합니다. 워드 프레딕션은 입력 중 단어를 예측해 타이핑과 철자 부담을 줄입니다. 마인드 맵 소프트웨어는 아이디어를 시각적으로 정리하고, 캘린더·알림 앱은 기억을 보완합니다.",
+						"읽기 지원 도구로는 난독증용 글꼴(OpenDyslexic 등), 줄 포커스·리더 모드, 텍스트 간격 조정이 있습니다. 다만 인지 접근성의 대부분은 특수 기술보다 콘텐츠 자체의 명료함 — 짧은 문장, 명확한 제목, 예측 가능한 상호작용 — 에서 나온다는 점이 CPACC의 관점입니다.",
+					],
+					en: [
+						"Text-to-Speech (TTS) lets people with dyslexia hear text read aloud. Word prediction reduces typing and spelling effort by suggesting words during input. Mind-mapping software organizes ideas visually; calendar and reminder apps support memory.",
+						"Reading supports include dyslexia-friendly fonts (e.g., OpenDyslexic), line focus and reader modes, and text spacing adjustments. Still, the CPACC perspective is that most cognitive accessibility comes not from special technology but from clarity of the content itself — short sentences, clear headings, predictable interactions.",
+					],
+				},
+			},
+		],
 		questions: [
 			{
 				id: "cpacc-1-5-q1",

@@ -1048,7 +1048,8 @@ button { font-family: inherit; cursor: pointer; }
 .bilingual-card__col-head { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); }
 .bilingual-card__col-head .lang-pill { background: var(--accent-soft); color: var(--accent-soft-fg); padding: 1px 6px; border-radius: 4px; font-size: 10px; }
 .bilingual-card__label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); margin-bottom: var(--space-2); }
-.term { display: inline; background: var(--highlight-bg); color: var(--highlight-fg); padding: 1px 4px; border-radius: 3px; font-weight: 600; cursor: help; border-bottom: 1px dashed currentColor; }
+.bilingual-card__section-head { font-size: var(--fs-md); font-weight: 700; letter-spacing: -0.01em; padding-top: var(--space-3); border-top: 1px solid var(--divider); margin-bottom: var(--space-2); }
+.bilingual-card__section-head--en { color: var(--fg-muted); font-weight: 600; font-size: var(--fs-sm); font-style: italic; }
 .bilingual-card__nav { display: flex; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-5); margin-top: var(--space-6); border-top: 1px solid var(--divider); align-items: center; }
 .bilingual-card__nav-help { font-size: var(--fs-xs); color: var(--fg-subtle); display: flex; gap: var(--space-3); align-items: center; }
 
@@ -1157,8 +1158,28 @@ button { font-family: inherit; cursor: pointer; }
 .glossary-row__term { font-weight: 700; font-size: var(--fs-base); }
 .glossary-row__term-en { font-size: var(--fs-xs); color: var(--fg-subtle); margin-top: 2px; font-style: italic; }
 .glossary-row__def { color: var(--fg-muted); font-size: var(--fs-sm); line-height: 1.6; }
-.glossary-row__cert { display: flex; gap: 4px; flex-wrap: wrap; }
+.glossary-row__cert { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
 .glossary-row__cert .tag { font-size: 10px; padding: 2px 8px; }
+
+/* 검색어 하이라이트 */
+.glossary-list mark { background: var(--highlight-bg, rgba(37, 99, 235, 0.25)); color: inherit; border-radius: 3px; padding: 0 1px; }
+
+/* 용어 딥링크 진입 시 일시 강조 */
+.glossary-row--flash { background: var(--accent-soft); transition: background 0.6s ease; }
+@media (prefers-reduced-motion: reduce) {
+	.glossary-row--flash { transition: none; }
+}
+
+/* 링크 복사 버튼 */
+.glossary-row__copy { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: var(--radius); border: 1px solid var(--border); background: none; color: var(--fg-subtle); cursor: pointer; }
+.glossary-row__copy:hover { color: var(--accent); border-color: var(--accent); }
+
+/* 글자 점프 인덱스 */
+.glossary-jump { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 2px; padding: var(--space-2) 0; margin-top: var(--space-3); background: var(--bg); border-bottom: 1px solid var(--divider); }
+.glossary-jump button { min-width: 28px; height: 28px; padding: 0 4px; border: none; background: none; border-radius: var(--radius); font-size: var(--fs-xs); font-weight: 600; color: var(--accent); cursor: pointer; }
+.glossary-jump button:hover:not(:disabled) { background: var(--accent-soft); }
+.glossary-jump button:disabled { color: var(--fg-subtle); opacity: 0.4; cursor: default; }
+.glossary-letter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ============================================================
    Responsive

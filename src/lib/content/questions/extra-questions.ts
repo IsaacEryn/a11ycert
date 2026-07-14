@@ -8,6 +8,270 @@ import type { QuizQuestion } from "../types";
  */
 
 export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
+	// ── Domain 1: 장애, 도전, 보조기술 ───────────────────────────────────────
+	"cpacc-1-1": [
+		{
+			id: "cpacc-1-1-x1",
+			question: {
+				ko: "자선 모델(Charity Model)에 대한 비판으로 가장 적절한 것은?",
+				en: "What is the most appropriate criticism of the Charity Model?",
+			},
+			options: {
+				a: { ko: "장애인을 권리의 주체가 아닌 시혜의 대상으로 위치시킨다", en: "It positions disabled people as objects of benevolence rather than holders of rights" },
+				b: { ko: "환경의 장벽을 지나치게 강조한다", en: "It overemphasizes environmental barriers" },
+				c: { ko: "의료적 치료를 거부한다", en: "It rejects medical treatment" },
+				d: { ko: "장애를 문화적 정체성으로 본다", en: "It views disability as a cultural identity" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "자선 모델은 선의에서 출발하지만 장애인을 동정과 도움이 필요한 수동적 수혜자로 취급합니다. 권리 기반 접근(CRPD)과 대비되는 지점입니다.",
+				en: "Though well-intentioned, the Charity Model treats disabled people as passive recipients of pity and help — in contrast with the rights-based approach of the CRPD.",
+			},
+		},
+		{
+			id: "cpacc-1-1-x2",
+			question: {
+				ko: "수어를 제1언어로 사용하는 농(Deaf) 공동체가 스스로를 언어적 소수자로 이해하는 것은 어떤 장애 모델의 예인가?",
+				en: "The Deaf community understanding itself as a linguistic minority exemplifies which model of disability?",
+			},
+			options: {
+				a: { ko: "경제 모델", en: "Economic Model" },
+				b: { ko: "사회 정체성/문화 소속 모델", en: "Social Identity / Cultural Affiliation Model" },
+				c: { ko: "의료 모델", en: "Medical Model" },
+				d: { ko: "기능적 해결 모델", en: "Functional Solutions Model" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "사회 정체성/문화 소속 모델은 장애를 자부심의 원천이자 문화적 정체성으로 봅니다. 고유한 언어(수어)와 문화를 가진 농 공동체가 대표적 사례입니다.",
+				en: "The Social Identity/Cultural Affiliation Model views disability as a source of pride and cultural identity. The Deaf community, with its own language and culture, is the prime example.",
+			},
+		},
+		{
+			id: "cpacc-1-1-x3",
+			question: {
+				ko: "사회 모델에서 '손상(impairment)'과 '장애(disability)'의 구분으로 옳은 것은?",
+				en: "In the Social Model, what is the correct distinction between impairment and disability?",
+			},
+			options: {
+				a: { ko: "손상은 사회적 장벽, 장애는 개인의 특성이다", en: "Impairment is the societal barrier; disability is the personal characteristic" },
+				b: { ko: "두 용어는 같은 의미다", en: "The two terms mean the same thing" },
+				c: { ko: "손상은 개인의 신체적·정신적 특성이고, 장애는 장벽이 만들어내는 참여 제한이다", en: "Impairment is a characteristic of a person's body or mind; disability is the participation restriction created by barriers" },
+				d: { ko: "손상은 치료 가능하고 장애는 치료 불가능하다", en: "Impairment is treatable; disability is not" },
+			},
+			answer: "c",
+			explanation: {
+				ko: "사회 모델의 핵심 구분입니다. 손상은 개인의 특성일 뿐이며, 장애는 그 특성을 가진 사람의 참여를 막는 사회적·환경적 장벽의 결과입니다.",
+				en: "This is the Social Model's core distinction: impairment is merely a personal characteristic, while disability results from social and environmental barriers that block participation.",
+			},
+		},
+	],
+	"cpacc-1-2": [
+		{
+			id: "cpacc-1-2-x1",
+			question: {
+				ko: "화면낭독기 사용자의 일반적인 페이지 탐색 방식으로 옳은 것은?",
+				en: "How do screen reader users typically navigate a page?",
+			},
+			options: {
+				a: { ko: "항상 페이지를 처음부터 끝까지 순서대로 듣는다", en: "They always listen to the page from top to bottom" },
+				b: { ko: "제목 목록·랜드마크·링크 목록으로 원하는 지점에 바로 이동한다", en: "They jump directly to targets using headings lists, landmarks, and link lists" },
+				c: { ko: "마우스로 화면을 훑는다", en: "They scan the screen with a mouse" },
+				d: { ko: "이미지 위주로 탐색한다", en: "They navigate primarily by images" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "숙련된 화면낭독기 사용자는 제목·랜드마크·링크 목록과 첫 글자 탐색으로 구조를 훑고 건너뜁니다. 그래서 올바른 제목 계층과 의미 있는 링크 텍스트가 핵심입니다.",
+				en: "Experienced screen reader users skim and jump via headings, landmarks, link lists, and first-letter navigation — which is why proper heading hierarchy and meaningful link text are essential.",
+			},
+		},
+		{
+			id: "cpacc-1-2-x2",
+			question: {
+				ko: "농맹(DeafBlind) 사용자의 디지털 접근에서 사실상 유일한 출력 수단은?",
+				en: "For DeafBlind users, what is effectively the only digital output method?",
+			},
+			options: {
+				a: { ko: "음성 출력", en: "Speech output" },
+				b: { ko: "화면 확대", en: "Screen magnification" },
+				c: { ko: "갱신형 점자 단말기", en: "A refreshable braille display" },
+				d: { ko: "자막", en: "Captions" },
+			},
+			answer: "c",
+			explanation: {
+				ko: "농맹 사용자는 시각과 청각을 모두 사용할 수 없어 음성 출력이 무용합니다. 화면낭독기와 연결된 갱신형 점자 단말기가 사실상 유일한 접근 수단이며, 텍스트로 제공되지 않는 정보는 완전히 차단됩니다.",
+				en: "DeafBlind users can use neither vision nor hearing, so speech output is unusable. A refreshable braille display driven by a screen reader is effectively the only access method — information not available as text is completely blocked.",
+			},
+		},
+		{
+			id: "cpacc-1-2-x3",
+			question: {
+				ko: "저시력 사용자를 위한 설계 요구사항으로 옳은 것은?",
+				en: "Which is a correct design requirement for low-vision users?",
+			},
+			options: {
+				a: { ko: "200% 확대 시에도 콘텐츠와 기능이 유지되어야 한다", en: "Content and functionality must remain usable at 200% zoom" },
+				b: { ko: "확대 기능을 차단해 레이아웃을 보호한다", en: "Block zooming to protect the layout" },
+				c: { ko: "고대비 모드에서는 콘텐츠를 숨긴다", en: "Hide content in high-contrast modes" },
+				d: { ko: "저시력 사용자는 항상 화면낭독기를 쓰므로 시각 설계는 무관하다", en: "Low-vision users always use screen readers, so visual design is irrelevant" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "WCAG 1.4.4(텍스트 크기 조정)는 200% 확대 시에도 콘텐츠와 기능이 손실되지 않을 것을 요구합니다. 저시력 사용자는 확대·고대비·큰 글꼴 등 시각 설정을 조합해 사용하므로 이를 차단하면 안 됩니다.",
+				en: "WCAG 1.4.4 (Resize Text) requires content and functionality to survive 200% zoom. Low-vision users combine magnification, high contrast, and large fonts — never block these settings.",
+			},
+		},
+	],
+	"cpacc-1-3": [
+		{
+			id: "cpacc-1-3-x1",
+			question: {
+				ko: "수어에 대한 설명으로 옳은 것은?",
+				en: "Which statement about sign languages is correct?",
+			},
+			options: {
+				a: { ko: "전 세계 수어는 하나로 통일되어 있다", en: "There is one universal sign language worldwide" },
+				b: { ko: "수어는 음성 언어를 손동작으로 그대로 옮긴 것이다", en: "Sign language is spoken language rendered by hand" },
+				c: { ko: "수어는 국가별로 다른 고유한 문법과 어휘를 가진 독립 언어다", en: "Sign languages are independent languages with distinct grammar and vocabulary that differ by country" },
+				d: { ko: "수어 사용자는 모두 문어(글)를 완벽하게 이해한다", en: "All sign language users understand written text perfectly" },
+			},
+			answer: "c",
+			explanation: {
+				ko: "한국수어(KSL), 미국수어(ASL), 영국수어(BSL)는 서로 다른 독립 언어입니다. 수어가 제1언어인 농인에게 문어는 제2언어일 수 있어, 긴 텍스트가 반드시 쉬운 대안은 아닙니다.",
+				en: "KSL, ASL, and BSL are distinct, independent languages. For Deaf people whose first language is sign, written text can be a second language — so long text is not automatically an easy alternative.",
+			},
+		},
+		{
+			id: "cpacc-1-3-x2",
+			question: {
+				ko: "대본(Transcript)에 대한 설명으로 가장 적절한 것은?",
+				en: "Which statement best describes a transcript?",
+			},
+			options: {
+				a: { ko: "영상에 새겨져 항상 표시되는 자막이다", en: "Captions burned into a video, always visible" },
+				b: { ko: "오디오 전체의 텍스트 기록으로, 오디오 전용 콘텐츠의 대안이며 검색이 가능하다", en: "A full text record of audio — the alternative for audio-only content, with the benefit of searchability" },
+				c: { ko: "다른 언어로 번역된 대화 자막이다", en: "Dialogue subtitles translated into another language" },
+				d: { ko: "수어 통역 영상이다", en: "A sign language interpretation video" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "대본은 오디오 콘텐츠 전체의 텍스트 기록입니다. 팟캐스트 같은 오디오 전용 콘텐츠의 접근성 대안이며, 검색과 훑어읽기가 가능하다는 부가 이점이 있습니다.",
+				en: "A transcript is a complete text record of audio content — the accessibility alternative for audio-only content like podcasts, with added benefits of search and skimming.",
+			},
+		},
+		{
+			id: "cpacc-1-3-x3",
+			question: {
+				ko: "히어링 루프(유도 루프)와 텔레코일(T-coil)의 용도는?",
+				en: "What is the purpose of hearing (induction) loops and telecoils (T-coils)?",
+			},
+			options: {
+				a: { ko: "공공장소에서 음원을 잡음 없이 보청기로 직접 전달한다", en: "Delivering audio directly and cleanly to hearing aids in public venues" },
+				b: { ko: "수어를 텍스트로 번역한다", en: "Translating sign language into text" },
+				c: { ko: "발작을 예방한다", en: "Preventing seizures" },
+				d: { ko: "화면의 텍스트를 음성으로 변환한다", en: "Converting on-screen text into speech" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "히어링 루프는 강연장·극장·창구 등에서 음원을 전자기 신호로 송출하고, 보청기의 텔레코일이 이를 수신해 주변 소음 없이 깨끗한 소리를 전달합니다. 보조청취장치(ALD)의 대표 사례입니다.",
+				en: "Hearing loops transmit audio as an electromagnetic signal in venues like lecture halls and theaters; the hearing aid's telecoil receives it, delivering clean sound without ambient noise. A classic Assistive Listening Device (ALD).",
+			},
+		},
+	],
+	"cpacc-1-4": [
+		{
+			id: "cpacc-1-4-x1",
+			question: {
+				ko: "음성 제어 사용자를 위해 '보이는 라벨'과 '접근 가능한 이름'이 일치해야 한다는 WCAG 기준은?",
+				en: "Which WCAG criterion requires the visible label to match the accessible name, serving voice control users?",
+			},
+			options: {
+				a: { ko: "2.5.3 라벨 인 네임 (Label in Name)", en: "2.5.3 Label in Name" },
+				b: { ko: "2.1.1 키보드", en: "2.1.1 Keyboard" },
+				c: { ko: "1.4.1 색상 사용", en: "1.4.1 Use of Color" },
+				d: { ko: "2.3.1 세 번의 번쩍임", en: "2.3.1 Three Flashes" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "음성 제어 사용자는 화면에 보이는 라벨을 말해 컨트롤을 실행합니다. 보이는 라벨이 접근 가능한 이름에 포함되지 않으면 '저장 버튼 클릭'이라고 말해도 실행되지 않습니다 — WCAG 2.5.3의 존재 이유입니다.",
+				en: "Voice control users activate controls by speaking their visible labels. If the visible label isn't contained in the accessible name, saying 'click Save' fails — which is exactly why WCAG 2.5.3 exists.",
+			},
+		},
+		{
+			id: "cpacc-1-4-x2",
+			question: {
+				ko: "많은 보조기술이 키보드 인터페이스를 거쳐 동작한다는 사실이 시사하는 것은?",
+				en: "What does it imply that many assistive technologies operate through the keyboard interface?",
+			},
+			options: {
+				a: { ko: "마우스 지원만 잘하면 충분하다", en: "Good mouse support is sufficient" },
+				b: { ko: "키보드로 안 되는 기능은 스위치·음성 제어 등으로도 사용할 수 없다", en: "Anything not keyboard-operable is also unusable via switches, voice control, and similar technologies" },
+				c: { ko: "터치스크린이 항상 대안이 된다", en: "Touchscreens are always an alternative" },
+				d: { ko: "보조기술은 키보드를 대체한다", en: "Assistive technologies replace the keyboard" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "스위치, 음성 제어, 대체 키보드 등 다수의 보조기술이 내부적으로 키보드 인터페이스를 사용합니다. 키보드 접근성(WCAG 2.1.1, Level A)이 무너지면 이 모든 기술이 함께 무력화됩니다.",
+				en: "Switches, voice control, and alternative keyboards internally use the keyboard interface. If keyboard accessibility (WCAG 2.1.1, Level A) fails, all of these technologies fail with it.",
+			},
+		},
+		{
+			id: "cpacc-1-4-x3",
+			question: {
+				ko: "키가드(Keyguard)의 용도로 옳은 것은?",
+				en: "What is the purpose of a keyguard?",
+			},
+			options: {
+				a: { ko: "키보드를 물리적으로 잠가 입력을 차단한다", en: "Physically locking the keyboard to block input" },
+				b: { ko: "떨림이 있는 사용자가 의도한 키만 누르도록 키 사이에 경계판을 제공한다", en: "Providing raised borders between keys so users with tremor press only the intended key" },
+				c: { ko: "키 입력을 음성으로 읽어준다", en: "Reading keystrokes aloud" },
+				d: { ko: "키보드를 확대해 보여준다", en: "Magnifying the keyboard on screen" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "키가드는 키 사이에 경계판(구멍 뚫린 판)을 씌워, 떨림이나 정밀 조작 어려움이 있는 사용자가 인접 키를 잘못 누르는 것을 방지하는 적응형 하드웨어입니다.",
+				en: "A keyguard is an overlay with holes that creates raised borders between keys, preventing users with tremor or limited precision from hitting adjacent keys accidentally.",
+			},
+		},
+	],
+	"cpacc-1-5": [
+		{
+			id: "cpacc-1-5-x1",
+			question: {
+				ko: "WCAG 2.2의 3.3.8 '접근 가능한 인증'이 해결하려는 문제는?",
+				en: "What problem does WCAG 2.2's 3.3.8 'Accessible Authentication' address?",
+			},
+			options: {
+				a: { ko: "비밀번호가 너무 짧은 문제", en: "Passwords being too short" },
+				b: { ko: "퍼즐 풀기·암기 등 인지 기능 테스트에 의존하는 로그인 절차", en: "Login flows that depend on cognitive function tests such as puzzles or memorization" },
+				c: { ko: "이중 인증의 보안 취약점", en: "Security weaknesses in two-factor authentication" },
+				d: { ko: "로그인 화면의 색상 대비", en: "Color contrast on login screens" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "3.3.8은 인증 과정에서 퍼즐 풀기, 문자 옮겨 적기, 암기 같은 인지 기능 테스트를 요구하지 않도록 합니다(붙여넣기 허용, 비밀번호 관리자 지원 등 대안 필요). 인지 장애 사용자의 로그인 장벽을 낮추는 WCAG 2.2 신규 기준입니다.",
+				en: "3.3.8 requires that authentication not depend on cognitive function tests — solving puzzles, transcribing characters, memorizing — with alternatives like allowing paste and password managers. A new WCAG 2.2 criterion lowering login barriers for cognitive disabilities.",
+			},
+		},
+		{
+			id: "cpacc-1-5-x2",
+			question: {
+				ko: "인지 접근성에 대한 CPACC의 관점으로 가장 적절한 것은?",
+				en: "Which best captures the CPACC perspective on cognitive accessibility?",
+			},
+			options: {
+				a: { ko: "특수 보조기술 도입이 대부분의 문제를 해결한다", en: "Specialized assistive technology solves most problems" },
+				b: { ko: "대부분은 콘텐츠 자체의 명료함 — 쉬운 언어, 명확한 구조, 예측 가능한 상호작용 — 에서 나온다", en: "Most of it comes from clarity of the content itself — plain language, clear structure, predictable interactions" },
+				c: { ko: "인지 장애는 웹 접근성과 무관하다", en: "Cognitive disabilities are unrelated to web accessibility" },
+				d: { ko: "글꼴 교체만으로 충분하다", en: "Changing fonts is sufficient" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "TTS·워드 프레딕션 같은 도구도 있지만, 인지 접근성의 핵심은 콘텐츠와 인터페이스 자체의 명료함입니다. W3C COGA의 'Making Content Usable' 가이드도 쉬운 언어, 명확한 구조, 사용자 통제를 중심에 둡니다.",
+				en: "Tools like TTS and word prediction help, but the heart of cognitive accessibility is clarity of content and interface. W3C COGA's 'Making Content Usable' likewise centers plain language, clear structure, and user control.",
+			},
+		},
+	],
+
 	// ── Domain 2: 접근성 및 보편적 설계 ──────────────────────────────────────
 	"cpacc-2-1": [
 		{

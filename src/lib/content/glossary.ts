@@ -3,6 +3,8 @@ export interface GlossaryTerm {
   term: { ko: string; en: string };
   definition: { ko: string; en: string };
   certs: ("cpacc" | "was")[];
+  /** 검색 매칭 확장용 별칭 (렌더에는 노출 안 함) — 예: 약어, 흔한 표기 변형 */
+  aliases?: string[];
 }
 
 export const glossaryTerms: GlossaryTerm[] = [
@@ -24,6 +26,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "HTML alt attribute that describes the content and function of an image. Helps screen reader users understand visual content.",
     },
     certs: ["cpacc", "was"],
+    aliases: ["alt", "얼트", "대체텍스트"],
   },
   {
     id: "aria",
@@ -33,6 +36,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "W3C specification defining roles, properties, and states that supplement HTML to improve accessibility of complex UI components.",
     },
     certs: ["was"],
+    aliases: ["에어리어", "아리아", "Accessible Rich Internet Applications"],
   },
   {
     id: "assistive-technology",
@@ -42,6 +46,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Hardware or software that helps people with disabilities use devices and software, including screen readers, voice recognition, and braille displays.",
     },
     certs: ["cpacc", "was"],
+    aliases: ["AT", "보조공학"],
   },
   {
     id: "axe",
@@ -80,6 +85,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Luminance ratio between foreground and background colors. WCAG AA requires 4.5:1 for normal text and 3:1 for large text and UI components.",
     },
     certs: ["was"],
+    aliases: ["명도 대비", "색 대비"],
   },
   {
     id: "conformance",
@@ -98,6 +104,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "International human rights treaty adopted in 2006. Guarantees accessibility as a right for persons with disabilities and requires removal of social barriers.",
     },
     certs: ["cpacc"],
+    aliases: ["UN CRPD", "장애인권리협약"],
   },
   // E
   {
@@ -167,6 +174,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Principle of making all functionality usable with a keyboard alone. Required by WCAG 2.1.1.",
     },
     certs: ["was"],
+    aliases: ["키보드 접근", "탭 이동"],
   },
   // L
   {
@@ -217,6 +225,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Assistive technology that outputs screen text and UI information as speech or braille. Primarily used by people with visual impairments and dyslexia.",
     },
     certs: ["cpacc", "was"],
+    aliases: ["SR", "스크린리더"],
   },
   {
     id: "section-508",
@@ -273,6 +282,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Designing products, environments, and programs to be usable by all people to the greatest extent possible, without adaptation. Includes 7 principles.",
     },
     certs: ["cpacc"],
+    aliases: ["UD", "유니버설 디자인"],
   },
   // V
   {
@@ -292,6 +302,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Document template describing how a product meets accessibility standards. Commonly required in U.S. public sector procurement.",
     },
     certs: ["cpacc"],
+    aliases: ["ACR"],
   },
   // W
   {
@@ -311,6 +322,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "International web accessibility standard by W3C WAI. WCAG 2.2 is the latest version, defining A, AA, and AAA conformance levels.",
     },
     certs: ["cpacc", "was"],
+    aliases: ["웹 콘텐츠 접근성 지침", "더블에이"],
   },
   {
     id: "wcag-em",

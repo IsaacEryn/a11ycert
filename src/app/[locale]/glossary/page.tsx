@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { glossaryTerms } from "@/lib/content/glossary";
@@ -29,7 +30,10 @@ export default async function GlossaryPage({ params }: { params: Promise<{ local
 
   return (
     <div className="container" style={{ maxWidth: 960, paddingTop: "var(--space-8)", paddingBottom: "var(--space-16)" }}>
-      <GlossaryClient terms={glossaryTerms} locale={locale} />
+      {/* useSearchParams 사용 컴포넌트는 Suspense 경계 필수 (CSR bailout) */}
+      <Suspense>
+        <GlossaryClient terms={glossaryTerms} locale={locale} />
+      </Suspense>
     </div>
   );
 }
