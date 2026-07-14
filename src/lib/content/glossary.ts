@@ -468,4 +468,79 @@ export const glossaryTerms: GlossaryTerm[] = [
     },
     certs: ["cpacc", "was"],
   },
+  {
+    id: "udl",
+    term: { ko: "보편적 학습 설계 (UDL)", en: "Universal Design for Learning (UDL)" },
+    definition: {
+      ko: "보편적 설계를 교육에 적용한 프레임워크(CAST 개발). 참여·표상·행동과 표현의 세 영역에서 다양한 수단을 제공해 모든 학습자를 지원합니다.",
+      en: "A framework applying Universal Design to education (developed by CAST), supporting all learners through multiple means of engagement, representation, and action & expression.",
+    },
+    certs: ["cpacc"],
+    aliases: ["Universal Design for Learning"],
+  },
+  {
+    id: "user-centered-design",
+    term: { ko: "사용자 중심 설계 (UCD)", en: "User-Centered Design (UCD)" },
+    definition: {
+      ko: "사용자 요구를 조사→설계→평가의 반복 주기 중심에 두는 설계 방법론. 장애인을 리서치와 테스트 참가자로 포함할 때 접근성과 만납니다.",
+      en: "A design methodology centering user needs in an iterative research→design→evaluate cycle. It meets accessibility when disabled people are included as research and testing participants.",
+    },
+    certs: ["cpacc"],
+    aliases: ["UCD"],
+  },
+  {
+    id: "curb-cut-effect",
+    term: { ko: "연석 경사로 효과", en: "Curb Cut Effect" },
+    definition: {
+      ko: "특정 집단(휠체어 사용자)을 위한 설계가 유모차·자전거·짐 든 사람 등 모두에게 혜택을 주는 현상. 접근성 설계의 보편적 가치를 보여주는 대표 개념입니다.",
+      en: "The phenomenon where design for a specific group (wheelchair users) benefits everyone — strollers, bicycles, people carrying loads. The classic illustration of accessibility's universal value.",
+    },
+    certs: ["cpacc"],
+    aliases: ["curb cut"],
+  },
+  {
+    id: "plain-language",
+    term: { ko: "쉬운 언어 (Plain Language)", en: "Plain Language" },
+    definition: {
+      ko: "짧은 문장, 익숙한 단어, 명확한 구조로 쓰는 글쓰기 방식. 인지 장애 사용자를 포함한 모든 독자의 이해를 돕는 인지 접근성의 핵심 수단입니다.",
+      en: "Writing with short sentences, familiar words, and clear structure. A core tool of cognitive accessibility that helps all readers, including those with cognitive disabilities.",
+    },
+    certs: ["cpacc", "was"],
+  },
+  {
+    id: "cvaa",
+    term: { ko: "CVAA (21세기 통신·영상 접근성법)", en: "CVAA (21st Century Communications and Video Accessibility Act)" },
+    definition: {
+      ko: "2010년 미국 법률. 첨단 통신 서비스(VoIP, 메시징)와 인터넷으로 배포되는 영상 프로그램의 접근성(자막 등)을 요구합니다.",
+      en: "A 2010 US law requiring accessibility of advanced communications services (VoIP, messaging) and internet-delivered video programming (e.g., captions).",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "accessibility-statement",
+    term: { ko: "접근성 성명", en: "Accessibility Statement" },
+    definition: {
+      ko: "사이트·서비스의 접근성 준수 수준, 알려진 한계, 피드백 연락처를 공개하는 문서. EU 공공 부문에서는 법적 의무입니다.",
+      en: "A public document disclosing a site's conformance level, known limitations, and a feedback contact. Legally required for the EU public sector.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "maturity-model",
+    term: { ko: "접근성 성숙도 모델", en: "Accessibility Maturity Model" },
+    definition: {
+      ko: "조직의 접근성 수준을 단계(초기→계획→관리→정착→최적화)로 진단하고 지속 가능한 프로그램으로 가는 로드맵을 제공하는 평가 틀. W3C도 자체 모델을 발행합니다.",
+      en: "An assessment framework diagnosing organizational accessibility in stages (ad hoc→planned→managed→embedded→optimized) and providing a roadmap toward a sustainable program. The W3C publishes its own model.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "shift-left",
+    term: { ko: "시프트 레프트 (Shift Left)", en: "Shift Left" },
+    definition: {
+      ko: "접근성을 개발 프로세스의 초기(왼쪽) 단계 — 기획·디자인 — 부터 통합하는 전략. 출시 후 소급 수정 대비 비용을 크게 줄입니다.",
+      en: "The strategy of integrating accessibility from the earliest (leftmost) stages — planning and design — dramatically reducing cost compared with post-launch retrofits.",
+    },
+    certs: ["cpacc", "was"],
+  },
 ];
