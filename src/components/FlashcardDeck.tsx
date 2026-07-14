@@ -1,9 +1,14 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { StudyUnit } from "@/lib/content/types";
 import FlashcardCard from "@/components/FlashcardCard";
+import { useLearningStore } from "@/lib/store/learningStore";
+import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { syncSrsCardToDB } from "@/lib/store/learning-sync";
+import { isDue } from "@/lib/srs/leitner";
 
 interface Props {
   units: StudyUnit[];
@@ -12,16 +17,41 @@ interface Props {
 }
 
 type DomainFilter = "all" | 1 | 2 | 3;
+type DeckMode = "all" | "review";
 
 export default function FlashcardDeck({ units, locale, exam }: Props) {
+  const t = useTranslations("flashcardsSrs");
   const [domainFilter, setDomainFilter] = useState<DomainFilter>("all");
+  const [mode, setMode] = useState<DeckMode>("all");
   const [index, setIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [sessionDone, setSessionDone] = useState(0);
+  // 복습 세션에서 이미 처리한 카드 (again은 큐 유지, good은 제외)
+  const [reviewedGood, setReviewedGood] = useState<Set<string>>(new Set());
   const isKo = locale === "ko";
 
+  const { getSrsMap, gradeFlashcard } = useLearningStore();
+  const auth = useOptionalAuth();
+  const userId = auth?.user?.id ?? null;
+
   const filteredUnits = domainFilter === "all" ? units : units.filter((u) => u.domain === domainFilter);
-  const questions = filteredUnits.flatMap((u) => u.questions);
+  const allQuestions = useMemo(() => filteredUnits.flatMap((u) => u.questions), [filteredUnits]);
+
+  const srsMap = getSrsMap(exam);
+  const dueTotal = useMemo(
+    () => allQuestions.filter((q) => isDue(srsMap[q.id])).length,
+    [allQuestions, srsMap]
+  );
+
+  const questions = useMemo(() => {
+    if (mode === "all") return allQuestions;
+    // 복습 모드: due 카드 중 이번 세션에서 "알았음" 처리 안 된 것
+    return allQuestions.filter((q) => isDue(srsMap[q.id]) && !reviewedGood.has(q.id));
+    // srsMap은 gradeFlashcard 시점에 갱신되지만, due 판정은 세션 시작 기준을 유지하기 위해
+    // reviewedGood으로만 목록을 줄인다 ("다시"한 카드는 계속 큐에 남음)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, allQuestions, reviewedGood]);
+
   const safeIndex = Math.min(index, Math.max(0, questions.length - 1));
   const q = questions[safeIndex];
 
@@ -35,10 +65,33 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
     setIndex(0);
     setIsFlipped(false);
     setSessionDone(0);
+    setReviewedGood(new Set());
   };
 
-  const handleRate = (_rating: "again" | "hard" | "good" | "easy") => {
+  const handleModeChange = (m: DeckMode) => {
+    setMode(m);
+    setIndex(0);
+    setIsFlipped(false);
+    setSessionDone(0);
+    setReviewedGood(new Set());
+  };
+
+  const handleRate = (rating: "again" | "hard" | "good" | "easy") => {
+    if (!q) return;
+    const grade = rating === "again" || rating === "hard" ? "again" : "good";
+    const next = gradeFlashcard(exam, q.id, grade);
+    if (userId) syncSrsCardToDB(userId, exam, q.id, next.box, next.due);
+
     setSessionDone((n) => n + 1);
+
+    if (mode === "review" && grade === "good") {
+      // 목록에서 제거 — 인덱스는 그대로 두면 다음 카드가 그 자리로 옴
+      setReviewedGood((prev) => new Set(prev).add(q.id));
+      setIsFlipped(false);
+      setIndex((i) => Math.min(i, Math.max(0, questions.length - 2)));
+      return;
+    }
+
     if (safeIndex < questions.length - 1) {
       goTo(safeIndex + 1);
     } else {
@@ -71,6 +124,21 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
           )}
         </div>
 
+        {/* Mode toggle (SRS) */}
+        <div
+          role="group"
+          aria-label={t("modeReview")}
+          className="glossary-filter"
+          style={{ justifyContent: "center", marginBottom: "var(--space-3)" }}
+        >
+          <button type="button" aria-pressed={mode === "all"} onClick={() => handleModeChange("all")}>
+            {t("modeAll")}
+          </button>
+          <button type="button" aria-pressed={mode === "review"} onClick={() => handleModeChange("review")}>
+            {t("modeReview")} ({dueTotal})
+          </button>
+        </div>
+
         {/* Domain filter */}
         <div
           role="group"
@@ -92,7 +160,9 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
 
         {questions.length === 0 ? (
           <div style={{ textAlign: "center", padding: "var(--space-12) var(--space-8)", color: "var(--fg-muted)" }}>
-            {isKo ? "이 도메인에 문제가 없습니다." : "No questions in this domain."}
+            {mode === "review"
+              ? t("noDue")
+              : isKo ? "이 도메인에 문제가 없습니다." : "No questions in this domain."}
           </div>
         ) : (
           <FlashcardCard

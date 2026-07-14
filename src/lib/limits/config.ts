@@ -7,7 +7,7 @@ export const LIMITS_CONFIG = {
 	enabled: false, // true로 변경 시 제한 활성화
 
 	free: {
-		dailyQuizLimit: 20, // 하루 20문제
+		dailyQuizLimit: 20, // 하루 20회 퀴즈 세션 (퀴즈 페이지 진입 기준)
 		dailyPageLimit: 5, // 하루 5페이지
 	},
 

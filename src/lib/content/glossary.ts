@@ -321,4 +321,139 @@ export const glossaryTerms: GlossaryTerm[] = [
     },
     certs: ["was"],
   },
+  {
+    id: "accessibility-tree",
+    term: { ko: "접근성 트리", en: "Accessibility Tree" },
+    definition: {
+      ko: "브라우저가 DOM에서 생성하는 보조기술용 구조. 각 요소의 name, role, state, value를 담아 스크린 리더 등에 전달합니다.",
+      en: "A structure browsers derive from the DOM for assistive technologies, exposing each element's name, role, state, and value to screen readers and other AT.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "acr",
+    term: { ko: "ACR (접근성 적합성 보고서)", en: "ACR (Accessibility Conformance Report)" },
+    definition: {
+      ko: "VPAT 양식을 작성해 완성한 문서. 제품이 Section 508, WCAG, EN 301 549를 어느 정도 준수하는지 기술하며 조달 평가에 사용됩니다.",
+      en: "The completed document produced from a VPAT, describing how a product conforms to Section 508, WCAG, and EN 301 549. Used in procurement evaluations.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "aoda",
+    term: { ko: "AODA (온타리오 장애인 접근성법)", en: "AODA (Accessibility for Ontarians with Disabilities Act)" },
+    definition: {
+      ko: "캐나다 온타리오주의 접근성 법률. 공공·민간 조직에 WCAG 2.0 AA 수준의 웹 접근성 준수를 단계적으로 의무화했습니다.",
+      en: "Ontario, Canada's accessibility law that phased in mandatory WCAG 2.0 AA web accessibility compliance for public and private organizations.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "aria-live",
+    term: { ko: "ARIA 라이브 리전", en: "ARIA Live Region" },
+    definition: {
+      ko: "동적으로 변경되는 콘텐츠를 스크린 리더가 자동으로 낭독하게 하는 영역. aria-live=\"polite\"는 현재 낭독을 마친 뒤, \"assertive\"는 즉시 알립니다.",
+      en: "A region whose dynamic content updates are announced automatically by screen readers. aria-live=\"polite\" waits for the current speech to finish; \"assertive\" interrupts immediately.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "cognitive-disability",
+    term: { ko: "인지 장애", en: "Cognitive Disability" },
+    definition: {
+      ko: "기억, 주의, 문제 해결, 언어 이해 등에 영향을 주는 장애의 총칭. 단순한 언어, 일관된 내비게이션, 충분한 시간 제공 등이 도움이 됩니다.",
+      en: "Disabilities affecting memory, attention, problem-solving, or language comprehension. Plain language, consistent navigation, and sufficient time all help.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "eaa",
+    term: { ko: "유럽 접근성법 (EAA)", en: "European Accessibility Act (EAA)" },
+    definition: {
+      ko: "2025년부터 시행된 EU 지침. 전자상거래, 은행, 전자책, 교통 등 민간 제품·서비스에 접근성을 의무화하며 EN 301 549가 적합성 기준으로 쓰입니다.",
+      en: "EU directive in force from 2025 requiring accessibility of private-sector products and services — e-commerce, banking, e-books, transport — with EN 301 549 as the presumed conformance standard.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "focus-visible",
+    term: { ko: "포커스 표시 (Focus Visible)", en: "Focus Visible" },
+    definition: {
+      ko: "키보드 포커스를 받은 요소가 시각적으로 구별되어야 한다는 요구사항(WCAG 2.4.7). 포커스 아웃라인을 제거하면 키보드 사용자가 위치를 잃습니다.",
+      en: "The requirement (WCAG 2.4.7) that keyboard focus be visually apparent. Removing focus outlines leaves keyboard users lost on the page.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "keyboard-trap",
+    term: { ko: "키보드 트랩", en: "Keyboard Trap" },
+    definition: {
+      ko: "키보드만으로 특정 영역에 들어간 뒤 빠져나올 수 없는 상태(WCAG 2.1.2 위반). 모달 대화상자 구현 시 흔히 발생합니다.",
+      en: "A state where keyboard users can enter a component but cannot leave it (violating WCAG 2.1.2). Commonly occurs in modal dialog implementations.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "name-role-value",
+    term: { ko: "이름·역할·값 (Name, Role, Value)", en: "Name, Role, Value" },
+    definition: {
+      ko: "모든 UI 컴포넌트가 보조기술에 노출해야 하는 정보(WCAG 4.1.2). 시맨틱 HTML을 쓰면 자동으로 제공되고, 커스텀 컴포넌트는 ARIA로 보완합니다.",
+      en: "Information every UI component must expose to assistive technologies (WCAG 4.1.2). Semantic HTML provides it automatically; custom components need ARIA.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "reasonable-accommodation",
+    term: { ko: "합리적 편의제공", en: "Reasonable Accommodation" },
+    definition: {
+      ko: "과도한 부담이 되지 않는 범위에서 장애인에게 필요한 변경과 조정을 제공하는 것. CRPD는 이를 거부하는 것을 차별로 규정합니다.",
+      en: "Providing necessary modifications and adjustments for persons with disabilities without imposing an undue burden. Under the CRPD, denial constitutes discrimination.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "reflow",
+    term: { ko: "리플로우 (Reflow)", en: "Reflow" },
+    definition: {
+      ko: "400% 확대(320px 폭 상당)에서도 가로 스크롤 없이 콘텐츠를 이용할 수 있어야 한다는 요구사항(WCAG 1.4.10). 반응형 설계로 충족합니다.",
+      en: "The requirement (WCAG 1.4.10) that content be usable without horizontal scrolling at 400% zoom (equivalent to 320px width). Met through responsive design.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "situational-limitation",
+    term: { ko: "상황적 제약", en: "Situational Limitation" },
+    definition: {
+      ko: "밝은 햇빛 아래의 화면, 한 손에 짐을 든 상태 등 일시적 상황이 만드는 이용 제약. 접근성이 모든 사용자에게 유익함을 보여주는 개념입니다.",
+      en: "Constraints created by temporary circumstances — glare on a screen, carrying something in one hand. Illustrates how accessibility benefits everyone.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "switch-access",
+    term: { ko: "스위치 제어", en: "Switch Access" },
+    definition: {
+      ko: "버튼(스위치) 하나 이상으로 기기를 조작하는 보조기술. 운동 장애가 있는 사용자가 스캐닝 방식으로 항목을 선택합니다.",
+      en: "Assistive technology operated with one or more buttons (switches). Users with motor disabilities select items via scanning.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "target-size",
+    term: { ko: "타깃 크기", en: "Target Size" },
+    definition: {
+      ko: "포인터 입력 대상의 최소 크기 요구사항. WCAG 2.2의 2.5.8(AA)은 최소 24×24 CSS 픽셀을 요구합니다.",
+      en: "Minimum size requirements for pointer targets. WCAG 2.2's 2.5.8 (AA) requires at least 24×24 CSS pixels.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "wai",
+    term: { ko: "WAI (웹 접근성 이니셔티브)", en: "WAI (Web Accessibility Initiative)" },
+    definition: {
+      ko: "W3C 산하에서 웹 접근성 표준과 자료를 개발하는 조직. WCAG, ARIA, ATAG, UAAG 등을 관리합니다.",
+      en: "The W3C group developing web accessibility standards and resources, maintaining WCAG, ARIA, ATAG, and UAAG.",
+    },
+    certs: ["cpacc", "was"],
+  },
 ];

@@ -1,16 +1,21 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { consumeQuizUsage, type LimitCheckResult } from "@/lib/limits/usage-limiter";
+import { LIMITS_CONFIG } from "@/lib/limits/config";
+import UsageLimitBanner from "@/components/limits/UsageLimitBanner";
 import {
   syncWrongAnswerToDB,
   removeWrongAnswerFromDB,
   syncSavedQuestionToDB,
   removeSavedQuestionFromDB,
+  syncAttemptToDB,
 } from "@/lib/store/learning-sync";
+import { computeDomainStats } from "@/lib/quiz/mock-exam";
 import BilingualText from "@/components/BilingualText";
 
 interface Props {
@@ -30,11 +35,25 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
   const questionRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
 
-  const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, getWrongNotes, languageMode } =
+  const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, getWrongNotes, languageMode, recordAttempt } =
     useLearningStore();
+  const startedAtRef = useRef<number>(Date.now());
   const auth = useOptionalAuth();
   const userId = auth?.user?.id ?? null;
   const isKo = locale === "ko";
+
+  // 일일 사용량 소비 (LIMITS_CONFIG.enabled가 false이면 항상 허용)
+  const [limitState, setLimitState] = useState<LimitCheckResult | null>(null);
+  useEffect(() => {
+    if (!userId || !LIMITS_CONFIG.enabled) return;
+    let cancelled = false;
+    consumeQuizUsage(userId).then((result) => {
+      if (!cancelled) setLimitState(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
 
   const total = questions.length;
   const q = questions[current];
@@ -60,6 +79,24 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
       </div>
     );
   }
+  // 일일 한도 초과 시 퀴즈 대신 안내 배너 표시
+  if (limitState && !limitState.allowed) {
+    return (
+      <div className="quiz-shell">
+        <div className="container">
+          <div style={{ maxWidth: 640, margin: "0 auto" }}>
+            <UsageLimitBanner
+              type="quiz"
+              remaining={limitState.remaining}
+              limit={limitState.limit}
+              locale={locale}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const answered = selected !== null;
   const correctCount = questions.filter((_, i) => answers[i] === questions[i].answer).length;
 
@@ -86,6 +123,28 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
       setSelected(null);
       requestAnimationFrame(() => questionRef.current?.focus());
     } else {
+      // 시도 이력 기록 (성취도 분석용)
+      const finalAnswers = { ...answers };
+      const correct = questions.filter((q, i) => finalAnswers[i] === q.answer).length;
+      const attempt = {
+        id: crypto.randomUUID(),
+        mode: "practice" as const,
+        total: questions.length,
+        correct,
+        durationSeconds: Math.round((Date.now() - startedAtRef.current) / 1000),
+        domainStats: computeDomainStats(questions, finalAnswers),
+        createdAt: new Date().toISOString(),
+      };
+      recordAttempt(exam, attempt);
+      if (userId) {
+        syncAttemptToDB(userId, exam, {
+          mode: attempt.mode,
+          total: attempt.total,
+          correct: attempt.correct,
+          durationSeconds: attempt.durationSeconds,
+          domainStats: attempt.domainStats,
+        });
+      }
       setDone(true);
       requestAnimationFrame(() => summaryRef.current?.focus());
     }
@@ -96,6 +155,7 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
     setSelected(null);
     setAnswers({});
     setDone(false);
+    startedAtRef.current = Date.now();
     requestAnimationFrame(() => questionRef.current?.focus());
   };
 

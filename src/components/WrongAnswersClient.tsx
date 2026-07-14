@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import type { StudyUnit, QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
-import QuizEngine from "@/components/QuizEngine";
+import QuizEngine from "@/components/quiz/QuizEngine";
 import BilingualText from "@/components/BilingualText";
 import LanguageModeToggle from "@/components/LanguageModeToggle";
 

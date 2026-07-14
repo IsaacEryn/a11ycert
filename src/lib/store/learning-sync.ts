@@ -78,6 +78,58 @@ export async function syncCompletedUnitToDB(userId: string, unitId: string) {
 	if (error) console.error("[learning-sync] completed_unit upsert failed:", error.message);
 }
 
+// ── 플래시카드 SRS ──────────────────────────────────────────────────────────
+
+export async function syncSrsCardToDB(
+	userId: string,
+	cert: "cpacc" | "was",
+	cardId: string,
+	box: number,
+	dueAt: string
+) {
+	const { error } = await supabase.from("flashcard_srs").upsert(
+		{
+			user_id: userId,
+			cert,
+			card_id: cardId,
+			box,
+			due_at: dueAt,
+			updated_at: new Date().toISOString(),
+		},
+		{ onConflict: "user_id,cert,card_id" }
+	);
+
+	if (error) console.error("[learning-sync] flashcard_srs upsert failed:", error.message);
+}
+
+// ── 퀴즈 시도 이력 ──────────────────────────────────────────────────────────
+
+export async function syncAttemptToDB(
+	userId: string,
+	cert: "cpacc" | "was",
+	attempt: {
+		mode: "practice" | "mock";
+		total: number;
+		correct: number;
+		durationSeconds: number | null;
+		domainStats: Record<string, { total: number; correct: number }>;
+		answers?: { qid: string; picked: string; correct: boolean }[];
+	}
+) {
+	const { error } = await supabase.from("quiz_attempts").insert({
+		user_id: userId,
+		cert,
+		mode: attempt.mode,
+		total: attempt.total,
+		correct: attempt.correct,
+		duration_seconds: attempt.durationSeconds,
+		domain_stats: attempt.domainStats,
+		answers: attempt.answers ?? null,
+	});
+
+	if (error) console.error("[learning-sync] quiz_attempt insert failed:", error.message);
+}
+
 // ── localStorage → DB 전체 마이그레이션 ──────────────────────────────────────
 
 export async function migrateLocalStorageToDB(userId: string) {

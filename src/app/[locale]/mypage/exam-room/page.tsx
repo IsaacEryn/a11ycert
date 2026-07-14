@@ -55,6 +55,11 @@ export default function ExamRoomPage() {
 					? "오답 노트, 저장한 문제, 학습 메모를 한 곳에서 관리하세요."
 					: "Manage your wrong answers, saved questions, and study notes in one place."}
 			</p>
+			<p style={{ marginTop: "var(--space-2)" }}>
+				<Link href={`/${locale}/mypage/stats`} className="btn btn--sm">
+					{isKo ? "성취도 분석 보기 →" : "View Progress & Stats →"}
+				</Link>
+			</p>
 
 			<div style={{ marginTop: "var(--space-8)" }}>
 				<ExamRoomTabs locale={locale} />

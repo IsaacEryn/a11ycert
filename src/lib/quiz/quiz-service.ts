@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/client";
-import { cpaccUnits } from "@/lib/content/cpacc-units";
-import { wasUnits } from "@/lib/content/was-units";
+import { getCertContent } from "@/lib/content";
 import type { QuizQuestion } from "@/lib/content/types";
 
 // DB에서 퀴즈를 가져오는 서비스
@@ -20,10 +19,12 @@ function dbToQuizQuestion(row: any): QuizQuestion {
 		},
 		answer: row.answer,
 		explanation: { ko: row.explanation_ko, en: row.explanation_en },
+		domain: row.domain,
+		difficulty: row.difficulty,
 	};
 }
 
-const allLocalUnits = [...cpaccUnits, ...wasUnits];
+const allLocalUnits = [...getCertContent("cpacc").units, ...getCertContent("was").units];
 
 export async function getQuizzesByUnit(unitId: string): Promise<QuizQuestion[]> {
 	try {

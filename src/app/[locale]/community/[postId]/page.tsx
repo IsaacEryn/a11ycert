@@ -69,23 +69,17 @@ export default function CommunityPostPage() {
 		if (!auth?.user || !replyContent.trim()) return;
 
 		setIsSubmitting(true);
-		await supabase.from("board_replies").insert({
-			post_id: postId,
-			user_id: auth.user.id,
-			content: replyContent.trim(),
+		const res = await fetch(`/api/board/${postId}/replies`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ content: replyContent.trim() }),
 		});
 
-		// reply_count 증가
-		if (post) {
-			await supabase
-				.from("board_posts")
-				.update({ reply_count: post.view_count + 1 })
-				.eq("id", postId);
+		if (res.ok) {
+			setReplyContent("");
+			await fetchReplies();
 		}
-
-		setReplyContent("");
 		setIsSubmitting(false);
-		await fetchReplies();
 	};
 
 	if (!post) {

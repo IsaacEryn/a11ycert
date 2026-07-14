@@ -9,6 +9,9 @@ export interface QuizQuestion {
 	};
 	answer: "a" | "b" | "c" | "d";
 	explanation: { ko: string; en: string };
+	/** 소속 도메인 — 데이터 파일엔 없고 로딩 시 소속 단원에서 주입됨 */
+	domain?: 1 | 2 | 3;
+	difficulty?: "easy" | "medium" | "hard";
 }
 
 export interface StudyUnit {

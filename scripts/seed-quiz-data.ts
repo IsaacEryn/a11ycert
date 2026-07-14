@@ -56,10 +56,13 @@ async function seed() {
   const supabase = createClient(url, key);
 
   // 동적 import (tsconfig paths 없이 실행하므로 상대경로)
-  const { cpaccUnits } = await import("../src/lib/content/cpacc-units");
-  const { wasUnits } = await import("../src/lib/content/was-units");
+  // getCertContent는 extra-questions까지 병합된 최종 문항을 반환
+  const { getCertContent } = await import("../src/lib/content");
 
-  const allUnits: StudyUnit[] = [...cpaccUnits, ...wasUnits];
+  const allUnits: StudyUnit[] = [
+    ...getCertContent("cpacc").units,
+    ...getCertContent("was").units,
+  ];
   const rows = allUnits.flatMap((unit) =>
     unit.questions.map((q) => ({
       id: q.id,

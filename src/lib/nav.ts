@@ -10,6 +10,7 @@ export function certNavItems(locale: string, cert: "cpacc" | "was"): NavItem[] {
 		{ href: `/${locale}/${cert}`, label: isKo ? "개요" : "Overview" },
 		{ href: `/${locale}/${cert}/study`, label: isKo ? "학습" : "Study" },
 		{ href: `/${locale}/${cert}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
+		{ href: `/${locale}/${cert}/mock-exam`, label: isKo ? "모의시험" : "Mock Exam" },
 		{ href: `/${locale}/${cert}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
 	];
 }

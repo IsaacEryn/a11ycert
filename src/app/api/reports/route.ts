@@ -86,6 +86,16 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ error: "제보를 저장할 수 없습니다." }, { status: 500 });
 	}
 
+	// 퀴즈 문항 제보면 신고 카운트 증가 (실패해도 제보 저장에는 영향 없음)
+	if (target_type === "quiz" && typeof target_id === "string" && target_id) {
+		const { error: rpcError } = await supabase.rpc("increment_report_count", {
+			question_id: target_id,
+		});
+		if (rpcError) {
+			console.error("[POST /api/reports] increment_report_count", rpcError.message);
+		}
+	}
+
 	return NextResponse.json({ report, post }, { status: 201 });
 }
 

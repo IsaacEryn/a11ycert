@@ -1,0 +1,16 @@
+# Supabase keep-alive 백업 (1차는 Vercel Cron — vercel.json 참조)
+# GitHub Actions schedule은 저장소 60일 미활동 시 자동 비활성화되므로 백업 용도로만 사용.
+name: keep-alive
+
+on:
+  schedule:
+    - cron: "0 15 */2 * *" # 이틀에 한 번, Vercel Cron(03:00 UTC)과 다른 시각
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping keep-alive endpoint
+        run: |
+          curl -fsS -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" "${{ secrets.KEEP_ALIVE_URL }}"
