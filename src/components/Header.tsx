@@ -294,7 +294,7 @@ export default function Header({ locale }: HeaderProps) {
               <button
                 className="btn"
                 style={{ width: "100%" }}
-                onClick={async () => { await auth.signOut(); setMobileOpen(false); }}
+                onClick={async () => { await auth.signOut(); setMobileOpen(false); router.push(`/${locale}`); }}
               >
                 {isKo ? "로그아웃" : "Sign Out"}
               </button>

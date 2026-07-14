@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
@@ -12,6 +13,7 @@ interface UserMenuProps {
 export default function UserMenu({ locale }: UserMenuProps) {
 	const auth = useOptionalAuth();
 	const t = useTranslations("userMenu");
+	const router = useRouter();
 	const [open, setOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const triggerRef = useRef<HTMLButtonElement>(null);
@@ -222,7 +224,7 @@ export default function UserMenu({ locale }: UserMenuProps) {
 					{/* 로그아웃 */}
 					<div style={{ borderTop: "1px solid var(--divider)", padding: "var(--space-1) 0" }}>
 						<button
-							onClick={async () => { await auth.signOut(); setOpen(false); }}
+							onClick={async () => { await auth.signOut(); setOpen(false); router.push(`/${locale}`); }}
 							style={{ ...menuItemStyle, color: "var(--danger)" }}
 							role="menuitem"
 							onMouseEnter={(e) => (e.currentTarget.style.background = "var(--danger-soft)")}

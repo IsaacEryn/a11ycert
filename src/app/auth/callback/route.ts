@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { createClient as createDirectClient } from "@supabase/supabase-js";
 
 /**
  * OAuth 콜백 처리 (canonical — AuthProvider가 이 경로로 리다이렉트)
@@ -52,14 +53,24 @@ export async function GET(request: NextRequest) {
 	}
 
 	// 로그인 활동 로그 (실패해도 로그인 흐름은 막지 않음)
+	// 주의: 위 supabase 클라이언트는 토큰을 "요청 쿠키"에서 읽는데, 새 세션은 아직
+	// 응답 쿠키에만 있어 auth.uid()가 NULL → RPC가 조용히 스킵됨.
+	// 방금 교환한 access token을 명시적으로 붙인 클라이언트로 호출해야 함.
 	try {
-		const provider = data.user?.app_metadata?.provider ?? null;
-		const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
-		const { error: logError } = await supabase.rpc("log_user_login", {
-			p_provider: provider,
-			p_ip: ip,
-		});
-		if (logError) console.error("[Auth Callback] log_user_login:", logError.message);
+		const accessToken = data.session?.access_token;
+		if (accessToken) {
+			const authed = createDirectClient(url, key, {
+				global: { headers: { Authorization: `Bearer ${accessToken}` } },
+				auth: { persistSession: false, autoRefreshToken: false },
+			});
+			const provider = data.user?.app_metadata?.provider ?? null;
+			const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+			const { error: logError } = await authed.rpc("log_user_login", {
+				p_provider: provider,
+				p_ip: ip,
+			});
+			if (logError) console.error("[Auth Callback] log_user_login:", logError.message);
+		}
 	} catch (e) {
 		console.error("[Auth Callback] log_user_login:", e);
 	}
