@@ -32,8 +32,10 @@ export default function QuestionsClient() {
 		const { data, error } = await query;
 		if (error) {
 			setError(error.message);
+			setQuestions([]);
 			return;
 		}
+		setError(null);
 		setQuestions((data as QuestionRow[]) ?? []);
 	}, [examFilter]);
 

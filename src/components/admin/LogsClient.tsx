@@ -47,6 +47,14 @@ const KNOWN_ACTIONS = [
 	"report_created",
 ] as const;
 
+const KNOWN_MODERATION_ACTIONS = [
+	"set_user_role",
+	"set_question_active",
+	"set_post_state",
+	"set_comment_deleted",
+	"update_report_status",
+] as const;
+
 export default function LogsClient({ locale }: { locale: string }) {
 	const t = useTranslations("admin");
 	const [tab, setTab] = useState<"activity" | "audit">("activity");
@@ -77,7 +85,11 @@ export default function LogsClient({ locale }: { locale: string }) {
 			p_page: page,
 			p_page_size: PAGE_SIZE,
 		});
-		if (error) return setError(error.message);
+		if (error) {
+			setError(error.message);
+			setLogs([]);
+			return;
+		}
 		setError(null);
 		setLogs((data as ActivityLogRow[]) ?? []);
 	}, [category, action, submittedSearch, adminOnly, page]);
@@ -88,7 +100,11 @@ export default function LogsClient({ locale }: { locale: string }) {
 			p_page: auditPage,
 			p_page_size: PAGE_SIZE,
 		});
-		if (error) return setError(error.message);
+		if (error) {
+			setError(error.message);
+			setAudit([]);
+			return;
+		}
 		setError(null);
 		setAudit((data as AuditRow[]) ?? []);
 	}, [auditPage]);
@@ -114,6 +130,11 @@ export default function LogsClient({ locale }: { locale: string }) {
 
 	const actionLabel = (a: string) =>
 		(KNOWN_ACTIONS as readonly string[]).includes(a) ? t(`logs.action.${a}`) : a;
+
+	const moderationActionLabel = (a: string) =>
+		(KNOWN_MODERATION_ACTIONS as readonly string[]).includes(a)
+			? t(`logs.moderationAction.${a}`)
+			: a;
 
 	const categories: { value: Category; label: string }[] = [
 		{ value: "all", label: t("logs.catAll") },
@@ -315,7 +336,7 @@ export default function LogsClient({ locale }: { locale: string }) {
 											onToggle={() => toggleExpand(-row.id)}
 											when={timeStr(row.created_at)}
 											actor={<span>{row.actor_email ?? "—"}</span>}
-											action={row.action}
+											action={moderationActionLabel(row.action)}
 											target={row.target_type ? `${row.target_type}${row.target_id ? ` · ${row.target_id}` : ""}` : "—"}
 											detail={row.detail}
 											toggleLabel={t("logs.toggleDetail")}

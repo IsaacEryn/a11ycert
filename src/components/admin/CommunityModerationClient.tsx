@@ -42,7 +42,12 @@ export default function CommunityModerationClient({ locale }: { locale: string }
 				.select("id, title, category, is_pinned, is_deleted, view_count, reply_count, created_at, profiles:user_id(nickname)")
 				.order("created_at", { ascending: false })
 				.limit(100);
-			if (error) return setError(error.message);
+			if (error) {
+				setError(error.message);
+				setPosts([]);
+				return;
+			}
+			setError(null);
 			setPosts((data as unknown as PostRow[]) ?? []);
 		} else {
 			const { data, error } = await supabase
@@ -50,7 +55,12 @@ export default function CommunityModerationClient({ locale }: { locale: string }
 				.select("id, page_path, content, is_deleted, created_at, profiles:user_id(nickname)")
 				.order("created_at", { ascending: false })
 				.limit(100);
-			if (error) return setError(error.message);
+			if (error) {
+				setError(error.message);
+				setComments([]);
+				return;
+			}
+			setError(null);
 			setComments((data as unknown as CommentRow[]) ?? []);
 		}
 	}, [tab]);

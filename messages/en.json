@@ -366,6 +366,13 @@
 				"board_reply_created": "Post Reply",
 				"comment_created": "Study Comment",
 				"report_created": "Report Filed"
+			},
+			"moderationAction": {
+				"set_user_role": "Role Changed",
+				"set_question_active": "Question Toggled",
+				"set_post_state": "Post State Changed",
+				"set_comment_deleted": "Comment Hidden/Restored",
+				"update_report_status": "Report Status Changed"
 			}
 		}
 	},

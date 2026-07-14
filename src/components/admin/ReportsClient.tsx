@@ -44,8 +44,10 @@ export default function ReportsClient({ locale }: { locale: string }) {
 		const { data, error } = await query;
 		if (error) {
 			setError(error.message);
+			setReports([]);
 			return;
 		}
+		setError(null);
 		setReports((data as unknown as ReportRow[]) ?? []);
 	}, [filter]);
 

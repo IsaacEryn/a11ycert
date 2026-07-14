@@ -44,8 +44,10 @@ export default function UsersClient({ locale }: { locale: string }) {
 		});
 		if (error) {
 			setError(error.message);
+			setUsers([]);
 			return;
 		}
+		setError(null);
 		setUsers((data as UserRow[]) ?? []);
 	}, [submittedSearch, page]);
 

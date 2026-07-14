@@ -366,6 +366,13 @@
 				"board_reply_created": "게시글 댓글",
 				"comment_created": "학습 댓글",
 				"report_created": "제보 접수"
+			},
+			"moderationAction": {
+				"set_user_role": "역할 변경",
+				"set_question_active": "문항 활성/비활성",
+				"set_post_state": "게시글 상태 변경",
+				"set_comment_deleted": "댓글 숨김/복원",
+				"update_report_status": "제보 상태 변경"
 			}
 		}
 	},
