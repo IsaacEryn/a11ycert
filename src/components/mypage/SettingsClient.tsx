@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { isReservedNickname } from "@/lib/nickname";
 
 function isValidHttpUrl(value: string): boolean {
 	try {
@@ -44,6 +45,12 @@ export default function SettingsClient({ locale }: { locale: string }) {
 		e.preventDefault();
 		if (saving || !nickname.trim() || avatarInvalid) return;
 
+		// 관리자 사칭 닉네임 차단 — 실제 관리자는 예외 (최종 차단은 DB 트리거)
+		if (profile.role !== "admin" && isReservedNickname(nickname)) {
+			setStatus({ tone: "danger", text: t("nicknameReserved") });
+			return;
+		}
+
 		setSaving(true);
 		setStatus(null);
 		const { error } = await supabase
@@ -55,7 +62,10 @@ export default function SettingsClient({ locale }: { locale: string }) {
 			.eq("id", profile.id);
 
 		if (error) {
-			setStatus({ tone: "danger", text: t("saveError") });
+			setStatus({
+				tone: "danger",
+				text: error.message.includes("reserved_nickname") ? t("nicknameReserved") : t("saveError"),
+			});
 		} else {
 			await auth.refreshProfile();
 			setStatus({ tone: "success", text: t("saved") });

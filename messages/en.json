@@ -471,7 +471,8 @@
 			"deleteButton": "Delete Account",
 			"deleting": "Deleting...",
 			"deleteMismatch": "Nickname does not match.",
-			"deleteError": "Failed to delete account: {message}"
+			"deleteError": "Failed to delete account: {message}",
+			"nicknameReserved": "Nicknames that could impersonate site staff are not allowed."
 		}
 	},
 	"glossary": {
