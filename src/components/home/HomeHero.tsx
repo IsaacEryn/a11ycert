@@ -46,7 +46,7 @@ export default function HomeHero({ locale, isKo }: Props) {
               <div>
                 <dt className="hero__stat-label">{isKo ? "실전형 학습 문항" : "Practice questions"}</dt>
                 <dd className="hero__stat-num">
-                  175
+                  222
                   <span style={{ fontSize: "0.55em", color: "var(--fg-muted)", fontWeight: 600, marginLeft: 2 }}>
                     {isKo ? "문항" : "Qs"}
                   </span>
@@ -70,8 +70,11 @@ export default function HomeHero({ locale, isKo }: Props) {
             </dl>
           </div>
 
-          {/* Showcase (decorative) */}
+          {/* Showcase (decorative) — 실제 UI로 오인되지 않도록 예시 라벨 표시 */}
           <div className="showcase" aria-hidden="true">
+            <span className="showcase__label">
+              {isKo ? "화면 예시 — 실제 문제는 학습 메뉴에서" : "Preview — find real questions in Study"}
+            </span>
             <div className="showcase__card showcase__card--badge">
               <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: "50%", background: "var(--success-soft)", color: "var(--success)" }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -86,7 +89,7 @@ export default function HomeHero({ locale, isKo }: Props) {
 
             <div className="showcase__card showcase__card--main">
               <div className="qcard__head">
-                <span className="qcard__qnum">{isKo ? "문항 12" : "Q.12"}</span>
+                <span className="qcard__qnum">{isKo ? "예시 문항" : "Sample Q"}</span>
                 <span className="qcard__cert">CPACC · POUR</span>
               </div>
               <div>

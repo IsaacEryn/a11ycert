@@ -884,6 +884,8 @@ button { font-family: inherit; cursor: pointer; }
 .hero__stat-label { font-size: var(--fs-sm); color: var(--fg-muted); margin-top: 4px; }
 
 .showcase { position: relative; height: 460px; }
+/* 히어로 쇼케이스가 실제 UI로 오인되지 않도록 붙이는 '화면 예시' 라벨 */
+.showcase__label { position: absolute; top: -16px; right: 0; z-index: 3; padding: 4px 12px; border-radius: 999px; background: var(--bg-elev); border: 1px dashed var(--border-strong); font-size: var(--fs-xs); font-weight: 600; color: var(--fg-subtle); white-space: nowrap; }
 .showcase__card {
   position: absolute;
   background: var(--bg-elev);
