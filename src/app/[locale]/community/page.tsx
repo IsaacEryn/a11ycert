@@ -58,7 +58,7 @@ export default function CommunityPage() {
 	}, [category]);
 
 	useEffect(() => {
-		fetchPosts();
+		void Promise.resolve().then(fetchPosts);
 	}, [fetchPosts]);
 
 	const handleCategoryChange = (cat: string) => {

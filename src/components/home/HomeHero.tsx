@@ -94,7 +94,7 @@ export default function HomeHero({ locale, isKo }: Props) {
               </div>
               <div>
                 <div className="qcard__q">{isKo ? "WCAG 2.2의 네 가지 핵심 원칙(POUR)에 포함되지 않는 것은?" : "Which is NOT one of WCAG 2.2's four POUR principles?"}</div>
-                <div className="qcard__q-en">Which of the following is NOT one of WCAG 2.2's four principles (POUR)?</div>
+                <div className="qcard__q-en">Which of the following is NOT one of WCAG 2.2&apos;s four principles (POUR)?</div>
               </div>
               <div className="qcard__opts">
                 <div className="qcard__opt"><span className="qcard__opt-letter">A</span>{isKo ? "인식 가능 (Perceivable)" : "Perceivable"}</div>

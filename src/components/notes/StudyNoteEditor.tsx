@@ -17,19 +17,20 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 	const [lastSaved, setLastSaved] = useState<Date | null>(null);
 	const [confirmingDelete, setConfirmingDelete] = useState(false);
 	const auth = useOptionalAuth();
+	// 옵셔널 체이닝을 의존성 배열에 직접 쓰면 React Compiler가 memo를 보존하지 못함
+	const user = auth?.user ?? null;
 	const isKo = locale === "ko";
 	const debounceRef = useRef<NodeJS.Timeout | null>(null);
-	const supabaseRef = useRef(createClient());
-	const supabase = supabaseRef.current;
+	const [supabase] = useState(createClient);
 
 	// 기존 메모 로드
 	const loadNote = useCallback(async () => {
-		if (!auth?.user) return;
+		if (!user) return;
 
 		const { data } = await supabase
 			.from("study_notes")
 			.select("content")
-			.eq("user_id", auth.user.id)
+			.eq("user_id", user.id)
 			.eq("page_path", pagePath)
 			.single();
 
@@ -37,21 +38,21 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 			setContent(data.content);
 			setSavedContent(data.content);
 		}
-	}, [auth?.user, supabase, pagePath]);
+	}, [user, supabase, pagePath]);
 
 	useEffect(() => {
-		loadNote();
+		void Promise.resolve().then(loadNote);
 	}, [loadNote]);
 
 	// 자동 저장 (디바운스 1초)
 	const saveNote = useCallback(
 		async (text: string) => {
-			if (!auth?.user || text === savedContent) return;
+			if (!user || text === savedContent) return;
 
 			setIsSaving(true);
 			await supabase.from("study_notes").upsert(
 				{
-					user_id: auth.user.id,
+					user_id: user.id,
 					page_path: pagePath,
 					unit_id: unitId,
 					content: text,
@@ -63,7 +64,7 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 			setLastSaved(new Date());
 			setIsSaving(false);
 		},
-		[auth?.user, supabase, pagePath, unitId, savedContent]
+		[user, supabase, pagePath, unitId, savedContent]
 	);
 
 	// 디바운스 저장 대기 중(미저장 변경) 새로고침·창 닫기 시 이탈 경고

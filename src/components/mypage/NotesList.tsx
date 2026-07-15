@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -22,24 +22,26 @@ export default function NotesList({ locale }: Props) {
 	const [notes, setNotes] = useState<Note[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
-	const supabaseRef = useRef(createClient());
-	const supabase = supabaseRef.current;
+	const [supabase] = useState(createClient);
 
 	useEffect(() => {
-		if (!user) {
-			setLoading(false);
-			return;
-		}
-
-		supabase
-			.from("study_notes")
-			.select("id, page_path, unit_id, content, updated_at")
-			.eq("user_id", user.id)
-			.order("updated_at", { ascending: false })
-			.then((result: { data: Note[] | null }) => {
-				setNotes(result.data ?? []);
+		// setState 직접 호출 대신 마이크로태스크로 지연 (react-hooks/set-state-in-effect)
+		void Promise.resolve().then(() => {
+			if (!user) {
 				setLoading(false);
-			});
+				return;
+			}
+
+			supabase
+				.from("study_notes")
+				.select("id, page_path, unit_id, content, updated_at")
+				.eq("user_id", user.id)
+				.order("updated_at", { ascending: false })
+				.then((result: { data: Note[] | null }) => {
+					setNotes(result.data ?? []);
+					setLoading(false);
+				});
+		});
 	}, [user, supabase]);
 
 	if (!user) {

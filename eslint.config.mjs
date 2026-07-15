@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
 		"out/**",
 		"build/**",
 		"next-env.d.ts",
+		// 리포 내 부속 디렉터리 — 앱 코드 아님
+		".claude/**",
+		"doc/**",
+		"supabase/**",
+		"scripts/**",
 	]),
 ]);
 

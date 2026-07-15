@@ -58,7 +58,7 @@ const features = [
   },
 ];
 
-export default function HomeFeatures({ locale, isKo }: Props) {
+export default function HomeFeatures({ isKo }: Props) {
   const lang = isKo ? "ko" : "en";
   return (
     <section className="section" aria-labelledby="features-title">

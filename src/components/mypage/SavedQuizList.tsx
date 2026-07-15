@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -23,8 +23,7 @@ export default function SavedQuizList({ locale }: Props) {
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
-	const supabaseRef = useRef(createClient());
-	const supabase = supabaseRef.current;
+	const [supabase] = useState(createClient);
 
 	useEffect(() => {
 		async function load() {

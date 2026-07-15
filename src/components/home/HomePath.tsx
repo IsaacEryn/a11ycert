@@ -22,7 +22,7 @@ const steps = [
   },
 ];
 
-export default function HomePath({ locale, isKo }: Props) {
+export default function HomePath({ isKo }: Props) {
   const lang = isKo ? "ko" : "en";
   return (
     <section className="section section--alt" aria-labelledby="path-title">

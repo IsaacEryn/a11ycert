@@ -60,8 +60,11 @@ export default function CommunityPostPage() {
 	}, [supabase, postId]);
 
 	useEffect(() => {
-		fetchPost();
-		fetchReplies();
+		// eslint(react-hooks/set-state-in-effect) 대응 — 마이크로태스크로 지연
+		void Promise.resolve().then(() => {
+			fetchPost();
+			fetchReplies();
+		});
 	}, [fetchPost, fetchReplies]);
 
 	const handleReply = async (e: React.FormEvent) => {

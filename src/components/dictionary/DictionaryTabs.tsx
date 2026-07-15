@@ -20,7 +20,7 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 	const t = useTranslations("dictionary");
 	const auth = useOptionalAuth();
 	const userId = auth?.user?.id ?? null;
-	const supabaseRef = useRef(createClient());
+	const [supabaseClient] = useState(createClient);
 
 	const dictionary = useLearningStore((s) => s.dictionary);
 	const getDictionary = useLearningStore((s) => s.getDictionary);
@@ -45,7 +45,7 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 		let cancelled = false;
 		const fetchEntries = async () => {
 			setLoading(true);
-			const { data, error } = await supabaseRef.current
+			const { data, error } = await supabaseClient
 				.from("dictionary_entries")
 				.select("entry_id, source, word_ko, word_en, meaning_ko, meaning_en, box, due_at, created_at")
 				.order("created_at", { ascending: false });
@@ -57,7 +57,7 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 		return () => {
 			cancelled = true;
 		};
-	}, [userId]);
+	}, [userId, supabaseClient]);
 
 	// 로그인: DB가 소스(비어 있으면 로컬 fallback — 이관 직후 반영 지연 대비), 비로그인: 로컬
 	const entries = useMemo(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- 아바타는 임의 외부 호스트 URL이라 next/image 부적합 */
 "use client";
 
 import { useState } from "react";

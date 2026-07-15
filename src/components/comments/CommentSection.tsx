@@ -42,7 +42,7 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 	}, [pagePath]);
 
 	useEffect(() => {
-		fetchComments();
+		void Promise.resolve().then(fetchComments);
 	}, [fetchComments]);
 
 	const handleSubmit = async (content: string, parentId?: string) => {

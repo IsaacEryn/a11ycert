@@ -6,7 +6,6 @@ import {
 	useEffect,
 	useState,
 	useCallback,
-	useRef,
 	type ReactNode,
 } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -56,9 +55,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [isLoading, setIsLoading] = useState(true);
 
 	// createClient()는 싱글톤이지만 매 렌더마다 새 참조를 반환하므로
-	// useRef로 고정해 useCallback/useEffect 의존성 배열 재실행 방지
-	const supabaseRef = useRef(createClient());
-	const supabase = supabaseRef.current;
+	// useState 지연 초기화로 고정해 useCallback/useEffect 의존성 재실행 방지
+	const [supabase] = useState(createClient);
 
 	const fetchProfile = useCallback(
 		async (userId: string) => {

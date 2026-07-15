@@ -37,7 +37,11 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
 
   const { saveQuestion, unsaveQuestion, addWrongAnswer, removeWrongAnswer, isSaved, getWrongNotes, languageMode, recordAttempt } =
     useLearningStore();
-  const startedAtRef = useRef<number>(Date.now());
+  // Date.now()를 렌더 중 호출하지 않도록 마운트 이후 기록
+  const startedAtRef = useRef<number | null>(null);
+  useEffect(() => {
+    startedAtRef.current ??= Date.now();
+  }, []);
   const auth = useOptionalAuth();
   const userId = auth?.user?.id ?? null;
   const isKo = locale === "ko";
@@ -102,7 +106,6 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
 
   const wrongInSession = questions.filter((_, i) => answers[i] && answers[i] !== questions[i].answer);
   const allWrong = getWrongNotes(exam);
-  const savedIds = questions.filter((q) => isSaved(exam, q.id));
 
   const handleSelect = (key: "a" | "b" | "c" | "d") => {
     if (answered) return;
@@ -131,7 +134,8 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
         mode: "practice" as const,
         total: questions.length,
         correct,
-        durationSeconds: Math.round((Date.now() - startedAtRef.current) / 1000),
+        durationSeconds:
+          startedAtRef.current != null ? Math.round((Date.now() - startedAtRef.current) / 1000) : null,
         domainStats: computeDomainStats(questions, finalAnswers),
         createdAt: new Date().toISOString(),
       };

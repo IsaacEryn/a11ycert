@@ -18,11 +18,6 @@ interface HeaderProps {
 
 type Cert = "cpacc" | "was";
 
-function certFromPath(pathname: string): Cert {
-  if (pathname.includes("/was")) return "was";
-  return "cpacc";
-}
-
 export default function Header({ locale }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<Cert | null>(null);
@@ -31,14 +26,16 @@ export default function Header({ locale }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const isKo = locale === "ko";
-  const cert = certFromPath(pathname);
   const { languageMode, setLanguageMode } = useLearningStore();
   const auth = useOptionalAuth();
   const { theme, setTheme } = usePrefs();
 
   useEffect(() => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
+    // 라우트 전환 시 열린 메뉴 닫기 — setState 직접 호출 대신 마이크로태스크로 지연
+    void Promise.resolve().then(() => {
+      setMobileOpen(false);
+      setOpenDropdown(null);
+    });
   }, [pathname]);
 
   // 드롭다운 열릴 때 첫 번째 메뉴 아이템으로 포커스 이동

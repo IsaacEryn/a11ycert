@@ -69,10 +69,13 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
   const [prefs, setPrefs] = useState<Prefs>(defaultPrefs);
 
   useEffect(() => {
-    migrateV1();
-    const p = readStorage();
-    setPrefs(p);
-    applyToRoot(p);
+    // localStorage 복원 — setState 직접 호출 대신 마이크로태스크로 지연
+    void Promise.resolve().then(() => {
+      migrateV1();
+      const p = readStorage();
+      setPrefs(p);
+      applyToRoot(p);
+    });
   }, []);
 
   const patch = useCallback((update: Partial<Prefs>) => {

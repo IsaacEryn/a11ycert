@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element -- 아바타는 임의 외부 호스트 URL이라 next/image 부적합 */
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
@@ -21,8 +22,7 @@ export default function SettingsClient({ locale }: { locale: string }) {
 	const auth = useOptionalAuth();
 	const router = useRouter();
 	const pathname = usePathname();
-	const supabaseRef = useRef(createClient());
-	const supabase = supabaseRef.current;
+	const [supabase] = useState(createClient);
 
 	const profile = auth?.profile ?? null;
 

@@ -29,7 +29,6 @@ export function createClient() {
 
 /** Supabase 미연결 시 에러 없이 동작하는 더미 클라이언트 */
 function createDummyClient() {
-  const noop = () => ({ data: null, error: null });
   const noopAsync = async () => ({ data: null, error: null });
 
   const authMethods = {
@@ -38,7 +37,7 @@ function createDummyClient() {
     signInWithOAuth: noopAsync,
     signOut: noopAsync,
     exchangeCodeForSession: noopAsync,
-    onAuthStateChange: (_event: string, _callback: unknown) => ({
+    onAuthStateChange: () => ({
       data: { subscription: { unsubscribe: () => {} } },
     }),
   };

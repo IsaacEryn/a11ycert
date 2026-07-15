@@ -44,6 +44,8 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 	const [remaining, setRemaining] = useState(preset.timeLimitMinutes * 60);
 	const [liveMessage, setLiveMessage] = useState("");
 	const [timeUp, setTimeUp] = useState(false);
+	// 결과 렌더에서 Date.now()를 호출하지 않도록 제출 시점에 확정해 둔다
+	const [finalDuration, setFinalDuration] = useState<number | null>(null);
 
 	const startedAtRef = useRef<number | null>(null);
 	const announcedRef = useRef<Set<number>>(new Set());
@@ -69,6 +71,7 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 			const durationSeconds = startedAtRef.current
 				? Math.round((Date.now() - startedAtRef.current) / 1000)
 				: null;
+			setFinalDuration(durationSeconds);
 			const domainStats = computeDomainStats(questions, answers);
 			const correct = questions.filter((q, i) => answers[i] === q.answer).length;
 
@@ -240,9 +243,7 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 	if (stage === "result") {
 		const domainStats = computeDomainStats(questions, answers);
 		const pct = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
-		const durationSeconds = startedAtRef.current
-			? Math.round((Date.now() - startedAtRef.current) / 1000)
-			: null;
+		const durationSeconds = finalDuration;
 
 		return (
 			<div className="quiz-shell">

@@ -43,7 +43,6 @@ export function useQuizSession(
 ) {
 	const { shuffle = false, recordWrongAnswers = true } = options;
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps -- 셔플은 마운트 시 1회만
 	const questions = useMemo(
 		() => (shuffle ? shuffled(sourceQuestions) : sourceQuestions),
 		[sourceQuestions, shuffle]
