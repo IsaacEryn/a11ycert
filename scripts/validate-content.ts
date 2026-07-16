@@ -72,6 +72,11 @@ function validateDomains(cert: string, domains: DomainGroup[]): QuizQuestion[] {
 					if (sec.paragraphs.ko.length === 0) errors.push(`${u.id} sections[${si}]: paragraphs 비어 있음`);
 					sec.paragraphs.ko.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].ko[${i}] 빈 문자열`); });
 					sec.paragraphs.en.forEach((s, i) => { if (!s.trim()) errors.push(`${u.id} sections[${si}].en[${i}] 빈 문자열`); });
+					sec.codeExamples?.forEach((ex, ei) => {
+						checkPair(`${u.id} sections[${si}].codeExamples[${ei}] caption`, ex.caption);
+						if (!ex.code?.trim()) errors.push(`${u.id} sections[${si}].codeExamples[${ei}]: code 빈 문자열`);
+						if (!["html", "css", "js"].includes(ex.lang)) errors.push(`${u.id} sections[${si}].codeExamples[${ei}]: lang '${ex.lang}' 유효하지 않음`);
+					});
 					checkReferences(`${u.id} sections[${si}]`, sec.references);
 				});
 			} else if (u.available && u.content.ko.length === 0) {
@@ -126,16 +131,18 @@ function reportDistribution(cert: string, domains: DomainGroup[]) {
 	let paragraphs = 0;
 	let units = 0;
 	let refs = 0;
+	let codeExamples = 0;
 	for (const d of domains)
 		for (const u of d.units) {
 			byDomain[d.domain] += u.questions.length;
 			paragraphs += unitParagraphCount(u);
 			units += 1;
 			refs += (u.references?.length ?? 0) + (u.sections?.reduce((sum, s) => sum + (s.references?.length ?? 0), 0) ?? 0);
+			codeExamples += u.sections?.reduce((sum, s) => sum + (s.codeExamples?.length ?? 0), 0) ?? 0;
 		}
 	const total = Object.values(byDomain).reduce((a, b) => a + b, 0);
 	console.log(
-		`  ${cert.toUpperCase()}: ${units}단원 · 본문 ${paragraphs}문단 · 참고링크 ${refs}개 · 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
+		`  ${cert.toUpperCase()}: ${units}단원 · 본문 ${paragraphs}문단 · 참고링크 ${refs}개 · 코드예제 ${codeExamples}개 · 총 ${total}문항 — D1 ${byDomain[1]} / D2 ${byDomain[2]} / D3 ${byDomain[3]}`
 	);
 }
 

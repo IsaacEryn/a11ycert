@@ -20,10 +20,19 @@ export interface UnitReference {
 	url: string;
 }
 
+/** 코드 예제 — WAS 학습용 스니펫 (caption은 ko/en 쌍, code는 언어 중립) */
+export interface CodeExample {
+	caption: { ko: string; en: string };
+	lang: "html" | "css" | "js";
+	code: string;
+}
+
 /** 소제목 + 문단 묶음 — 긴 본문을 구조화 (ko/en 문단 배열 길이 일치 필수) */
 export interface UnitSection {
 	heading: { ko: string; en: string };
 	paragraphs: { ko: string[]; en: string[] };
+	/** 문단 뒤에 표시할 코드 예제 */
+	codeExamples?: CodeExample[];
 	/** 섹션 하단에 표시할 참고 링크 */
 	references?: UnitReference[];
 }

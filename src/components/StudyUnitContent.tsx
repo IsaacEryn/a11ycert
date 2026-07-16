@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { StudyUnit, UnitReference } from "@/lib/content/types";
 import AddWordButton from "@/components/dictionary/AddWordButton";
+import CodeExampleBlock from "@/components/CodeExampleBlock";
 import { useLearningStore } from "@/lib/store/learningStore";
 
 interface Props {
@@ -129,6 +130,9 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
                     <p lang="ko">{para}</p>
                     <p lang="en">{section.paragraphs.en[i] ?? ""}</p>
                   </div>
+                ))}
+                {section.codeExamples?.map((ex, xi) => (
+                  <CodeExampleBlock key={xi} example={ex} locale={locale} />
                 ))}
                 {section.references && section.references.length > 0 && (
                   <ReferencesBlock refs={section.references} locale={locale} />

@@ -1055,6 +1055,18 @@ button { font-family: inherit; cursor: pointer; }
 .bilingual-card__section-head { font-size: var(--fs-md); font-weight: 700; letter-spacing: -0.01em; padding-top: var(--space-3); border-top: 1px solid var(--divider); margin-bottom: var(--space-2); }
 .bilingual-card__section-head--en { color: var(--fg-muted); font-weight: 600; font-size: var(--fs-sm); font-style: italic; }
 
+/* 코드 예제 블록 — WAS 학습용 (그리드 전체 폭, 자체 가로 스크롤) */
+.code-example { grid-column: 1 / -1; margin: var(--space-2) 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.code-example__caption { display: flex; align-items: center; gap: var(--space-2); padding: 6px var(--space-3); font-size: var(--fs-xs); color: var(--fg-muted); background: var(--bg-muted); border-bottom: 1px solid var(--divider); }
+.code-example__lang { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--fg-subtle); letter-spacing: 0.06em; }
+.code-example__copy { margin-left: auto; padding: 2px 10px; font-size: var(--fs-xs); font-weight: 600; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-elev); color: var(--fg-muted); cursor: pointer; }
+.code-example pre { margin: 0; padding: var(--space-3) var(--space-4); overflow-x: auto; background: var(--bg-sunk); font-family: var(--font-mono); font-size: var(--fs-xs); line-height: 1.7; }
+.code-example code { font-family: inherit; }
+.code-tok--comment { color: var(--fg-subtle); font-style: italic; }
+.code-tok--string { color: var(--success); }
+.code-tok--keyword { color: var(--accent); font-weight: 600; }
+[data-theme="hc"] .code-tok--string, [data-theme="hc"] .code-tok--keyword { font-weight: 700; }
+
 /* 참고 자료 링크 블록 — 섹션 내(그리드 전체 폭) / 단원 하단 공용 */
 .bilingual-card__refs { grid-column: 1 / -1; margin-top: var(--space-2); padding: var(--space-3) var(--space-4); background: var(--bg-muted); border-radius: var(--radius); border: 1px solid var(--divider); }
 .bilingual-card__refs-label { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-1); }

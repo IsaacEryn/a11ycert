@@ -9,6 +9,9 @@ export const metadata: Metadata = {
 	robots: { index: false, follow: false },
 };
 
+// 인증 가드 페이지 — 빌드 시 프리렌더 대상이 아님 (Supabase env 없는 CI 빌드 보호)
+export const dynamic = "force-dynamic";
+
 /**
  * 관리자 가드 레이아웃 — 하위 전 페이지에 1회 적용.
  * 비로그인·비관리자는 홈으로 조용히 리다이렉트 (로그아웃 후 404 노출 방지).

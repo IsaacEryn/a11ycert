@@ -717,7 +717,10 @@
 		"notStarted": "Not started",
 		"objectives": "Objectives",
 		"navigate": "Navigate",
-		"continueStudying": "Continue: {cert} · {title}"
+		"continueStudying": "Continue: {cert} · {title}",
+		"copy": "Copy",
+		"copied": "Copied",
+		"copyCode": "Copy code: {caption}"
 	},
 	"wrongAnswers": {
 		"wrongAnswerPractice": "Wrong Answer Practice",

@@ -221,6 +221,26 @@ const units: StudyUnit[] = [
 						'Other key attributes: aria-hidden="true" (hides a subtree from AT while remaining visible), aria-required, aria-invalid, and aria-current (current page/step). Use aria-label for controls with no visible text, such as icon buttons — but when a visible label exists, it must be contained in the name (WCAG 2.5.3 Label in Name, for voice control users).',
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "아이콘 버튼의 접근 가능한 이름 — 잘못된 예와 올바른 예", en: "Accessible name for an icon button — wrong vs. right" },
+						lang: "html",
+						code: `<!-- ❌ 이름 없는 아이콘 버튼: 스크린 리더는 "버튼"으로만 읽음 -->
+<button><svg aria-hidden="true">…</svg></button>
+
+<!-- ✅ aria-label로 이름 제공 (보이는 라벨이 있으면 그 텍스트를 포함할 것) -->
+<button aria-label="검색">
+  <svg aria-hidden="true">…</svg>
+</button>`,
+					},
+					{
+						caption: { ko: "aria-labelledby로 이름, aria-describedby로 보조 설명 연결", en: "Name via aria-labelledby, supplementary hint via aria-describedby" },
+						lang: "html",
+						code: `<h2 id="ship-title">배송지 주소</h2>
+<p id="ship-hint">도로명 주소를 입력하세요.</p>
+<input aria-labelledby="ship-title" aria-describedby="ship-hint">`,
+					},
+				],
 			},
 			{
 				heading: { ko: "라이브 영역", en: "Live Regions" },
@@ -234,6 +254,17 @@ const units: StudyUnit[] = [
 						'Related roles: role="status" is equivalent to a polite live region and role="alert" to an assertive one. Practical tip: live regions work reliably when the container exists in the DOM from page load and only its content updates — inserting the region element itself dynamically often drops announcements.',
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "상태 알림은 polite, 긴급 오류만 alert", en: "Use polite status for updates; reserve alert for urgent errors" },
+						lang: "html",
+						code: `<!-- 폼 저장 결과 — 현재 낭독을 방해하지 않고 안내 -->
+<div role="status" aria-live="polite">저장되었습니다.</div>
+
+<!-- 긴급 오류 — assertive(role=alert)는 꼭 필요할 때만 -->
+<div role="alert">세션이 만료되었습니다. 다시 로그인해주세요.</div>`,
+					},
+				],
 			},
 		],
 		questions: [
@@ -384,6 +415,19 @@ const units: StudyUnit[] = [
 						"In an SPA, route changes don't reload the page, so focus and announcements linger in the previous state. On route change, give the new screen's main heading tabindex=\"-1\" and move focus to it, or announce the transition via a live region. Dynamic content (toasts, lists after deletion) also needs focus management so focus never dangles on removed elements.",
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "모달 포커스 관리 — 열 때 이동, 닫을 때 반환", en: "Modal focus management — move on open, restore on close" },
+						lang: "js",
+						code: `// 열기: 트리거를 기억하고 모달 안 첫 포커서블로 이동
+const opener = document.activeElement;
+dialog.showModal();
+dialog.querySelector("button, [href], input")?.focus();
+
+// 닫기: 원래 트리거로 포커스 반환 (사용자가 길을 잃지 않도록)
+dialog.addEventListener("close", () => opener.focus());`,
+					},
+				],
 			},
 		],
 		questions: [
@@ -628,6 +672,20 @@ const units: StudyUnit[] = [
 						"Placeholder text cannot substitute for a label — it disappears when typing begins and its default color often fails contrast. If the design must hide the label visually (e.g., a search box), use an sr-only class or aria-label — and any visible text must be contained in the accessible name (2.5.3).",
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "placeholder는 레이블이 아니다 — label 연결과 오류 통지", en: "Placeholder is not a label — proper label plus error wiring" },
+						lang: "html",
+						code: `<!-- ❌ placeholder만 있는 입력: 입력 시작하면 이름이 사라짐 -->
+<input type="email" placeholder="이메일">
+
+<!-- ✅ label 연결 + 오류를 aria-describedby·aria-invalid로 -->
+<label for="email">이메일</label>
+<input id="email" type="email" aria-invalid="true"
+       aria-describedby="email-err" autocomplete="email">
+<p id="email-err" role="alert">올바른 이메일 형식이 아닙니다.</p>`,
+					},
+				],
 			},
 			{
 				heading: { ko: "그룹화 — fieldset과 legend", en: "Grouping — fieldset and legend" },

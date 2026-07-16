@@ -717,7 +717,10 @@
 		"notStarted": "미시작",
 		"objectives": "학습 목표",
 		"navigate": "이동",
-		"continueStudying": "이어서 학습: {cert} · {title}"
+		"continueStudying": "이어서 학습: {cert} · {title}",
+		"copy": "복사",
+		"copied": "복사됨",
+		"copyCode": "코드 복사: {caption}"
 	},
 	"wrongAnswers": {
 		"wrongAnswerPractice": "오답 연습",

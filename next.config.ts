@@ -22,9 +22,9 @@ const securityHeaders = [
 		value: [
 			"default-src 'self'",
 			"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://ep2.adtrafficquality.google",
-			"style-src 'self' 'unsafe-inline'",
+			"style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com",
 			"img-src 'self' data: https:",
-			"font-src 'self' data:",
+			"font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com",
 			"connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google",
 			// AdSense 광고 iframe — 오버레이가 아닌 인라인 슬롯 내부에서만 렌더됨
 			"frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://ep2.adtrafficquality.google",

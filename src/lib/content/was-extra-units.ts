@@ -220,6 +220,20 @@ export const wasExtraUnits: StudyUnit[] = [
 						'Accordions are simpler: each header is a real `<button>` with aria-expanded for state and aria-controls for its panel. Wrapping the button in a heading (`<h3><button>`) gives both heading navigation and widget behavior. In both patterns, the crux is actually updating ARIA values when state changes.',
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "APG 탭 패턴 골격 — role·aria-selected·roving tabindex", en: "APG tabs skeleton — roles, aria-selected, roving tabindex" },
+						lang: "html",
+						code: `<div role="tablist" aria-label="설정">
+  <button role="tab" id="t1" aria-selected="true" aria-controls="p1">일반</button>
+  <button role="tab" id="t2" aria-selected="false" aria-controls="p2"
+          tabindex="-1">알림</button>
+</div>
+<div role="tabpanel" id="p1" aria-labelledby="t1">…</div>
+<div role="tabpanel" id="p2" aria-labelledby="t2" hidden>…</div>
+<!-- 화살표 키로 탭 간 이동, 활성 탭만 tabindex=0 (roving) -->`,
+					},
+				],
 			},
 			{
 				heading: { ko: "모달 다이얼로그", en: "Modal Dialogs" },
@@ -233,6 +247,19 @@ export const wasExtraUnits: StudyUnit[] = [
 						"The native `<dialog>` element's showModal() provides much of this — focus trapping, Esc, background inertness — and deserves first consideration. In custom implementations, aria-hidden on the background is not enough: focus can still escape into it, so real trap logic is required.",
 					],
 				},
+				codeExamples: [
+					{
+						caption: { ko: "네이티브 dialog — 이름 연결과 초기 포커스", en: "Native dialog — accessible name and initial focus" },
+						lang: "html",
+						code: `<dialog aria-labelledby="dlg-title">
+  <h2 id="dlg-title">변경 사항 저장</h2>
+  <p>저장하지 않은 변경 사항이 있습니다.</p>
+  <button autofocus>저장</button>
+  <button>취소</button>
+</dialog>
+<!-- showModal()은 포커스 트랩·ESC 닫기·inert 배경을 기본 제공 -->`,
+					},
+				],
 			},
 			{
 				heading: { ko: "콤보박스와 자동완성", en: "Comboboxes and Autocomplete" },
