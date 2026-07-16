@@ -889,5 +889,17 @@
 		"thisMayBeA": "일시적인 오류일 수 있습니다. 다시 시도해주세요.",
 		"tryAgain": "다시 시도",
 		"goHome": "홈으로"
+	},
+	"search": {
+		"dialogLabel": "통합 검색",
+		"inputLabel": "학습 단원과 용어 검색",
+		"placeholder": "단원·용어 검색… (초성 가능)",
+		"resultsLabel": "검색 결과",
+		"noResults": "결과가 없습니다",
+		"termTag": "용어",
+		"hintNavigate": "이동",
+		"hintOpen": "열기",
+		"hintClose": "닫기",
+		"openSearch": "검색 (Ctrl+K)"
 	}
 }

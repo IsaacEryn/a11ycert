@@ -1055,6 +1055,10 @@ button { font-family: inherit; cursor: pointer; }
 .bilingual-card__section-head { font-size: var(--fs-md); font-weight: 700; letter-spacing: -0.01em; padding-top: var(--space-3); border-top: 1px solid var(--divider); margin-bottom: var(--space-2); }
 .bilingual-card__section-head--en { color: var(--fg-muted); font-weight: 600; font-size: var(--fs-sm); font-style: italic; }
 
+/* 헤더 아이콘 버튼 (검색 등) */
+.header-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elev); color: var(--fg-muted); cursor: pointer; }
+.header-icon-btn:hover { color: var(--fg); border-color: var(--border-strong); }
+
 /* 코드 예제 블록 — WAS 학습용 (그리드 전체 폭, 자체 가로 스크롤) */
 .code-example { grid-column: 1 / -1; margin: var(--space-2) 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .code-example__caption { display: flex; align-items: center; gap: var(--space-2); padding: 6px var(--space-3); font-size: var(--fs-xs); color: var(--fg-muted); background: var(--bg-muted); border-bottom: 1px solid var(--divider); }

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ModeMenu from "./ModeMenu";
+import SearchButton from "./search/SearchButton";
 import MobileSheet from "./MobileSheet";
 import UserMenu from "./auth/UserMenu";
 import GoogleLogo from "./auth/GoogleLogo";
@@ -175,6 +176,8 @@ export default function Header({ locale }: HeaderProps) {
           </nav>
 
           <div className="app-header__spacer" />
+
+          <SearchButton locale={locale} />
 
           {/* Desktop-only controls */}
           <div className="header-desktop">

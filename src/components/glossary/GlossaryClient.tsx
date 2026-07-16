@@ -79,8 +79,10 @@ export default function GlossaryClient({ terms, locale }: Props) {
       if (sortMode !== defaultSort) params.set("sort", sortMode);
       const qs = params.toString();
       // 딥링크 hash 보존 (replace가 hash를 지우지 않도록)
+      // 클라이언트 내비게이션 직후 pathname에 hash가 섞여 들어오는 경우가 있어 제거 후 조합 (중복 방지)
       const hash = window.location.hash;
-      router.replace(`${pathname}${qs ? `?${qs}` : ""}${hash}`, { scroll: false });
+      const cleanPath = pathname.split("#")[0];
+      router.replace(`${cleanPath}${qs ? `?${qs}` : ""}${hash}`, { scroll: false });
     }, 300);
     return () => clearTimeout(timer);
   }, [query, certFilter, sortMode, defaultSort, pathname, router]);

@@ -889,5 +889,17 @@
 		"thisMayBeA": "This may be a temporary issue. Please try again.",
 		"tryAgain": "Try again",
 		"goHome": "Go home"
+	},
+	"search": {
+		"dialogLabel": "Site search",
+		"inputLabel": "Search units and terms",
+		"placeholder": "Search units & terms…",
+		"resultsLabel": "Search results",
+		"noResults": "No results",
+		"termTag": "Term",
+		"hintNavigate": "Navigate",
+		"hintOpen": "Open",
+		"hintClose": "Close",
+		"openSearch": "Search (Ctrl+K)"
 	}
 }
