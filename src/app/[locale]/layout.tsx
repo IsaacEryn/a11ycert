@@ -10,6 +10,7 @@ import AuthProvider from "@/lib/auth/AuthProvider";
 import { PrefsProvider } from "@/lib/prefs/PrefsContext";
 import AdSenseScript from "@/components/ads/AdSenseScript";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import SwRegister from "@/components/SwRegister";
 import RouteTracker from "@/components/analytics/RouteTracker";
 import { Suspense } from "react";
 import "../globals.css";
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
 							<Footer locale={locale} />
 							<AdSenseScript />
 							<GoogleAnalytics />
+							<SwRegister />
 							<Suspense fallback={null}>
 								<RouteTracker />
 							</Suspense>

@@ -933,5 +933,9 @@
 		},
 		"officialLink": "Official IAAP exam page",
 		"handbookLink": "Candidate handbook (PDF)"
+	},
+	"offline": {
+		"title": "You're offline",
+		"body": "The network is unavailable. Study pages you've visited before remain readable offline — the latest content loads automatically once you reconnect."
 	}
 }
