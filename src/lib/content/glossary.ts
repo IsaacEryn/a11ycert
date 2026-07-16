@@ -1034,4 +1034,378 @@ export const glossaryTerms: GlossaryTerm[] = [
     certs: ["was"],
     aliases: ["1.3.5"],
   },
+
+  // ── CPACC 축 확장 (배치 D-8 2차) ────────────────────────────────────────
+  {
+    id: "rehabilitation-act-504",
+    term: { ko: "재활법 504조", en: "Section 504 (Rehabilitation Act)" },
+    definition: {
+      ko: "연방 재정 지원을 받는 프로그램(학교·병원 등)에서 장애 차별을 금지하는 1973년 미국 재활법 조항. 연방기관 ICT를 다루는 508조와 구별하세요.",
+      en: "The 1973 Rehabilitation Act clause banning disability discrimination in federally funded programs (schools, hospitals). Distinguish from 508, which covers federal ICT.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "acaa",
+    term: { ko: "항공사 접근법 (ACAA)", en: "Air Carrier Access Act (ACAA)" },
+    definition: {
+      ko: "항공 여행에서의 장애 차별을 금지하는 미국 법(1986). 항공사 웹사이트·키오스크 접근성 요구의 근거로, 도메인 특화법의 대표 사례입니다.",
+      en: "US law (1986) banning disability discrimination in air travel — the basis for airline website and kiosk accessibility, a classic domain-specific law.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "idea",
+    term: { ko: "장애인교육법 (IDEA)", en: "Individuals with Disabilities Education Act (IDEA)" },
+    definition: {
+      ko: "장애 학생에게 무상의 적절한 공교육(FAPE)과 개별화교육계획(IEP)을 보장하는 미국 교육법.",
+      en: "US education law guaranteeing students with disabilities a free appropriate public education (FAPE) and an IEP.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "equality-act-2010",
+    term: { ko: "영국 평등법 2010", en: "Equality Act 2010 (UK)" },
+    definition: {
+      ko: "장애를 포함한 보호 특성에 대한 차별을 금지하는 영국 법. 서비스 제공자에게 '합리적 조정(reasonable adjustments)' 의무를 부과하며 웹사이트에도 적용됩니다.",
+      en: "UK law prohibiting discrimination across protected characteristics including disability. Imposes a 'reasonable adjustments' duty on service providers, applying to websites.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "dda-australia",
+    term: { ko: "호주 장애차별금지법 (DDA)", en: "Disability Discrimination Act 1992 (Australia)" },
+    definition: {
+      ko: "호주의 장애 차별 금지법. 2000년 시드니 올림픽 웹사이트 소송(Maguire v SOCOG)이 웹 접근성에 적용된 첫 유명 판례입니다.",
+      en: "Australia's disability discrimination law. Maguire v SOCOG (Sydney 2000 Olympics website) was the first famous web accessibility case under it.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "accessible-canada-act",
+    term: { ko: "접근성 캐나다법 (ACA)", en: "Accessible Canada Act (ACA)" },
+    definition: {
+      ko: "2019년 제정된 캐나다 연방 접근성법. 연방 관할 조직에 장벽 식별·제거·예방 계획을 요구하며, 주 단위 AODA와 별개로 작동합니다.",
+      en: "Canada's 2019 federal accessibility law requiring federally regulated organizations to identify, remove, and prevent barriers — separate from provincial AODA.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "wad",
+    term: { ko: "EU 웹접근성 지침 (WAD)", en: "EU Web Accessibility Directive (WAD)" },
+    definition: {
+      ko: "EU 회원국 공공 부문 웹사이트·모바일 앱에 접근성(사실상 EN 301 549/WCAG 2.1 AA)을 의무화한 2016년 지침. 접근성 성명 게시와 주기적 모니터링을 요구합니다.",
+      en: "The 2016 EU directive mandating accessibility (effectively EN 301 549/WCAG 2.1 AA) for public sector websites and apps, with accessibility statements and monitoring.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "jangchabeop",
+    term: { ko: "장애인차별금지법 (장차법)", en: "Korean Anti-Discrimination Act" },
+    definition: {
+      ko: "한국의 「장애인차별금지 및 권리구제 등에 관한 법률」(2008 시행). 전자정보 접근에서 정당한 편의 제공을 요구하며, 웹 접근성 의무의 법적 근거입니다.",
+      en: "Korea's Act on the Prohibition of Discrimination against Persons with Disabilities (2008), requiring reasonable accommodation in access to electronic information — the legal basis for web accessibility in Korea.",
+    },
+    certs: ["cpacc"],
+    aliases: ["장차법"],
+  },
+  {
+    id: "kwcag",
+    term: { ko: "KWCAG (한국형 웹 콘텐츠 접근성 지침)", en: "KWCAG (Korean Web Content Accessibility Guidelines)" },
+    definition: {
+      ko: "WCAG를 기반으로 국내 환경에 맞게 조정한 한국의 국가 표준 지침. 공공기관 웹 접근성 평가의 기준으로 쓰입니다.",
+      en: "Korea's national guidelines adapted from WCAG for the domestic context, used as the benchmark for public sector web accessibility evaluation.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "wa-certification",
+    term: { ko: "웹 접근성 품질인증 마크", en: "Korean Web Accessibility Certification Mark" },
+    definition: {
+      ko: "과기정통부 지정 인증기관이 KWCAG 준수를 심사해 부여하는 한국의 임의 인증 제도. 법적 의무는 아니며 1년 단위로 갱신합니다.",
+      en: "Korea's voluntary certification: designated bodies audit KWCAG conformance and grant a yearly renewable mark. It is not legally mandatory.",
+    },
+    certs: ["cpacc"],
+    aliases: ["와 인증"],
+  },
+  {
+    id: "udhr",
+    term: { ko: "세계인권선언 (UDHR)", en: "Universal Declaration of Human Rights (UDHR)" },
+    definition: {
+      ko: "1948년 UN 총회가 채택한 최초의 보편적 인권 문서. 법적 구속력 없는 '선언'으로, 구속력 있는 조약인 CRPD와 문서 유형이 다릅니다.",
+      en: "The first universal human rights document (UN, 1948). A non-binding declaration — unlike the CRPD, which is a binding treaty.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "african-charter",
+    term: { ko: "아프리카 인권 헌장", en: "African Charter on Human and Peoples' Rights" },
+    definition: {
+      ko: "아프리카연합 회원국에 적용되는 1981년 인권 조약(반줄 헌장). 제18조가 장애인의 특별 보호를 규정하며, 2018년 장애인 권리 의정서가 추가됐습니다.",
+      en: "The 1981 human rights treaty of African Union states (Banjul Charter); Article 18 protects disabled people, with a 2018 disability rights protocol.",
+    },
+    certs: ["cpacc"],
+    aliases: ["반줄 헌장", "banjul"],
+  },
+  {
+    id: "inter-american-convention",
+    term: { ko: "미주 장애인 차별 철폐 협약", en: "Inter-American Convention on Disability Discrimination" },
+    definition: {
+      ko: "미주기구(OAS)의 1999년 협약 — 세계 최초의 장애 특화 지역 인권 협약으로 UN CRPD(2006)보다 앞섭니다.",
+      en: "The OAS convention of 1999 — the world's first disability-specific regional human rights instrument, predating the UN CRPD (2006).",
+    },
+    certs: ["cpacc"],
+    aliases: ["oas"],
+  },
+  {
+    id: "sdgs",
+    term: { ko: "지속가능발전목표 (SDGs)", en: "Sustainable Development Goals (SDGs)" },
+    definition: {
+      ko: "2015년 UN이 채택한 2030 의제의 17개 목표. '누구도 소외되지 않게(Leave No One Behind)'라는 원칙 아래 교육·고용·도시 목표 등에 장애를 명시적으로 포함합니다.",
+      en: "The UN's 17 goals of the 2030 Agenda (2015). Under 'Leave No One Behind,' disability is explicit in education, employment, and cities goals.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "g3ict",
+    term: { ko: "G3ict", en: "G3ict" },
+    definition: {
+      ko: "접근 가능한 ICT를 위한 글로벌 이니셔티브 — CRPD의 ICT 접근성 조항 이행을 지원하는 비영리 기구로, IAAP의 모기관입니다.",
+      en: "The Global Initiative for Inclusive ICTs — a nonprofit advancing the CRPD's ICT accessibility agenda and the parent organization of IAAP.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "low-vision",
+    term: { ko: "저시력", en: "Low Vision" },
+    definition: {
+      ko: "교정으로도 완전히 회복되지 않는 시력 저하. 확대, 고대비, 사용자 지정 색·글꼴에 의존하며, 리플로우(1.4.10)와 충분한 대비가 핵심 요구입니다.",
+      en: "Vision loss not fully correctable. Users rely on magnification, high contrast, and custom colors/fonts; reflow (1.4.10) and adequate contrast are key requirements.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "hard-of-hearing",
+    term: { ko: "난청", en: "Hard of Hearing" },
+    definition: {
+      ko: "잔존 청력이 있는 청각 손실. 보청기·자막·음량 조절에 의존하며, 농(Deaf)과 달리 음성 언어를 주로 사용합니다.",
+      en: "Hearing loss with residual hearing. Users rely on hearing aids, captions, and volume control, typically using spoken language unlike culturally Deaf users.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "deaf-culture",
+    term: { ko: "농문화", en: "Deaf Culture" },
+    definition: {
+      ko: "수어를 제1언어로 공유하는 공동체의 문화적 정체성(대문자 D의 Deaf). 장애가 아닌 언어적 소수자로 스스로를 이해하며, 정체성 우선 표현을 선호하는 경향이 있습니다.",
+      en: "The cultural identity of communities sharing sign language as a first language (capital-D Deaf) — self-understood as a linguistic minority, often preferring identity-first language.",
+    },
+    certs: ["cpacc"],
+    aliases: ["대문자 D"],
+  },
+  {
+    id: "sign-language",
+    term: { ko: "수어", en: "Sign Language" },
+    definition: {
+      ko: "손·표정·공간을 사용하는 독립된 문법의 시각 언어. 국가마다 다르며(한국수어·ASL 등), 음성 언어의 번역이 아닙니다. 한국수어는 2016년 법정 공용어가 됐습니다.",
+      en: "Visual languages with their own grammar using hands, facial expressions, and space. They differ by country (KSL, ASL) and are not translations of spoken language; KSL became an official language of Korea in 2016.",
+    },
+    certs: ["cpacc"],
+    aliases: ["수화"],
+  },
+  {
+    id: "cochlear-implant",
+    term: { ko: "인공와우", en: "Cochlear Implant" },
+    definition: {
+      ko: "달팽이관에 전극을 이식해 청신경을 직접 자극하는 장치. 보청기와 달리 소리를 증폭하지 않고 전기 신호로 변환하며, 농문화 관점에서는 선택을 둘러싼 논쟁이 있습니다.",
+      en: "A device stimulating the auditory nerve via electrodes in the cochlea — converting sound to electrical signals rather than amplifying. Its adoption is debated within Deaf culture.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "aac",
+    term: { ko: "보완대체의사소통 (AAC)", en: "Augmentative and Alternative Communication (AAC)" },
+    definition: {
+      ko: "말을 보완·대체하는 의사소통 수단의 총칭 — 그림 기호판, 음성생성장치(SGD), 태블릿 앱 등. 언어 장애의 핵심 보조기술입니다.",
+      en: "The umbrella for methods that supplement or replace speech — symbol boards, speech-generating devices, tablet apps. The core AT for speech disabilities.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "speech-generating-device",
+    term: { ko: "음성생성장치 (SGD)", en: "Speech-Generating Device (SGD)" },
+    definition: {
+      ko: "입력한 텍스트나 기호를 합성 음성으로 출력하는 AAC 기기. 스티븐 호킹이 사용한 장치가 대표 사례입니다.",
+      en: "An AAC device converting typed text or symbols to synthesized speech — Stephen Hawking's communication device is the famous example.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "braille",
+    term: { ko: "점자", en: "Braille" },
+    definition: {
+      ko: "6점(확장 8점) 촉각 문자 체계. 시각장애인 문해력의 핵심이며, 화면 콘텐츠는 갱신형 점자 디스플레이로 읽습니다. 한글 점자는 한국 고유 규정을 따릅니다.",
+      en: "The 6-dot (extended 8-dot) tactile writing system — central to blind literacy. Screen content is read on refreshable braille displays; Korean braille follows its own code.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "refreshable-braille-display",
+    term: { ko: "갱신형 점자 디스플레이", en: "Refreshable Braille Display" },
+    definition: {
+      ko: "핀이 오르내리며 한 줄씩 점자를 표시하는 하드웨어. 스크린 리더 출력과 연동되며, 농맹인에게는 사실상 유일한 디지털 접근 통로입니다.",
+      en: "Hardware whose pins raise and lower to render braille line by line, paired with screen readers — effectively the only digital channel for deaf-blind users.",
+    },
+    certs: ["cpacc"],
+    aliases: ["점자정보단말기"],
+  },
+  {
+    id: "screen-magnifier",
+    term: { ko: "화면 확대 프로그램", en: "Screen Magnifier" },
+    definition: {
+      ko: "화면 일부를 확대하고 포커스·커서를 따라가는 저시력용 소프트웨어(ZoomText, Windows 돋보기 등). 확대 시 잘리지 않는 콘텐츠 설계가 전제됩니다.",
+      en: "Low-vision software that enlarges part of the screen and tracks focus (ZoomText, Windows Magnifier). Content must not clip when enlarged.",
+    },
+    certs: ["cpacc"],
+    aliases: ["zoomtext", "돋보기"],
+  },
+  {
+    id: "eye-tracking",
+    term: { ko: "시선 추적", en: "Eye Tracking (Eye Gaze)" },
+    definition: {
+      ko: "눈동자 움직임으로 포인터를 제어하는 입력 기술. 사지마비 등 중증 운동 장애 사용자의 대표적 접근 수단으로, 충분한 타깃 크기가 중요합니다.",
+      en: "Controlling the pointer with eye movement — a primary access method for users with severe motor disabilities; generous target sizes matter.",
+    },
+    certs: ["cpacc"],
+    aliases: ["시선 입력"],
+  },
+  {
+    id: "head-pointer",
+    term: { ko: "헤드 포인터", en: "Head Pointer / Head Mouse" },
+    definition: {
+      ko: "머리 움직임으로 포인터를 조작하는 장치(카메라 추적 또는 막대형). 손 사용이 어려운 사용자의 포인팅 대안입니다.",
+      en: "Devices that steer the pointer with head movement (camera-tracked or stick-type) — a pointing alternative for users who can't use their hands.",
+    },
+    certs: ["cpacc"],
+    aliases: ["헤드 마우스"],
+  },
+  {
+    id: "voice-recognition",
+    term: { ko: "음성 인식 (음성 제어)", en: "Voice Recognition (Voice Control)" },
+    definition: {
+      ko: "말로 받아쓰기·명령을 수행하는 기술(Dragon, OS 음성 컨트롤). 사용자는 보이는 레이블을 말해 조작하므로 Label in Name(2.5.3)이 전제 조건입니다.",
+      en: "Dictation and command by speech (Dragon, OS voice control). Users speak visible labels to operate controls, making Label in Name (2.5.3) a precondition.",
+    },
+    certs: ["cpacc"],
+    aliases: ["dragon"],
+  },
+  {
+    id: "dyslexia",
+    term: { ko: "난독증", en: "Dyslexia" },
+    definition: {
+      ko: "지능과 무관하게 문자 해독·철자에 어려움을 겪는 학습 장애. TTS, 줄 강조, 넉넉한 행간·짧은 문단이 돕고, 텍스트를 이미지로 만들면 도구가 작동하지 못합니다.",
+      en: "A learning disability affecting decoding and spelling regardless of intelligence. TTS, line highlighting, generous spacing, and short paragraphs help; text-as-image defeats those tools.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "adhd",
+    term: { ko: "ADHD (주의력결핍 과잉행동장애)", en: "ADHD" },
+    definition: {
+      ko: "주의 조절·충동성에 영향을 주는 신경발달적 특성. 움직이는 콘텐츠 정지 수단(2.2.2), 시간 연장, 단순한 과업 흐름이 핵심 대응입니다.",
+      en: "A neurodevelopmental condition affecting attention regulation and impulsivity. Pausable motion (2.2.2), extendable time, and simple task flows are the key responses.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "autism-spectrum",
+    term: { ko: "자폐 스펙트럼", en: "Autism Spectrum" },
+    definition: {
+      ko: "사회적 소통·감각 처리 방식이 다양한 신경발달적 스펙트럼. 예측 가능한 UI, 명확한 언어, 감각 과부하(자동재생·애니메이션) 회피가 돕습니다. 자기옹호 공동체는 정체성 우선 표현을 선호하는 경향이 있습니다.",
+      en: "A neurodevelopmental spectrum of differences in social communication and sensory processing. Predictable UI, clear language, and avoiding sensory overload help; the self-advocacy community often prefers identity-first language.",
+    },
+    certs: ["cpacc"],
+    aliases: ["asd", "자폐"],
+  },
+  {
+    id: "aphasia",
+    term: { ko: "실어증", en: "Aphasia" },
+    definition: {
+      ko: "뇌 손상(주로 뇌졸중)으로 언어의 이해·표현이 어려워지는 상태. 지능 손상이 아니며, 쉬운 언어·그림 병용·충분한 시간이 핵심 대응입니다.",
+      en: "Difficulty understanding or producing language after brain injury (often stroke) — not an intellectual impairment. Plain language, imagery, and generous time are key.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "intellectual-disability",
+    term: { ko: "지적 장애", en: "Intellectual Disability" },
+    definition: {
+      ko: "지적 기능과 적응 행동의 제한이 발달기에 나타나는 상태. 쉬운 언어(Easy Read), 단계적 안내, 일관된 구조가 접근성의 핵심입니다.",
+      en: "Limitations in intellectual functioning and adaptive behavior arising in the developmental period. Easy Read language, stepwise guidance, and consistent structure are central.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "tbi",
+    term: { ko: "외상성 뇌손상 (TBI)", en: "Traumatic Brain Injury (TBI)" },
+    definition: {
+      ko: "외부 충격으로 인한 뇌 손상. 기억·주의·피로 문제가 흔해 저장·재개 기능, 시간 여유, 낮은 인지 부하 설계가 돕습니다.",
+      en: "Brain injury from external force, commonly affecting memory, attention, and fatigue — save/resume, generous timing, and low cognitive load help.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "charity-model",
+    term: { ko: "자선 모델", en: "Charity Model of Disability" },
+    definition: {
+      ko: "장애인을 동정과 시혜의 대상으로 보는 관점. 당사자의 주체성을 약화시킨다는 비판을 받으며, 모금 캠페인의 '비극 서사'가 전형적 표현입니다.",
+      en: "Views disabled people as objects of pity and charity — criticized for undermining agency; 'tragedy narratives' in fundraising are the typical expression.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "economic-model",
+    term: { ko: "경제 모델", en: "Economic Model of Disability" },
+    definition: {
+      ko: "장애를 노동 능력·생산성 관점에서 정의하는 모델. 복지 급여 자격 판정 등 정책의 근거가 되지만, 사람의 가치를 경제적 기여로 축소한다는 비판이 있습니다.",
+      en: "Defines disability by work capacity and productivity — underpinning benefit eligibility, but criticized for reducing worth to economic contribution.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "functional-solutions-model",
+    term: { ko: "기능적 해결 모델", en: "Functional Solutions Model" },
+    definition: {
+      ko: "장애가 만드는 기능적 제한을 기술·서비스로 해결하는 실용주의적 관점. 보조기술 개발의 토대이지만 사회 변화보다 개별 해결에 치우칠 수 있습니다.",
+      en: "A pragmatic view solving functional limitations with technology and services — the foundation of AT development, though it can favor individual fixes over social change.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "social-identity-model",
+    term: { ko: "사회 정체성/문화 소속 모델", en: "Social Identity / Cultural Affiliation Model" },
+    definition: {
+      ko: "장애를 자부심과 문화적 정체성의 원천으로 보는 모델. 수어를 쓰는 농 공동체가 대표 사례입니다.",
+      en: "Views disability as a source of pride and cultural identity — the signing Deaf community is the prime example.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "inclusive-design",
+    term: { ko: "포용적 설계", en: "Inclusive Design" },
+    definition: {
+      ko: "배제된 사용자에게서 배우고 다양성을 설계 과정에 참여시키는 방법론. '모두를 위한 하나의 산출물'을 지향하는 보편적 설계와 달리 과정과 방법을 강조합니다.",
+      en: "A methodology of learning from excluded users and involving diversity in the process — emphasizing method, where Universal Design emphasizes a single outcome for all.",
+    },
+    certs: ["cpacc"],
+  },
+  {
+    id: "ud-seven-principles",
+    term: { ko: "보편적 설계 7원칙", en: "Seven Principles of Universal Design" },
+    definition: {
+      ko: "공평한 사용, 사용상의 융통성, 간단하고 직관적인 사용, 인지 가능한 정보, 오류에 대한 관용, 낮은 신체적 노력, 접근·사용을 위한 크기와 공간 — 노스캐롤라이나 주립대 CUD(1997)가 정립.",
+      en: "Equitable Use, Flexibility in Use, Simple and Intuitive Use, Perceptible Information, Tolerance for Error, Low Physical Effort, and Size and Space for Approach and Use — formulated by NC State's CUD (1997).",
+    },
+    certs: ["cpacc"],
+  },
 ];
