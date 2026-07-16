@@ -641,4 +641,397 @@ export const glossaryTerms: GlossaryTerm[] = [
     certs: ["cpacc"],
     aliases: ["hidden disability", "숨겨진 장애"],
   },
+
+  // ── WAS 실무 축 확장 (배치 D-8 1차) ──────────────────────────────────────
+  {
+    id: "text-alternatives",
+    term: { ko: "텍스트 대안", en: "Text Alternatives" },
+    definition: {
+      ko: "이미지·아이콘 등 텍스트 아닌 콘텐츠에 동등한 목적의 텍스트를 제공하라는 원칙(WCAG 1.1.1). alt 속성, aria-label, 인접 텍스트 등이 수단입니다.",
+      en: "The principle (WCAG 1.1.1) that non-text content needs text serving the equivalent purpose — via alt attributes, aria-label, or adjacent text.",
+    },
+    certs: ["was"],
+    aliases: ["1.1.1"],
+  },
+  {
+    id: "audio-description",
+    term: { ko: "음성 해설", en: "Audio Description" },
+    definition: {
+      ko: "영상의 시각 정보(장면·동작·자막 외 텍스트)를 말로 설명하는 대체 수단. 사전 녹화 영상에 대해 WCAG 1.2.5(AA)가 요구합니다.",
+      en: "Narration describing a video's visual information (scenes, actions, on-screen text). Required for prerecorded video by WCAG 1.2.5 (AA).",
+    },
+    certs: ["was"],
+    aliases: ["AD"],
+  },
+  {
+    id: "info-and-relationships",
+    term: { ko: "정보와 관계", en: "Info and Relationships" },
+    definition: {
+      ko: "시각적으로 표현된 구조·관계(헤딩, 목록, 표, 레이블)를 마크업으로도 프로그램이 인식할 수 있게 하라는 기준(WCAG 1.3.1). 가장 자주 위반되는 기준 중 하나입니다.",
+      en: "Structure and relationships conveyed visually (headings, lists, tables, labels) must be programmatically determinable (WCAG 1.3.1) — one of the most commonly failed criteria.",
+    },
+    certs: ["was"],
+    aliases: ["1.3.1"],
+  },
+  {
+    id: "meaningful-sequence",
+    term: { ko: "의미 있는 순서", en: "Meaningful Sequence" },
+    definition: {
+      ko: "콘텐츠의 읽기 순서가 의미에 영향을 줄 때, DOM 순서가 그 의미를 보존해야 한다는 기준(WCAG 1.3.2). CSS로 시각 순서만 바꾸면 스크린 리더 순서와 어긋날 수 있습니다.",
+      en: "When reading order affects meaning, the DOM order must preserve it (WCAG 1.3.2). Reordering visually with CSS can desynchronize screen reader order.",
+    },
+    certs: ["was"],
+    aliases: ["1.3.2"],
+  },
+  {
+    id: "use-of-color",
+    term: { ko: "색상 사용", en: "Use of Color" },
+    definition: {
+      ko: "색을 정보 전달의 유일한 수단으로 쓰지 말라는 기준(WCAG 1.4.1). 오류 표시·링크 구분·차트 계열에 패턴·텍스트·아이콘을 병기해야 합니다.",
+      en: "Color must not be the only visual means of conveying information (WCAG 1.4.1) — pair it with patterns, text, or icons for errors, links, and chart series.",
+    },
+    certs: ["was"],
+    aliases: ["1.4.1"],
+  },
+  {
+    id: "text-spacing",
+    term: { ko: "텍스트 간격", en: "Text Spacing" },
+    definition: {
+      ko: "사용자가 줄·문단·자간·어간 간격을 지정값까지 늘려도 콘텐츠와 기능이 손실되지 않아야 한다는 기준(WCAG 1.4.12). 고정 높이 컨테이너에서 잘림이 흔한 실패입니다.",
+      en: "Content must survive user-increased line, paragraph, letter, and word spacing (WCAG 1.4.12). Clipping in fixed-height containers is the common failure.",
+    },
+    certs: ["was"],
+    aliases: ["1.4.12"],
+  },
+  {
+    id: "pointer-gestures",
+    term: { ko: "포인터 제스처", en: "Pointer Gestures" },
+    definition: {
+      ko: "멀티포인트·경로 기반 제스처(핀치 줌, 스와이프)에는 단일 포인터 대안을 제공하라는 기준(WCAG 2.5.1). 운동 장애·보조기기 사용자를 위한 요구입니다.",
+      en: "Multipoint or path-based gestures (pinch, swipe) need single-pointer alternatives (WCAG 2.5.1) — for users with motor disabilities and assistive devices.",
+    },
+    certs: ["was"],
+    aliases: ["2.5.1"],
+  },
+  {
+    id: "label-in-name",
+    term: { ko: "이름의 레이블", en: "Label in Name" },
+    definition: {
+      ko: "보이는 레이블 텍스트가 접근 가능한 이름에 포함되어야 한다는 기준(WCAG 2.5.3). 음성 제어 사용자가 보이는 텍스트를 말해 조작하기 때문입니다.",
+      en: "The visible label text must be contained in the accessible name (WCAG 2.5.3), because voice control users speak what they see.",
+    },
+    certs: ["was"],
+    aliases: ["2.5.3"],
+  },
+  {
+    id: "dragging-movements",
+    term: { ko: "드래그 동작", en: "Dragging Movements" },
+    definition: {
+      ko: "드래그로 수행하는 기능에 단일 포인터(클릭 등) 대안을 요구하는 기준(WCAG 2.5.7, 2.2 신설). 정렬·슬라이더에 버튼 대안을 제공합니다.",
+      en: "Functions performed by dragging need a single-pointer alternative (WCAG 2.5.7, new in 2.2) — e.g., buttons alongside sortable lists and sliders.",
+    },
+    certs: ["was"],
+    aliases: ["2.5.7"],
+  },
+  {
+    id: "focus-not-obscured",
+    term: { ko: "포커스 가림 방지", en: "Focus Not Obscured" },
+    definition: {
+      ko: "포커스를 받은 요소가 고정 헤더·배너 등에 완전히 가려지지 않아야 한다는 기준(WCAG 2.4.11, 2.2 신설).",
+      en: "A focused element must not be entirely hidden by sticky headers or banners (WCAG 2.4.11, new in 2.2).",
+    },
+    certs: ["was"],
+    aliases: ["2.4.11"],
+  },
+  {
+    id: "consistent-navigation",
+    term: { ko: "일관된 내비게이션", en: "Consistent Navigation" },
+    definition: {
+      ko: "여러 페이지에서 반복되는 내비게이션은 같은 상대 순서로 나타나야 한다는 기준(WCAG 3.2.3). 인지 장애 사용자의 예측 가능성을 지킵니다.",
+      en: "Repeated navigation must appear in the same relative order across pages (WCAG 3.2.3), preserving predictability for users with cognitive disabilities.",
+    },
+    certs: ["was"],
+    aliases: ["3.2.3"],
+  },
+  {
+    id: "error-suggestion",
+    term: { ko: "오류 수정 제안", en: "Error Suggestion" },
+    definition: {
+      ko: "입력 오류가 감지되고 수정 방법을 알 수 있다면 사용자에게 제안하라는 기준(WCAG 3.3.3). '잘못된 형식'보다 '예: name@example.com'이 낫습니다.",
+      en: "When an input error is detected and a fix is known, suggest it (WCAG 3.3.3) — 'e.g., name@example.com' beats 'invalid format'.",
+    },
+    certs: ["was"],
+    aliases: ["3.3.3"],
+  },
+  {
+    id: "accessible-authentication",
+    term: { ko: "접근 가능한 인증", en: "Accessible Authentication" },
+    definition: {
+      ko: "로그인에 인지 기능 테스트(암기·퍼즐 등)를 강요하지 말라는 기준(WCAG 3.3.8, 2.2 신설). 붙여넣기 허용·패스워드 매니저 지원이 대표 대응입니다.",
+      en: "Logins must not require a cognitive function test (WCAG 3.3.8, new in 2.2) — allow paste and password managers.",
+    },
+    certs: ["was"],
+    aliases: ["3.3.8"],
+  },
+  {
+    id: "status-messages",
+    term: { ko: "상태 메시지", en: "Status Messages" },
+    definition: {
+      ko: "포커스 이동 없이 나타나는 상태 변화(저장됨, 검색 결과 5건)를 보조기술이 인지하게 하라는 기준(WCAG 4.1.3). role=status/alert, aria-live가 수단입니다.",
+      en: "Status changes appearing without focus (saved, 5 results) must reach AT (WCAG 4.1.3) — via role=status/alert and aria-live.",
+    },
+    certs: ["was"],
+    aliases: ["4.1.3"],
+  },
+  {
+    id: "parsing-note",
+    term: { ko: "구문 분석 (폐지)", en: "Parsing (obsolete)" },
+    definition: {
+      ko: "중복 id·잘못된 중첩을 금지하던 WCAG 4.1.1은 2.2에서 폐지되었습니다 — 최신 브라우저가 오류를 일관되게 복구하기 때문입니다.",
+      en: "WCAG 4.1.1 (Parsing) was removed in 2.2 — modern browsers recover from markup errors consistently.",
+    },
+    certs: ["was"],
+    aliases: ["4.1.1"],
+  },
+  {
+    id: "aria-label-term",
+    term: { ko: "aria-label", en: "aria-label" },
+    definition: {
+      ko: "요소에 접근 가능한 이름을 문자열로 직접 부여하는 속성. 보이는 텍스트가 없는 컨트롤(아이콘 버튼)에 쓰되, 보이는 레이블이 있으면 그 텍스트를 포함해야 합니다(2.5.3).",
+      en: "Supplies an accessible name directly as a string. Use for controls without visible text (icon buttons); when a visible label exists it must be contained in the name (2.5.3).",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "aria-labelledby",
+    term: { ko: "aria-labelledby", en: "aria-labelledby" },
+    definition: {
+      ko: "다른 요소(들)의 텍스트를 참조해 접근 가능한 이름을 만드는 속성. 이름 계산에서 aria-label보다 우선하며, 여러 id를 나열할 수 있습니다.",
+      en: "Builds the accessible name from other elements' text. Wins over aria-label in name computation; accepts multiple ids.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "aria-describedby",
+    term: { ko: "aria-describedby", en: "aria-describedby" },
+    definition: {
+      ko: "이름이 아닌 '보조 설명'을 요소에 연결하는 속성. 폼 도움말·오류 메시지 연결의 표준 수단입니다.",
+      en: "Attaches supplementary description (not the name) to an element — the standard wiring for form hints and error messages.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "aria-expanded",
+    term: { ko: "aria-expanded", en: "aria-expanded" },
+    definition: {
+      ko: "펼침 컨트롤(아코디언·드롭다운)의 열림/닫힘 상태를 보조기술에 알리는 상태 속성. 컨트롤 쪽에 붙이며 JS로 갱신해야 합니다.",
+      en: "State attribute announcing open/closed for disclosure controls (accordions, dropdowns). Set on the control and updated via JS.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "aria-hidden",
+    term: { ko: "aria-hidden", en: "aria-hidden" },
+    definition: {
+      ko: "서브트리를 접근성 트리에서 제거하는 속성(시각적으로는 보임). 장식 아이콘에 적합하지만, 포커스 가능한 요소를 포함하면 심각한 결함이 됩니다.",
+      en: "Removes a subtree from the accessibility tree while it stays visible. Right for decorative icons; a serious defect if the subtree contains focusable elements.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "roving-tabindex",
+    term: { ko: "로빙 탭인덱스", en: "Roving tabindex" },
+    definition: {
+      ko: "복합 위젯(탭·툴바·그리드)에서 활성 항목만 tabindex=0, 나머지는 -1로 두고 화살표 키로 이동시키는 키보드 패턴. Tab 한 번으로 위젯 전체를 건너뛸 수 있게 합니다.",
+      en: "Keyboard pattern for composite widgets: only the active item has tabindex=0 (others -1), arrows move within — so a single Tab skips past the widget.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "landmark-roles",
+    term: { ko: "랜드마크 역할", en: "Landmark Roles" },
+    definition: {
+      ko: "페이지 영역을 구분하는 ARIA 역할군 — banner(머리글), navigation, main, complementary, contentinfo(바닥글), search. 스크린 리더의 영역 점프 탐색을 가능하게 합니다.",
+      en: "ARIA roles that segment a page — banner, navigation, main, complementary, contentinfo, search — enabling region-jump navigation in screen readers.",
+    },
+    certs: ["was"],
+    aliases: ["banner", "contentinfo"],
+  },
+  {
+    id: "presentation-role",
+    term: { ko: "presentation/none 역할", en: "role=presentation/none" },
+    definition: {
+      ko: "요소의 암묵적 시맨틱을 제거하는 역할. 레이아웃 목적의 표 등에 쓰이며, 실제 데이터 표에 쓰면 구조 정보가 사라지는 오용이 됩니다.",
+      en: "Strips an element's implicit semantics. Used for layout tables; misused on real data tables it erases structural information.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "lighthouse",
+    term: { ko: "Lighthouse", en: "Lighthouse" },
+    definition: {
+      ko: "Chrome 내장 감사 도구. 접근성 점수는 axe 규칙 일부를 실행한 결과로, 100점이 접근성 적합을 의미하지 않습니다 — 자동 검사의 한계가 그대로 적용됩니다.",
+      en: "Chrome's built-in audit tool. Its accessibility score runs a subset of axe rules — 100 does not mean conformant; automation limits apply.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "pa11y",
+    term: { ko: "Pa11y", en: "Pa11y" },
+    definition: {
+      ko: "명령줄·CI에서 실행하는 오픈소스 접근성 자동 검사 도구. HTML_CodeSniffer/axe 엔진을 사용해 페이지를 스캔합니다.",
+      en: "An open-source CLI/CI accessibility testing tool that scans pages using the HTML_CodeSniffer or axe engines.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "color-contrast-analyzer",
+    term: { ko: "색상 대비 분석기 (CCA)", en: "Colour Contrast Analyser (CCA)" },
+    definition: {
+      ko: "TPGi의 데스크톱 대비 측정 도구. 화면의 임의 색을 스포이드로 찍어 WCAG 대비율을 확인할 수 있어 이미지·그라데이션 검사에 유용합니다.",
+      en: "TPGi's desktop contrast tool. Its eyedropper samples any on-screen color for WCAG ratios — handy for images and gradients.",
+    },
+    certs: ["was"],
+    aliases: ["cca"],
+  },
+  {
+    id: "screen-reader-testing",
+    term: { ko: "스크린 리더 테스트", en: "Screen Reader Testing" },
+    definition: {
+      ko: "대표 조합(NVDA+Chrome/Firefox, JAWS+Chrome, VoiceOver+Safari, TalkBack+Chrome)으로 실제 낭독·조작을 검증하는 수동 테스트. 자동 도구가 못 잡는 이름 적절성·순서 문제를 찾습니다.",
+      en: "Manual testing with representative pairings (NVDA+Chrome/Firefox, JAWS+Chrome, VoiceOver+Safari, TalkBack+Chrome) to verify real announcements and operation.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "keyboard-testing",
+    term: { ko: "키보드 테스트", en: "Keyboard Testing" },
+    definition: {
+      ko: "마우스를 치우고 Tab/Shift+Tab/화살표/Enter/Space/Esc만으로 전 기능을 검증하는 수동 프로토콜. 도달·조작·탈출·가시적 포커스 4가지를 확인합니다.",
+      en: "The manual protocol of operating everything with Tab/Shift+Tab/arrows/Enter/Space/Esc only — checking reach, operate, escape, and visible focus.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "accessibility-audit",
+    term: { ko: "접근성 감사", en: "Accessibility Audit" },
+    definition: {
+      ko: "표본 페이지에 대해 자동·수동·AT 테스트를 조합해 성공 기준별 적합성을 판정하고 결함을 보고하는 공식 평가. WCAG-EM이 대표 방법론입니다.",
+      en: "A formal evaluation combining automated, manual, and AT testing on sampled pages, judging each success criterion — WCAG-EM is the reference methodology.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "conformance-claim",
+    term: { ko: "적합성 주장", en: "Conformance Claim" },
+    definition: {
+      ko: "특정 페이지들이 특정 WCAG 버전·수준을 충족한다는 공식 선언. 날짜·버전·수준·적용 페이지·의존 기술을 명시해야 하며, 선택 사항입니다.",
+      en: "An optional formal declaration that specific pages meet a given WCAG version and level — stating date, version, level, pages, and relied-upon technologies.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "severity-rating",
+    term: { ko: "심각도 평가", en: "Severity Rating" },
+    definition: {
+      ko: "발견 결함을 사용자 영향(차단/심각/보통/경미)과 과업 중요도로 등급화해 수정 우선순위를 정하는 실무 체계. 핵심 과업을 차단하는 결함이 최우선입니다.",
+      en: "Grading defects by user impact (blocker/critical/moderate/minor) and task criticality to order fixes — blockers on core tasks come first.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "accessibility-overlay",
+    term: { ko: "접근성 오버레이", en: "Accessibility Overlay" },
+    definition: {
+      ko: "스크립트 한 줄로 접근성을 '자동 수정'한다고 주장하는 서드파티 위젯. 근본 결함을 고치지 못하고 사용자 보조기술과 충돌하는 경우가 많아 접근성 커뮤니티가 광범위하게 비판합니다.",
+      en: "Third-party widgets claiming to 'auto-fix' accessibility via one script. Widely criticized: they don't fix root defects and often conflict with users' AT.",
+    },
+    certs: ["was"],
+    aliases: ["overlay"],
+  },
+  {
+    id: "skip-link",
+    term: { ko: "건너뛰기 링크", en: "Skip Link" },
+    definition: {
+      ko: "반복 블록(헤더·내비)을 건너뛰고 본문으로 바로 가는 페이지 첫 링크(WCAG 2.4.1 Bypass Blocks의 대표 기법). 포커스 시에만 보여도 됩니다.",
+      en: "The first link that jumps past repeated blocks to main content (the classic technique for WCAG 2.4.1). It may be visible only on focus.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "visible-focus-indicator",
+    term: { ko: "가시적 포커스 표시", en: "Visible Focus Indicator" },
+    definition: {
+      ko: "키보드 포커스 위치를 시각적으로 드러내는 외곽선·강조(WCAG 2.4.7). outline:none으로 제거만 하는 것이 대표적 실패이며, :focus-visible로 입력 방식별 표시가 가능합니다.",
+      en: "The outline or highlight revealing keyboard focus (WCAG 2.4.7). Removing it with outline:none is the classic failure; :focus-visible allows input-aware styling.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "touch-target",
+    term: { ko: "터치 타깃", en: "Touch Target" },
+    definition: {
+      ko: "포인터로 조작하는 영역의 크기. WCAG 2.5.8(2.2, AA)은 최소 24×24 CSS픽셀(또는 동등 간격)을, 모바일 지침들은 44px 안팎을 권장합니다.",
+      en: "The interactive area for pointer input. WCAG 2.5.8 (2.2, AA) requires at least 24×24 CSS px or equivalent spacing; mobile guidelines suggest ~44px.",
+    },
+    certs: ["was"],
+    aliases: ["target size"],
+  },
+  {
+    id: "prefers-reduced-motion",
+    term: { ko: "prefers-reduced-motion", en: "prefers-reduced-motion" },
+    definition: {
+      ko: "OS의 '동작 줄이기' 설정을 감지하는 CSS 미디어 특성. 전정 장애 사용자를 위해 패럴랙스·대형 전환 애니메이션을 끄거나 대체하는 표준 수단입니다.",
+      en: "The CSS media feature detecting the OS reduce-motion setting — the standard way to disable or replace parallax and large transitions for users with vestibular disorders.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "focus-trap",
+    term: { ko: "포커스 트랩 (의도적)", en: "Focus Trap (intentional)" },
+    definition: {
+      ko: "모달이 열린 동안 Tab 순환을 모달 내부로 한정하는 의도적 기법. 닫기 수단(ESC·버튼)을 반드시 제공해야 하며, 탈출 불가능하면 키보드 트랩(2.1.2 위반)이 됩니다.",
+      en: "Deliberately confining Tab cycling inside an open modal. An escape (ESC, close button) is mandatory — without it, it becomes a keyboard trap (2.1.2 failure).",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "live-region",
+    term: { ko: "라이브 영역", en: "Live Region" },
+    definition: {
+      ko: "DOM 변경을 보조기술에 자동 통지하는 영역. aria-live=polite(현재 낭독 후), assertive(즉시), role=status/alert 별칭이 있으며, 남용하면 소음이 됩니다.",
+      en: "A region whose DOM changes are announced automatically: aria-live=polite (after current speech) or assertive (immediately), with role=status/alert shortcuts. Overuse creates noise.",
+    },
+    certs: ["was"],
+  },
+  {
+    id: "high-contrast-mode",
+    term: { ko: "고대비 모드", en: "High Contrast Mode" },
+    definition: {
+      ko: "OS·브라우저가 색상을 강제 팔레트로 바꾸는 모드(Windows 대비 테마 등). forced-colors 미디어 특성으로 감지하며, 배경 이미지로만 전달되는 정보가 사라질 수 있습니다.",
+      en: "OS/browser modes that override colors with a forced palette (e.g., Windows contrast themes). Detect via the forced-colors media feature; information carried only by background images can vanish.",
+    },
+    certs: ["was"],
+    aliases: ["forced colors"],
+  },
+  {
+    id: "captions-vs-subtitles",
+    term: { ko: "폐쇄자막과 개방자막", en: "Closed vs Open Captions" },
+    definition: {
+      ko: "폐쇄자막(CC)은 켜고 끌 수 있는 자막, 개방자막은 영상에 새겨진 자막입니다. 접근성 자막은 대사 외에 화자 구분·효과음도 담아야 합니다.",
+      en: "Closed captions can be toggled; open captions are burned into the video. Accessible captions include speaker identification and sound effects, not just dialogue.",
+    },
+    certs: ["was"],
+    aliases: ["cc"],
+  },
+  {
+    id: "form-autocomplete",
+    term: { ko: "autocomplete 속성", en: "autocomplete attribute" },
+    definition: {
+      ko: "입력 필드의 목적(name, email, tel 등)을 기계가 인식할 값으로 선언하는 속성. WCAG 1.3.5가 요구하며, 자동 채움으로 인지·운동 부담을 줄입니다.",
+      en: "Declares an input's purpose (name, email, tel…) machine-readably. Required by WCAG 1.3.5; autofill reduces cognitive and motor load.",
+    },
+    certs: ["was"],
+    aliases: ["1.3.5"],
+  },
 ];
