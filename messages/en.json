@@ -907,5 +907,31 @@
 		"hintOpen": "Open",
 		"hintClose": "Close",
 		"openSearch": "Search (Ctrl+K)"
+	},
+	"examGuide": {
+		"title": "Applying and Taking the Exam",
+		"subtitle": "A summary of the official IAAP process — always confirm current schedules and fees on the official pages.",
+		"stepsTitle": "Application steps",
+		"steps": {
+			"1": "Create an account on the IAAP site and submit the exam application. (IAAP membership discounts the fee.)",
+			"2cpacc": "CPACC asks you to describe about one year of accessibility-related experience, or a role transitioning into accessibility.",
+			"2was": "WAS uses a two-step application — a screening application first assesses eligibility (roughly 3–5 years of hands-on technical experience recommended).",
+			"3": "Once approved, schedule with Pearson VUE — online-proctored from home or at a test center worldwide.",
+			"4": "Take the exam within your scheduled exam window. Results typically arrive within a few weeks."
+		},
+		"feesTitle": "Fees (per the 2026 handbook — subject to change)",
+		"feesCpacc": "Standard $510 · IAAP member $410 · Emerging/Developing Economy (EDE) $170",
+		"feesWas": "Standard $315 · IAAP member $255 · EDE $100",
+		"feesNote": "A discounted retake is available once within one year of the first attempt; payments are non-refundable.",
+		"validityTitle": "Maintaining the credential",
+		"validity": "Certifications are valid for three years; renewal requires 45 CAECs (Continuing Accessibility Education Credits) earned through courses, presentations, publications, mentoring, or IAAP volunteering.",
+		"tipsTitle": "Exam-day tips",
+		"tips": {
+			"1": "For remote proctoring, run the system check (webcam, network) in advance and prepare a quiet private room with valid ID.",
+			"2": "Budget time per question — practice pacing with this site's full-scale mock exams (CPACC 100Q/120min, WAS 75Q/90min).",
+			"3": "Flag uncertain questions and return after a full pass — there is no penalty for wrong answers."
+		},
+		"officialLink": "Official IAAP exam page",
+		"handbookLink": "Candidate handbook (PDF)"
 	}
 }

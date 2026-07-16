@@ -43,6 +43,7 @@ function CertOverviewContent({ locale, cert }: { locale: string; cert: Cert }) {
   const tExam = useTranslations("common.exam");
   const tCert = useTranslations("cert");
   const tMockExam = useTranslations("mockExam");
+  const tGuide = useTranslations("examGuide");
   const lang = locale === "ko" ? "ko" : "en";
   const overview = certOverviews[cert];
   const certName = cert.toUpperCase();
@@ -145,6 +146,63 @@ function CertOverviewContent({ locale, cert }: { locale: string; cert: Cert }) {
               </ul>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 시험 신청·응시 안내 — 절차·비용은 진부화 위험이 있어 공식 링크 병기 */}
+      <section className="section" aria-labelledby={`${cert}-exam-guide`}>
+        <div className="container" style={{ maxWidth: 880 }}>
+          <div className="section__head">
+            <div>
+              <h2 id={`${cert}-exam-guide`} className="section__title">{tGuide("title")}</h2>
+              <p className="section__sub">{tGuide("subtitle")}</p>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2" style={{ marginTop: "var(--space-4)" }}>
+            <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-5)" }}>
+              <h3 style={{ fontSize: "var(--fs-md)", fontWeight: 700 }}>{tGuide("stepsTitle")}</h3>
+              <ol style={{ marginTop: "var(--space-3)", paddingLeft: "1.2em", display: "flex", flexDirection: "column", gap: "var(--space-2)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", lineHeight: 1.7 }}>
+                <li>{tGuide("steps.1")}</li>
+                <li>{cert === "cpacc" ? tGuide("steps.2cpacc") : tGuide("steps.2was")}</li>
+                <li>{tGuide("steps.3")}</li>
+                <li>{tGuide("steps.4")}</li>
+              </ol>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
+              <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-5)" }}>
+                <h3 style={{ fontSize: "var(--fs-md)", fontWeight: 700 }}>{tGuide("feesTitle")}</h3>
+                <p style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-sm)", fontWeight: 600 }}>
+                  {cert === "cpacc" ? tGuide("feesCpacc") : tGuide("feesWas")}
+                </p>
+                <p style={{ marginTop: "var(--space-1)", fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>{tGuide("feesNote")}</p>
+              </div>
+              <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-5)" }}>
+                <h3 style={{ fontSize: "var(--fs-md)", fontWeight: 700 }}>{tGuide("validityTitle")}</h3>
+                <p style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", lineHeight: 1.7 }}>{tGuide("validity")}</p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: "var(--space-4)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-5)" }}>
+            <h3 style={{ fontSize: "var(--fs-md)", fontWeight: 700 }}>{tGuide("tipsTitle")}</h3>
+            <ul style={{ marginTop: "var(--space-3)", paddingLeft: "1.2em", display: "flex", flexDirection: "column", gap: "var(--space-2)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", lineHeight: 1.7 }}>
+              <li>{tGuide("tips.1")}</li>
+              <li>{tGuide("tips.2")}</li>
+              <li>{tGuide("tips.3")}</li>
+            </ul>
+            <div style={{ marginTop: "var(--space-4)", display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
+              <a className="btn btn--sm" href={cert === "cpacc" ? "https://www.accessibilityassociation.org/cpacc" : "https://www.accessibilityassociation.org/s/wascertification"} target="_blank" rel="noopener noreferrer">
+                {tGuide("officialLink")}
+                <span className="sr-only">({tCert("externalLink")})</span>
+              </a>
+              <a className="btn btn--sm" href="https://www.accessibilityassociation.org/sfsites/c/resource/CertHandbookV2" target="_blank" rel="noopener noreferrer">
+                {tGuide("handbookLink")}
+                <span className="sr-only">({tCert("externalLink")})</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </>
