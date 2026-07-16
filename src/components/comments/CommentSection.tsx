@@ -88,11 +88,11 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 
 			{/* 댓글 목록 */}
 			{isLoading ? (
-				<p className="mt-4 text-sm text-gray-400">
+				<p className="mt-4 text-sm text-gray-500">
 					{t("loadingComments")}
 				</p>
 			) : rootComments.length === 0 ? (
-				<p className="mt-4 text-sm text-gray-400">
+				<p className="mt-4 text-sm text-gray-500">
 					{t("noCommentsYetBe")}
 				</p>
 			) : (

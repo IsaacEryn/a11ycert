@@ -1023,6 +1023,8 @@ button { font-family: inherit; cursor: pointer; }
 .sidebar__item[aria-current="true"], .sidebar__item.is-active { background: var(--accent-soft); color: var(--accent-soft-fg); font-weight: 600; }
 [data-theme="hc"] .sidebar__item[aria-current="true"], [data-theme="hc"] .sidebar__item.is-active { background: var(--accent); color: var(--fg-on-accent); }
 .sidebar__item-num { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); min-width: 22px; }
+/* 활성 배경(accent-soft) 위에서는 본문색으로 대비 확보 (axe color-contrast) */
+.sidebar__item[aria-current="true"] .sidebar__item-num, .sidebar__item.is-active .sidebar__item-num { color: inherit; }
 .sidebar__item-status { margin-left: auto; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--border-strong); }
 .sidebar__item-status.is-done { background: var(--success); border-color: var(--success); }
 

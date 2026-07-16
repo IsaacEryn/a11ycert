@@ -90,7 +90,7 @@ export default function CommunityPostPage() {
 	if (!post) {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-10">
-				<p className="text-sm text-gray-400">{t("loading")}</p>
+				<p className="text-sm text-gray-500">{t("loading")}</p>
 			</div>
 		);
 	}
@@ -105,7 +105,7 @@ export default function CommunityPostPage() {
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
 			{/* Breadcrumb */}
-			<nav className="mb-6 text-xs text-gray-400">
+			<nav className="mb-6 text-xs text-gray-500">
 				<Link href={`/${locale}/community`} className="hover:text-blue-600 no-underline">
 					{t("title")}
 				</Link>
@@ -121,7 +121,7 @@ export default function CommunityPostPage() {
 					</span>
 				</div>
 				<h1 className="text-xl font-bold text-gray-900">{post.title}</h1>
-				<div className="mt-2 flex items-center gap-3 text-xs text-gray-400">
+				<div className="mt-2 flex items-center gap-3 text-xs text-gray-500">
 					<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 					<span>
 						{formatDistanceToNow(new Date(post.created_at), {
@@ -151,7 +151,7 @@ export default function CommunityPostPage() {
 								<div>
 									<div className="flex items-center gap-2 text-xs">
 										<span className="font-medium text-gray-900">{reply.profiles?.nickname}</span>
-										<span className="text-gray-400">
+										<span className="text-gray-500">
 											{formatDistanceToNow(new Date(reply.created_at), {
 												addSuffix: true,
 												locale: isKo ? ko : enUS,
@@ -189,7 +189,7 @@ export default function CommunityPostPage() {
 						</div>
 					</form>
 				) : (
-					<p className="mt-6 text-sm text-gray-400">
+					<p className="mt-6 text-sm text-gray-500">
 						{t("signInToReply")}
 					</p>
 				)}

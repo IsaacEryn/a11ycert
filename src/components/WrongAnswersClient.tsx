@@ -132,7 +132,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 				className="mt-6 focus-visible:outline-none"
 			>
 				{currentList.length === 0 ? (
-					<div className="rounded-xl border border-dashed border-gray-200 px-6 py-12 text-center text-sm text-gray-400">
+					<div className="rounded-xl border border-dashed border-gray-200 px-6 py-12 text-center text-sm text-gray-500">
 						{tab === "wrong"
 							? t("noWrongAnswersYet")
 							: t("noSavedQuestionsYet")}
@@ -174,7 +174,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 												{unit && (
 													<Link
 														href={`/${locale}/${exam}/study/${unit.id}`}
-														className="text-xs text-gray-400 no-underline hover:text-blue-600"
+														className="text-xs text-gray-500 no-underline hover:text-blue-600"
 													>
 														{isKo ? unit.title.ko : unit.title.en}
 													</Link>
@@ -186,7 +186,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 													<span className="font-medium">{t("answer")}</span>
 													<BilingualText field={q.options[q.answer]} variant="label" as="span" />
 												</div>
-												<BilingualText field={q.explanation} variant="label" as="p" className="mt-1 text-xs text-gray-400 leading-relaxed" />
+												<BilingualText field={q.explanation} variant="label" as="p" className="mt-1 text-xs text-gray-500 leading-relaxed" />
 											</div>
 											{tab === "saved" && (
 												<button
@@ -196,7 +196,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 															? `저장 취소: ${isKo ? q.question.ko : q.question.en}`
 															: `Remove from saved: ${q.question.en}`
 													}
-													className="shrink-0 rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+													className="shrink-0 rounded p-1 text-gray-500 hover:bg-red-50 hover:text-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
 												>
 													<span aria-hidden="true">✕</span>
 												</button>

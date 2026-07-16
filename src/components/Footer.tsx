@@ -80,7 +80,7 @@ export default function Footer({ locale }: FooterProps) {
               href="https://www.codeslog.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "var(--accent)", textDecoration: "none" }}
+              style={{ color: "var(--accent)", textDecoration: "underline" }}
             >
               Isaac
             </a>

@@ -76,7 +76,7 @@ export default function CommentItem({
 					{/* 헤더 */}
 					<div className="flex items-center gap-2">
 						<span className="text-sm font-medium text-gray-900">{nickname}</span>
-						<span className="text-xs text-gray-400">
+						<span className="text-xs text-gray-500">
 							<time dateTime={comment.created_at}>{timeAgo}</time>
 						</span>
 					</div>
@@ -111,7 +111,7 @@ export default function CommentItem({
 											: `Reply to ${nickname}'s comment`
 									}
 									aria-expanded={isReplying}
-									className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
+									className="text-gray-500 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 								>
 									{t("reply")}
 								</button>
@@ -121,7 +121,7 @@ export default function CommentItem({
 									<button
 										onClick={() => setIsEditing(true)}
 										aria-label={t("editMyComment")}
-										className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
+										className="text-gray-500 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 									>
 										{t("edit")}
 									</button>
@@ -145,7 +145,7 @@ export default function CommentItem({
 											<button
 												onClick={() => setConfirmingDelete(false)}
 												aria-label={t("cancelDelete")}
-												className="text-gray-400 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
+												className="text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
 											>
 												{t("no")}
 											</button>
@@ -154,7 +154,7 @@ export default function CommentItem({
 										<button
 											onClick={() => setConfirmingDelete(true)}
 											aria-label={t("deleteMyComment")}
-											className="text-gray-400 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
+											className="text-gray-500 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
 										>
 											{t("delete2")}
 										</button>

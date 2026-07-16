@@ -138,7 +138,7 @@ export default function CommunityPage() {
 						</ul>
 					</div>
 				) : posts.length === 0 ? (
-					<p className="mt-8 text-sm text-gray-400">
+					<p className="mt-8 text-sm text-gray-500">
 						{t("noPostsYet")}
 					</p>
 				) : (
@@ -161,7 +161,7 @@ export default function CommunityPage() {
 												{post.title}
 											</span>
 										</div>
-										<div className="mt-1 flex items-center gap-3 text-xs text-gray-400">
+										<div className="mt-1 flex items-center gap-3 text-xs text-gray-500">
 											<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 											<span>
 												<time dateTime={post.created_at}>

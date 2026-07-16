@@ -33,7 +33,7 @@ function PrivacyContent() {
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
 			<h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
-			<p className="mt-2 text-sm text-gray-400">{t("lastUpdated")}</p>
+			<p className="mt-2 text-sm text-gray-500">{t("lastUpdated")}</p>
 			<p className="mt-4 text-gray-700 leading-relaxed">{t("intro")}</p>
 
 			<div className="mt-10 space-y-8 text-gray-700">
