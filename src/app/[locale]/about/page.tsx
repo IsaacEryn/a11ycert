@@ -28,7 +28,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 	const { locale } = await params;
 	setRequestLocale(locale);
 	const t = await getTranslations({ locale, namespace: "about" });
-	const isKo = locale === "ko";
 
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
@@ -90,7 +89,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 								rel="noopener noreferrer"
 								style={{ marginTop: "var(--space-2)", display: "inline-flex", alignItems: "center", gap: "var(--space-1)", fontSize: "var(--fs-sm)", fontWeight: 500, color: "var(--accent)" }}
 							>
-								{isKo ? "블로그 방문하기" : "Visit blog"}
+								{t("visitBlog")}
 								<span aria-hidden="true">↗</span>
 							</a>
 						</div>
@@ -110,12 +109,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 				{/* 문의 */}
 				<section aria-labelledby="about-contact">
 					<h2 id="about-contact" style={{ fontSize: "var(--fs-lg)", fontWeight: 600, color: "var(--fg)" }}>
-						{isKo ? "문의 및 오류 제보" : "Contact & Issue Reports"}
+						{t("contactIssueReports")}
 					</h2>
 					<p style={{ marginTop: "var(--space-3)", color: "var(--fg-muted)", lineHeight: "var(--lh-normal)" }}>
-						{isKo
-							? "콘텐츠 오류, 수정 요청, 기타 문의는 아래 이메일로 보내주세요."
-							: "For content errors, correction requests, or general inquiries, please send an email to:"}
+						{t("forContentErrorsCorrection")}
 					</p>
 					<a
 						href="mailto:contact@a11ycert.com"

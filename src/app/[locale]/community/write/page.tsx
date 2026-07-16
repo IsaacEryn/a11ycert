@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
@@ -8,7 +9,7 @@ export default function CommunityWritePage() {
 	const params = useParams();
 	const router = useRouter();
 	const locale = (params?.locale as string) || "ko";
-	const isKo = locale === "ko";
+	const t = useTranslations("community");
 	const auth = useOptionalAuth();
 
 	const [category, setCategory] = useState("discussion");
@@ -29,9 +30,9 @@ export default function CommunityWritePage() {
 	}, [isDirty]);
 
 	const categories = [
-		{ value: "discussion", label: isKo ? "자유토론" : "Discussion" },
-		{ value: "question", label: isKo ? "질문" : "Question" },
-		{ value: "tip", label: isKo ? "팁" : "Tip" },
+		{ value: "discussion", label: t("discussion") },
+		{ value: "question", label: t("question") },
+		{ value: "tip", label: t("tip") },
 	];
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -53,7 +54,7 @@ export default function CommunityWritePage() {
 			const json = await res.json().catch(() => ({}));
 			setSubmitError(
 				json.error ||
-					(isKo ? "등록 중 오류가 발생했습니다. 다시 시도해주세요." : "An error occurred. Please try again.")
+					(t("anErrorOccurredPlease"))
 			);
 			setIsSubmitting(false);
 		}
@@ -63,7 +64,7 @@ export default function CommunityWritePage() {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-10">
 				<p className="text-sm text-gray-500">
-					{isKo ? "글을 작성하려면 로그인이 필요합니다." : "Please sign in to write a post."}
+					{t("pleaseSignInTo")}
 				</p>
 			</div>
 		);
@@ -71,7 +72,7 @@ export default function CommunityWritePage() {
 
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-			<h1 className="text-2xl font-bold text-gray-900">{isKo ? "새 글 작성" : "New Post"}</h1>
+			<h1 className="text-2xl font-bold text-gray-900">{t("newPost2")}</h1>
 
 			<form onSubmit={handleSubmit} className="mt-6 space-y-4">
 				{/* 오류 메시지 */}
@@ -84,7 +85,7 @@ export default function CommunityWritePage() {
 				{/* 카테고리 — aria-pressed로 선택 상태 전달 */}
 				<fieldset>
 					<legend className="text-sm font-medium text-gray-700">
-						{isKo ? "카테고리" : "Category"}
+						{t("category")}
 					</legend>
 					<div className="mt-2 flex gap-2" role="group">
 						{categories.map(({ value, label }) => (
@@ -108,7 +109,7 @@ export default function CommunityWritePage() {
 				{/* 제목 */}
 				<div>
 					<label htmlFor="post-title" className="block text-sm font-medium text-gray-700">
-						{isKo ? "제목" : "Title"}
+						{t("title2")}
 					</label>
 					<input
 						id="post-title"
@@ -124,7 +125,7 @@ export default function CommunityWritePage() {
 				{/* 내용 */}
 				<div>
 					<label htmlFor="post-content" className="block text-sm font-medium text-gray-700">
-						{isKo ? "내용" : "Content"}
+						{t("content")}
 					</label>
 					<textarea
 						id="post-content"
@@ -144,14 +145,14 @@ export default function CommunityWritePage() {
 						onClick={() => router.back()}
 						className="rounded-lg px-5 py-2.5 text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
 					>
-						{isKo ? "취소" : "Cancel"}
+						{t("cancel")}
 					</button>
 					<button
 						type="submit"
 						disabled={!title.trim() || !content.trim() || isSubmitting}
 						className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
 					>
-						{isSubmitting ? (isKo ? "등록 중..." : "Posting...") : isKo ? "등록" : "Post"}
+						{isSubmitting ? (t("posting")) : t("post")}
 					</button>
 				</div>
 			</form>

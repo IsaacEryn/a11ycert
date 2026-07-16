@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import BilingualText from "@/components/BilingualText";
@@ -30,6 +31,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 	const session = useQuizSession(questions, exam);
 	const [showResults, setShowResults] = useState(false);
 	const isKo = locale === "ko";
+	const t = useTranslations("quiz");
 	const wrongAnswersLink = `/${locale}/${exam}/wrong-answers`;
 
 	return (
@@ -55,7 +57,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 							</span>
 							<button
 								onClick={() => session.toggleSave(q.id)}
-								aria-label={session.isQuestionSaved(q.id) ? (isKo ? "저장 취소" : "Unsave") : (isKo ? "저장" : "Save")}
+								aria-label={session.isQuestionSaved(q.id) ? (t("unsave")) : (t("save"))}
 								aria-pressed={session.isQuestionSaved(q.id)}
 								className="rounded px-2 py-0.5 text-xs font-medium transition-colors"
 								style={session.isQuestionSaved(q.id)
@@ -91,7 +93,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 						className="rounded-lg px-6 py-2.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2"
 						style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 					>
-						{isKo ? "결과 보기" : "See Results"}
+						{t("seeResults")}
 					</button>
 				</div>
 			)}
@@ -101,7 +103,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 					<p className="text-xl font-bold" style={{ color: "var(--fg)" }}>
 						{session.correctCount} / {session.questions.length}
 						<span className="ml-2 text-sm font-normal" style={{ color: "var(--fg-subtle)" }}>
-							{isKo ? "정답" : "correct"}
+							{t("correct3")}
 						</span>
 					</p>
 					<div className="mt-4 flex flex-wrap gap-3">
@@ -113,7 +115,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 							className="rounded-lg border px-4 py-2 text-sm font-medium"
 							style={{ borderColor: "var(--border)", color: "var(--fg-muted)" }}
 						>
-							{isKo ? "다시 풀기" : "Retry"}
+							{t("retry")}
 						</button>
 						{session.correctCount < session.questions.length && (
 							<Link
@@ -121,7 +123,7 @@ function AllAtOnceQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showA
 								className="rounded-lg px-4 py-2 text-sm font-medium no-underline"
 								style={{ background: "var(--danger)", color: "#fff" }}
 							>
-								{isKo ? "오답노트 보기" : "View Wrong Answers"}
+								{t("viewWrongAnswers")}
 							</Link>
 						)}
 					</div>
@@ -141,6 +143,7 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 	const summaryRef = useRef<HTMLDivElement>(null);
 
 	const isKo = locale === "ko";
+	const t = useTranslations("quiz");
 	const q = session.questions[current];
 	const selected = session.answers[current] ?? null;
 	const answered = selected !== null;
@@ -187,8 +190,8 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 					onClick={() => session.toggleSave(q.id)}
 					aria-label={
 						session.isQuestionSaved(q.id)
-							? isKo ? "저장 취소" : "Unsave question"
-							: isKo ? "문제 저장" : "Save question"
+							? t("unsaveQuestion")
+							: t("saveQuestion")
 					}
 					aria-pressed={session.isQuestionSaved(q.id)}
 					className="rounded px-2 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
@@ -197,7 +200,7 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 						: { background: "var(--bg-muted)", color: "var(--fg-subtle)" }}
 				>
 					<span aria-hidden="true">{session.isQuestionSaved(q.id) ? "★" : "☆"}</span>
-					{" "}{session.isQuestionSaved(q.id) ? (isKo ? "저장됨" : "Saved") : isKo ? "저장" : "Save"}
+					{" "}{session.isQuestionSaved(q.id) ? (t("saved")) : t("save")}
 				</button>
 			</div>
 
@@ -210,7 +213,7 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 					aria-valuenow={current + 1}
 					aria-valuemin={1}
 					aria-valuemax={session.questions.length}
-					aria-label={isKo ? `퀴즈 진행률: ${current + 1}/${session.questions.length}` : `Quiz progress: ${current + 1} of ${session.questions.length}`}
+					aria-label={t("quizProgressLabel", { current: current + 1, total: session.questions.length })}
 				/>
 			</div>
 
@@ -247,8 +250,8 @@ function SteppedQuiz({ questions, locale, exam }: Omit<QuizEngineProps, "showAll
 					style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 				>
 					{current < session.questions.length - 1
-						? isKo ? "다음 문제 →" : "Next →"
-						: isKo ? "결과 보기" : "See Results"}
+						? t("next2")
+						: t("seeResults")}
 				</button>
 			)}
 		</div>

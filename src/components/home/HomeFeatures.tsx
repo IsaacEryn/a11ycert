@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 interface Props {
   locale: string;
   isKo: boolean;
@@ -59,19 +60,18 @@ const features = [
 ];
 
 export default function HomeFeatures({ isKo }: Props) {
-  const lang = isKo ? "ko" : "en";
+  const t = useTranslations("homeUi");
+  const lang = (isKo ? "ko" : "en") as "ko" | "en";
   return (
     <section className="section" aria-labelledby="features-title">
       <div className="container">
         <div className="section__head">
           <div>
             <h2 id="features-title" className="section__title">
-              {isKo ? "학습은 이렇게 진행됩니다" : "How the Learning Works"}
+              {t("howTheLearningWorks")}
             </h2>
             <p className="section__sub">
-              {isKo
-                ? "암기보다 이해, 한국어 해설과 영어 원문을 항상 함께 봅니다."
-                : "Understanding over memorisation — Korean and English always side by side."}
+              {t("understandingOverMemorisationKor")}
             </p>
           </div>
         </div>

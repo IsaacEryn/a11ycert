@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import WrongAnswerList from "./WrongAnswerList";
 import SavedQuizList from "./SavedQuizList";
 import NotesList from "./NotesList";
@@ -15,7 +16,7 @@ interface Props {
 
 export default function ExamRoomTabs({ locale }: Props) {
 	const [tab, setTab] = useState<Tab>("wrong");
-	const isKo = locale === "ko";
+	const t = useTranslations("examRoom");
 	const tabRefs = useRef<Record<Tab, HTMLButtonElement | null>>({
 		wrong: null,
 		saved: null,
@@ -23,9 +24,9 @@ export default function ExamRoomTabs({ locale }: Props) {
 	});
 
 	const tabs: { key: Tab; label: string }[] = [
-		{ key: "wrong", label: isKo ? "오답 노트" : "Wrong Answers" },
-		{ key: "saved", label: isKo ? "저장한 문제" : "Saved Questions" },
-		{ key: "notes", label: isKo ? "학습 메모" : "Study Notes" },
+		{ key: "wrong", label: t("wrongAnswers") },
+		{ key: "saved", label: t("savedQuestions") },
+		{ key: "notes", label: t("studyNotes") },
 	];
 
 	// Roving tabIndex: 탭 변경 시 해당 버튼으로 포커스 이동
@@ -56,7 +57,7 @@ export default function ExamRoomTabs({ locale }: Props) {
 			<div
 				style={{ display: "flex", borderBottom: "1px solid var(--border)" }}
 				role="tablist"
-				aria-label={isKo ? "나의 시험장 탭" : "My Exam Room tabs"}
+				aria-label={t("myExamRoomTabs")}
 				aria-orientation="horizontal"
 				onKeyDown={handleKeyDown}
 			>

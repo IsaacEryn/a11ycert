@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
@@ -31,6 +32,7 @@ export default function CommunityPostPage() {
 	const locale = (params?.locale as string) || "ko";
 	const postId = params?.postId as string;
 	const isKo = locale === "ko";
+	const t = useTranslations("community");
 	const auth = useOptionalAuth();
 
 	const [post, setPost] = useState<Post | null>(null);
@@ -88,16 +90,16 @@ export default function CommunityPostPage() {
 	if (!post) {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-10">
-				<p className="text-sm text-gray-400">{isKo ? "불러오는 중..." : "Loading..."}</p>
+				<p className="text-sm text-gray-400">{t("loading")}</p>
 			</div>
 		);
 	}
 
 	const categoryLabels: Record<string, string> = {
-		report: isKo ? "제보·수정요청" : "Report",
-		discussion: isKo ? "자유토론" : "Discussion",
-		question: isKo ? "질문" : "Question",
-		tip: isKo ? "팁" : "Tip",
+		report: t("report"),
+		discussion: t("discussion"),
+		question: t("question"),
+		tip: t("tip"),
 	};
 
 	return (
@@ -105,7 +107,7 @@ export default function CommunityPostPage() {
 			{/* Breadcrumb */}
 			<nav className="mb-6 text-xs text-gray-400">
 				<Link href={`/${locale}/community`} className="hover:text-blue-600 no-underline">
-					{isKo ? "커뮤니티" : "Community"}
+					{t("title")}
 				</Link>
 				<span className="mx-1">/</span>
 				<span className="text-gray-600">{post.title}</span>
@@ -120,7 +122,7 @@ export default function CommunityPostPage() {
 				</div>
 				<h1 className="text-xl font-bold text-gray-900">{post.title}</h1>
 				<div className="mt-2 flex items-center gap-3 text-xs text-gray-400">
-					<span>{post.profiles?.nickname || (isKo ? "익명" : "Anonymous")}</span>
+					<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 					<span>
 						{formatDistanceToNow(new Date(post.created_at), {
 							addSuffix: true,
@@ -136,7 +138,7 @@ export default function CommunityPostPage() {
 			{/* Replies */}
 			<section className="mt-10 border-t border-gray-200 pt-6">
 				<h2 className="text-base font-semibold text-gray-900">
-					{isKo ? "댓글" : "Replies"} ({replies.length})
+					{t("replies")} ({replies.length})
 				</h2>
 
 				{replies.length > 0 && (
@@ -169,7 +171,7 @@ export default function CommunityPostPage() {
 						<textarea
 							value={replyContent}
 							onChange={(e) => setReplyContent(e.target.value)}
-							placeholder={isKo ? "댓글을 작성해주세요..." : "Write a reply..."}
+							placeholder={t("writeAReply")}
 							rows={3}
 							maxLength={2000}
 							className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
@@ -181,18 +183,14 @@ export default function CommunityPostPage() {
 								className="rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700 disabled:opacity-50"
 							>
 								{isSubmitting
-									? isKo
-										? "등록 중..."
-										: "Posting..."
-									: isKo
-										? "댓글 등록"
-										: "Post Reply"}
+									? t("posting")
+									: t("postReply")}
 							</button>
 						</div>
 					</form>
 				) : (
 					<p className="mt-6 text-sm text-gray-400">
-						{isKo ? "댓글을 작성하려면 로그인이 필요합니다." : "Sign in to reply."}
+						{t("signInToReply")}
 					</p>
 				)}
 			</section>

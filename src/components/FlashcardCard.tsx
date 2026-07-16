@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import type { QuizQuestion } from "@/lib/content/types";
 import BilingualText from "@/components/BilingualText";
 
@@ -29,6 +30,7 @@ export default function FlashcardCard({
   locale,
 }: Props) {
   const isKo = locale === "ko";
+  const t = useTranslations("flashcards");
 
   useEffect(() => {
     // 화살표 키만 전역 단축키로 유지 — Space/Enter는 카드 요소의 onKeyDown에서 처리
@@ -56,7 +58,7 @@ export default function FlashcardCard({
   } as const;
 
   return (
-    <article aria-label={`${isKo ? "플래시카드" : "Flashcard"} ${index + 1} / ${total}`}>
+    <article aria-label={`${t("flashcard")} ${index + 1} / ${total}`}>
       <div
         className={`flash-card${isFlipped ? " is-flipped" : ""}`}
         onClick={onFlip}
@@ -69,21 +71,21 @@ export default function FlashcardCard({
         role="button"
         tabIndex={0}
         aria-pressed={isFlipped}
-        aria-label={isFlipped ? (isKo ? "카드 앞면 보기" : "Show question") : (isKo ? "정답 보기" : "Reveal answer")}
+        aria-label={isFlipped ? (t("showQuestion")) : (t("revealAnswer"))}
       >
         <div className="flash-card__inner" aria-hidden={isFlipped}>
           {/* Front */}
           <div className="flash-card__face">
-            <div className="flash-card__label">{isKo ? "문제" : "QUESTION"}</div>
+            <div className="flash-card__label">{t("question")}</div>
             <div className="flash-card__term">
               <BilingualText field={q.question} variant="heading" as="span" />
             </div>
-            <div className="flash-card__hint">{isKo ? "클릭하여 정답 확인" : "Click to reveal answer"}</div>
+            <div className="flash-card__hint">{t("clickToRevealAnswer")}</div>
           </div>
 
           {/* Back */}
           <div className="flash-card__face flash-card__face--back" aria-hidden={!isFlipped}>
-            <div className="flash-card__label">{isKo ? "정답" : "ANSWER"}</div>
+            <div className="flash-card__label">{t("answer")}</div>
             <div className="flash-card__term">
               <span style={{ fontWeight: 700, color: "var(--fg-subtle)", marginRight: 6 }}>
                 {q.answer.toUpperCase()}.
@@ -105,7 +107,7 @@ export default function FlashcardCard({
         aria-valuenow={index + 1}
         aria-valuemin={1}
         aria-valuemax={total}
-        aria-label={isKo ? `${index + 1}/${total} 카드` : `Card ${index + 1} of ${total}`}
+        aria-label={t("cardProgress", { current: index + 1, total })}
       >
         <div className="progress-fill" style={{ width: `${((index + 1) / total) * 100}%` }} />
       </div>
@@ -133,12 +135,12 @@ export default function FlashcardCard({
             className="btn"
             onClick={onPrev}
             disabled={index === 0}
-            aria-label={isKo ? "이전 카드" : "Previous card"}
+            aria-label={t("previousCard")}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            {isKo ? "이전" : "Prev"}
+            {t("prev")}
           </button>
           <button
             type="button"
@@ -146,16 +148,16 @@ export default function FlashcardCard({
             onClick={onFlip}
             aria-pressed={isFlipped}
           >
-            {isKo ? "정답 보기" : "Reveal Answer"}
+            {t("revealAnswer2")}
           </button>
           <button
             type="button"
             className="btn"
             onClick={onNext}
             disabled={index === total - 1}
-            aria-label={isKo ? "다음 카드" : "Next card"}
+            aria-label={t("nextCard")}
           >
-            {isKo ? "다음" : "Next"}
+            {t("next")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="9 18 15 12 9 6" />
             </svg>

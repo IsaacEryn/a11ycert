@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import type { QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
@@ -44,7 +45,7 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
   }, []);
   const auth = useOptionalAuth();
   const userId = auth?.user?.id ?? null;
-  const isKo = locale === "ko";
+  const t = useTranslations("quiz");
 
   // 일일 사용량 소비 (LIMITS_CONFIG.enabled가 false이면 항상 허용)
   const [limitState, setLimitState] = useState<LimitCheckResult | null>(null);
@@ -67,15 +68,13 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
       <div className="quiz-shell">
         <div className="container">
           <div className="quiz-card" style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-            <p className="quiz-q">{isKo ? "출제 가능한 문항이 없습니다" : "No questions available"}</p>
+            <p className="quiz-q">{t("noQuestionsAvailable")}</p>
             <p style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)", marginTop: "var(--space-2)" }}>
-              {isKo
-                ? "학습 단원을 먼저 완료하거나 잠시 후 다시 시도해주세요."
-                : "Complete a study unit first, or try again later."}
+              {t("completeAStudyUnit")}
             </p>
             <div style={{ marginTop: "var(--space-5)" }}>
               <Link className="btn btn--primary" href={`/${locale}/${exam}/study`}>
-                {isKo ? "학습 로드맵으로" : "Go to Study Roadmap"}
+                {t("goToStudyRoadmap")}
               </Link>
             </div>
           </div>
@@ -93,7 +92,6 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
               type="quiz"
               remaining={limitState.remaining}
               limit={limitState.limit}
-              locale={locale}
             />
           </div>
         </div>
@@ -185,11 +183,11 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
           >
             <div className="quiz-card__top">
               <div className="quiz-card__tags">
-                <span className="tag tag--accent">{isKo ? "완료" : "Finished"}</span>
+                <span className="tag tag--accent">{t("finished")}</span>
               </div>
             </div>
             <p className="quiz-q">
-              {isKo ? "퀴즈 완료" : "Quiz Complete"}
+              {t("quizComplete")}
             </p>
             <div style={{ margin: "var(--space-5) 0", fontSize: "var(--fs-3xl)", fontWeight: 700, letterSpacing: "-0.03em" }}>
               {correctCount}
@@ -203,16 +201,16 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
             <div className="quiz-foot">
               <div className="quiz-foot__keys">
                 <span style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)" }}>
-                  {isKo ? `정답률 ${Math.round((correctCount / total) * 100)}%` : `${Math.round((correctCount / total) * 100)}% accuracy`}
+                  {t("accuracyPct", { pct: Math.round((correctCount / total) * 100) })}
                 </span>
               </div>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
                 <button className="btn" onClick={handleRetry}>
-                  {isKo ? "다시 풀기" : "Retry"}
+                  {t("retry")}
                 </button>
                 {correctCount < total && (
                   <Link className="btn btn--primary" href={`/${locale}/${exam}/wrong-answers`}>
-                    {isKo ? "오답노트 보기" : "Wrong Answers"}
+                    {t("wrongAnswers")}
                   </Link>
                 )}
               </div>
@@ -238,14 +236,14 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
                 aria-valuenow={current + 1}
                 aria-valuemin={1}
                 aria-valuemax={total}
-                aria-label={isKo ? `${current + 1}/${total} 문항` : `${current + 1} of ${total}`}
+                aria-label={t("questionProgressLabel", { current: current + 1, total })}
               />
             </div>
           </div>
           <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center" }}>
             {wrongInSession.length > 0 && (
               <span style={{ fontSize: "var(--fs-xs)", color: "var(--danger)", fontWeight: 600 }}>
-                {isKo ? `오답 ${wrongInSession.length}` : `${wrongInSession.length} wrong`}
+                {t("wrongBadge", { count: wrongInSession.length })}
               </span>
             )}
           </div>
@@ -269,12 +267,12 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
                 type="button"
                 onClick={toggleSave}
                 aria-pressed={isSaved(exam, q.id)}
-                aria-label={isSaved(exam, q.id) ? (isKo ? "저장 취소" : "Unsave") : (isKo ? "저장" : "Save")}
+                aria-label={isSaved(exam, q.id) ? (t("unsave")) : (t("save"))}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill={isSaved(exam, q.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
                 </svg>
-                {isSaved(exam, q.id) ? (isKo ? "저장됨" : "Saved") : (isKo ? "저장" : "Save")}
+                {isSaved(exam, q.id) ? (t("saved")) : (t("save"))}
               </button>
             </div>
 
@@ -294,9 +292,9 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
 
                 const stateLabel = answered
                   ? key === q.answer
-                    ? isKo ? " (정답)" : " (Correct)"
+                    ? t("correct")
                     : key === selected
-                      ? isKo ? " (오답)" : " (Wrong)"
+                      ? t("wrong")
                       : ""
                   : "";
 
@@ -345,8 +343,8 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
                     }
                   </svg>
                   {selected === q.answer
-                    ? (isKo ? "정답입니다!" : "Correct!")
-                    : (isKo ? "오답입니다." : "Incorrect.")}
+                    ? (t("correct2"))
+                    : (t("incorrect"))}
                 </div>
                 <div className="quiz-explain__body">
                   <BilingualText field={q.explanation} variant="body" as="p" />
@@ -358,14 +356,14 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
               <div className="quiz-foot__keys">
                 <span className="kbd">A</span><span className="kbd">B</span>
                 <span className="kbd">C</span><span className="kbd">D</span>
-                <span style={{ marginLeft: 4 }}>{isKo ? "선택" : "select"}</span>
+                <span style={{ marginLeft: 4 }}>{t("select")}</span>
               </div>
               <div style={{ display: "flex", gap: "var(--space-2)" }}>
                 {answered && (
                   <button className="btn btn--primary" onClick={handleNext}>
                     {current < total - 1
-                      ? (isKo ? "다음 문제" : "Next")
-                      : (isKo ? "결과 보기" : "See Results")}
+                      ? (t("next"))
+                      : (t("seeResults"))}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
@@ -381,12 +379,12 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
               <div className="aside-card__head">
                 <div>
                   <div className="aside-card__title">
-                    {isKo ? "이번 세션 오답" : "Session Errors"}
+                    {t("sessionErrors")}
                   </div>
                   <div className="aside-card__sub">
                     {wrongInSession.length > 0
-                      ? (isKo ? `${wrongInSession.length}문제` : `${wrongInSession.length} questions`)
-                      : (isKo ? "아직 없음" : "None yet")}
+                      ? t("questionsCount", { count: wrongInSession.length })
+                      : (t("noneYet"))}
                   </div>
                 </div>
               </div>
@@ -396,14 +394,14 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
                     <li key={q.id} className="wrong-list__item">
                       <span className="wrong-list__num">{String(i + 1).padStart(2, "0")}</span>
                       <div className="wrong-list__q">
-                        <div className="wrong-list__cat">{isKo ? "오답" : "WRONG"}</div>
+                        <div className="wrong-list__cat">{t("wrong2")}</div>
                         <BilingualText field={q.question} variant="label" as="span" />
                       </div>
                     </li>
                   ))}
                   {wrongInSession.length > 6 && (
                     <li style={{ fontSize: "var(--fs-xs)", color: "var(--fg-subtle)", padding: "var(--space-2) var(--space-3)" }}>
-                      +{wrongInSession.length - 6} {isKo ? "더" : "more"}
+                      +{wrongInSession.length - 6} {t("more")}
                     </li>
                   )}
                 </ul>
@@ -413,19 +411,19 @@ export default function QuizPageClient({ questions, locale, exam }: Props) {
             <div className="aside-card" style={{ marginTop: "var(--space-3)" }}>
               <div className="aside-card__head">
                 <div>
-                  <div className="aside-card__title">{isKo ? "빠른 이동" : "Quick Links"}</div>
+                  <div className="aside-card__title">{t("quickLinks")}</div>
                 </div>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
                 <Link className="btn btn--sm" href={`/${locale}/${exam}/study`} style={{ justifyContent: "flex-start" }}>
-                  {isKo ? "학습 로드맵" : "Study Roadmap"}
+                  {t("studyRoadmap")}
                 </Link>
                 <Link className="btn btn--sm" href={`/${locale}/${exam}/flashcards`} style={{ justifyContent: "flex-start" }}>
-                  {isKo ? "플래시카드" : "Flashcards"}
+                  {t("flashcards")}
                 </Link>
                 {allWrong.length > 0 && (
                   <Link className="btn btn--sm" href={`/${locale}/${exam}/wrong-answers`} style={{ justifyContent: "flex-start" }}>
-                    {isKo ? `오답노트 (${allWrong.length})` : `Wrong Notes (${allWrong.length})`}
+                    {t("wrongNotesCount", { count: allWrong.length })}
                   </Link>
                 )}
               </div>

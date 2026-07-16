@@ -28,7 +28,7 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
   const [sessionDone, setSessionDone] = useState(0);
   // 복습 세션에서 이미 처리한 카드 (again은 큐 유지, good은 제외)
   const [reviewedGood, setReviewedGood] = useState<Set<string>>(new Set());
-  const isKo = locale === "ko";
+  const tf = useTranslations("flashcards");
 
   const { getSrsMap, gradeFlashcard } = useLearningStore();
   const auth = useOptionalAuth();
@@ -100,10 +100,10 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
   };
 
   const filterOptions: { value: DomainFilter; label: string }[] = [
-    { value: "all", label: isKo ? "전체" : "All" },
-    { value: 1, label: isKo ? "도메인 1" : "Domain 1" },
-    { value: 2, label: isKo ? "도메인 2" : "Domain 2" },
-    { value: 3, label: isKo ? "도메인 3" : "Domain 3" },
+    { value: "all", label: tf("all") },
+    { value: 1, label: tf("domain1") },
+    { value: 2, label: tf("domain2") },
+    { value: 3, label: tf("domain3") },
   ];
 
   return (
@@ -119,7 +119,7 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
           </span>
           {sessionDone > 0 && (
             <span style={{ fontSize: "var(--fs-xs)", color: "var(--success)", fontWeight: 600 }}>
-              {isKo ? `${sessionDone}장 완료` : `${sessionDone} done`}
+              {tf("doneCount", { count: sessionDone })}
             </span>
           )}
         </div>
@@ -142,7 +142,7 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
         {/* Domain filter */}
         <div
           role="group"
-          aria-label={isKo ? "도메인 필터" : "Domain filter"}
+          aria-label={tf("domainFilter")}
           className="glossary-filter"
           style={{ justifyContent: "center", marginBottom: "var(--space-5)" }}
         >
@@ -162,7 +162,7 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
           <div style={{ textAlign: "center", padding: "var(--space-12) var(--space-8)", color: "var(--fg-muted)" }}>
             {mode === "review"
               ? t("noDue")
-              : isKo ? "이 도메인에 문제가 없습니다." : "No questions in this domain."}
+              : tf("noQuestionsInThis")}
           </div>
         ) : (
           <FlashcardCard
@@ -180,8 +180,8 @@ export default function FlashcardDeck({ units, locale, exam }: Props) {
 
         {/* Keyboard hint */}
         <p style={{ textAlign: "center", fontSize: "var(--fs-xs)", color: "var(--fg-subtle)", marginTop: "var(--space-4)" }} aria-hidden="true">
-          <span className="kbd">Space</span> {isKo ? "뒤집기" : "flip"} &nbsp;
-          <span className="kbd">←</span><span className="kbd">→</span> {isKo ? "이동" : "navigate"}
+          <span className="kbd">Space</span> {tf("flip")} &nbsp;
+          <span className="kbd">←</span><span className="kbd">→</span> {tf("navigate")}
         </p>
       </div>
     </div>

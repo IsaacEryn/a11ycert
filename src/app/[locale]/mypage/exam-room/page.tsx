@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -11,7 +12,7 @@ export default function ExamRoomPage() {
 	const router = useRouter();
 	const params = useParams();
 	const locale = params.locale as string;
-	const isKo = locale === "ko";
+	const t = useTranslations("examRoom");
 
 	useEffect(() => {
 		if (!isLoading && !user) {
@@ -22,7 +23,7 @@ export default function ExamRoomPage() {
 	if (isLoading || !user) {
 		return (
 			<div style={{ padding: "var(--space-16) var(--space-4)", textAlign: "center", fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>
-				{isKo ? "불러오는 중..." : "Loading..."}
+				{t("loading")}
 			</div>
 		);
 	}
@@ -30,16 +31,14 @@ export default function ExamRoomPage() {
 	return (
 		<div>
 			<h1 style={{ fontSize: "var(--fs-xl)", fontWeight: 700, color: "var(--fg)" }}>
-				{isKo ? "나의 시험장" : "My Exam Room"}
+				{t("myExamRoom")}
 			</h1>
 			<p style={{ marginTop: "var(--space-1)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)" }}>
-				{isKo
-					? "오답 노트, 저장한 문제, 학습 메모를 한 곳에서 관리하세요."
-					: "Manage your wrong answers, saved questions, and study notes in one place."}
+				{t("manageYourWrongAnswers")}
 			</p>
 			<p style={{ marginTop: "var(--space-2)" }}>
 				<Link href={`/${locale}/mypage/stats`} className="btn btn--sm">
-					{isKo ? "성취도 분석 보기 →" : "View Progress & Stats →"}
+					{t("viewProgressStats")}
 				</Link>
 			</p>
 

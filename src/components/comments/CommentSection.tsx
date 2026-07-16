@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
@@ -30,7 +31,7 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 	const [comments, setComments] = useState<Comment[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const auth = useOptionalAuth();
-	const isKo = locale === "ko";
+	const t = useTranslations("comments");
 
 	const fetchComments = useCallback(async () => {
 		const res = await fetch(`/api/comments?path=${encodeURIComponent(pagePath)}`);
@@ -79,7 +80,7 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 	return (
 		<section aria-labelledby="comments-heading" className="mt-10 border-t border-gray-200 pt-8">
 			<h2 id="comments-heading" className="text-base font-semibold text-gray-900">
-				{isKo ? "댓글" : "Comments"}
+				{t("comments")}
 				{rootComments.length > 0 && (
 					<span className="ml-2 text-sm font-normal text-gray-500">({rootComments.length})</span>
 				)}
@@ -88,13 +89,11 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 			{/* 댓글 목록 */}
 			{isLoading ? (
 				<p className="mt-4 text-sm text-gray-400">
-					{isKo ? "댓글을 불러오는 중..." : "Loading comments..."}
+					{t("loadingComments")}
 				</p>
 			) : rootComments.length === 0 ? (
 				<p className="mt-4 text-sm text-gray-400">
-					{isKo
-						? "아직 댓글이 없습니다. 첫 번째 댓글을 남겨보세요!"
-						: "No comments yet. Be the first to comment!"}
+					{t("noCommentsYetBe")}
 				</p>
 			) : (
 				<ul className="mt-4 space-y-4" role="list">
@@ -119,13 +118,12 @@ export default function CommentSection({ pagePath, locale }: CommentSectionProps
 				<div className="mt-6">
 					<CommentForm
 						onSubmit={(content) => handleSubmit(content)}
-						locale={locale}
-						placeholder={isKo ? "댓글을 작성해주세요..." : "Write a comment..."}
+						placeholder={t("writeAComment")}
 					/>
 				</div>
 			) : (
 				<p className="mt-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500">
-					{isKo ? "댓글을 작성하려면 로그인이 필요합니다." : "Please sign in to write a comment."}
+					{t("pleaseSignInTo")}
 				</p>
 			)}
 		</section>

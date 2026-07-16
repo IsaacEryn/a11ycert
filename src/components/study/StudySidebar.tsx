@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useLearningStore } from "@/lib/store/learningStore";
 import type { DomainGroup } from "@/lib/content/types";
@@ -16,14 +17,15 @@ export default function StudySidebar({ locale, exam, activeUnitId, domains }: Pr
   const router = useRouter();
   const { isCompleted } = useLearningStore();
   const isKo = locale === "ko";
+  const t = useTranslations("study");
 
   const allUnits = domains.flatMap((d) => d.units);
   const totalUnits = allUnits.length;
   const completedCount = allUnits.filter((u) => isCompleted(exam, u.id)).length;
 
   return (
-    <aside className="sidebar" aria-label={isKo ? "학습 목차" : "Study contents"}>
-      <div className="sidebar__cert-switch" role="group" aria-label={isKo ? "자격증 선택" : "Select certification"}>
+    <aside className="sidebar" aria-label={t("studyContents")}>
+      <div className="sidebar__cert-switch" role="group" aria-label={t("selectCertification")}>
         <button
           type="button"
           aria-pressed={exam === "cpacc"}
@@ -43,7 +45,7 @@ export default function StudySidebar({ locale, exam, activeUnitId, domains }: Pr
       <div className="sidebar__progress">
         <div className="sidebar__progress-row">
           <span style={{ color: "var(--fg-muted)", fontWeight: 600 }}>
-            {isKo ? "전체 진행" : "Progress"}
+            {t("progress")}
           </span>
           <span className="sidebar__progress-num">{completedCount} / {totalUnits}</span>
         </div>
@@ -89,7 +91,7 @@ export default function StudySidebar({ locale, exam, activeUnitId, domains }: Pr
                     <span style={{ flex: 1 }}>{label}</span>
                     <span
                       className={`sidebar__item-status${done ? " is-done" : ""}`}
-                      aria-label={done ? (isKo ? "완료" : "Done") : (isKo ? "미시작" : "Not started")}
+                      aria-label={done ? (t("done")) : (t("notStarted"))}
                     />
                   </Link>
                 </li>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ModeMenu from "./ModeMenu";
@@ -25,7 +26,8 @@ export default function Header({ locale }: HeaderProps) {
   const panelRefs = useRef<Partial<Record<Cert, HTMLDivElement>>>({});
   const pathname = usePathname();
   const router = useRouter();
-  const isKo = locale === "ko";
+  const t = useTranslations("header");
+  const tNav = useTranslations("common.nav");
   const { languageMode, setLanguageMode } = useLearningStore();
   const auth = useOptionalAuth();
   const { theme, setTheme } = usePrefs();
@@ -78,7 +80,7 @@ export default function Header({ locale }: HeaderProps) {
   const mobileNavSections = [
     { label: "CPACC", items: certNavItems("cpacc") },
     { label: "WAS", items: certNavItems("was") },
-    { label: isKo ? "기타" : "More", items: siteNavItems(locale, { includePrivacy: false }) },
+    { label: t("more"), items: siteNavItems(locale, { includePrivacy: false }) },
   ];
 
   const otherLocale = locale === "ko" ? "en" : "ko";
@@ -86,7 +88,7 @@ export default function Header({ locale }: HeaderProps) {
 
   const langOptions: { mode: LanguageMode; label: string; locale?: string }[] = [
     { mode: "ko-only", label: "KO", locale: "ko" },
-    { mode: "parallel", label: isKo ? "병기" : "Dual" },
+    { mode: "parallel", label: t("dual") },
     { mode: "en-only", label: "EN", locale: "en" },
   ];
 
@@ -98,9 +100,9 @@ export default function Header({ locale }: HeaderProps) {
   }
 
   const themeOptions: { value: Theme; label: string; icon: string }[] = [
-    { value: "light", label: isKo ? "라이트" : "Light", icon: "☀" },
-    { value: "dark", label: isKo ? "다크" : "Dark", icon: "☾" },
-    { value: "hc", label: isKo ? "고대비" : "HC", icon: "◑" },
+    { value: "light", label: t("light"), icon: "☀" },
+    { value: "dark", label: t("dark"), icon: "☾" },
+    { value: "hc", label: t("hc"), icon: "◑" },
   ];
 
   return (
@@ -112,14 +114,14 @@ export default function Header({ locale }: HeaderProps) {
           <Link
             href={`/${locale}`}
             className="brand"
-            aria-label={isKo ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
+            aria-label={t("goToA11ycertHome")}
           >
             <span className="brand__mark" aria-hidden="true">A11Y</span>
             <span>Cert</span>
           </Link>
 
           {/* Desktop nav */}
-          <nav aria-label={isKo ? "주 메뉴" : "Main menu"} className="app-nav">
+          <nav aria-label={t("mainMenu")} className="app-nav">
             {(["cpacc", "was"] as const).map((c) => (
               <div key={c} className="nav-dropdown">
                 <button
@@ -148,9 +150,9 @@ export default function Header({ locale }: HeaderProps) {
                   role="menu"
                   onKeyDown={(e) => handleDropdownKeyDown(e, c)}
                 >
-                  {certNavItems(c).map(({ href, label }) => (
+                  {certNavItems(c).map(({ href, labelKey }) => (
                     <Link key={href} href={href} className="nav-dropdown__item" role="menuitem" aria-current={isActive(href) ? "page" : undefined}>
-                      {label}
+                      {tNav(labelKey)}
                     </Link>
                   ))}
                 </div>
@@ -161,14 +163,14 @@ export default function Header({ locale }: HeaderProps) {
               className="app-nav__link"
               aria-current={isActive(`/${locale}/glossary`) ? "page" : undefined}
             >
-              {isKo ? "용어집" : "Glossary"}
+              {t("glossary")}
             </Link>
             <Link
               href={`/${locale}/about`}
               className="app-nav__link"
               aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
             >
-              {isKo ? "소개" : "About"}
+              {t("about")}
             </Link>
           </nav>
 
@@ -176,7 +178,7 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Desktop-only controls */}
           <div className="header-desktop">
-            <div className="lang-toggle" role="group" aria-label={isKo ? "언어 표시 모드" : "Language display mode"}>
+            <div className="lang-toggle" role="group" aria-label={t("languageDisplayMode")}>
               {langOptions.map((opt) => (
                 <button
                   key={opt.mode}
@@ -187,12 +189,12 @@ export default function Header({ locale }: HeaderProps) {
                 </button>
               ))}
             </div>
-            <ModeMenu locale={locale} />
+            <ModeMenu />
             {!auth?.user && (
               <button
                 onClick={() => auth?.signInWithGoogle()}
                 className="btn btn--sm"
-                aria-label={isKo ? "Google 계정으로 로그인" : "Sign in with Google"}
+                aria-label={t("signInWithGoogle")}
               >
                 <GoogleLogo />
                 Google
@@ -206,7 +208,7 @@ export default function Header({ locale }: HeaderProps) {
             className="mobile-trigger"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-sheet"
-            aria-label={mobileOpen ? (isKo ? "메뉴 닫기" : "Close menu") : (isKo ? "메뉴 열기" : "Open menu")}
+            aria-label={mobileOpen ? (t("closeMenu")) : (t("openMenu"))}
             onClick={() => setMobileOpen((v) => !v)}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -226,23 +228,22 @@ export default function Header({ locale }: HeaderProps) {
         <MobileSheet
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
-          title={isKo ? "메뉴" : "Menu"}
-          locale={locale}
+          title={t("menu")}
         >
           {/* Nav links */}
-          <nav aria-label={isKo ? "모바일 메뉴" : "Mobile menu"}>
+          <nav aria-label={t("mobileMenu")}>
             {mobileNavSections.map(({ label, items }) => (
               <div key={label} className="mobile-sheet__section" style={{ marginTop: 0, paddingTop: 0, borderTop: "none" }}>
                 <p className="mobile-sheet__section-label">{label}</p>
                 <div className="mobile-nav">
-                  {items.map(({ href, label: itemLabel }) => (
+                  {items.map(({ href, labelKey }) => (
                     <Link
                       key={href}
                       href={href}
                       aria-current={isActive(href) ? "page" : undefined}
                       onClick={() => setMobileOpen(false)}
                     >
-                      <span>{itemLabel}</span>
+                      <span>{tNav(labelKey)}</span>
                       <span aria-hidden="true">→</span>
                     </Link>
                   ))}
@@ -253,8 +254,8 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Language display mode */}
           <div className="mobile-sheet__section">
-            <p className="mobile-sheet__section-label">{isKo ? "언어 표시" : "Language"}</p>
-            <div className="lang-toggle" style={{ width: "100%" }} role="group" aria-label={isKo ? "언어 표시 모드" : "Language display mode"}>
+            <p className="mobile-sheet__section-label">{t("language")}</p>
+            <div className="lang-toggle" style={{ width: "100%" }} role="group" aria-label={t("languageDisplayMode")}>
               {langOptions.map((opt) => (
                 <button
                   key={opt.mode}
@@ -270,8 +271,8 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Theme */}
           <div className="mobile-sheet__section">
-            <p className="mobile-sheet__section-label">{isKo ? "테마" : "Theme"}</p>
-            <div className="seg" role="group" aria-label={isKo ? "테마 선택" : "Select theme"} style={{ width: "100%" }}>
+            <p className="mobile-sheet__section-label">{t("theme")}</p>
+            <div className="seg" role="group" aria-label={t("selectTheme")} style={{ width: "100%" }}>
               {themeOptions.map((opt) => (
                 <button
                   key={opt.value}
@@ -293,7 +294,7 @@ export default function Header({ locale }: HeaderProps) {
                 style={{ width: "100%" }}
                 onClick={async () => { await auth.signOut(); setMobileOpen(false); router.push(`/${locale}`); }}
               >
-                {isKo ? "로그아웃" : "Sign Out"}
+                {t("signOut")}
               </button>
             ) : (
               <button
@@ -302,7 +303,7 @@ export default function Header({ locale }: HeaderProps) {
                 onClick={() => { auth?.signInWithGoogle(); setMobileOpen(false); }}
               >
                 <GoogleLogo />
-                {isKo ? "Google로 로그인" : "Sign in with Google"}
+                {t("signInWithGoogle2")}
               </button>
             )}
           </div>

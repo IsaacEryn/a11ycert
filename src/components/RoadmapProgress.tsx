@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { DomainGroup } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
 import StudySidebar from "@/components/study/StudySidebar";
@@ -14,6 +15,7 @@ interface Props {
 export default function RoadmapProgress({ locale, exam, domains }: Props) {
   const { isCompleted } = useLearningStore();
   const isKo = locale === "ko";
+  const t = useTranslations("study");
 
   const allUnits = domains.flatMap((d) => d.units);
   const totalUnits = allUnits.length;
@@ -29,10 +31,10 @@ export default function RoadmapProgress({ locale, exam, domains }: Props) {
           {/* Welcome card */}
           <div className="bilingual-card" style={{ textAlign: "center", padding: "var(--space-12) var(--space-8)" }}>
             <div className="bilingual-card__num" style={{ justifyContent: "center", display: "flex", marginBottom: "var(--space-3)" }}>
-              {exam.toUpperCase()} · {isKo ? "학습 로드맵" : "STUDY ROADMAP"}
+              {exam.toUpperCase()} · {t("studyRoadmap")}
             </div>
             <h1 style={{ fontSize: "var(--fs-2xl)", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "var(--space-3)" }}>
-              {isKo ? "어디서부터 시작할까요?" : "Where would you like to start?"}
+              {t("whereWouldYouLike")}
             </h1>
             <p style={{ color: "var(--fg-muted)", marginBottom: "var(--space-6)", maxWidth: "40ch", margin: "0 auto var(--space-6)" }}>
               {isKo
@@ -46,7 +48,7 @@ export default function RoadmapProgress({ locale, exam, domains }: Props) {
                   <div className="progress-fill" style={{ width: `${(completedCount / totalUnits) * 100}%` }} />
                 </div>
                 <p style={{ fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>
-                  {Math.round((completedCount / totalUnits) * 100)}% {isKo ? "완료" : "complete"}
+                  {Math.round((completedCount / totalUnits) * 100)}% {t("complete")}
                 </p>
               </div>
             )}
@@ -55,7 +57,7 @@ export default function RoadmapProgress({ locale, exam, domains }: Props) {
               <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "center", flexWrap: "wrap" }}>
                 {completedCount === 0 ? (
                   <Link className="btn btn--primary btn--lg" href={`/${locale}/${exam}/study/${firstUnit.id}`}>
-                    {isKo ? "첫 단원 시작" : "Start First Unit"}
+                    {t("startFirstUnit")}
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
@@ -63,13 +65,13 @@ export default function RoadmapProgress({ locale, exam, domains }: Props) {
                 ) : (
                   <>
                     <Link className="btn btn--primary btn--lg" href={`/${locale}/${exam}/study/${firstUnit.id}`}>
-                      {isKo ? "계속 학습" : "Continue"}
+                      {t("continue")}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </Link>
                     <Link className="btn btn--lg" href={`/${locale}/${exam}/quiz`}>
-                      {isKo ? "모의 퀴즈" : "Mock Quiz"}
+                      {t("mockQuiz")}
                     </Link>
                   </>
                 )}

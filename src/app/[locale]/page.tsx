@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import HomeHero from "@/components/home/HomeHero";
 import HomeCerts from "@/components/home/HomeCerts";
@@ -12,6 +12,7 @@ export function generateStaticParams() {
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
+	const t = await getTranslations({ locale, namespace: "homeUi" });
 	setRequestLocale(locale);
 	const isKo = locale === "ko";
 
@@ -24,12 +25,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 					<div className="section__head">
 						<div>
 							<h2 id="certs-title" className="section__title">
-								{isKo ? "자격증을 선택하세요" : "Choose Your Certification"}
+								{t("chooseYourCertification")}
 							</h2>
 							<p className="section__sub">
-								{isKo
-									? "두 자격증의 범위와 난이도를 비교해 시작점을 정하세요."
-									: "Compare scope and difficulty to find your starting point."}
+								{t("compareScopeAndDifficulty")}
 							</p>
 						</div>
 					</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { QuizQuestion } from "@/lib/content/types";
+import { useTranslations } from "next-intl";
 import type { LanguageMode } from "@/lib/store/learningStore";
 import BilingualText from "@/components/BilingualText";
 import { OPTION_KEYS, type OptionKey } from "./useQuizSession";
@@ -22,11 +23,11 @@ export default function QuestionCard({
 	question: q,
 	selected,
 	onSelect,
-	isKo,
 	languageMode,
 	variant,
 	explanationAction,
 }: QuestionCardProps) {
+	const t = useTranslations("quiz");
 	const answered = selected !== null;
 	const isCorrect = selected === q.answer;
 
@@ -45,9 +46,9 @@ export default function QuestionCard({
 
 				const answerStateLabel = answered
 					? key === q.answer
-						? isKo ? " (정답)" : " (Correct answer)"
+						? t("correctAnswer")
 						: key === selected
-							? isKo ? " (선택한 오답)" : " (Your wrong answer)"
+							? t("yourWrongAnswer")
 							: ""
 					: "";
 
@@ -77,7 +78,7 @@ export default function QuestionCard({
 		<>
 			{variant === "single" ? (
 				<fieldset className="mt-4">
-					<legend className="sr-only">{isKo ? "답을 선택하세요" : "Select your answer"}</legend>
+					<legend className="sr-only">{t("selectYourAnswer")}</legend>
 					{optionList}
 				</fieldset>
 			) : (
@@ -95,12 +96,12 @@ export default function QuestionCard({
 					aria-atomic="true"
 				>
 					<p className="font-semibold">
-						{isCorrect ? (isKo ? "정답입니다!" : "Correct!") : (isKo ? "오답입니다." : "Incorrect.")}
+						{isCorrect ? (t("correct2")) : (t("incorrect"))}
 					</p>
 					<BilingualText field={q.explanation} variant="body" as="p" className="mt-1 leading-relaxed" />
 					{variant === "single" && !isCorrect && (
 						<p className="mt-1 text-xs opacity-75">
-							{isKo ? "오답노트에 자동으로 추가되었습니다." : "Added to your wrong answers automatically."}
+							{t("addedToYourWrong")}
 						</p>
 					)}
 					{explanationAction && <div className="mt-2 flex justify-end">{explanationAction}</div>}

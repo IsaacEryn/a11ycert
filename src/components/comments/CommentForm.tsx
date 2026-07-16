@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useId } from "react";
+import { useTranslations } from "next-intl";
 
 interface CommentFormProps {
 	onSubmit: (content: string) => Promise<void>;
 	onCancel?: () => void;
-	locale: string;
 	initialValue?: string;
 	placeholder?: string;
 	submitLabel?: string;
@@ -16,15 +16,14 @@ interface CommentFormProps {
 export default function CommentForm({
 	onSubmit,
 	onCancel,
-	locale,
-	initialValue = "",
+		initialValue = "",
 	placeholder,
 	submitLabel,
 	labelText,
 }: CommentFormProps) {
 	const [content, setContent] = useState(initialValue);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const isKo = locale === "ko";
+	const t = useTranslations("comments");
 	const textareaId = useId();
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -43,13 +42,13 @@ export default function CommentForm({
 	return (
 		<form onSubmit={handleSubmit} className="space-y-2">
 			<label htmlFor={textareaId} className="sr-only">
-				{labelText || (isKo ? "댓글 입력" : "Write a comment")}
+				{labelText || (t("writeAComment2"))}
 			</label>
 			<textarea
 				id={textareaId}
 				value={content}
 				onChange={(e) => setContent(e.target.value)}
-				placeholder={placeholder || (isKo ? "댓글을 입력하세요..." : "Write a comment...")}
+				placeholder={placeholder || (t("writeAComment3"))}
 				className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1 resize-none"
 				style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 				rows={3}
@@ -64,7 +63,7 @@ export default function CommentForm({
 						className="rounded-md px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
 						style={{ color: "var(--fg-muted)" }}
 					>
-						{isKo ? "취소" : "Cancel"}
+						{t("cancel")}
 					</button>
 				)}
 				<button
@@ -74,10 +73,8 @@ export default function CommentForm({
 					style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 				>
 					{isSubmitting
-						? isKo
-							? "등록 중..."
-							: "Posting..."
-						: submitLabel || (isKo ? "댓글 등록" : "Post Comment")}
+						? t("posting")
+						: submitLabel || (t("postComment"))}
 				</button>
 			</div>
 		</form>

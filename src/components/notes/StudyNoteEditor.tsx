@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
 interface StudyNoteEditorProps {
 	pagePath: string;
 	unitId: string;
-	locale: string;
 }
 
-export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteEditorProps) {
+export default function StudyNoteEditor({ pagePath, unitId }: StudyNoteEditorProps) {
 	const [content, setContent] = useState("");
 	const [savedContent, setSavedContent] = useState("");
 	const [isSaving, setIsSaving] = useState(false);
@@ -19,7 +19,7 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 	const auth = useOptionalAuth();
 	// 옵셔널 체이닝을 의존성 배열에 직접 쓰면 React Compiler가 memo를 보존하지 못함
 	const user = auth?.user ?? null;
-	const isKo = locale === "ko";
+	const t = useTranslations("notes");
 	const debounceRef = useRef<NodeJS.Timeout | null>(null);
 	const [supabase] = useState(createClient);
 
@@ -108,7 +108,7 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 		return (
 			<div className="mt-8 rounded-lg border border-dashed border-gray-200 px-4 py-3 text-sm text-gray-400">
 				<span aria-hidden="true">📝</span>{" "}
-				{isKo ? "로그인하면 학습 메모를 작성할 수 있습니다." : "Sign in to take study notes."}
+				{t("signInToTake")}
 			</div>
 		);
 	}
@@ -117,15 +117,15 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 		<section aria-labelledby="study-note-heading" className="mt-8">
 			<div className="flex items-center justify-between">
 				<h2 id="study-note-heading" className="text-base font-semibold text-gray-900">
-					{isKo ? "나의 학습 메모" : "My Study Notes"}
+					{t("myStudyNotes")}
 				</h2>
 				<div className="flex items-center gap-2 text-xs text-gray-400">
 					{/* 저장 상태 — aria-live로 스크린리더에 자동 전달 */}
 					<span aria-live="polite" aria-atomic="true">
 						{isSaving
-							? isKo ? "저장 중..." : "Saving..."
+							? t("saving")
 							: lastSaved
-								? isKo ? "자동 저장됨" : "Saved"
+								? t("saved")
 								: ""}
 					</span>
 
@@ -134,43 +134,41 @@ export default function StudyNoteEditor({ pagePath, unitId, locale }: StudyNoteE
 						<button
 							onClick={() => setConfirmingDelete(true)}
 							className="text-red-400 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
-							aria-label={isKo ? "메모 삭제" : "Delete note"}
+							aria-label={t("deleteNote")}
 						>
-							{isKo ? "삭제" : "Delete"}
+							{t("delete")}
 						</button>
 					)}
 					{confirmingDelete && (
-						<span className="flex items-center gap-1.5" role="group" aria-label={isKo ? "삭제 확인" : "Confirm deletion"}>
-							<span className="text-red-600">{isKo ? "삭제할까요?" : "Delete?"}</span>
+						<span className="flex items-center gap-1.5" role="group" aria-label={t("confirmDeletion")}>
+							<span className="text-red-600">{t("delete2")}</span>
 							<button
 								onClick={handleDelete}
 								className="text-red-600 font-medium hover:text-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 rounded"
-								aria-label={isKo ? "메모 삭제 확인" : "Confirm delete note"}
+								aria-label={t("confirmDeleteNote")}
 							>
-								{isKo ? "확인" : "Yes"}
+								{t("yes")}
 							</button>
 							<button
 								onClick={() => setConfirmingDelete(false)}
 								className="text-gray-400 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
-								aria-label={isKo ? "삭제 취소" : "Cancel delete"}
+								aria-label={t("cancelDelete")}
 							>
-								{isKo ? "취소" : "No"}
+								{t("no")}
 							</button>
 						</span>
 					)}
 				</div>
 			</div>
 			<label htmlFor="study-note-textarea" className="sr-only">
-				{isKo ? "학습 메모" : "Study notes"}
+				{t("studyNotes")}
 			</label>
 			<textarea
 				id="study-note-textarea"
 				value={content}
 				onChange={(e) => handleChange(e.target.value)}
 				placeholder={
-					isKo
-						? "이 단원에서 기억할 내용을 메모하세요... (자동 저장)"
-						: "Take notes for this unit... (auto-saved)"
+					t("takeNotesForThis")
 				}
 				className="mt-2 w-full rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y min-h-[100px]"
 			/>

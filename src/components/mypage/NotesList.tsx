@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -21,7 +22,7 @@ export default function NotesList({ locale }: Props) {
 	const { user } = useAuth();
 	const [notes, setNotes] = useState<Note[]>([]);
 	const [loading, setLoading] = useState(true);
-	const isKo = locale === "ko";
+	const t = useTranslations("examRoom");
 	const [supabase] = useState(createClient);
 
 	useEffect(() => {
@@ -47,13 +48,13 @@ export default function NotesList({ locale }: Props) {
 	if (!user) {
 		return (
 			<p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-muted)" }}>
-				{isKo ? "로그인 후 메모를 확인할 수 있습니다." : "Sign in to view your notes."}
+				{t("signInToView")}
 			</p>
 		);
 	}
 
 	if (loading) {
-		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{t("loading")}</p>;
 	}
 
 	if (notes.length === 0) {
@@ -66,7 +67,7 @@ export default function NotesList({ locale }: Props) {
 				fontSize: "var(--fs-sm)",
 				color: "var(--fg-subtle)",
 			}}>
-				{isKo ? "아직 작성한 메모가 없습니다." : "No study notes yet."}
+				{t("noStudyNotesYet")}
 			</div>
 		);
 	}

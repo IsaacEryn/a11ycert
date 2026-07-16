@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { formatDistanceToNow } from "date-fns";
 import { ko, enUS } from "date-fns/locale";
 import CommentForm from "./CommentForm";
@@ -41,8 +42,9 @@ export default function CommentItem({
 	const [isReplying, setIsReplying] = useState(false);
 	const [confirmingDelete, setConfirmingDelete] = useState(false);
 	const isKo = locale === "ko";
+	const t = useTranslations("comments");
 	const isOwner = currentUserId === comment.user_id;
-	const nickname = comment.profiles?.nickname || (isKo ? "익명" : "Anonymous");
+	const nickname = comment.profiles?.nickname || (t("anonymous"));
 	const avatarUrl = comment.profiles?.avatar_url;
 
 	const timeAgo = formatDistanceToNow(new Date(comment.created_at), {
@@ -87,10 +89,9 @@ export default function CommentItem({
 								setIsEditing(false);
 							}}
 							onCancel={() => setIsEditing(false)}
-							locale={locale}
 							initialValue={comment.content}
-							submitLabel={isKo ? "수정" : "Edit"}
-							labelText={isKo ? "댓글 수정" : "Edit comment"}
+							submitLabel={t("edit")}
+							labelText={t("editComment")}
 						/>
 					) : (
 						<p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap break-words">
@@ -112,50 +113,50 @@ export default function CommentItem({
 									aria-expanded={isReplying}
 									className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 								>
-									{isKo ? "답글" : "Reply"}
+									{t("reply")}
 								</button>
 							)}
 							{isOwner && (
 								<>
 									<button
 										onClick={() => setIsEditing(true)}
-										aria-label={isKo ? "내 댓글 수정" : "Edit my comment"}
+										aria-label={t("editMyComment")}
 										className="text-gray-400 hover:text-blue-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 									>
-										{isKo ? "수정" : "Edit"}
+										{t("edit")}
 									</button>
 
 									{/* 인라인 삭제 확인 (native confirm 대신) */}
 									{confirmingDelete ? (
 										<span className="flex items-center gap-1.5">
 											<span className="text-red-600">
-												{isKo ? "삭제할까요?" : "Delete?"}
+												{t("delete")}
 											</span>
 											<button
 												onClick={() => {
 													setConfirmingDelete(false);
 													onDelete(comment.id);
 												}}
-												aria-label={isKo ? "삭제 확인" : "Confirm delete"}
+												aria-label={t("confirmDelete")}
 												className="text-red-600 font-medium hover:text-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 rounded"
 											>
-												{isKo ? "확인" : "Yes"}
+												{t("yes")}
 											</button>
 											<button
 												onClick={() => setConfirmingDelete(false)}
-												aria-label={isKo ? "삭제 취소" : "Cancel delete"}
+												aria-label={t("cancelDelete")}
 												className="text-gray-400 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 rounded"
 											>
-												{isKo ? "취소" : "No"}
+												{t("no")}
 											</button>
 										</span>
 									) : (
 										<button
 											onClick={() => setConfirmingDelete(true)}
-											aria-label={isKo ? "내 댓글 삭제" : "Delete my comment"}
+											aria-label={t("deleteMyComment")}
 											className="text-gray-400 hover:text-red-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 rounded"
 										>
-											{isKo ? "삭제" : "Delete"}
+											{t("delete2")}
 										</button>
 									)}
 								</>
@@ -172,10 +173,9 @@ export default function CommentItem({
 									setIsReplying(false);
 								}}
 								onCancel={() => setIsReplying(false)}
-								locale={locale}
-								placeholder={isKo ? "답글을 작성해주세요..." : "Write a reply..."}
+								placeholder={t("writeAReply")}
 								labelText={
-									isKo ? `${nickname}의 댓글에 답글` : `Reply to ${nickname}`
+									t("replyToComment", { nickname })
 								}
 							/>
 						</div>

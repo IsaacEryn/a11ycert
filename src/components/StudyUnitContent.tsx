@@ -40,6 +40,7 @@ function ReferencesBlock({ refs, locale }: { refs: UnitReference[]; locale: stri
 
 export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exam }: Props) {
   const isKo = locale === "ko";
+  const t = useTranslations("study");
   const unitNum = `${unit.domain}.${unit.order}`;
 
   return (
@@ -82,7 +83,7 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
         {(unit.objectives.ko.length > 0 || unit.objectives.en.length > 0) && (
           <div className="bilingual-pair">
             <div lang="ko">
-              <p className="bilingual-card__label">{isKo ? "학습 목표" : "Objectives"}</p>
+              <p className="bilingual-card__label">{t("objectives")}</p>
               {unit.objectives.ko.map((obj, i) => (
                 <p key={i} style={{ display: "flex", gap: 8 }}>
                   <span aria-hidden="true" style={{ color: "var(--accent)", flexShrink: 0 }}>•</span>
@@ -152,7 +153,7 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
 
         <div className="bilingual-card__nav-help">
           <span>
-            <span className="kbd">←</span> <span className="kbd">→</span> {isKo ? "이동" : "Navigate"}
+            <span className="kbd">←</span> <span className="kbd">→</span> {t("navigate")}
           </span>
         </div>
 

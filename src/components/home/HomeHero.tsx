@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Props {
   locale: string;
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export default function HomeHero({ locale, isKo }: Props) {
+  const t = useTranslations("homeUi");
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="container">
@@ -13,7 +15,7 @@ export default function HomeHero({ locale, isKo }: Props) {
           <div>
             <span className="hero__eyebrow">
               <span className="dot" aria-hidden="true">A</span>
-              {isKo ? "IAAP 공인 자격증 한국어 학습" : "IAAP Certification Korean Study Platform"}
+              {t("iaapCertificationKoreanStudy")}
             </span>
 
             <h1 id="hero-title" className="hero__title">
@@ -25,46 +27,44 @@ export default function HomeHero({ locale, isKo }: Props) {
             </h1>
 
             <p className="hero__lede">
-              {isKo
-                ? "CPACC와 WAS 시험 범위를 한국어 해설과 영어 원문으로 동시에 학습합니다. 핵심 용어 플래시카드, 실전형 모의 퀴즈, 자동 오답 노트까지 — 모두 무료."
-                : "Study CPACC and WAS exam content with Korean explanations and English originals side by side. Flashcards, mock quizzes, and automatic wrong-answer notes — all free."}
+              {t("studyCpaccAndWas")}
             </p>
 
             <div className="hero__cta">
               <Link className="btn btn--primary btn--lg" href={`/${locale}/cpacc`}>
-                {isKo ? "CPACC 시작하기" : "Start CPACC"}
+                {t("startCpacc")}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
               </Link>
               <Link className="btn btn--lg" href={`/${locale}/was`}>
-                {isKo ? "WAS 시작하기" : "Start WAS"}
+                {t("startWas")}
               </Link>
             </div>
 
             <dl className="hero__stats">
               <div>
-                <dt className="hero__stat-label">{isKo ? "실전형 학습 문항" : "Practice questions"}</dt>
+                <dt className="hero__stat-label">{t("practiceQuestions")}</dt>
                 <dd className="hero__stat-num">
                   222
                   <span style={{ fontSize: "0.55em", color: "var(--fg-muted)", fontWeight: 600, marginLeft: 2 }}>
-                    {isKo ? "문항" : "Qs"}
+                    {t("qs")}
                   </span>
                 </dd>
               </div>
               <div>
-                <dt className="hero__stat-label">{isKo ? "CPACC · WAS 과정" : "CPACC · WAS courses"}</dt>
+                <dt className="hero__stat-label">{t("cpaccWasCourses")}</dt>
                 <dd className="hero__stat-num">
                   2
                   <span style={{ fontSize: "0.55em", color: "var(--fg-muted)", fontWeight: 600, marginLeft: 6 }}>
-                    {isKo ? "자격증" : "certs"}
+                    {t("certs")}
                   </span>
                 </dd>
               </div>
               <div>
-                <dt className="hero__stat-label">{isKo ? "계정 없이 이용" : "No account needed"}</dt>
+                <dt className="hero__stat-label">{t("noAccountNeeded")}</dt>
                 <dd className="hero__stat-num" style={{ color: "var(--success)" }}>
-                  {isKo ? "무료" : "Free"}
+                  {t("free")}
                 </dd>
               </div>
             </dl>
@@ -73,7 +73,7 @@ export default function HomeHero({ locale, isKo }: Props) {
           {/* Showcase (decorative) — 실제 UI로 오인되지 않도록 예시 라벨 표시 */}
           <div className="showcase" aria-hidden="true">
             <span className="showcase__label">
-              {isKo ? "화면 예시 — 실제 문제는 학습 메뉴에서" : "Preview — find real questions in Study"}
+              {t("previewFindRealQuestions")}
             </span>
             <div className="showcase__card showcase__card--badge">
               <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: "50%", background: "var(--success-soft)", color: "var(--success)" }}>
@@ -82,31 +82,31 @@ export default function HomeHero({ locale, isKo }: Props) {
                 </svg>
               </span>
               <div>
-                <div style={{ fontSize: "var(--fs-xs)", color: "var(--fg-subtle)", fontWeight: 500 }}>{isKo ? "정답 +1점" : "Correct +1"}</div>
-                <div style={{ fontSize: "var(--fs-sm)" }}>{isKo ? "진행 12 / 100" : "12 / 100 done"}</div>
+                <div style={{ fontSize: "var(--fs-xs)", color: "var(--fg-subtle)", fontWeight: 500 }}>{t("correct1")}</div>
+                <div style={{ fontSize: "var(--fs-sm)" }}>{t("12100Done")}</div>
               </div>
             </div>
 
             <div className="showcase__card showcase__card--main">
               <div className="qcard__head">
-                <span className="qcard__qnum">{isKo ? "예시 문항" : "Sample Q"}</span>
+                <span className="qcard__qnum">{t("sampleQ")}</span>
                 <span className="qcard__cert">CPACC · POUR</span>
               </div>
               <div>
-                <div className="qcard__q">{isKo ? "WCAG 2.2의 네 가지 핵심 원칙(POUR)에 포함되지 않는 것은?" : "Which is NOT one of WCAG 2.2's four POUR principles?"}</div>
+                <div className="qcard__q">{t("whichIsNotOne")}</div>
                 <div className="qcard__q-en">Which of the following is NOT one of WCAG 2.2&apos;s four principles (POUR)?</div>
               </div>
               <div className="qcard__opts">
-                <div className="qcard__opt"><span className="qcard__opt-letter">A</span>{isKo ? "인식 가능 (Perceivable)" : "Perceivable"}</div>
-                <div className="qcard__opt"><span className="qcard__opt-letter">B</span>{isKo ? "운용 가능 (Operable)" : "Operable"}</div>
-                <div className="qcard__opt qcard__opt--correct"><span className="qcard__opt-letter">C</span>{isKo ? "예측 가능 (Predictable)" : "Predictable"}</div>
-                <div className="qcard__opt"><span className="qcard__opt-letter">D</span>{isKo ? "견고함 (Robust)" : "Robust"}</div>
+                <div className="qcard__opt"><span className="qcard__opt-letter">A</span>{t("perceivable")}</div>
+                <div className="qcard__opt"><span className="qcard__opt-letter">B</span>{t("operable")}</div>
+                <div className="qcard__opt qcard__opt--correct"><span className="qcard__opt-letter">C</span>{t("predictable")}</div>
+                <div className="qcard__opt"><span className="qcard__opt-letter">D</span>{t("robust")}</div>
               </div>
             </div>
 
             <div className="showcase__card showcase__card--mini">
               <div style={{ fontSize: "var(--fs-xs)", color: "var(--fg-subtle)", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 6 }}>
-                {isKo ? "오늘의 진행" : "Today"}
+                {t("today")}
               </div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 8 }}>
                 <span style={{ fontSize: "var(--fs-2xl)", fontWeight: 700, letterSpacing: "-0.02em" }}>68</span>
@@ -116,8 +116,8 @@ export default function HomeHero({ locale, isKo }: Props) {
                 <div className="progress-fill" style={{ width: "68%" }} />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>
-                <span>{isKo ? "34/50 카드" : "34/50 cards"}</span>
-                <span>{isKo ? "+3 연속 정답" : "+3 streak"}</span>
+                <span>{t("3450Cards")}</span>
+                <span>{t("3Streak")}</span>
               </div>
             </div>
           </div>

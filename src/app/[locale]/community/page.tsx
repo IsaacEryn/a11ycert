@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -23,17 +24,18 @@ export default function CommunityPage() {
 	const params = useParams();
 	const locale = (params?.locale as string) || "ko";
 	const isKo = locale === "ko";
+	const t = useTranslations("community");
 	const [posts, setPosts] = useState<BoardPost[]>([]);
 	const [category, setCategory] = useState<string>("all");
 	const [isLoading, setIsLoading] = useState(true);
 	const panelRef = useRef<HTMLDivElement>(null);
 
 	const categoryLabels: Record<string, string> = {
-		all: isKo ? "전체" : "All",
-		report: isKo ? "제보·수정요청" : "Reports",
-		discussion: isKo ? "자유토론" : "Discussion",
-		question: isKo ? "질문" : "Questions",
-		tip: isKo ? "팁" : "Tips",
+		all: t("all"),
+		report: t("reports"),
+		discussion: t("discussion"),
+		question: t("questions"),
+		tip: t("tips"),
 	};
 
 	const fetchPosts = useCallback(async () => {
@@ -80,12 +82,12 @@ export default function CommunityPage() {
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
 			<div className="flex items-center justify-between">
-				<h1 className="text-2xl font-bold text-gray-900">{isKo ? "커뮤니티" : "Community"}</h1>
+				<h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
 				<Link
 					href={`/${locale}/community/write`}
 					className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-blue-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
 				>
-					{isKo ? "글 작성" : "New Post"}
+					{t("newPost")}
 				</Link>
 			</div>
 
@@ -93,7 +95,7 @@ export default function CommunityPage() {
 			<div
 				className="mt-6 flex flex-wrap gap-2"
 				role="tablist"
-				aria-label={isKo ? "카테고리 필터" : "Category filter"}
+				aria-label={t("categoryFilter")}
 			>
 				{CATEGORIES.map((cat) => (
 					<button
@@ -125,7 +127,7 @@ export default function CommunityPage() {
 			>
 				{isLoading ? (
 					<div className="mt-6" aria-live="polite" aria-busy="true">
-						<span className="sr-only">{isKo ? "불러오는 중..." : "Loading..."}</span>
+						<span className="sr-only">{t("loading")}</span>
 						<ul className="divide-y divide-gray-100 motion-safe:animate-pulse" aria-hidden="true">
 							{[0, 1, 2, 3, 4].map((i) => (
 								<li key={i} className="py-4">
@@ -137,7 +139,7 @@ export default function CommunityPage() {
 					</div>
 				) : posts.length === 0 ? (
 					<p className="mt-8 text-sm text-gray-400">
-						{isKo ? "아직 게시글이 없습니다." : "No posts yet."}
+						{t("noPostsYet")}
 					</p>
 				) : (
 					<ul className="mt-6 divide-y divide-gray-100" role="list">
@@ -160,7 +162,7 @@ export default function CommunityPage() {
 											</span>
 										</div>
 										<div className="mt-1 flex items-center gap-3 text-xs text-gray-400">
-											<span>{post.profiles?.nickname || (isKo ? "익명" : "Anonymous")}</span>
+											<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 											<span>
 												<time dateTime={post.created_at}>
 													{formatDistanceToNow(new Date(post.created_at), {
@@ -171,7 +173,7 @@ export default function CommunityPage() {
 											</span>
 											{post.reply_count > 0 && (
 												<span>
-													{isKo ? `댓글 ${post.reply_count}` : `${post.reply_count} replies`}
+													{t("replyCount", { count: post.reply_count })}
 												</span>
 											)}
 										</div>

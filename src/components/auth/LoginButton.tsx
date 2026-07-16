@@ -1,15 +1,12 @@
 "use client";
 
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
+import { useTranslations } from "next-intl";
 import GoogleLogo from "./GoogleLogo";
 
-interface LoginButtonProps {
-	locale: string;
-}
-
-export default function LoginButton({ locale }: LoginButtonProps) {
+export default function LoginButton() {
 	const auth = useOptionalAuth();
-	const isKo = locale === "ko";
+	const t = useTranslations("auth");
 
 	if (!auth || auth.isLoading || auth.user) return null;
 
@@ -17,7 +14,7 @@ export default function LoginButton({ locale }: LoginButtonProps) {
 		<button
 			onClick={() => auth.signInWithGoogle()}
 			className="btn btn--sm"
-			aria-label={isKo ? "Google 계정으로 로그인" : "Sign in with Google"}
+			aria-label={t("signInWithGoogle")}
 		>
 			<GoogleLogo />
 			Google

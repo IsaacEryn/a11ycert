@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { certNavItems, siteNavItems } from "@/lib/nav";
 
 interface FooterProps {
@@ -6,7 +7,8 @@ interface FooterProps {
 }
 
 export default function Footer({ locale }: FooterProps) {
-  const isKo = locale === "ko";
+  const t = useTranslations("footer");
+  const tNav = useTranslations("common.nav");
 
   const cpaccLinks = certNavItems(locale, "cpacc");
   const wasLinks = certNavItems(locale, "was");
@@ -21,49 +23,47 @@ export default function Footer({ locale }: FooterProps) {
             <Link
               href={`/${locale}`}
               className="brand"
-              aria-label={isKo ? "A11yCert 홈으로 이동" : "Go to A11yCert home"}
+              aria-label={t("goToA11ycertHome")}
             >
               <span className="brand__mark" aria-hidden="true">A11Y</span>
               <span>Cert</span>
             </Link>
             <p style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-sm)", color: "var(--fg-muted)", lineHeight: 1.6, maxWidth: "24ch" }}>
-              {isKo
-                ? "IAAP BoK 기반 비공식 한국어 학습 플랫폼"
-                : "Unofficial study platform based on IAAP Body of Knowledge."}
+              {t("unofficialStudyPlatformBased")}
             </p>
           </div>
 
           {/* CPACC col */}
-          <nav aria-label={isKo ? "CPACC 메뉴" : "CPACC navigation"} className="app-footer__col">
+          <nav aria-label={t("cpaccNavigation")} className="app-footer__col">
             <h4>CPACC</h4>
             <ul>
-              {cpaccLinks.map(({ href, label }) => (
+              {cpaccLinks.map(({ href, labelKey }) => (
                 <li key={href}>
-                  <Link href={href}>{label}</Link>
+                  <Link href={href}>{tNav(labelKey)}</Link>
                 </li>
               ))}
             </ul>
           </nav>
 
           {/* WAS col */}
-          <nav aria-label={isKo ? "WAS 메뉴" : "WAS navigation"} className="app-footer__col">
+          <nav aria-label={t("wasNavigation")} className="app-footer__col">
             <h4>WAS</h4>
             <ul>
-              {wasLinks.map(({ href, label }) => (
+              {wasLinks.map(({ href, labelKey }) => (
                 <li key={href}>
-                  <Link href={href}>{label}</Link>
+                  <Link href={href}>{tNav(labelKey)}</Link>
                 </li>
               ))}
             </ul>
           </nav>
 
           {/* Site col */}
-          <nav aria-label={isKo ? "사이트 메뉴" : "Site menu"} className="app-footer__col">
-            <h4>{isKo ? "사이트" : "Site"}</h4>
+          <nav aria-label={t("siteMenu")} className="app-footer__col">
+            <h4>{t("site")}</h4>
             <ul>
-              {siteLinks.map(({ href, label }) => (
+              {siteLinks.map(({ href, labelKey }) => (
                 <li key={href}>
-                  <Link href={href}>{label}</Link>
+                  <Link href={href}>{tNav(labelKey)}</Link>
                 </li>
               ))}
             </ul>
@@ -73,9 +73,9 @@ export default function Footer({ locale }: FooterProps) {
         <div className="app-footer__bottom">
           <span>
             © {new Date().getFullYear()} A11yCert.{" "}
-            {isKo ? "IAAP와 무관한 독립 운영 사이트." : "Independent site, not affiliated with IAAP."}
+            {t("independentSiteNotAffiliated")}
             {" "}
-            {isKo ? "제작: " : "Made by "}
+            {t("madeBy")}
             <a
               href="https://www.codeslog.com"
               target="_blank"
@@ -89,7 +89,7 @@ export default function Footer({ locale }: FooterProps) {
             href="mailto:contact@a11ycert.com"
             style={{ color: "var(--fg-muted)", fontSize: "var(--fs-sm)" }}
           >
-            {isKo ? "오류 제보: contact@a11ycert.com" : "Report issues: contact@a11ycert.com"}
+            {t("reportIssuesContactA11ycert")}
           </a>
         </div>
       </div>

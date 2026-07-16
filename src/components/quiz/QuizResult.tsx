@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { QuizQuestion } from "@/lib/content/types";
 import BilingualText from "@/components/BilingualText";
 import ReportButton from "@/components/report/ReportButton";
@@ -27,7 +28,7 @@ export default function QuizResult({
 	onRetry,
 	summaryRef,
 }: QuizResultProps) {
-	const isKo = locale === "ko";
+	const t = useTranslations("quiz");
 	const wrongAnswersLink = `/${locale}/${exam}/wrong-answers`;
 
 	return (
@@ -38,12 +39,12 @@ export default function QuizResult({
 			style={{ borderColor: "var(--border)" }}
 		>
 			<h3 className="text-base font-semibold" style={{ color: "var(--fg)" }}>
-				{isKo ? "퀴즈 완료" : "Quiz Complete"}
+				{t("quizComplete")}
 			</h3>
 			<p className="mt-2 text-2xl font-bold" style={{ color: "var(--fg)" }}>
 				{correctCount} / {questions.length}
 				<span className="ml-2 text-sm font-normal" style={{ color: "var(--fg-subtle)" }}>
-					{isKo ? "정답" : "correct"}
+					{t("correct3")}
 				</span>
 			</p>
 
@@ -63,13 +64,13 @@ export default function QuizResult({
 						</p>
 						{!correct && userAns && (
 							<p className="mt-1" style={{ color: "var(--danger)" }}>
-								{isKo ? "내 답: " : "Your answer: "}
+								{t("yourAnswer")}
 								<BilingualText field={q.options[userAns]} variant="label" as="span" />
 							</p>
 						)}
 						<div className="mt-1 flex items-center justify-between">
 							<p style={{ color: correct ? "var(--success)" : "var(--fg-muted)" }}>
-								{isKo ? "정답: " : "Correct: "}
+								{t("correct4")}
 								<BilingualText field={q.options[q.answer]} variant="label" as="span" />
 							</p>
 							<ReportButton locale={locale} targetType="quiz" targetId={q.id} />
@@ -84,7 +85,7 @@ export default function QuizResult({
 					className="rounded-lg border px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
 					style={{ borderColor: "var(--border)", color: "var(--fg-muted)" }}
 				>
-					{isKo ? "다시 풀기" : "Retry"}
+					{t("retry")}
 				</button>
 				{correctCount < questions.length && (
 					<Link
@@ -92,7 +93,7 @@ export default function QuizResult({
 						className="rounded-lg px-4 py-2 text-sm font-medium no-underline focus-visible:outline-2 focus-visible:outline-offset-2"
 						style={{ background: "var(--danger)", color: "#fff" }}
 					>
-						{isKo ? "오답노트 보기" : "View Wrong Answers"}
+						{t("viewWrongAnswers")}
 					</Link>
 				)}
 			</div>

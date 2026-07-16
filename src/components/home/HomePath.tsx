@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 interface Props {
   locale: string;
   isKo: boolean;
@@ -23,22 +24,23 @@ const steps = [
 ];
 
 export default function HomePath({ isKo }: Props) {
-  const lang = isKo ? "ko" : "en";
+  const t = useTranslations("homeUi");
+  const lang = (isKo ? "ko" : "en") as "ko" | "en";
   return (
     <section className="section section--alt" aria-labelledby="path-title">
       <div className="container">
         <div className="section__head">
           <div>
             <h2 id="path-title" className="section__title">
-              {isKo ? "합격까지의 4단계" : "4 Steps to Passing"}
+              {t("4StepsToPassing")}
             </h2>
             <p className="section__sub">
-              {isKo ? "평균 6주, 하루 30분 학습 기준" : "Based on 6 weeks avg, 30 min/day"}
+              {t("basedOn6Weeks")}
             </p>
           </div>
         </div>
 
-        <ol className="path" aria-label={isKo ? "학습 경로" : "Study path"}>
+        <ol className="path" aria-label={t("studyPath")}>
           {steps.map((step, i) => (
             <li key={i} className="path__step">
               <span className="path__num">{i + 1}</span>

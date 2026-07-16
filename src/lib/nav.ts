@@ -1,29 +1,28 @@
 export interface NavItem {
 	href: string;
-	label: string;
+	/** common.nav 네임스페이스의 메시지 키 — 소비처에서 t(labelKey)로 번역 */
+	labelKey: string;
 }
 
 /** CPACC/WAS 공통 하위 메뉴 — Header 드롭다운·모바일 시트·Footer에서 공유 */
 export function certNavItems(locale: string, cert: "cpacc" | "was"): NavItem[] {
-	const isKo = locale === "ko";
 	return [
-		{ href: `/${locale}/${cert}`, label: isKo ? "개요" : "Overview" },
-		{ href: `/${locale}/${cert}/study`, label: isKo ? "학습" : "Study" },
-		{ href: `/${locale}/${cert}/quiz`, label: isKo ? "모의퀴즈" : "Quiz" },
-		{ href: `/${locale}/${cert}/mock-exam`, label: isKo ? "모의시험" : "Mock Exam" },
-		{ href: `/${locale}/${cert}/flashcards`, label: isKo ? "플래시카드" : "Flashcards" },
+		{ href: `/${locale}/${cert}`, labelKey: "overview" },
+		{ href: `/${locale}/${cert}/study`, labelKey: "study" },
+		{ href: `/${locale}/${cert}/quiz`, labelKey: "quiz" },
+		{ href: `/${locale}/${cert}/mock-exam`, labelKey: "mockExam" },
+		{ href: `/${locale}/${cert}/flashcards`, labelKey: "flashcards" },
 	];
 }
 
 /** 사이트 공통 메뉴 */
 export function siteNavItems(locale: string, { includePrivacy = true } = {}): NavItem[] {
-	const isKo = locale === "ko";
 	const items = [
-		{ href: `/${locale}/glossary`, label: isKo ? "용어집" : "Glossary" },
-		{ href: `/${locale}/about`, label: isKo ? "소개" : "About" },
+		{ href: `/${locale}/glossary`, labelKey: "glossary" },
+		{ href: `/${locale}/about`, labelKey: "about" },
 	];
 	if (includePrivacy) {
-		items.push({ href: `/${locale}/privacy`, label: isKo ? "개인정보처리방침" : "Privacy" });
+		items.push({ href: `/${locale}/privacy`, labelKey: "privacy" });
 	}
 	return items;
 }

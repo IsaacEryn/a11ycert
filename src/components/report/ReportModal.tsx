@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 
 interface ReportModalProps {
-	locale: string;
 	targetType: "quiz" | "content" | "glossary";
 	targetId?: string;
 	onClose: () => void;
@@ -13,7 +13,7 @@ interface ReportModalProps {
 const FOCUSABLE =
 	'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export default function ReportModal({ locale, targetType, targetId, onClose }: ReportModalProps) {
+export default function ReportModal({ targetType, targetId, onClose }: ReportModalProps) {
 	const [type, setType] = useState<"correction" | "error" | "suggestion">("error");
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
@@ -21,7 +21,7 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const auth = useOptionalAuth();
-	const isKo = locale === "ko";
+	const t = useTranslations("report");
 	const dialogRef = useRef<HTMLDivElement>(null);
 	// 모달 열기 전 포커스 요소 저장 → 닫힐 때 반환
 	const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -97,16 +97,16 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 		} else {
 			const json = await res.json().catch(() => ({}));
 			setSubmitError(
-				json.error || (isKo ? "제출 중 오류가 발생했습니다." : "An error occurred. Please try again.")
+				json.error || (t("anErrorOccurredPlease"))
 			);
 		}
 		setIsSubmitting(false);
 	};
 
 	const typeOptions = [
-		{ value: "error" as const, label: isKo ? "오류 제보" : "Report Error" },
-		{ value: "correction" as const, label: isKo ? "수정 요청" : "Correction Request" },
-		{ value: "suggestion" as const, label: isKo ? "제안" : "Suggestion" },
+		{ value: "error" as const, label: t("reportError") },
+		{ value: "correction" as const, label: t("correctionRequest") },
+		{ value: "suggestion" as const, label: t("suggestion") },
 	];
 
 	return (
@@ -128,44 +128,42 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 				{submitted ? (
 					<div className="text-center py-4">
 						<p className="text-lg font-semibold" style={{ color: "var(--success)" }} role="status">
-							{isKo ? "제보가 접수되었습니다!" : "Report submitted!"}
+							{t("reportSubmitted")}
 						</p>
 						<p className="mt-2 text-sm" style={{ color: "var(--fg-muted)" }}>
-							{isKo
-								? "커뮤니티 게시판에서 토론에 참여할 수 있습니다."
-								: "You can join the discussion in the community board."}
+							{t("youCanJoinThe")}
 						</p>
 						<button
 							onClick={onClose}
 							className="mt-4 rounded-lg px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2"
 							style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 						>
-							{isKo ? "닫기" : "Close"}
+							{t("close")}
 						</button>
 					</div>
 				) : !auth?.user ? (
 					<div className="text-center py-4">
 						<p className="text-sm" style={{ color: "var(--fg-muted)" }}>
-							{isKo ? "제보하려면 로그인이 필요합니다." : "Please sign in to submit a report."}
+							{t("pleaseSignInTo")}
 						</p>
 						<button
 							onClick={onClose}
 							className="mt-4 text-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 rounded"
 							style={{ color: "var(--accent)" }}
 						>
-							{isKo ? "닫기" : "Close"}
+							{t("close")}
 						</button>
 					</div>
 				) : (
 					<form onSubmit={handleSubmit}>
 						<h2 id="report-title" className="text-base font-semibold" style={{ color: "var(--fg)" }}>
-							{isKo ? "정보 수정 요청 / 오류 제보" : "Report Issue"}
+							{t("reportIssue")}
 						</h2>
 
 						{/* 유형 선택 — aria-pressed로 선택 상태 전달 */}
 						<fieldset className="mt-4">
 							<legend className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>
-								{isKo ? "유형" : "Type"}
+								{t("type")}
 							</legend>
 							<div className="mt-1.5 flex gap-2" role="group">
 								{typeOptions.map(({ value, label }) => (
@@ -196,7 +194,7 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 
 						{/* 제목 */}
 						<label className="mt-4 block">
-							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{isKo ? "제목" : "Title"}</span>
+							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{t("title")}</span>
 							<input
 								type="text"
 								value={title}
@@ -211,7 +209,7 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 
 						{/* 내용 */}
 						<label className="mt-3 block">
-							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{isKo ? "내용" : "Details"}</span>
+							<span className="text-xs font-medium" style={{ color: "var(--fg-muted)" }}>{t("details")}</span>
 							<textarea
 								value={content}
 								onChange={(e) => setContent(e.target.value)}
@@ -232,7 +230,7 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 								className="rounded-lg px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
 								style={{ color: "var(--fg-muted)" }}
 							>
-								{isKo ? "취소" : "Cancel"}
+								{t("cancel")}
 							</button>
 							<button
 								type="submit"
@@ -241,12 +239,8 @@ export default function ReportModal({ locale, targetType, targetId, onClose }: R
 								style={{ background: "var(--accent)", color: "var(--fg-on-accent)" }}
 							>
 								{isSubmitting
-									? isKo
-										? "제출 중..."
-										: "Submitting..."
-									: isKo
-										? "제보하기"
-										: "Submit"}
+									? t("submitting")
+									: t("submit")}
 							</button>
 						</div>
 					</form>

@@ -116,11 +116,11 @@ export default async function CertUnitPage({
 
 					{/* Complete button */}
 					<div style={{ marginTop: "var(--space-8)", paddingTop: "var(--space-6)", borderTop: "1px solid var(--divider)" }}>
-						<UnitCompleteButton unitId={unit.id} locale={locale} exam={cert} backHref={`/${locale}/${cert}/study`} />
+						<UnitCompleteButton unitId={unit.id} exam={cert} backHref={`/${locale}/${cert}/study`} />
 					</div>
 
 					{/* Study notes */}
-					<StudyNoteEditor pagePath={`/${cert}/study/${unitId}`} unitId={unit.id} locale={locale} />
+					<StudyNoteEditor pagePath={`/${cert}/study/${unitId}`} unitId={unit.id} />
 
 					{/* Comments */}
 					<CommentSection pagePath={`/${cert}/study/${unitId}`} locale={locale} />

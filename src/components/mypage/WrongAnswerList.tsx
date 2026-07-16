@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -23,6 +24,7 @@ export default function WrongAnswerList({ locale }: Props) {
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
+	const t = useTranslations("examRoom");
 	const [supabase] = useState(createClient);
 
 	useEffect(() => {
@@ -51,7 +53,7 @@ export default function WrongAnswerList({ locale }: Props) {
 	}, [user, localWrong, supabase]); // localWrong is stable via useMemo([])
 
 	if (loading) {
-		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{t("loading")}</p>;
 	}
 
 	if (questions.length === 0) {
@@ -64,13 +66,13 @@ export default function WrongAnswerList({ locale }: Props) {
 				fontSize: "var(--fs-sm)",
 				color: "var(--fg-subtle)",
 			}}>
-				{isKo ? "아직 오답이 없습니다." : "No wrong answers yet."}
+				{t("noWrongAnswersYet")}
 				<div style={{ marginTop: "var(--space-3)" }}>
 					<Link
 						href={`/${locale}/cpacc/study`}
 						style={{ color: "var(--accent)", textDecoration: "none", fontSize: "var(--fs-xs)" }}
 					>
-						{isKo ? "학습 시작하기 →" : "Start studying →"}
+						{t("startStudying")}
 					</Link>
 				</div>
 			</div>
@@ -90,7 +92,7 @@ export default function WrongAnswerList({ locale }: Props) {
 						{isKo ? q.question.ko : q.question.en}
 					</p>
 					<div style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)" }}>
-						<span style={{ fontWeight: 500, color: "var(--success)" }}>{isKo ? "정답: " : "Answer: "}</span>
+						<span style={{ fontWeight: 500, color: "var(--success)" }}>{t("answer")}</span>
 						{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
 					</div>
 					<p style={{ marginTop: "var(--space-1)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)", lineHeight: 1.6 }}>

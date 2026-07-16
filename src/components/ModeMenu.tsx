@@ -1,11 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { usePrefs, type Theme, type FontScale, type Motion } from "@/lib/prefs/PrefsContext";
-
-interface Props {
-  locale: string;
-}
 
 const THEME_OPTIONS: { value: Theme; label: string; icon: string }[] = [
   { value: "light", label: "라이트", icon: "☀" },
@@ -23,12 +20,12 @@ const MOTION_OPTIONS: { value: Motion; label: string }[] = [
   { value: "reduced", label: "줄이기" },
 ];
 
-export default function ModeMenu({ locale }: Props) {
+export default function ModeMenu() {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const { theme, fs, motion, setTheme, setFs, setMotion } = usePrefs();
-  const isKo = locale === "ko";
+  const t = useTranslations("prefs");
 
   useEffect(() => {
     function onPointerDown(e: PointerEvent) {
@@ -62,23 +59,23 @@ export default function ModeMenu({ locale }: Props) {
         className="mode-menu__trigger"
         aria-expanded={open}
         aria-haspopup="true"
-        aria-label={isKo ? "표시 설정" : "Display settings"}
+        aria-label={t("displaySettings")}
         onClick={() => setOpen((v) => !v)}
       >
         <span aria-hidden="true">{themeIcon}</span>
-        <span>{isKo ? "설정" : "Settings"}</span>
+        <span>{t("settings")}</span>
       </button>
 
       <div
         ref={panelRef}
         className="mode-menu__panel"
         role="dialog"
-        aria-label={isKo ? "표시 설정" : "Display settings"}
+        aria-label={t("displaySettings")}
       >
         {/* Theme */}
         <div className="mode-menu__group">
           <p className="mode-menu__label" id="mode-theme-label">
-            {isKo ? "테마" : "Theme"}
+            {t("theme")}
           </p>
           <div className="seg" role="group" aria-labelledby="mode-theme-label">
             {THEME_OPTIONS.map((opt) => (
@@ -97,7 +94,7 @@ export default function ModeMenu({ locale }: Props) {
         {/* Font scale */}
         <div className="mode-menu__group">
           <p className="mode-menu__label" id="mode-fs-label">
-            {isKo ? "글자 크기" : "Font size"}
+            {t("fontSize")}
           </p>
           <div className="seg" role="group" aria-labelledby="mode-fs-label">
             {FS_OPTIONS.map((opt) => (
@@ -115,7 +112,7 @@ export default function ModeMenu({ locale }: Props) {
         {/* Motion */}
         <div className="mode-menu__group">
           <p className="mode-menu__label" id="mode-motion-label">
-            {isKo ? "모션" : "Motion"}
+            {t("motion")}
           </p>
           <div className="seg" role="group" aria-labelledby="mode-motion-label">
             {MOTION_OPTIONS.map((opt) => (

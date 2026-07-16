@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/lib/auth/AuthProvider";
@@ -23,6 +24,7 @@ export default function SavedQuizList({ locale }: Props) {
 	const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 	const [loading, setLoading] = useState(true);
 	const isKo = locale === "ko";
+	const t = useTranslations("examRoom");
 	const [supabase] = useState(createClient);
 
 	useEffect(() => {
@@ -64,7 +66,7 @@ export default function SavedQuizList({ locale }: Props) {
 	};
 
 	if (loading) {
-		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{isKo ? "불러오는 중..." : "Loading..."}</p>;
+		return <p style={{ fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>{t("loading")}</p>;
 	}
 
 	if (questions.length === 0) {
@@ -77,13 +79,13 @@ export default function SavedQuizList({ locale }: Props) {
 				fontSize: "var(--fs-sm)",
 				color: "var(--fg-subtle)",
 			}}>
-				{isKo ? "저장한 문제가 없습니다." : "No saved questions yet."}
+				{t("noSavedQuestionsYet")}
 				<div style={{ marginTop: "var(--space-3)" }}>
 					<Link
 						href={`/${locale}/cpacc/study`}
 						style={{ color: "var(--accent)", textDecoration: "none", fontSize: "var(--fs-xs)" }}
 					>
-						{isKo ? "학습 시작하기 →" : "Start studying →"}
+						{t("startStudying")}
 					</Link>
 				</div>
 			</div>
@@ -105,13 +107,13 @@ export default function SavedQuizList({ locale }: Props) {
 								{isKo ? q.question.ko : q.question.en}
 							</p>
 							<div style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-xs)", color: "var(--fg-muted)" }}>
-								<span style={{ fontWeight: 500, color: "var(--success)" }}>{isKo ? "정답: " : "Answer: "}</span>
+								<span style={{ fontWeight: 500, color: "var(--success)" }}>{t("answer")}</span>
 								{isKo ? q.options[q.answer].ko : q.options[q.answer].en}
 							</div>
 						</div>
 						<button
 							onClick={() => handleRemove(q.id)}
-							aria-label={isKo ? "저장 취소" : "Remove from saved"}
+							aria-label={t("removeFromSaved")}
 							style={{
 								flexShrink: 0,
 								background: "none",

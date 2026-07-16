@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import type { StudyUnit, QuizQuestion } from "@/lib/content/types";
 import { useLearningStore } from "@/lib/store/learningStore";
@@ -29,6 +30,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 	const [practiceMode, setPracticeMode] = useState(false);
 	const panelRef = useRef<HTMLDivElement>(null);
 	const isKo = locale === "ko";
+	const t = useTranslations("wrongAnswers");
 	const c = ACCENT[exam];
 
 	const allQuestions = units.flatMap((u) => u.questions);
@@ -51,18 +53,14 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 				<div className="mb-6 flex items-center justify-between">
 					<h1 className="text-xl font-bold text-gray-900">
 						{tab === "wrong"
-							? isKo
-								? "오답 연습"
-								: "Wrong Answer Practice"
-							: isKo
-								? "저장 문제 연습"
-								: "Saved Question Practice"}
+							? t("wrongAnswerPractice")
+							: t("savedQuestionPractice")}
 					</h1>
 					<button
 						onClick={() => setPracticeMode(false)}
 						className="text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded"
 					>
-						← {isKo ? "목록으로" : "Back to list"}
+						← {t("backToList")}
 					</button>
 				</div>
 				<QuizEngine questions={currentList} locale={locale} exam={exam} />
@@ -82,33 +80,29 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 						{exam.toUpperCase()}
 					</Link>
 					<h1 className="mt-1 text-2xl font-bold text-gray-900">
-						{isKo ? "오답노트" : "My Study Notes"}
+						{t("myStudyNotes")}
 					</h1>
 				</div>
 				<LanguageModeToggle />
 			</div>
 
 			{/* Tabs */}
-			<div className="mt-6 flex border-b border-gray-200" role="tablist" aria-label={isKo ? "오답노트 탭" : "Study notes tabs"}>
-				{(["wrong", "saved"] as Tab[]).map((t) => {
-					const count = t === "wrong" ? wrongQs.length : savedQs.length;
+			<div className="mt-6 flex border-b border-gray-200" role="tablist" aria-label={t("studyNotesTabs")}>
+				{(["wrong", "saved"] as Tab[]).map((tabKey) => {
+					const count = tabKey === "wrong" ? wrongQs.length : savedQs.length;
 					const label =
-						t === "wrong"
-							? isKo
-								? "오답 문제"
-								: "Wrong Answers"
-							: isKo
-								? "저장한 문제"
-								: "Saved Questions";
-					const isActive = tab === t;
+						tabKey === "wrong"
+							? t("wrongAnswers")
+							: t("savedQuestions");
+					const isActive = tab === tabKey;
 					return (
 						<button
-							key={t}
-							id={`tab-${t}`}
+							key={tabKey}
+							id={`tab-${tabKey}`}
 							role="tab"
 							aria-selected={isActive}
 							aria-controls="tab-panel"
-							onClick={() => handleTabChange(t)}
+							onClick={() => handleTabChange(tabKey)}
 							className={`flex items-center gap-1.5 border-b-2 px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-blue-600 ${
 								isActive
 									? `${c.active} border-b-2`
@@ -140,18 +134,14 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 				{currentList.length === 0 ? (
 					<div className="rounded-xl border border-dashed border-gray-200 px-6 py-12 text-center text-sm text-gray-400">
 						{tab === "wrong"
-							? isKo
-								? "아직 오답이 없습니다. 학습 단위 퀴즈를 풀어보세요."
-								: "No wrong answers yet. Try a unit quiz."
-							: isKo
-								? "아직 저장한 문제가 없습니다."
-								: "No saved questions yet."}
+							? t("noWrongAnswersYet")
+							: t("noSavedQuestionsYet")}
 						<div className="mt-4">
 							<Link
 								href={`/${locale}/${exam}/study`}
 								className={`text-sm font-medium no-underline ${exam === "cpacc" ? "text-blue-600 hover:text-blue-700" : "text-violet-600 hover:text-violet-700"}`}
 							>
-								{isKo ? "학습 로드맵 보기 →" : "Go to Study Roadmap →"}
+								{t("goToStudyRoadmap")}
 							</Link>
 						</div>
 					</div>
@@ -159,7 +149,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 					<>
 						<div className="mb-4 flex items-center justify-between">
 							<p className="text-xs text-gray-500">
-								{isKo ? `${currentList.length}문제` : `${currentList.length} questions`}
+								{t("questionCount", { count: currentList.length })}
 							</p>
 							<button
 								onClick={() => setPracticeMode(true)}
@@ -169,7 +159,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 										: "bg-violet-600 hover:bg-violet-700 focus-visible:outline-violet-800"
 								}`}
 							>
-								{isKo ? "연습 모드 시작" : "Start Practice"}
+								{t("startPractice")}
 							</button>
 						</div>
 
@@ -193,7 +183,7 @@ export default function WrongAnswersClient({ locale, exam, units }: Props) {
 													<BilingualText field={q.question} variant="body" as="span" />
 												</p>
 												<div className="mt-2 text-xs text-gray-500">
-													<span className="font-medium">{isKo ? "정답: " : "Answer: "}</span>
+													<span className="font-medium">{t("answer")}</span>
 													<BilingualText field={q.options[q.answer]} variant="label" as="span" />
 												</div>
 												<BilingualText field={q.explanation} variant="label" as="p" className="mt-1 text-xs text-gray-400 leading-relaxed" />

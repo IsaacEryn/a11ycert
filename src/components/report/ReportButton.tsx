@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface ReportButtonProps {
 	locale: string;
 	targetType: "quiz" | "content" | "glossary";
@@ -8,8 +10,9 @@ interface ReportButtonProps {
 
 export default function ReportButton({ locale, targetType, targetId }: ReportButtonProps) {
 	const isKo = locale === "ko";
+	const t = useTranslations("report");
 
-	const typeLabel = targetType === "quiz" ? (isKo ? "퀴즈" : "quiz") : targetType === "glossary" ? (isKo ? "용어집" : "glossary") : (isKo ? "콘텐츠" : "content");
+	const typeLabel = targetType === "quiz" ? (t("quiz")) : targetType === "glossary" ? (t("glossary")) : (t("content"));
 	const subject = encodeURIComponent(
 		isKo
 			? `[오류 제보] ${typeLabel}${targetId ? ` — ${targetId}` : ""}`
@@ -26,7 +29,7 @@ export default function ReportButton({ locale, targetType, targetId }: ReportBut
 			href={`mailto:contact@a11ycert.com?subject=${subject}&body=${body}`}
 			className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors"
 			style={{ color: "var(--fg-subtle)" }}
-			aria-label={isKo ? "이메일로 오류 제보하기" : "Report an issue via email"}
+			aria-label={t("reportAnIssueVia")}
 		>
 			<svg
 				aria-hidden="true"
@@ -42,7 +45,7 @@ export default function ReportButton({ locale, targetType, targetId }: ReportBut
 				<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
 				<line x1="4" y1="22" x2="4" y2="15" />
 			</svg>
-			<span>{isKo ? "제보" : "Report"}</span>
+			<span>{t("report")}</span>
 		</a>
 	);
 }

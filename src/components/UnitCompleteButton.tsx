@@ -1,22 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useLearningStore } from "@/lib/store/learningStore";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { syncCompletedUnitToDB } from "@/lib/store/learning-sync";
 
 interface Props {
 	unitId: string;
-	locale: string;
 	exam: "cpacc" | "was";
 	backHref: string;
 }
 
-export default function UnitCompleteButton({ unitId, locale, exam, backHref }: Props) {
+export default function UnitCompleteButton({ unitId, exam, backHref }: Props) {
 	const { markUnitComplete, isCompleted } = useLearningStore();
 	const auth = useOptionalAuth();
 	const userId = auth?.user?.id ?? null;
-	const isKo = locale === "ko";
+	const t = useTranslations("study");
 	const done = isCompleted(exam, unitId);
 
 	const handleComplete = () => {
@@ -31,16 +31,16 @@ export default function UnitCompleteButton({ unitId, locale, exam, backHref }: P
 					onClick={handleComplete}
 					className="rounded-lg bg-green-600 px-5 py-2 text-sm font-medium text-white hover:bg-green-700"
 				>
-					{isKo ? "학습 완료 표시" : "Mark as Complete"}
+					{t("markAsComplete")}
 				</button>
 			) : (
 				<span className="inline-flex items-center gap-1.5 rounded-lg bg-green-50 border border-green-200 px-4 py-2 text-sm font-medium text-green-700">
 					<span aria-hidden="true">✓</span>
-					{isKo ? "학습 완료" : "Completed"}
+					{t("completed")}
 				</span>
 			)}
 			<Link href={backHref} className="text-sm text-gray-500 no-underline hover:text-gray-700">
-				← {isKo ? "로드맵으로" : "Back to roadmap"}
+				← {t("backToRoadmap")}
 			</Link>
 		</div>
 	);
