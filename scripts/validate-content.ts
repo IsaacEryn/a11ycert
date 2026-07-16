@@ -16,6 +16,7 @@ import * as path from "node:path";
 import { getCertContent } from "../src/lib/content";
 import { glossaryTerms } from "../src/lib/content/glossary";
 import { unitReferences } from "../src/lib/content/references";
+import { cpaccScenarioQuestions, wasScenarioQuestions } from "../src/lib/content/questions/scenario-questions";
 import type { DomainGroup, QuizQuestion, UnitReference } from "../src/lib/content/types";
 
 // extra-questions까지 병합된 최종 콘텐츠를 검증
@@ -175,6 +176,9 @@ for (const term of glossaryTerms) {
 	);
 	for (const key of Object.keys(unitReferences)) {
 		if (!unitIds.has(key)) errors.push(`references: 존재하지 않는 단원 id '${key}'`);
+	}
+	for (const key of [...Object.keys(cpaccScenarioQuestions), ...Object.keys(wasScenarioQuestions)]) {
+		if (!unitIds.has(key)) errors.push(`scenario-questions: 존재하지 않는 단원 id '${key}'`);
 	}
 }
 

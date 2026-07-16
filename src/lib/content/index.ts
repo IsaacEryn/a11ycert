@@ -2,6 +2,7 @@ import type { DomainGroup, StudyUnit, QuizQuestion } from "./types";
 import { cpaccDomains } from "./cpacc-units";
 import { wasDomains } from "./was-units";
 import { cpaccExtraQuestions, wasExtraQuestions } from "./questions/extra-questions";
+import { cpaccScenarioQuestions, wasScenarioQuestions } from "./questions/scenario-questions";
 import { cpaccExtraUnits } from "./cpacc-extra-units";
 import { wasExtraUnits } from "./was-extra-units";
 import { unitReferences } from "./references";
@@ -64,10 +65,20 @@ function buildCertContent(domains: DomainGroup[]): CertContent {
 
 const contentByCert: Record<Cert, CertContent> = {
 	cpacc: buildCertContent(
-		withReferences(withExtraQuestions(withExtraUnits(cpaccDomains, cpaccExtraUnits), cpaccExtraQuestions))
+		withReferences(
+			withExtraQuestions(
+				withExtraQuestions(withExtraUnits(cpaccDomains, cpaccExtraUnits), cpaccExtraQuestions),
+				cpaccScenarioQuestions
+			)
+		)
 	),
 	was: buildCertContent(
-		withReferences(withExtraQuestions(withExtraUnits(wasDomains, wasExtraUnits), wasExtraQuestions))
+		withReferences(
+			withExtraQuestions(
+				withExtraQuestions(withExtraUnits(wasDomains, wasExtraUnits), wasExtraQuestions),
+				wasScenarioQuestions
+			)
+		)
 	),
 };
 
