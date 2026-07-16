@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { useLearningStore, type LocalAttempt } from "@/lib/store/learningStore";
 import { CERTS, type Cert } from "@/lib/content/certs";
+import { computeReadiness, accuracyTrend, MIN_ATTEMPTS_FOR_SCORE } from "@/lib/quiz/readiness";
 
 interface AttemptRow extends LocalAttempt {
 	cert: Cert;
@@ -119,11 +120,72 @@ export default function StatsClient({ locale }: { locale: string }) {
 					null
 				);
 
+				const readiness = computeReadiness(cert, certAttempts);
+				const trend = accuracyTrend(certAttempts);
+
 				return (
 					<section key={cert} aria-labelledby={`stats-${cert}`}>
 						<h2 id={`stats-${cert}`} style={{ fontSize: "var(--fs-lg)", fontWeight: 700 }}>
 							{cert.toUpperCase()}
 						</h2>
+
+						{/* 시험 준비도 — 실제 시험 도메인 배분·최근 시도 가중 */}
+						<div style={{ marginTop: "var(--space-3)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-4)" }}>
+							<h3 style={{ fontSize: "var(--fs-sm)", fontWeight: 600, color: "var(--fg-muted)" }}>{t("readiness")}</h3>
+							{readiness.score === null ? (
+								<p style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-sm)", color: "var(--fg-subtle)" }}>
+									{t("readinessNotEnough", { min: MIN_ATTEMPTS_FOR_SCORE })}
+								</p>
+							) : (
+								<>
+									<div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: "var(--space-2)" }}>
+										<span style={{ fontSize: "var(--fs-3xl)", fontWeight: 700, letterSpacing: "-0.02em" }}>{readiness.score}</span>
+										<span style={{ color: "var(--fg-muted)", fontWeight: 600 }}>/ 100</span>
+									</div>
+									<div
+										className="progress-track"
+										role="meter"
+										aria-valuenow={readiness.score}
+										aria-valuemin={0}
+										aria-valuemax={100}
+										aria-label={t("readinessMeterLabel", { cert: cert.toUpperCase() })}
+										style={{ marginTop: "var(--space-2)" }}
+									>
+										<div className="progress-fill" style={{ width: `${readiness.score}%` }} />
+									</div>
+									<p style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-xs)", color: "var(--fg-subtle)" }}>
+										{t("readinessHint", { count: readiness.sampleSize })}
+									</p>
+								</>
+							)}
+						</div>
+
+						{/* 최근 시도 정답률 추이 — CSS 막대, role=img 대체 텍스트 */}
+						{trend.length >= 2 && (
+							<div style={{ marginTop: "var(--space-3)" }}>
+								<h3 style={{ fontSize: "var(--fs-sm)", fontWeight: 600, color: "var(--fg-muted)" }}>{t("trend")}</h3>
+								<div
+									role="img"
+									aria-label={t("trendLabel", { values: trend.map((tp) => `${tp.pct}%`).join(", ") })}
+									style={{ marginTop: "var(--space-2)", display: "flex", alignItems: "flex-end", gap: 4, height: 72 }}
+								>
+									{trend.map((tp, i) => (
+										<div
+											key={i}
+											style={{
+												flex: 1,
+												maxWidth: 28,
+												height: `${Math.max(tp.pct, 4)}%`,
+												background: tp.pct >= 70 ? "var(--success)" : "var(--accent)",
+												borderRadius: "3px 3px 0 0",
+												opacity: 0.55 + (i / trend.length) * 0.45,
+											}}
+											aria-hidden="true"
+										/>
+									))}
+								</div>
+							</div>
+						)}
 
 						{/* 도메인별 누적 정답률 */}
 						{domains.length > 0 && (

@@ -244,7 +244,13 @@
 		"domainAccuracy": "Cumulative accuracy by domain",
 		"weakest": "Weakest domain: {domain}",
 		"goStudy": "Study this domain",
-		"attemptsTableLabel": "{cert} attempt history"
+		"attemptsTableLabel": "{cert} attempt history",
+		"readiness": "Exam readiness",
+		"readinessNotEnough": "Not enough data yet — complete at least {min} quizzes or mock exams to see your readiness.",
+		"readinessHint": "Based on your last {count} attempts, weighted by real exam domain distribution",
+		"readinessMeterLabel": "{cert} exam readiness",
+		"trend": "Accuracy trend",
+		"trendLabel": "Recent attempt accuracy trend: {values}"
 	},
 	"flashcardsSrs": {
 		"modeAll": "Browse All",

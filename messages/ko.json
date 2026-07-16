@@ -244,7 +244,13 @@
 		"domainAccuracy": "도메인별 누적 정답률",
 		"weakest": "가장 약한 도메인: {domain}",
 		"goStudy": "해당 도메인 학습하기",
-		"attemptsTableLabel": "{cert} 시도 이력"
+		"attemptsTableLabel": "{cert} 시도 이력",
+		"readiness": "시험 준비도",
+		"readinessNotEnough": "아직 데이터가 부족합니다 — 퀴즈·모의시험을 {min}회 이상 풀면 준비도가 표시됩니다.",
+		"readinessHint": "최근 {count}회 시도 기준, 실제 시험 도메인 배분으로 가중 계산",
+		"readinessMeterLabel": "{cert} 시험 준비도",
+		"trend": "정답률 추이",
+		"trendLabel": "최근 시도 정답률 추이: {values}"
 	},
 	"flashcardsSrs": {
 		"modeAll": "전체 훑기",
