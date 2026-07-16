@@ -50,3 +50,7 @@ CLAUDE.md
 # Supabase (DB schema, migrations — internal only)
 # 루트의 supabase/만 무시 — src/lib/supabase/ 는 앱 소스라 제외되면 안 됨
 /supabase/
+
+# Playwright
+test-results/
+playwright-report/
