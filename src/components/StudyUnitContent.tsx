@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { StudyUnit, UnitReference } from "@/lib/content/types";
 import AddWordButton from "@/components/dictionary/AddWordButton";
+import { useLearningStore } from "@/lib/store/learningStore";
 
 interface Props {
   unit: StudyUnit;
@@ -41,7 +43,13 @@ function ReferencesBlock({ refs, locale }: { refs: UnitReference[]; locale: stri
 export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exam }: Props) {
   const isKo = locale === "ko";
   const t = useTranslations("study");
+  const setLastVisited = useLearningStore((s) => s.setLastVisited);
   const unitNum = `${unit.domain}.${unit.order}`;
+
+  // 이어서 학습용 마지막 방문 기록 (제목 스냅샷 — 홈에서 콘텐츠 import 없이 표시)
+  useEffect(() => {
+    setLastVisited({ cert: exam, unitId: unit.id, title: unit.title, at: new Date().toISOString() });
+  }, [setLastVisited, exam, unit.id, unit.title]);
 
   return (
     <article className="bilingual-card" aria-labelledby="card-title">

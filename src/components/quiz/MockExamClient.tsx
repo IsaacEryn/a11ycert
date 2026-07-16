@@ -280,10 +280,18 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 						<ul style={{ marginTop: "var(--space-3)", display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
 							{Object.entries(domainStats).map(([domain, s]) => {
 								const dPct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+								const weak = s.total > 0 && dPct < 70;
 								return (
 									<li key={domain}>
 										<div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--fs-sm)" }}>
-											<span>{t("domainLabel", { domain })}</span>
+											<span>
+												{t("domainLabel", { domain })}
+												{weak && (
+													<span className="tag" style={{ marginLeft: 8, fontSize: 10, padding: "2px 8px", background: "var(--danger-soft)", color: "var(--danger)" }}>
+														{t("needsWork")}
+													</span>
+												)}
+											</span>
 											<span style={{ color: "var(--fg-muted)" }}>
 												{s.correct}/{s.total} ({dPct}%)
 											</span>
@@ -291,6 +299,17 @@ export default function MockExamClient({ pool, locale, cert }: Props) {
 										<div className="progress-track" style={{ marginTop: 4 }}>
 											<div className="progress-fill" style={{ width: `${dPct}%` }} />
 										</div>
+										{/* 약점 도메인 보강 딥링크 — 학습 로드맵 앵커·플래시카드 도메인 필터 */}
+										{weak && (
+											<div style={{ marginTop: 6, display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
+												<Link className="btn btn--sm" href={`/${locale}/${cert}/study#domain-${domain}`}>
+													{t("reviewWeakDomain")}
+												</Link>
+												<Link className="btn btn--sm" href={`/${locale}/${cert}/flashcards?domain=${domain}`}>
+													{t("reviewWithFlashcards")}
+												</Link>
+											</div>
+										)}
 									</li>
 								);
 							})}

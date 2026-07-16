@@ -43,10 +43,22 @@ export interface DictionaryData {
   srs: Record<string, SrsCardState>; // entryId(termId | customId) → Leitner 상태
 }
 
+/** 이어서 학습 — 마지막 방문 단원 (제목은 콘텐츠 import 없이 쓰도록 스냅샷 저장) */
+export interface LastVisited {
+  cert: Cert;
+  unitId: string;
+  title: { ko: string; en: string };
+  at: string;
+}
+
 interface LearningState {
   perCert: Record<string, PerCertData>;
   languageMode: LanguageMode;
   dictionary?: DictionaryData;
+  lastVisited?: LastVisited;
+
+  // 이어서 학습
+  setLastVisited: (v: LastVisited) => void;
 
   // 나의 사전 actions
   toggleDictTerm: (termId: string) => boolean;
@@ -173,6 +185,8 @@ export const useLearningStore = create<LearningState>()(
       getAttempts: (cert) => getCert(get(), cert).attempts,
 
       setLanguageMode: (mode) => set({ languageMode: mode }),
+
+      setLastVisited: (v) => set({ lastVisited: v }),
 
       // ── 나의 사전 ─────────────────────────────────────────────────────────
       toggleDictTerm: (termId) => {

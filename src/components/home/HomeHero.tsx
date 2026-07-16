@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import ContinueStudying from "@/components/ContinueStudying";
 
 interface Props {
   locale: string;
@@ -40,6 +41,11 @@ export default function HomeHero({ locale, isKo }: Props) {
               <Link className="btn btn--lg" href={`/${locale}/was`}>
                 {t("startWas")}
               </Link>
+            </div>
+
+            {/* 마지막 방문 단원이 있으면 이어서 학습 버튼 노출 (클라이언트) */}
+            <div style={{ marginTop: "var(--space-3)" }}>
+              <ContinueStudying locale={locale} />
             </div>
 
             <dl className="hero__stats">

@@ -224,7 +224,10 @@
 		"selectAnswer": "Select your answer",
 		"presetLabel": "Exam format",
 		"presetMini": "Mini Practice",
-		"presetFull": "Full Exam"
+		"presetFull": "Full Exam",
+		"reviewWeakDomain": "Review in Study",
+		"reviewWithFlashcards": "Flashcard review",
+		"needsWork": "Needs work"
 	},
 	"stats": {
 		"title": "Progress & Stats",
@@ -713,7 +716,8 @@
 		"done": "Done",
 		"notStarted": "Not started",
 		"objectives": "Objectives",
-		"navigate": "Navigate"
+		"navigate": "Navigate",
+		"continueStudying": "Continue: {cert} · {title}"
 	},
 	"wrongAnswers": {
 		"wrongAnswerPractice": "Wrong Answer Practice",

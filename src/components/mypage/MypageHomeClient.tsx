@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/auth/AuthProvider";
 import { useLearningStore } from "@/lib/store/learningStore";
 import type { Cert } from "@/lib/content/certs";
 import { isDue } from "@/lib/srs/leitner";
+import ContinueStudying from "@/components/ContinueStudying";
 
 /** 서버 페이지가 콘텐츠에서 미리 계산해 내려주는 cert별 경량 데이터 */
 export interface CertHomeData {
@@ -117,6 +118,10 @@ export default function MypageHomeClient({
 					</p>
 				</div>
 			</section>
+
+			<div style={{ marginTop: "var(--space-4)" }}>
+				<ContinueStudying locale={locale} />
+			</div>
 
 			{/* 학습 요약 카드 */}
 			<section aria-labelledby="study-summary" style={{ marginTop: "var(--space-6)" }}>

@@ -85,7 +85,7 @@ export default function RoadmapProgress({ locale, exam, domains }: Props) {
               const domainUnits = domain.units.filter((u) => u.available);
               const domainDone = domainUnits.filter((u) => isCompleted(exam, u.id)).length;
               return (
-                <div key={domain.domain} style={{ background: "var(--bg-elev)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-4)" }}>
+                <div key={domain.domain} id={`domain-${domain.domain}`} tabIndex={-1} style={{ background: "var(--bg-elev)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "var(--space-4)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-2)" }}>
                     <h2 style={{ fontSize: "var(--fs-base)", fontWeight: 700 }}>
                       {isKo ? domain.title.ko : domain.title.en}

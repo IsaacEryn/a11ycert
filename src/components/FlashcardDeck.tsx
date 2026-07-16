@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type { StudyUnit } from "@/lib/content/types";
 import FlashcardCard from "@/components/FlashcardCard";
@@ -21,7 +22,13 @@ type DeckMode = "all" | "review";
 
 export default function FlashcardDeck({ units, locale, exam }: Props) {
   const t = useTranslations("flashcardsSrs");
-  const [domainFilter, setDomainFilter] = useState<DomainFilter>("all");
+  // 모의시험 약점 연계 딥링크(?domain=N) — useSearchParams 사용으로 페이지에서 Suspense 필요
+  const searchParams = useSearchParams();
+  const initialDomain = ((): DomainFilter => {
+    const d = searchParams.get("domain");
+    return d === "1" || d === "2" || d === "3" ? (Number(d) as 1 | 2 | 3) : "all";
+  })();
+  const [domainFilter, setDomainFilter] = useState<DomainFilter>(initialDomain);
   const [mode, setMode] = useState<DeckMode>("all");
   const [index, setIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
