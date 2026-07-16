@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/client";
-import { getCertContent } from "@/lib/content";
-import type { QuizQuestion } from "@/lib/content/types";
+import type { StudyUnit, QuizQuestion } from "@/lib/content/types";
 
 // DB에서 퀴즈를 가져오는 서비스
 // Supabase 미연결/빈 결과 시 로컬 TypeScript 파일로 fallback
@@ -24,7 +23,12 @@ function dbToQuizQuestion(row: any): QuizQuestion {
 	};
 }
 
-const allLocalUnits = [...getCertContent("cpacc").units, ...getCertContent("was").units];
+// 로컬 fallback은 동적 import — 정적 import하면 전체 학습 콘텐츠가
+// 이 모듈을 쓰는 클라이언트 번들에 포함된다 (DB 정상 시에는 로드조차 안 됨)
+async function loadLocalUnits(): Promise<StudyUnit[]> {
+	const { getCertContent } = await import("@/lib/content");
+	return [...getCertContent("cpacc").units, ...getCertContent("was").units];
+}
 
 export async function getQuizzesByUnit(unitId: string): Promise<QuizQuestion[]> {
 	try {
@@ -41,7 +45,7 @@ export async function getQuizzesByUnit(unitId: string): Promise<QuizQuestion[]> 
 		/* fallback */
 	}
 
-	return allLocalUnits.find((u) => u.id === unitId)?.questions ?? [];
+	return (await loadLocalUnits()).find((u) => u.id === unitId)?.questions ?? [];
 }
 
 export async function getQuizzesByExam(exam: "cpacc" | "was"): Promise<QuizQuestion[]> {
@@ -60,7 +64,7 @@ export async function getQuizzesByExam(exam: "cpacc" | "was"): Promise<QuizQuest
 		/* fallback */
 	}
 
-	return allLocalUnits.filter((u) => u.exam === exam).flatMap((u) => u.questions);
+	return (await loadLocalUnits()).filter((u) => u.exam === exam).flatMap((u) => u.questions);
 }
 
 export async function getQuizzesByDomain(
@@ -82,7 +86,7 @@ export async function getQuizzesByDomain(
 		/* fallback */
 	}
 
-	return allLocalUnits
+	return (await loadLocalUnits())
 		.filter((u) => u.exam === exam && u.domain === domain)
 		.flatMap((u) => u.questions);
 }
@@ -104,5 +108,5 @@ export async function getQuizzesByIds(ids: string[]): Promise<QuizQuestion[]> {
 		/* fallback */
 	}
 
-	return allLocalUnits.flatMap((u) => u.questions).filter((q) => ids.includes(q.id));
+	return (await loadLocalUnits()).flatMap((u) => u.questions).filter((q) => ids.includes(q.id));
 }

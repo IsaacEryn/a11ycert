@@ -7,6 +7,7 @@ import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { createClient } from "@/lib/supabase/client";
 import { removeDictEntryFromDB, syncDictSrsToDB } from "@/lib/store/learning-sync";
 import type { SrsGrade } from "@/lib/srs/leitner";
+import type { GlossaryTerm } from "@/lib/content/glossary";
 import { resolveLocalEntries, resolveDbEntries, type DictEntryView } from "./dict-utils";
 import DictList from "./DictList";
 import DictFlashcards from "./DictFlashcards";
@@ -16,7 +17,7 @@ type Tab = "list" | "flashcards" | "quiz";
 const TAB_KEYS: Tab[] = ["list", "flashcards", "quiz"];
 
 /** 나의 사전 탭 컨테이너 — 엔트리 로딩(로그인=DB, 비로그인=로컬)과 삭제·채점 콜백을 소유 */
-export default function DictionaryTabs({ locale }: { locale: string }) {
+export default function DictionaryTabs({ locale, terms }: { locale: string; terms: GlossaryTerm[] }) {
 	const t = useTranslations("dictionary");
 	const auth = useOptionalAuth();
 	const userId = auth?.user?.id ?? null;
@@ -28,10 +29,10 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 	const gradeDictEntry = useLearningStore((s) => s.gradeDictEntry);
 
 	const localEntries = useMemo(
-		() => resolveLocalEntries(getDictionary()),
+		() => resolveLocalEntries(getDictionary(), terms),
 		// dictionary 상태가 바뀔 때마다 재계산
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[dictionary]
+		[dictionary, terms]
 	);
 
 	const [dbEntries, setDbEntries] = useState<DictEntryView[] | null>(null);
@@ -50,14 +51,14 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 				.select("entry_id, source, word_ko, word_en, meaning_ko, meaning_en, box, due_at, created_at")
 				.order("created_at", { ascending: false });
 			if (cancelled) return;
-			if (!error && data) setDbEntries(resolveDbEntries(data));
+			if (!error && data) setDbEntries(resolveDbEntries(data, terms));
 			setLoading(false);
 		};
 		void Promise.resolve().then(fetchEntries);
 		return () => {
 			cancelled = true;
 		};
-	}, [userId, supabaseClient]);
+	}, [userId, supabaseClient, terms]);
 
 	// 로그인: DB가 소스(비어 있으면 로컬 fallback — 이관 직후 반영 지연 대비), 비로그인: 로컬
 	const entries = useMemo(() => {
@@ -183,7 +184,7 @@ export default function DictionaryTabs({ locale }: { locale: string }) {
 					<>
 						{tab === "list" && <DictList locale={locale} entries={entries} onRemove={handleRemove} />}
 						{tab === "flashcards" && <DictFlashcards entries={entries} onGrade={handleGrade} />}
-						{tab === "quiz" && <DictQuiz locale={locale} entries={entries} onGrade={handleGrade} />}
+						{tab === "quiz" && <DictQuiz locale={locale} entries={entries} terms={terms} onGrade={handleGrade} />}
 					</>
 				)}
 			</div>

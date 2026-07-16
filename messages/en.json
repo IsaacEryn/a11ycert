@@ -555,5 +555,8 @@
 		"quizResult": "{correct} of {total} correct",
 		"quizRestart": "Try again",
 		"loading": "Loading..."
+	},
+	"community": {
+		"title": "Community"
 	}
 }

@@ -1,17 +1,31 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { setRequestLocale, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { glossaryTerms } from "@/lib/content/glossary";
 import DictionaryTabs from "@/components/dictionary/DictionaryTabs";
 
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const t = await getTranslations({ locale, namespace: "dictionary" });
+	return { title: t("title"), robots: { index: false } };
+}
+
 /**
- * 나의 사전 — 마이페이지 하위지만 비로그인도 사용 가능(localStorage).
- * 로그인 시 DB 동기화로 기기 간 공유.
+ * 나의 사전 — 서버에서 용어집 데이터를 주입 (클라이언트가 glossary 모듈을
+ * 직접 import하면 용어집 전체가 번들에 포함되므로 금지).
+ * 비로그인도 사용 가능(localStorage), 로그인 시 DB 동기화.
  */
-export default function DictionaryPage() {
-	const t = useTranslations("dictionary");
-	const params = useParams();
-	const locale = params.locale as string;
+export default async function DictionaryPage({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations({ locale, namespace: "dictionary" });
 
 	return (
 		<div>
@@ -23,7 +37,7 @@ export default function DictionaryPage() {
 			</p>
 
 			<div style={{ marginTop: "var(--space-8)" }}>
-				<DictionaryTabs locale={locale} />
+				<DictionaryTabs locale={locale} terms={glossaryTerms} />
 			</div>
 		</div>
 	);

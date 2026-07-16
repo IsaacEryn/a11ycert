@@ -555,5 +555,8 @@
 		"quizResult": "{total}문항 중 {correct}개 정답",
 		"quizRestart": "다시 풀기",
 		"loading": "불러오는 중..."
+	},
+	"community": {
+		"title": "커뮤니티"
 	}
 }

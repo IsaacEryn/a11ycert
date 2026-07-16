@@ -6,13 +6,9 @@ import { cpaccExtraUnits } from "./cpacc-extra-units";
 import { wasExtraUnits } from "./was-extra-units";
 import { unitReferences } from "./references";
 
-export type Cert = "cpacc" | "was";
-
-export const CERTS: readonly Cert[] = ["cpacc", "was"] as const;
-
-export function isCert(value: string): value is Cert {
-	return value === "cpacc" || value === "was";
-}
+// cert 식별자는 경량 모듈(./certs)로 분리 — 클라이언트는 그쪽을 직접 import
+export { CERTS, isCert, type Cert } from "./certs";
+import type { Cert } from "./certs";
 
 export interface CertContent {
 	domains: DomainGroup[];

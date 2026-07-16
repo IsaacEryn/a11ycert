@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { useOptionalAuth } from "@/lib/auth/AuthProvider";
 import { useLearningStore, type LocalAttempt } from "@/lib/store/learningStore";
-import { CERTS, type Cert } from "@/lib/content";
+import { CERTS, type Cert } from "@/lib/content/certs";
 
 interface AttemptRow extends LocalAttempt {
 	cert: Cert;

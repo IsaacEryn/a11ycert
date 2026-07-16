@@ -1,4 +1,4 @@
-import { glossaryTerms } from "@/lib/content/glossary";
+import type { GlossaryTerm } from "@/lib/content/glossary";
 import type { DictionaryData } from "@/lib/store/learningStore";
 import type { SrsCardState } from "@/lib/srs/leitner";
 
@@ -12,10 +12,9 @@ export interface DictEntryView {
 	createdAt?: string;
 }
 
-const termById = new Map(glossaryTerms.map((t) => [t.id, t]));
-
-/** 로컬 스토어 dictionary → 엔트리 뷰 목록 (용어집 id는 콘텐츠에서 해석) */
-export function resolveLocalEntries(dict: DictionaryData): DictEntryView[] {
+/** 로컬 스토어 dictionary → 엔트리 뷰 목록 (용어집 id는 서버가 내려준 terms에서 해석) */
+export function resolveLocalEntries(dict: DictionaryData, terms: GlossaryTerm[]): DictEntryView[] {
+	const termById = new Map(terms.map((t) => [t.id, t]));
 	const glossaryEntries = dict.saved.flatMap<DictEntryView>((termId) => {
 		const term = termById.get(termId);
 		if (!term) return []; // 삭제된 용어 id는 조용히 무시
@@ -44,8 +43,10 @@ export function resolveDbEntries(
 		box: number;
 		due_at: string;
 		created_at?: string;
-	}[]
+	}[],
+	terms: GlossaryTerm[]
 ): DictEntryView[] {
+	const termById = new Map(terms.map((t) => [t.id, t]));
 	return rows.flatMap<DictEntryView>((r) => {
 		const srs: SrsCardState = { box: r.box, due: r.due_at };
 		if (r.source === "glossary") {
@@ -85,7 +86,8 @@ export function buildDistractors(
 	correct: DictEntryView,
 	entries: DictEntryView[],
 	locale: string,
-	count: number
+	count: number,
+	terms: GlossaryTerm[]
 ): string[] {
 	const correctText = pickText(correct.meaning, locale);
 	const pool = new Set<string>();
@@ -96,7 +98,7 @@ export function buildDistractors(
 		if (pool.size >= count) break;
 	}
 	if (pool.size < count) {
-		for (const term of shuffled(glossaryTerms)) {
+		for (const term of shuffled(terms)) {
 			if (term.id === correct.id) continue;
 			const text = pickText(term.definition, locale);
 			if (text && text !== correctText && !pool.has(text)) pool.add(text);

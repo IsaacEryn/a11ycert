@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import type { SrsCardState, SrsGrade } from "@/lib/srs/leitner";
+import type { GlossaryTerm } from "@/lib/content/glossary";
 import { buildDistractors, pickText, shuffled, type DictEntryView } from "./dict-utils";
 
 interface QuizItem {
@@ -15,10 +16,12 @@ interface QuizItem {
 export default function DictQuiz({
 	locale,
 	entries,
+	terms,
 	onGrade,
 }: {
 	locale: string;
 	entries: DictEntryView[];
+	terms: GlossaryTerm[];
 	onGrade: (entryId: string, grade: SrsGrade) => SrsCardState;
 }) {
 	const t = useTranslations("dictionary");
@@ -42,7 +45,7 @@ export default function DictQuiz({
 		void idsKey;
 		return shuffled(quizable).map((entry) => {
 			const correctText = pickText(entry.meaning, locale);
-			const distractors = buildDistractors(entry, quizable, locale, 3);
+			const distractors = buildDistractors(entry, quizable, locale, 3, terms);
 			return { entry, options: shuffled([correctText, ...distractors]), correctText };
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps

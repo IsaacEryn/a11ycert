@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { checkWriteRateLimit, RATE_LIMIT_MESSAGE } from "@/lib/limits/write-rate-limit";
 
 const MAX_CONTENT_LENGTH = 2000;
 
@@ -19,6 +20,10 @@ export async function POST(
 		data: { user },
 	} = await supabase.auth.getUser();
 	if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+	// 스팸 방지
+	const rate = await checkWriteRateLimit(supabase, "board_replies", user.id, { max: 5 });
+	if (!rate.allowed) return NextResponse.json({ error: RATE_LIMIT_MESSAGE }, { status: 429 });
 
 	const body = await request.json();
 	const content: string = body.content ?? "";
