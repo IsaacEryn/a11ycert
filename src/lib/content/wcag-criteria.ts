@@ -857,4 +857,308 @@ export const wcagCriteria: WcagCriterion[] = [
 		relatedUnits: ["was-1-9"],
 		kwcag: [{ num: "6.1.3", name: { ko: "조작 가능", en: "Operable Controls" } }],
 	},
+
+	// ── 원칙 3. 이해의 용이성 (Understandable) ───────────────────────────────────
+	{
+		id: "language-of-page",
+		num: "3.1.1",
+		level: "A",
+		title: { ko: "페이지 언어", en: "Language of Page" },
+		summary: {
+			ko: '페이지의 기본 언어를 프로그램이 알 수 있게 선언해야 합니다. `<html lang="ko">` 한 줄이면 되고, 이게 없으면 스크린리더가 한국어를 영어 발음 규칙으로 읽어 알아들을 수 없게 됩니다. 고치는 비용이 가장 싼 접근성 기준입니다.',
+			en: 'The default language of the page must be declared programmatically. A single `<html lang="ko">` does it; without it a screen reader may apply the wrong pronunciation rules and render the text unintelligible. This is the cheapest accessibility fix there is.',
+		},
+		commonFailures: [
+			{
+				ko: '한국어 페이지에 `lang` 속성이 없거나 `lang="en"`으로 남아 있는 경우',
+				en: 'A Korean page with no `lang` attribute, or one still set to `lang="en"`.',
+			},
+		],
+		relatedUnits: ["was-1-7", "was-1-1"],
+		kwcag: [{ num: "7.1.1", name: { ko: "기본 언어 표시", en: "Page Language Declared" } }],
+	},
+	{
+		id: "language-of-parts",
+		num: "3.1.2",
+		level: "AA",
+		title: { ko: "부분의 언어", en: "Language of Parts" },
+		summary: {
+			ko: '페이지 안에서 다른 언어로 된 구절에는 해당 언어를 표시해야 합니다. 한국어 문서에 영어 인용문이 섞이면 그 부분에 `lang="en"`을 주는 식입니다. 고유명사나 이미 한국어에 편입된 외래어에는 적용하지 않아도 됩니다.',
+			en: 'Passages in a different language from the page must be marked with that language. An English quotation inside a Korean document gets its own `lang="en"`. Proper nouns and loanwords absorbed into the surrounding language are exempt.',
+		},
+		commonFailures: [
+			{
+				ko: "한국어 문서에 긴 영어 원문 인용을 넣고도 `lang` 표시를 하지 않아 어색하게 읽히는 경우",
+				en: "Embedding a long English quotation in a Korean document with no `lang` marker, so it is read with the wrong pronunciation.",
+			},
+		],
+		relatedUnits: ["was-1-7"],
+	},
+	{
+		id: "on-focus",
+		num: "3.2.1",
+		level: "A",
+		title: { ko: "초점 시", en: "On Focus" },
+		summary: {
+			ko: "요소가 포커스를 받았다는 이유만으로 맥락이 바뀌어서는 안 됩니다. 키보드 사용자는 Tab으로 요소를 훑으며 내용을 파악하는데, 지나가기만 해도 페이지가 이동하면 탐색 자체가 불가능해집니다. 맥락 변화는 사용자가 명시적으로 실행했을 때만 일어나야 합니다.",
+			en: "Receiving focus must not, by itself, change the context. Keyboard users tab through elements to survey a page; if merely passing over one navigates away, exploration becomes impossible. Context changes belong to explicit user action.",
+		},
+		commonFailures: [
+			{
+				ko: "select에 포커스가 닿는 순간 폼이 제출되거나 다른 페이지로 이동하는 경우",
+				en: "A select that submits the form or navigates away the moment it receives focus.",
+			},
+		],
+		relatedUnits: ["was-1-5", "was-1-8"],
+		kwcag: [
+			{ num: "7.2.1", name: { ko: "사용자 요구에 따른 실행", en: "Action Only on User Request" } },
+		],
+	},
+	{
+		id: "on-input",
+		num: "3.2.2",
+		level: "A",
+		title: { ko: "입력 시", en: "On Input" },
+		summary: {
+			ko: "값을 바꾸는 것만으로 맥락이 바뀌려면 미리 사용자에게 알려야 합니다. 드롭다운에서 항목을 고르자마자 페이지가 이동하면, 스크린리더 사용자는 아직 목록을 훑는 중이었을 수 있습니다. 별도의 확인 버튼을 두는 것이 가장 안전한 패턴입니다.",
+			en: "Changing a setting must not change the context unless users were warned beforehand. Navigating the instant a dropdown option is selected catches out screen reader users who were still browsing the list. A separate submit button is the safest pattern.",
+		},
+		commonFailures: [
+			{
+				ko: "국가 선택 드롭다운에서 항목을 고르는 즉시 페이지가 새로 로드되는 경우",
+				en: "A country dropdown that reloads the page the instant an option is chosen.",
+			},
+		],
+		relatedUnits: ["was-1-5"],
+		kwcag: [
+			{ num: "7.2.1", name: { ko: "사용자 요구에 따른 실행", en: "Action Only on User Request" } },
+		],
+	},
+	{
+		id: "consistent-navigation",
+		num: "3.2.3",
+		level: "AA",
+		title: { ko: "일관된 내비게이션", en: "Consistent Navigation" },
+		summary: {
+			ko: "여러 페이지에 반복되는 내비게이션은 상대적 순서를 유지해야 합니다. 순서가 페이지마다 달라지면 위치를 기억해 이동하던 사용자가 매번 다시 탐색해야 합니다. 메뉴 항목을 추가하는 것은 괜찮지만, 기존 항목의 순서를 뒤바꾸는 것은 문제가 됩니다.",
+			en: "Navigation repeated across pages must keep the same relative order. When the order shifts, users who navigate from memory have to re-explore every time. Adding an item is fine; reshuffling the existing ones is not.",
+		},
+		commonFailures: [
+			{
+				ko: "섹션마다 헤더 메뉴 순서를 다르게 배치해 같은 항목의 위치가 계속 바뀌는 경우",
+				en: "Ordering the header menu differently per section, so the same item keeps moving.",
+			},
+		],
+		relatedUnits: ["was-1-1", "cpacc-2-3"],
+	},
+	{
+		id: "consistent-identification",
+		num: "3.2.4",
+		level: "AA",
+		title: { ko: "일관된 식별", en: "Consistent Identification" },
+		summary: {
+			ko: '같은 기능을 하는 요소는 사이트 전체에서 같은 이름으로 불러야 합니다. 어떤 페이지에서는 "검색", 다른 페이지에서는 "찾기"라고 하면 같은 기능인지 매번 판단해야 합니다. 아이콘만 쓰는 버튼이라면 접근 가능한 이름을 통일하는 것이 이 기준의 실질입니다.',
+			en: 'Components with the same functionality must be labelled consistently across the site. Calling it "Search" on one page and "Find" on another forces users to re-identify it each time. For icon-only buttons, this means keeping the accessible name uniform.',
+		},
+		commonFailures: [
+			{
+				ko: "같은 다운로드 아이콘에 페이지마다 다른 aria-label을 붙이는 경우",
+				en: "Giving the same download icon a different aria-label on each page.",
+			},
+		],
+		relatedUnits: ["was-1-2", "was-1-1"],
+	},
+	{
+		id: "consistent-help",
+		num: "3.2.6",
+		level: "A",
+		title: { ko: "일관된 도움말", en: "Consistent Help" },
+		summary: {
+			ko: "연락처나 도움말 같은 지원 수단이 여러 페이지에 있다면 항상 같은 상대 위치에 있어야 합니다. WCAG 2.2에서 새로 들어온 기준으로, 막혔을 때 도움을 찾는 일 자체가 부담이 되지 않게 하려는 것입니다. 도움말을 제공할 의무가 생기는 것은 아니고, 제공한다면 위치를 일관되게 하라는 요구입니다.",
+			en: "If help mechanisms such as contact details appear on multiple pages, they must sit in the same relative place. New in WCAG 2.2, it keeps the act of finding help from becoming another obstacle. It does not require offering help — only that whatever is offered stays put.",
+		},
+		commonFailures: [
+			{
+				ko: "고객센터 링크를 어떤 페이지는 헤더에, 어떤 페이지는 푸터에만 두는 경우",
+				en: "Putting the support link in the header on some pages and only in the footer on others.",
+			},
+		],
+		relatedUnits: ["was-1-1", "cpacc-1-5"],
+		kwcag: [{ num: "7.2.2", name: { ko: "찾기 쉬운 도움 정보", en: "Easily Found Help" } }],
+	},
+	{
+		id: "error-identification",
+		num: "3.3.1",
+		level: "A",
+		title: { ko: "오류 식별", en: "Error Identification" },
+		summary: {
+			ko: "입력 오류가 자동으로 감지되면 어느 항목이 잘못됐는지 텍스트로 알려야 합니다. 빨간 테두리만으로는 색을 구분하지 못하는 사용자와 스크린리더 사용자에게 아무것도 전달되지 않습니다. 오류 메시지를 해당 입력란과 프로그램적으로 연결하는 것까지가 실무의 완성입니다.",
+			en: "When an input error is detected automatically, the item in error must be identified in text. A red border alone conveys nothing to screen reader users or users who cannot distinguish the color. In practice the message also needs to be programmatically tied to the field.",
+		},
+		commonFailures: [
+			{
+				ko: "오류를 테두리 색으로만 표시하고 어떤 항목이 왜 틀렸는지 문구로 알리지 않는 경우",
+				en: "Signalling errors with border color only, never stating in text which field failed and why.",
+			},
+			{
+				ko: "오류 요약을 페이지 상단에만 두고 각 입력란과 `aria-describedby`로 연결하지 않는 경우",
+				en: "Showing an error summary at the top without linking each message to its field via `aria-describedby`.",
+			},
+		],
+		relatedUnits: ["was-1-5"],
+		kwcag: [{ num: "7.4.2", name: { ko: "오류 정정", en: "Error Correction" } }],
+	},
+	{
+		id: "labels-or-instructions",
+		num: "3.3.2",
+		level: "A",
+		title: { ko: "레이블 또는 안내", en: "Labels or Instructions" },
+		summary: {
+			ko: "입력을 요구하는 곳에는 레이블이나 안내가 있어야 합니다. 플레이스홀더는 입력을 시작하면 사라지므로 레이블을 대신할 수 없습니다. 필수 항목 표시와 형식 안내(날짜 형식, 비밀번호 규칙)도 이 기준의 범위에 들어갑니다.",
+			en: "Wherever input is required, labels or instructions must be provided. Placeholder text disappears once typing begins, so it cannot stand in for a label. Required-field markers and format hints — date patterns, password rules — fall under this criterion too.",
+		},
+		commonFailures: [
+			{
+				ko: "레이블 없이 플레이스홀더만 두어 입력을 시작하면 무엇을 넣는 칸인지 알 수 없게 되는 경우",
+				en: "Relying on a placeholder instead of a label, so the field's purpose vanishes once typing starts.",
+			},
+			{
+				ko: "비밀번호 규칙을 미리 알리지 않고 제출한 뒤에야 오류로 알려주는 경우",
+				en: "Withholding password rules until after submission, then reporting them as an error.",
+			},
+		],
+		relatedUnits: ["was-1-5"],
+		kwcag: [{ num: "7.4.1", name: { ko: "레이블 제공", en: "Labels Provided" } }],
+	},
+	{
+		id: "error-suggestion",
+		num: "3.3.3",
+		level: "AA",
+		title: { ko: "오류 정정 제안", en: "Error Suggestion" },
+		summary: {
+			ko: '오류를 알리는 데 그치지 않고 고칠 방법을 제안해야 합니다. 3.3.1이 "무엇이 틀렸는지"를 요구한다면 이 기준은 "어떻게 고치는지"를 요구합니다. 다만 보안상 제안이 위험한 경우(로그인 실패 사유 등)는 예외입니다.',
+			en: "Beyond reporting an error, a correction must be suggested when one is known. Where 3.3.1 asks what went wrong, this asks how to fix it. Suggestions are excused when they would compromise security — failed login attempts, for instance.",
+		},
+		commonFailures: [
+			{
+				ko: '"입력값이 올바르지 않습니다"로만 끝내고 요구하는 형식을 알려주지 않는 경우',
+				en: 'Stopping at "invalid input" without stating the expected format.',
+			},
+		],
+		relatedUnits: ["was-1-5"],
+		kwcag: [{ num: "7.4.2", name: { ko: "오류 정정", en: "Error Correction" } }],
+	},
+	{
+		id: "error-prevention-legal-financial-data",
+		num: "3.3.4",
+		level: "AA",
+		title: { ko: "오류 방지(법적·금전적·데이터)", en: "Error Prevention (Legal, Financial, Data)" },
+		summary: {
+			ko: "법적 책임이나 금전 거래가 걸린 제출은 되돌리거나, 검증하거나, 확인할 수 있어야 합니다. 셋 중 하나만 갖추면 됩니다. 결제·계약 동의·데이터 삭제처럼 잘못 눌렀을 때 회복이 어려운 동작이 대상입니다.",
+			en: "Submissions with legal or financial consequences must be reversible, checked, or confirmable — any one of the three suffices. It covers payments, contract agreements, and data deletion, where a mis-click is hard to undo.",
+		},
+		commonFailures: [
+			{
+				ko: "결제 버튼을 누르는 즉시 확인 단계 없이 거래가 완료되는 경우",
+				en: "Completing a transaction the instant the pay button is pressed, with no confirmation step.",
+			},
+		],
+		relatedUnits: ["was-1-5"],
+	},
+	{
+		id: "redundant-entry",
+		num: "3.3.7",
+		level: "A",
+		title: { ko: "중복 입력", en: "Redundant Entry" },
+		summary: {
+			ko: "같은 절차 안에서 이미 입력한 정보를 다시 요구해서는 안 됩니다. WCAG 2.2에서 새로 들어온 기준으로, 기억이나 입력에 부담이 큰 사용자를 배려합니다. 자동 채우거나 선택지로 제시하면 되고, 비밀번호 확인처럼 재입력이 본질적인 경우는 예외입니다.",
+			en: "Information already entered in the same process must not be requested again. New in WCAG 2.2, it eases the load on users for whom recall or typing is costly. Auto-populating or offering the earlier value as a choice satisfies it; re-entry that is essential, such as confirming a password, is exempt.",
+		},
+		commonFailures: [
+			{
+				ko: "주문 절차에서 배송지와 청구지가 같은데도 주소를 처음부터 다시 입력하게 하는 경우",
+				en: "Making users retype the same address for billing when it matches the shipping address just entered.",
+			},
+		],
+		relatedUnits: ["was-1-5"],
+		kwcag: [{ num: "7.4.4", name: { ko: "반복 입력 정보", en: "Redundant Entry" } }],
+	},
+	{
+		id: "accessible-authentication-minimum",
+		num: "3.3.8",
+		level: "AA",
+		title: { ko: "접근 가능한 인증(최소)", en: "Accessible Authentication (Minimum)" },
+		summary: {
+			ko: "인증 과정에서 기억하거나 옮겨 적는 인지적 기능 검사를 요구해서는 안 됩니다. WCAG 2.2에서 새로 들어온 기준으로, 비밀번호 암기나 퍼즐 풀이를 통과 조건으로 삼는 관행을 겨냥합니다. 붙여넣기와 비밀번호 관리자를 허용하거나, 다른 인증 수단을 함께 제공하면 충족됩니다.",
+			en: "Authentication must not depend on a cognitive function test such as recalling or transcribing a value. New in WCAG 2.2, it targets the habit of gating access behind memorized passwords and puzzles. Allowing paste and password managers, or offering an alternative method, satisfies it.",
+		},
+		commonFailures: [
+			{
+				ko: "비밀번호 입력란에서 붙여넣기를 막아 비밀번호 관리자를 쓸 수 없게 하는 경우",
+				en: "Blocking paste in the password field, which rules out password managers.",
+			},
+			{
+				ko: "왜곡된 글자를 읽어 입력하는 CAPTCHA만 제공하고 대체 수단을 두지 않는 경우",
+				en: "Offering only a distorted-text CAPTCHA with no alternative route.",
+			},
+		],
+		relatedUnits: ["was-1-5", "was-1-11", "cpacc-1-5"],
+		kwcag: [{ num: "7.4.3", name: { ko: "접근 가능한 인증", en: "Accessible Authentication" } }],
+	},
+
+	// ── 원칙 4. 견고성 (Robust) ──────────────────────────────────────────────────
+	{
+		id: "name-role-value",
+		num: "4.1.2",
+		level: "A",
+		title: { ko: "이름·역할·값", en: "Name, Role, Value" },
+		summary: {
+			ko: "모든 UI 컴포넌트는 이름·역할·상태·값을 보조기술이 읽을 수 있어야 합니다. 커스텀 위젯을 만들 때 가장 자주 무너지는 지점으로, ARIA는 이 간극을 메우기 위한 도구입니다. 참고로 4.1.1(구문 분석)은 WCAG 2.2에서 삭제되어 원칙 4에는 이 기준과 4.1.3만 남았습니다.",
+			en: "Every interface component must expose its name, role, state, and value to assistive technology. This is where custom widgets most often break, and ARIA exists to close that gap. Note that 4.1.1 (Parsing) was removed in WCAG 2.2, leaving only this criterion and 4.1.3 under Robust.",
+		},
+		commonFailures: [
+			{
+				ko: "div로 만든 토글에 `role`과 `aria-checked`를 주지 않아 상태가 전달되지 않는 경우",
+				en: "A div-based toggle with no `role` and no `aria-checked`, so its state is never announced.",
+			},
+			{
+				ko: '아이콘만 있는 버튼에 접근 가능한 이름이 없어 "버튼"으로만 읽히는 경우',
+				en: 'An icon-only button with no accessible name, announced as just "button".',
+			},
+		],
+		relatedUnits: ["was-1-2", "was-1-8"],
+		kwcag: [
+			{
+				num: "8.2.1",
+				name: { ko: "웹 애플리케이션 접근성 준수", en: "Web Application Accessibility" },
+			},
+		],
+	},
+	{
+		id: "status-messages",
+		num: "4.1.3",
+		level: "AA",
+		title: { ko: "상태 메시지", en: "Status Messages" },
+		summary: {
+			ko: '포커스를 옮기지 않고 전달되는 상태 변화는 보조기술에도 알려야 합니다. 검색 결과 개수, 장바구니 담김, 저장 완료 같은 메시지가 여기 해당합니다. 라이브 영역(`aria-live`, `role="status"`)을 쓰되, 요소를 미리 두고 내용만 바꿔 넣어야 안정적으로 읽힙니다.',
+			en: 'Status changes conveyed without moving focus must also reach assistive technology. Search result counts, cart confirmations, and save notices all qualify. Live regions (`aria-live`, `role="status"`) handle this, but the region must exist beforehand and only its content change for announcements to fire reliably.',
+		},
+		commonFailures: [
+			{
+				ko: "검색 결과 개수를 화면에만 갱신하고 라이브 영역으로 알리지 않는 경우",
+				en: "Updating the result count visually without announcing it through a live region.",
+			},
+			{
+				ko: "`aria-live` 요소를 메시지와 함께 새로 삽입해 스크린리더가 읽지 못하는 경우",
+				en: "Injecting the `aria-live` element together with its message, so screen readers never announce it.",
+			},
+		],
+		relatedUnits: ["was-1-2", "was-1-8"],
+		kwcag: [
+			{
+				num: "8.2.1",
+				name: { ko: "웹 애플리케이션 접근성 준수", en: "Web Application Accessibility" },
+			},
+		],
+	},
 ];

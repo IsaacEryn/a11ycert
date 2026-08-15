@@ -189,6 +189,11 @@ for (const term of glossaryTerms) {
 	const seenIds = new Set<string>();
 	const seenNums = new Set<string>();
 
+	// WCAG 2.2의 A·AA는 55개로 확정 — 누락·중복 추가를 막는 고정 기준
+	if (wcagCriteria.length !== 55) {
+		errors.push(`wcag: A·AA 성공기준은 55개여야 함 (현재 ${wcagCriteria.length}개)`);
+	}
+
 	for (const c of wcagCriteria) {
 		const label = `wcag ${c.num}`;
 		if (!/^[a-z0-9-]+$/.test(c.id)) errors.push(`${label}: id '${c.id}'는 소문자·숫자·하이픈만 가능`);
