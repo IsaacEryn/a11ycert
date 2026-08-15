@@ -1005,7 +1005,9 @@ button { font-family: inherit; cursor: pointer; }
 /* ============================================================
    Study layout
    ============================================================ */
-.app-layout { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-8); padding: var(--space-8) 0 var(--space-12); align-items: start; }
+/* minmax(0, …) — 트랙 최소 크기를 0으로 묶어 둔다. 코드 예제처럼 자체 스크롤을 갖는 콘텐츠가
+   트랙을 밀어내면 페이지 전체에 가로 스크롤이 생긴다(1.4.10). */
+.app-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: var(--space-8); padding: var(--space-8) 0 var(--space-12); align-items: start; }
 .sidebar { position: sticky; top: 80px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-4); max-height: calc(100vh - 100px); overflow-y: auto; }
 [data-theme="hc"] .sidebar { border-width: 2px; }
 .sidebar__title { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-subtle); padding: var(--space-2) var(--space-3); }
@@ -1234,7 +1236,7 @@ article.bilingual-card > .bilingual-card__refs { display: block; margin-top: var
   .path__step:not(:last-child)::after { display: none; }
   .hero { padding: var(--space-10) 0 var(--space-8); }
   .section { padding: var(--space-10) 0; }
-  .app-layout { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-5) 0 var(--space-10); }
+  .app-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding: var(--space-5) 0 var(--space-10); }
   .sidebar { position: static; max-height: none; }
   /* 모바일: 문단 쌍을 ko→en 순으로 교차 배치 */
   .bilingual-card__pairs { display: block; }

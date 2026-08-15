@@ -22,6 +22,9 @@ const REFLOW_PAGES = [
 	"/en",
 	"/ko/cpacc/study/cpacc-1-1",
 	"/en/cpacc/study/cpacc-1-1",
+	// 코드 예제가 있는 단원 — pre는 자체 스크롤로 처리되어야 하고 페이지를 넓히면 안 된다
+	"/ko/was/study/was-1-1",
+	"/en/was/study/was-1-1",
 ];
 
 for (const path of REFLOW_PAGES) {

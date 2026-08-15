@@ -16,11 +16,14 @@ interface Props {
   exam: "cpacc" | "was";
 }
 
-function ReferencesBlock({ refs, locale }: { refs: UnitReference[]; locale: string }) {
+// 절 안에 들어가는 참고 자료는 랜드마크로 두지 않는다 — 단원 끝의 참고 자료와 이름이 같아
+// 랜드마크 목록에서 둘을 구별할 수 없다.
+function ReferencesBlock({ refs, locale, inline = false }: { refs: UnitReference[]; locale: string; inline?: boolean }) {
   const t = useTranslations("cert");
   const isKo = locale === "ko";
+  const Wrapper = inline ? "div" : "aside";
   return (
-    <aside className="bilingual-card__refs" aria-label={t("references")}>
+    <Wrapper className="bilingual-card__refs" aria-label={inline ? undefined : t("references")}>
       <span className="bilingual-card__refs-label">{t("references")}</span>
       <ul>
         {refs.map((ref) => (
@@ -37,7 +40,7 @@ function ReferencesBlock({ refs, locale }: { refs: UnitReference[]; locale: stri
           </li>
         ))}
       </ul>
-    </aside>
+    </Wrapper>
   );
 }
 
@@ -135,7 +138,7 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
                   <CodeExampleBlock key={xi} example={ex} locale={locale} />
                 ))}
                 {section.references && section.references.length > 0 && (
-                  <ReferencesBlock refs={section.references} locale={locale} />
+                  <ReferencesBlock refs={section.references} locale={locale} inline />
                 )}
               </div>
             ))
