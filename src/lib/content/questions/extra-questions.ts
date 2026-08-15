@@ -1072,8 +1072,8 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 			},
 			answer: "b",
 			explanation: {
-				ko: "제목은 그 페이지에만 해당하는 정보를 앞에, 사이트명을 뒤에 둡니다. 탭이 좁아지면 뒷부분이 잘리고 스크린리더 사용자도 앞부분을 먼저 듣기 때문입니다. a는 모든 페이지가 같아져 서로 구분되지 않고, c는 사이트명과 슬로건이 앞을 차지해 정작 고유 정보가 뒤로 밀리며, d는 주제나 목적을 전혀 설명하지 못합니다(WCAG 2.4.2).",
-				en: "A title puts page-specific information first and the site name last, because narrow tabs truncate the end and screen reader users hear the beginning first. Option a makes every page identical, c pushes the page's own identity behind the site name and tagline, and d describes neither topic nor purpose (WCAG 2.4.2).",
+				ko: "제목은 그 페이지에만 해당하는 정보를 앞에, 사이트명을 뒤에 둡니다. 탭이 좁아지면 뒷부분이 잘리고 스크린리더 사용자도 앞부분을 먼저 듣기 때문입니다. A는 모든 페이지가 같아져 서로 구분되지 않고, C는 사이트명과 슬로건이 앞을 차지해 정작 고유 정보가 뒤로 밀리며, D는 주제나 목적을 전혀 설명하지 못합니다(WCAG 2.4.2).",
+				en: "A title puts page-specific information first and the site name last, because narrow tabs truncate the end and screen reader users hear the beginning first. Option A makes every page identical, C pushes the page's own identity behind the site name and tagline, and D describes neither topic nor purpose (WCAG 2.4.2).",
 			},
 		},
 		{
@@ -1090,8 +1090,8 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 			},
 			answer: "a",
 			explanation: {
-				ko: "SPA는 문서가 그대로여서 제목을 갱신하지 않으면 처음 로드한 페이지의 title이 남습니다. 화면은 바뀌었는데 탭 이름과 스크린리더가 읽는 제목은 그대로인 상태가 되죠. Next.js App Router라면 라우트별 metadata·generateMetadata가 이를 처리합니다. c는 제목 갱신을 대신하지 못하고(라우트 변경을 알리는 것은 별개 문제), d는 표준 브라우저 동작을 막는 접근성 결함입니다.",
-				en: "In an SPA the document persists, so without an update the first-loaded title remains — the view changed but the tab label and announced title did not. In the Next.js App Router, per-route metadata/generateMetadata handles this. Option c does not replace updating the title (announcing route changes is a separate concern), and d breaks standard browser behavior.",
+				ko: "SPA는 문서가 그대로여서 제목을 갱신하지 않으면 처음 로드한 페이지의 title이 남습니다. 화면은 바뀌었는데 탭 이름과 스크린리더가 읽는 제목은 그대로인 상태가 되죠. Next.js App Router라면 라우트별 metadata·generateMetadata가 이를 처리합니다. C는 제목 갱신을 대신하지 못하고(라우트 변경을 알리는 것은 별개 문제), D는 표준 브라우저 동작을 막는 접근성 결함입니다.",
+				en: "In an SPA the document persists, so without an update the first-loaded title remains — the view changed but the tab label and announced title did not. In the Next.js App Router, per-route metadata/generateMetadata handles this. Option C does not replace updating the title (announcing route changes is a separate concern), and D breaks standard browser behavior.",
 			},
 		},
 	],
