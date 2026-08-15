@@ -70,19 +70,19 @@ export default function CommunityPage() {
 	};
 
 	const getCategoryBadge = (cat: string) => {
-		const colors: Record<string, string> = {
-			report: "bg-orange-100 text-orange-700",
-			discussion: "bg-blue-100 text-blue-700",
-			question: "bg-green-100 text-green-700",
-			tip: "bg-purple-100 text-purple-700",
+		const variants: Record<string, string> = {
+			report: "tag tag--warning",
+			discussion: "tag tag--accent",
+			question: "tag tag--success",
+			tip: "tag tag--accent",
 		};
-		return colors[cat] || "bg-gray-100 text-gray-700";
+		return variants[cat] || "tag";
 	};
 
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-			<div className="flex items-center justify-between">
-				<h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
+			<div className="flex items-center justify-between gap-3">
+				<h1 className="text-2xl font-bold">{t("title")}</h1>
 				<Link
 					href={`/${locale}/community/write`}
 					className="btn btn--primary"
@@ -105,11 +105,12 @@ export default function CommunityPage() {
 						aria-selected={category === cat}
 						aria-controls="posts-panel"
 						onClick={() => handleCategoryChange(cat)}
-						className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
+						className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+						style={
 							category === cat
-								? "bg-gray-900 text-white"
-								: "bg-gray-100 text-gray-600 hover:bg-gray-200"
-						}`}
+								? { background: "var(--accent)", color: "var(--fg-on-accent)", borderColor: "var(--accent)" }
+								: { background: "var(--bg-muted)", color: "var(--fg-muted)", borderColor: "var(--border)" }
+						}
 					>
 						{categoryLabels[cat]}
 					</button>
@@ -128,9 +129,9 @@ export default function CommunityPage() {
 				{isLoading ? (
 					<div className="mt-6" aria-live="polite" aria-busy="true">
 						<span className="sr-only">{t("loading")}</span>
-						<ul className="divide-y divide-gray-100 motion-safe:animate-pulse" aria-hidden="true">
+						<ul className="motion-safe:animate-pulse" aria-hidden="true">
 							{[0, 1, 2, 3, 4].map((i) => (
-								<li key={i} className="py-4">
+								<li key={i} className="border-t py-4 first:border-t-0" style={{ borderColor: "var(--divider)" }}>
 									<div className="h-3 w-16 rounded" style={{ background: "var(--bg-muted)" }} />
 									<div className="mt-2 h-4 w-3/4 rounded" style={{ background: "var(--bg-muted)" }} />
 								</li>
@@ -138,30 +139,31 @@ export default function CommunityPage() {
 						</ul>
 					</div>
 				) : posts.length === 0 ? (
-					<p className="mt-8 text-sm text-gray-500">
+					<p className="mt-8 text-sm" style={{ color: "var(--fg-subtle)" }}>
 						{t("noPostsYet")}
 					</p>
 				) : (
-					<ul className="mt-6 divide-y divide-gray-100" role="list">
+					<ul className="mt-6" role="list">
 						{posts.map((post) => (
-							<li key={post.id}>
+							<li key={post.id} className="border-t first:border-t-0" style={{ borderColor: "var(--divider)" }}>
 								<Link
 									href={`/${locale}/community/${post.id}`}
-									className="flex items-start gap-3 py-3 no-underline hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors"
+									className="community-row flex items-start gap-3 py-3 no-underline -mx-2 px-2 rounded-lg transition-colors"
 								>
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2">
 											<span
-												className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${getCategoryBadge(post.category)}`}
+												className={getCategoryBadge(post.category)}
+												style={{ fontSize: "10px", padding: "2px 8px" }}
 												aria-label={categoryLabels[post.category]}
 											>
 												{categoryLabels[post.category]}
 											</span>
-											<span className="text-sm font-medium text-gray-900 truncate">
+											<span className="text-sm font-medium truncate" style={{ color: "var(--fg)" }}>
 												{post.title}
 											</span>
 										</div>
-										<div className="mt-1 flex items-center gap-3 text-xs text-gray-500">
+										<div className="mt-1 flex items-center gap-3 text-xs" style={{ color: "var(--fg-subtle)" }}>
 											<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 											<span>
 												<time dateTime={post.created_at}>

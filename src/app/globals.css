@@ -1188,6 +1188,8 @@ article.bilingual-card > .bilingual-card__refs { display: block; margin-top: var
 .glossary-letter { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; color: var(--accent); padding: var(--space-4) 0 var(--space-2); border-bottom: 1px solid var(--divider); margin-bottom: var(--space-2); }
 .glossary-row { display: grid; grid-template-columns: 220px 1fr 80px; gap: var(--space-5); padding: var(--space-3); border-radius: var(--radius); align-items: start; }
 .glossary-row:hover { background: var(--bg-muted); }
+/* 커뮤니티 글 목록 행 — 호버 배경만 필요해서 규칙 하나로 둔다(나머지 색은 토큰 인라인) */
+.community-row:hover { background: var(--bg-muted); text-decoration: none; }
 .glossary-row__term { font-weight: 700; font-size: var(--fs-base); }
 .glossary-row__term-en { font-size: var(--fs-xs); color: var(--fg-subtle); margin-top: 2px; font-style: italic; }
 .glossary-row__def { color: var(--fg-muted); font-size: var(--fs-sm); line-height: 1.6; }

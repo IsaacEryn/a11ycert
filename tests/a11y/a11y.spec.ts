@@ -11,6 +11,7 @@ const PAGES = [
 	{ name: "모의 퀴즈", path: "/ko/cpacc/quiz" },
 	{ name: "용어집", path: "/ko/glossary" },
 	{ name: "모의시험 인트로", path: "/ko/cpacc/mock-exam" },
+	{ name: "커뮤니티", path: "/ko/community" },
 ];
 
 /**

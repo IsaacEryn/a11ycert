@@ -63,7 +63,8 @@ export default function CommunityWritePage() {
 	if (!auth?.user) {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-10">
-				<p className="text-sm text-gray-500">
+				<h1 className="text-2xl font-bold">{t("newPost2")}</h1>
+				<p className="mt-4 text-sm" style={{ color: "var(--fg-subtle)" }}>
 					{t("pleaseSignInTo")}
 				</p>
 			</div>
@@ -72,19 +73,23 @@ export default function CommunityWritePage() {
 
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-			<h1 className="text-2xl font-bold text-gray-900">{t("newPost2")}</h1>
+			<h1 className="text-2xl font-bold">{t("newPost2")}</h1>
 
 			<form onSubmit={handleSubmit} className="mt-6 space-y-4">
 				{/* 오류 메시지 */}
 				{submitError && (
-					<p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+					<p
+						role="alert"
+						className="rounded-lg border px-4 py-3 text-sm"
+						style={{ background: "var(--danger-soft)", color: "var(--danger)", borderColor: "var(--danger)" }}
+					>
 						{submitError}
 					</p>
 				)}
 
 				{/* 카테고리 — aria-pressed로 선택 상태 전달 */}
 				<fieldset>
-					<legend className="text-sm font-medium text-gray-700">
+					<legend className="text-sm font-medium" style={{ color: "var(--fg-muted)" }}>
 						{t("category")}
 					</legend>
 					<div className="mt-2 flex gap-2" role="group">
@@ -94,11 +99,12 @@ export default function CommunityWritePage() {
 								type="button"
 								aria-pressed={category === value}
 								onClick={() => setCategory(value)}
-								className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
+								className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+								style={
 									category === value
-										? "bg-blue-100 text-blue-700"
-										: "bg-gray-100 text-gray-600 hover:bg-gray-200"
-								}`}
+										? { background: "var(--accent-soft)", color: "var(--accent-soft-fg)", borderColor: "transparent" }
+										: { background: "var(--bg-muted)", color: "var(--fg-muted)", borderColor: "var(--border)" }
+								}
 							>
 								{label}
 							</button>
@@ -108,7 +114,7 @@ export default function CommunityWritePage() {
 
 				{/* 제목 */}
 				<div>
-					<label htmlFor="post-title" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="post-title" className="block text-sm font-medium" style={{ color: "var(--fg-muted)" }}>
 						{t("title2")}
 					</label>
 					<input
@@ -118,13 +124,14 @@ export default function CommunityWritePage() {
 						onChange={(e) => setTitle(e.target.value)}
 						required
 						maxLength={200}
-						className="mt-1 w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+						className="mt-1 w-full rounded-lg border px-4 py-2.5 text-sm"
+						style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 					/>
 				</div>
 
 				{/* 내용 */}
 				<div>
-					<label htmlFor="post-content" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="post-content" className="block text-sm font-medium" style={{ color: "var(--fg-muted)" }}>
 						{t("content")}
 					</label>
 					<textarea
@@ -134,23 +141,20 @@ export default function CommunityWritePage() {
 						required
 						maxLength={5000}
 						rows={10}
-						className="mt-1 w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y"
+						className="mt-1 w-full rounded-lg border px-4 py-3 text-sm resize-y"
+						style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 					/>
 				</div>
 
 				{/* 버튼 */}
 				<div className="flex justify-end gap-2 pt-2">
-					<button
-						type="button"
-						onClick={() => router.back()}
-						className="rounded-lg px-5 py-2.5 text-sm text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
-					>
+					<button type="button" onClick={() => router.back()} className="btn btn--ghost">
 						{t("cancel")}
 					</button>
 					<button
 						type="submit"
 						disabled={!title.trim() || !content.trim() || isSubmitting}
-						className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+						className="btn btn--primary disabled:opacity-50"
 					>
 						{isSubmitting ? (t("posting")) : t("post")}
 					</button>

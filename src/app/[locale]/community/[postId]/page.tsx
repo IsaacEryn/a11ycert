@@ -90,7 +90,7 @@ export default function CommunityPostPage() {
 	if (!post) {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-10">
-				<p className="text-sm text-gray-500">{t("loading")}</p>
+				<p className="text-sm" style={{ color: "var(--fg-subtle)" }}>{t("loading")}</p>
 			</div>
 		);
 	}
@@ -105,23 +105,21 @@ export default function CommunityPostPage() {
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
 			{/* Breadcrumb */}
-			<nav className="mb-6 text-xs text-gray-500">
-				<Link href={`/${locale}/community`} className="hover:text-blue-600 no-underline">
-					{t("title")}
-				</Link>
+			<nav className="mb-6 text-xs" style={{ color: "var(--fg-subtle)" }}>
+				<Link href={`/${locale}/community`}>{t("title")}</Link>
 				<span className="mx-1">/</span>
-				<span className="text-gray-600">{post.title}</span>
+				<span style={{ color: "var(--fg-muted)" }}>{post.title}</span>
 			</nav>
 
 			{/* Post */}
 			<article>
 				<div className="flex items-center gap-2 mb-2">
-					<span className="rounded px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-600">
+					<span className="tag" style={{ fontSize: "10px", padding: "2px 8px" }}>
 						{categoryLabels[post.category] || post.category}
 					</span>
 				</div>
-				<h1 className="text-xl font-bold text-gray-900">{post.title}</h1>
-				<div className="mt-2 flex items-center gap-3 text-xs text-gray-500">
+				<h1 className="text-xl font-bold">{post.title}</h1>
+				<div className="mt-2 flex items-center gap-3 text-xs" style={{ color: "var(--fg-subtle)" }}>
 					<span>{post.profiles?.nickname || (t("anonymous"))}</span>
 					<span>
 						{formatDistanceToNow(new Date(post.created_at), {
@@ -130,14 +128,14 @@ export default function CommunityPostPage() {
 						})}
 					</span>
 				</div>
-				<div className="mt-6 text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+				<div className="mt-6 text-sm whitespace-pre-wrap leading-relaxed" style={{ color: "var(--fg)" }}>
 					{post.content}
 				</div>
 			</article>
 
 			{/* Replies */}
-			<section className="mt-10 border-t border-gray-200 pt-6">
-				<h2 className="text-base font-semibold text-gray-900">
+			<section className="mt-10 border-t pt-6" style={{ borderColor: "var(--border)" }}>
+				<h2 className="text-base font-semibold">
 					{t("replies")} ({replies.length})
 				</h2>
 
@@ -145,20 +143,23 @@ export default function CommunityPostPage() {
 					<ul className="mt-4 space-y-4" role="list">
 						{replies.map((reply) => (
 							<li key={reply.id} className="flex gap-3">
-								<span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-500 shrink-0">
+								<span
+									className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold shrink-0"
+									style={{ background: "var(--bg-muted)", color: "var(--fg-muted)" }}
+								>
 									{(reply.profiles?.nickname || "?").charAt(0).toUpperCase()}
 								</span>
 								<div>
 									<div className="flex items-center gap-2 text-xs">
-										<span className="font-medium text-gray-900">{reply.profiles?.nickname}</span>
-										<span className="text-gray-500">
+										<span className="font-medium">{reply.profiles?.nickname}</span>
+										<span style={{ color: "var(--fg-subtle)" }}>
 											{formatDistanceToNow(new Date(reply.created_at), {
 												addSuffix: true,
 												locale: isKo ? ko : enUS,
 											})}
 										</span>
 									</div>
-									<p className="mt-1 text-sm text-gray-700 whitespace-pre-wrap">{reply.content}</p>
+									<p className="mt-1 text-sm whitespace-pre-wrap">{reply.content}</p>
 								</div>
 							</li>
 						))}
@@ -174,13 +175,14 @@ export default function CommunityPostPage() {
 							placeholder={t("writeAReply")}
 							rows={3}
 							maxLength={2000}
-							className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+							className="w-full rounded-lg border px-3 py-2 text-sm resize-none"
+							style={{ background: "var(--bg)", color: "var(--fg)", borderColor: "var(--border)" }}
 						/>
 						<div className="flex justify-end">
 							<button
 								type="submit"
 								disabled={!replyContent.trim() || isSubmitting}
-								className="rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+								className="btn btn--primary disabled:opacity-50"
 							>
 								{isSubmitting
 									? t("posting")
@@ -189,7 +191,7 @@ export default function CommunityPostPage() {
 						</div>
 					</form>
 				) : (
-					<p className="mt-6 text-sm text-gray-500">
+					<p className="mt-6 text-sm" style={{ color: "var(--fg-subtle)" }}>
 						{t("signInToReply")}
 					</p>
 				)}
