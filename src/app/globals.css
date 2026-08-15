@@ -945,7 +945,7 @@ button { font-family: inherit; cursor: pointer; }
 .cert-card__progress { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--bg); border-radius: var(--radius); border: 1px solid var(--border); }
 [data-theme="hc"] .cert-card__progress { border-width: 2px; }
 .cert-card__progress-num { font-size: var(--fs-sm); color: var(--fg-muted); font-weight: 600; font-feature-settings: "tnum" 1; white-space: nowrap; }
-.cert-card__cta { display: flex; gap: var(--space-2); margin-top: auto; }
+.cert-card__cta { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
 
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
 .feature { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }

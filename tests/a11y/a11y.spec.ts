@@ -13,6 +13,20 @@ const PAGES = [
 	{ name: "모의시험 인트로", path: "/ko/cpacc/mock-exam" },
 ];
 
+/** 1.4.10 리플로우 — 320px 폭에서 가로 스크롤이 생기면 안 된다. */
+for (const path of ["/ko", "/en"]) {
+	test(`리플로우 320px: 홈 (${path})`, async ({ page }) => {
+		await page.setViewportSize({ width: 320, height: 800 });
+		await page.goto(path);
+		await page.waitForLoadState("networkidle");
+		const { scrollWidth, clientWidth } = await page.evaluate(() => ({
+			scrollWidth: document.documentElement.scrollWidth,
+			clientWidth: document.documentElement.clientWidth,
+		}));
+		expect(scrollWidth, `가로 스크롤 ${scrollWidth - clientWidth}px 초과`).toBeLessThanOrEqual(clientWidth);
+	});
+}
+
 for (const { name, path } of PAGES) {
 	test(`axe: ${name} (${path})`, async ({ page }) => {
 		await page.goto(path);
