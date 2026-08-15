@@ -1058,6 +1058,42 @@ export const wasExtraQuestions: Record<string, QuizQuestion[]> = {
 				en: "Heading navigation is screen reader users' most-used exploration method. Text that merely looks like a heading, without h1–h6 markup, simply doesn't exist for that navigation.",
 			},
 		},
+		{
+			id: "was-1-1-x4",
+			question: {
+				ko: "쇼핑몰 주문 내역 페이지의 `<title>`로 가장 적절한 것은?",
+				en: "Which is the most appropriate `<title>` for a shopping site's order history page?",
+			},
+			options: {
+				a: { ko: "`어울림몰`", en: "`Eoullim Mall`" },
+				b: { ko: "`주문 내역 | 어울림몰`", en: "`Order history | Eoullim Mall`" },
+				c: { ko: "`어울림몰 - 모두를 위한 쇼핑 - 주문 내역`", en: "`Eoullim Mall - Shopping for everyone - Order history`" },
+				d: { ko: "`페이지`", en: "`Page`" },
+			},
+			answer: "b",
+			explanation: {
+				ko: "제목은 그 페이지에만 해당하는 정보를 앞에, 사이트명을 뒤에 둡니다. 탭이 좁아지면 뒷부분이 잘리고 스크린리더 사용자도 앞부분을 먼저 듣기 때문입니다. a는 모든 페이지가 같아져 서로 구분되지 않고, c는 사이트명과 슬로건이 앞을 차지해 정작 고유 정보가 뒤로 밀리며, d는 주제나 목적을 전혀 설명하지 못합니다(WCAG 2.4.2).",
+				en: "A title puts page-specific information first and the site name last, because narrow tabs truncate the end and screen reader users hear the beginning first. Option a makes every page identical, c pushes the page's own identity behind the site name and tagline, and d describes neither topic nor purpose (WCAG 2.4.2).",
+			},
+		},
+		{
+			id: "was-1-1-x5",
+			question: {
+				ko: "클라이언트 라우팅으로 화면을 전환하는 SPA에서 WCAG 2.4.2(페이지 제목)를 충족하려면 반드시 해야 하는 것은?",
+				en: "In a single-page app that swaps views with client-side routing, what is required to satisfy WCAG 2.4.2 (Page Titled)?",
+			},
+			options: {
+				a: { ko: "라우트가 바뀔 때마다 document.title을 해당 화면의 제목으로 갱신한다", en: "Update document.title to the new view's title on every route change" },
+				b: { ko: "최초 로드 시 title에 사이트명과 키워드를 충분히 넣어둔다", en: "Pack the site name and keywords into the initial title on first load" },
+				c: { ko: "각 화면의 h1에 aria-live를 붙인다", en: "Add aria-live to each view's h1" },
+				d: { ko: "브라우저 뒤로 가기 버튼을 비활성화한다", en: "Disable the browser's back button" },
+			},
+			answer: "a",
+			explanation: {
+				ko: "SPA는 문서가 그대로여서 제목을 갱신하지 않으면 처음 로드한 페이지의 title이 남습니다. 화면은 바뀌었는데 탭 이름과 스크린리더가 읽는 제목은 그대로인 상태가 되죠. Next.js App Router라면 라우트별 metadata·generateMetadata가 이를 처리합니다. c는 제목 갱신을 대신하지 못하고(라우트 변경을 알리는 것은 별개 문제), d는 표준 브라우저 동작을 막는 접근성 결함입니다.",
+				en: "In an SPA the document persists, so without an update the first-loaded title remains — the view changed but the tab label and announced title did not. In the Next.js App Router, per-route metadata/generateMetadata handles this. Option c does not replace updating the title (announcing route changes is a separate concern), and d breaks standard browser behavior.",
+			},
+		},
 	],
 	"was-1-2": [
 		{
