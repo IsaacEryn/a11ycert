@@ -70,12 +70,12 @@ export default function StudyUnitContent({ unit, locale, prevUnit, nextUnit, exa
       <div className="bilingual-card__pairs">
         {/* 컬럼 헤더 */}
         <div className="bilingual-pair">
-          <h4 className="bilingual-card__col-head">
+          <h2 className="bilingual-card__col-head">
             한국어 해설 <span className="lang-pill">KO</span>
-          </h4>
-          <h4 className="bilingual-card__col-head">
+          </h2>
+          <h2 className="bilingual-card__col-head">
             Original Text <span className="lang-pill">EN</span>
-          </h4>
+          </h2>
         </div>
 
         {/* Summary */}

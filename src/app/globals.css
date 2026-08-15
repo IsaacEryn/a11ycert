@@ -775,7 +775,7 @@ button { font-family: inherit; cursor: pointer; }
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: var(--space-8);
 }
-.app-footer__col h4 {
+.app-footer__col h2 {
   font-size: var(--fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.06em;

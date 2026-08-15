@@ -35,7 +35,7 @@ export default function Footer({ locale }: FooterProps) {
 
           {/* CPACC col */}
           <nav aria-label={t("cpaccNavigation")} className="app-footer__col">
-            <h4>CPACC</h4>
+            <h2>CPACC</h2>
             <ul>
               {cpaccLinks.map(({ href, labelKey }) => (
                 <li key={href}>
@@ -47,7 +47,7 @@ export default function Footer({ locale }: FooterProps) {
 
           {/* WAS col */}
           <nav aria-label={t("wasNavigation")} className="app-footer__col">
-            <h4>WAS</h4>
+            <h2>WAS</h2>
             <ul>
               {wasLinks.map(({ href, labelKey }) => (
                 <li key={href}>
@@ -59,7 +59,7 @@ export default function Footer({ locale }: FooterProps) {
 
           {/* Site col */}
           <nav aria-label={t("siteMenu")} className="app-footer__col">
-            <h4>{t("site")}</h4>
+            <h2>{t("site")}</h2>
             <ul>
               {siteLinks.map(({ href, labelKey }) => (
                 <li key={href}>
