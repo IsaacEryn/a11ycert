@@ -16,6 +16,7 @@ import * as path from "node:path";
 import { getCertContent } from "../src/lib/content";
 import { glossaryTerms } from "../src/lib/content/glossary";
 import { unitReferences } from "../src/lib/content/references";
+import { wcagCriteria, principleOf } from "../src/lib/content/wcag-criteria";
 import { cpaccScenarioQuestions, wasScenarioQuestions } from "../src/lib/content/questions/scenario-questions";
 import type { DomainGroup, QuizQuestion, UnitReference } from "../src/lib/content/types";
 
@@ -182,12 +183,70 @@ for (const term of glossaryTerms) {
 	}
 }
 
+// WCAG 성공기준 검증 — id는 W3C Understanding slug이자 URL·SRS 카드 id라 규칙이 엄격하다
+{
+	const unitIds = new Set([...cpaccDomains, ...wasDomains].flatMap((d) => d.units.map((u) => u.id)));
+	const seenIds = new Set<string>();
+	const seenNums = new Set<string>();
+
+	for (const c of wcagCriteria) {
+		const label = `wcag ${c.num}`;
+		if (!/^[a-z0-9-]+$/.test(c.id)) errors.push(`${label}: id '${c.id}'는 소문자·숫자·하이픈만 가능`);
+		if (seenIds.has(c.id)) errors.push(`wcag id 중복: ${c.id}`);
+		seenIds.add(c.id);
+		if (!/^\d\.\d+\.\d+$/.test(c.num)) errors.push(`${label}: num 형식 오류`);
+		if (seenNums.has(c.num)) errors.push(`wcag num 중복: ${c.num}`);
+		seenNums.add(c.num);
+		if (!["A", "AA"].includes(c.level)) errors.push(`${label}: level '${c.level}' 유효하지 않음 (AAA는 범위 밖)`);
+
+		checkPair(`${label} title`, c.title);
+		checkPair(`${label} summary`, c.summary);
+
+		if (c.commonFailures.length < 1 || c.commonFailures.length > 2) {
+			errors.push(`${label}: commonFailures는 1~2개여야 함 (현재 ${c.commonFailures.length}개)`);
+		}
+		c.commonFailures.forEach((f, i) => checkPair(`${label} commonFailures[${i}]`, f));
+
+		if (c.relatedUnits.length === 0) errors.push(`${label}: relatedUnits 비어 있음`);
+		for (const id of c.relatedUnits) {
+			if (!unitIds.has(id)) errors.push(`${label}: 존재하지 않는 단원 id '${id}'`);
+		}
+
+		c.kwcag?.forEach((k, i) => {
+			if (!/^\d\.\d+\.\d+$/.test(k.num)) errors.push(`${label} kwcag[${i}]: num '${k.num}' 형식 오류`);
+			checkPair(`${label} kwcag[${i}] name`, k.name);
+		});
+		if (c.kwcag && c.kwcag.length === 0) errors.push(`${label}: kwcag 빈 배열 (대응 없으면 필드 생략)`);
+	}
+
+	// num 오름차순 정렬 유지
+	const sorted = [...wcagCriteria].sort((a, b) => {
+		const pa = a.num.split(".").map(Number);
+		const pb = b.num.split(".").map(Number);
+		return pa[0] - pb[0] || pa[1] - pb[1] || pa[2] - pb[2];
+	});
+	wcagCriteria.forEach((c, i) => {
+		if (sorted[i].num !== c.num) errors.push(`wcag: num 오름차순 정렬 아님 (${c.num} 위치)`);
+	});
+}
+
 validateMessages();
 
 console.log("도메인별 문항 분포:");
 reportDistribution("cpacc", cpaccDomains);
 reportDistribution("was", wasDomains);
 console.log(`용어집: ${glossaryTerms.length}개`);
+{
+	const byPrinciple: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
+	let mapped = 0;
+	for (const c of wcagCriteria) {
+		byPrinciple[principleOf(c)] += 1;
+		if (c.kwcag?.length) mapped += 1;
+	}
+	console.log(
+		`WCAG 성공기준: ${wcagCriteria.length}개 (P ${byPrinciple[1]} / O ${byPrinciple[2]} / U ${byPrinciple[3]} / R ${byPrinciple[4]}) · KWCAG 매핑 ${mapped}개`
+	);
+}
 
 if (errors.length > 0) {
 	console.error(`\n검증 실패 — ${errors.length}건:`);
