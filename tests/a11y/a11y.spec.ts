@@ -13,9 +13,19 @@ const PAGES = [
 	{ name: "모의시험 인트로", path: "/ko/cpacc/mock-exam" },
 ];
 
-/** 1.4.10 리플로우 — 320px 폭에서 가로 스크롤이 생기면 안 된다. */
-for (const path of ["/ko", "/en"]) {
-	test(`리플로우 320px: 홈 (${path})`, async ({ page }) => {
+/**
+ * 1.4.10 리플로우 — 320px 폭에서 가로 스크롤이 생기면 안 된다.
+ * 학습 단원은 영어 제목이 길어 ko보다 먼저 터지므로 두 로케일을 모두 본다.
+ */
+const REFLOW_PAGES = [
+	"/ko",
+	"/en",
+	"/ko/cpacc/study/cpacc-1-1",
+	"/en/cpacc/study/cpacc-1-1",
+];
+
+for (const path of REFLOW_PAGES) {
+	test(`리플로우 320px: ${path}`, async ({ page }) => {
 		await page.setViewportSize({ width: 320, height: 800 });
 		await page.goto(path);
 		await page.waitForLoadState("networkidle");

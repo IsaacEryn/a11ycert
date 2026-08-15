@@ -85,7 +85,7 @@ export default function CommunityPage() {
 				<h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
 				<Link
 					href={`/${locale}/community/write`}
-					className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-blue-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800"
+					className="btn btn--primary"
 				>
 					{t("newPost")}
 				</Link>
