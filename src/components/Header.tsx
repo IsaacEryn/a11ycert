@@ -160,6 +160,13 @@ export default function Header({ locale }: HeaderProps) {
               </div>
             ))}
             <Link
+              href={`/${locale}/wcag`}
+              className="app-nav__link"
+              aria-current={isActive(`/${locale}/wcag`) ? "page" : undefined}
+            >
+              {tNav("wcag")}
+            </Link>
+            <Link
               href={`/${locale}/glossary`}
               className="app-nav__link"
               aria-current={isActive(`/${locale}/glossary`) ? "page" : undefined}

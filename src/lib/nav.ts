@@ -18,6 +18,7 @@ export function certNavItems(locale: string, cert: "cpacc" | "was"): NavItem[] {
 /** 사이트 공통 메뉴 */
 export function siteNavItems(locale: string, { includePrivacy = true } = {}): NavItem[] {
 	const items = [
+		{ href: `/${locale}/wcag`, labelKey: "wcag" },
 		{ href: `/${locale}/glossary`, labelKey: "glossary" },
 		{ href: `/${locale}/about`, labelKey: "about" },
 	];

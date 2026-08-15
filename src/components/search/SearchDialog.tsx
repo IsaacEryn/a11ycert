@@ -200,7 +200,11 @@ export default function SearchDialog({ locale, onClose }: { locale: string; onCl
 								}}
 							>
 								<span className="tag" style={{ fontSize: 10, padding: "2px 8px", flexShrink: 0 }}>
-									{e.type === "unit" ? (e.cert?.toUpperCase() ?? "") : t("termTag")}
+									{e.type === "unit"
+											? (e.cert?.toUpperCase() ?? "")
+											: e.type === "sc"
+												? t("scTag")
+												: t("termTag")}
 								</span>
 								<span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
 									{locale === "ko" ? e.title.ko : e.title.en}

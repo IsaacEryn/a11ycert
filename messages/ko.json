@@ -15,7 +15,8 @@
 			"community": "커뮤니티",
 			"about": "소개",
 			"privacy": "개인정보처리방침",
-			"mockExam": "모의시험"
+			"mockExam": "모의시험",
+			"wcag": "WCAG"
 		},
 		"languageMode": {
 			"ko": "한국어",
@@ -906,7 +907,8 @@
 		"hintNavigate": "이동",
 		"hintOpen": "열기",
 		"hintClose": "닫기",
-		"openSearch": "검색 (Ctrl+K)"
+		"openSearch": "검색 (Ctrl+K)",
+		"scTag": "기준"
 	},
 	"examGuide": {
 		"title": "시험 신청과 응시",
@@ -937,5 +939,29 @@
 	"offline": {
 		"title": "오프라인 상태입니다",
 		"body": "인터넷 연결이 끊겼습니다. 이전에 방문한 학습 페이지는 오프라인에서도 열 수 있습니다 — 연결이 복구되면 자동으로 최신 내용을 불러옵니다."
+	},
+	"wcag": {
+		"title": "WCAG 2.2 성공기준",
+		"description": "Level A·AA 성공기준 55개를 번호로 찾아보세요. 요약과 흔한 실패 사례, KWCAG 2.2 매핑, 관련 학습 단원을 함께 봅니다.",
+		"searchLabel": "성공기준 검색",
+		"searchPlaceholder": "번호·제목·KWCAG 항목 검색…",
+		"levelFilterLabel": "적합성 수준 필터",
+		"levelAll": "전체",
+		"levelTag": "Level {level}",
+		"principleNavLabel": "원칙으로 이동",
+		"principle1": "1. 인식의 용이성",
+		"principle2": "2. 운용의 용이성",
+		"principle3": "3. 이해의 용이성",
+		"principle4": "4. 견고성",
+		"resultCount": "{count}개 성공기준이 검색되었습니다.",
+		"noResults": "검색 결과가 없습니다.",
+		"breadcrumbLabel": "현재 위치",
+		"summaryHeading": "요약",
+		"failuresHeading": "흔한 실패 사례",
+		"kwcagHeading": "KWCAG 2.2 대응 항목",
+		"kwcagNone": "대응하는 KWCAG 2.2 검사항목이 없습니다.",
+		"relatedHeading": "관련 학습 단원",
+		"understandingLink": "W3C 원문 보기 — Understanding SC {num}",
+		"adjacentLabel": "이전·다음 성공기준"
 	}
 }

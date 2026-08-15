@@ -15,7 +15,8 @@
 			"community": "Community",
 			"about": "About",
 			"privacy": "Privacy Policy",
-			"mockExam": "Mock Exam"
+			"mockExam": "Mock Exam",
+			"wcag": "WCAG"
 		},
 		"languageMode": {
 			"ko": "한국어",
@@ -906,7 +907,8 @@
 		"hintNavigate": "Navigate",
 		"hintOpen": "Open",
 		"hintClose": "Close",
-		"openSearch": "Search (Ctrl+K)"
+		"openSearch": "Search (Ctrl+K)",
+		"scTag": "SC"
 	},
 	"examGuide": {
 		"title": "Applying and Taking the Exam",
@@ -937,5 +939,29 @@
 	"offline": {
 		"title": "You're offline",
 		"body": "The network is unavailable. Study pages you've visited before remain readable offline — the latest content loads automatically once you reconnect."
+	},
+	"wcag": {
+		"title": "WCAG 2.2 Success Criteria",
+		"description": "Browse all 55 Level A and AA success criteria by number, with summaries, common failures, KWCAG 2.2 mappings, and related study units.",
+		"searchLabel": "Search success criteria",
+		"searchPlaceholder": "Search by number, title, or KWCAG item…",
+		"levelFilterLabel": "Conformance level filter",
+		"levelAll": "All",
+		"levelTag": "Level {level}",
+		"principleNavLabel": "Jump to principle",
+		"principle1": "1. Perceivable",
+		"principle2": "2. Operable",
+		"principle3": "3. Understandable",
+		"principle4": "4. Robust",
+		"resultCount": "{count} success criteria found.",
+		"noResults": "No results found.",
+		"breadcrumbLabel": "Breadcrumb",
+		"summaryHeading": "Summary",
+		"failuresHeading": "Common failures",
+		"kwcagHeading": "Corresponding KWCAG 2.2 items",
+		"kwcagNone": "No corresponding KWCAG 2.2 checkpoint.",
+		"relatedHeading": "Related study units",
+		"understandingLink": "Read the W3C source — Understanding SC {num}",
+		"adjacentLabel": "Previous and next success criterion"
 	}
 }
