@@ -419,8 +419,8 @@ export const cpaccExtraQuestions: Record<string, QuizQuestion[]> = {
 			},
 			answer: "a",
 			explanation: {
-				ko: "오류에 대한 관용은 실수의 위험과 부정적 결과를 최소화하는 설계입니다. 실행 취소와 확인 대화상자는 사용자의 실수를 되돌릴 수 있게 하는 대표적 적용입니다. b는 공평한 사용, c는 인지 가능한 정보, d는 적은 신체적 노력에 해당합니다.",
-				en: "Tolerance for Error minimizes hazards and adverse consequences of mistakes. Undo and confirmation dialogs let users recover from errors. Option b is Equitable Use, c is Perceptible Information, and d is Low Physical Effort.",
+				ko: "오류에 대한 관용은 실수의 위험과 부정적 결과를 최소화하는 설계입니다. 실행 취소와 확인 대화상자는 사용자의 실수를 되돌릴 수 있게 하는 대표적 적용입니다. B는 공평한 사용, C는 인지 가능한 정보, D는 적은 신체적 노력에 해당합니다.",
+				en: "Tolerance for Error minimizes hazards and adverse consequences of mistakes. Undo and confirmation dialogs let users recover from errors. Option B is Equitable Use, C is Perceptible Information, and D is Low Physical Effort.",
 			},
 		},
 		{

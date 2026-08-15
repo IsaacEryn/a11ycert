@@ -654,8 +654,8 @@ export const wasExtraUnits: StudyUnit[] = [
 				},
 				answer: "a",
 				explanation: {
-					ko: "ATAG는 Part A(도구 UI의 접근성)와 Part B(접근 가능한 콘텐츠 생산 지원 — alt 프롬프트, 접근 가능한 템플릿, 자동 검사 등)로 구성됩니다. b는 Part A, c는 UAAG의 영역입니다.",
-					en: "ATAG comprises Part A (accessible tool UI) and Part B (supporting accessible content production — alt prompts, accessible templates, automated checks). Option b is Part A; c belongs to UAAG.",
+					ko: "ATAG는 Part A(도구 UI의 접근성)와 Part B(접근 가능한 콘텐츠 생산 지원 — alt 프롬프트, 접근 가능한 템플릿, 자동 검사 등)로 구성됩니다. B는 Part A, C는 UAAG의 영역입니다.",
+					en: "ATAG comprises Part A (accessible tool UI) and Part B (supporting accessible content production — alt prompts, accessible templates, automated checks). Option B is Part A; C belongs to UAAG.",
 				},
 			},
 			{
@@ -1266,8 +1266,8 @@ export const wasExtraUnits: StudyUnit[] = [
 				},
 				answer: "a",
 				explanation: {
-					ko: "현실의 제품이 전 항목을 완벽 지원하는 경우는 드뭅니다. 부분 지원을 정직하고 구체적으로 기재한 ACR이 오히려 신뢰할 수 있습니다. b·c·d는 신뢰성을 높이는 요소입니다.",
-					en: "Real products rarely support everything perfectly. An ACR that honestly details partial support is the trustworthy one; b, c, and d increase credibility.",
+					ko: "현실의 제품이 전 항목을 완벽 지원하는 경우는 드뭅니다. 부분 지원을 정직하고 구체적으로 기재한 ACR이 오히려 신뢰할 수 있습니다. B·C·D는 신뢰성을 높이는 요소입니다.",
+					en: "Real products rarely support everything perfectly. An ACR that honestly details partial support is the trustworthy one; B, C, and D increase credibility.",
 				},
 			},
 			{

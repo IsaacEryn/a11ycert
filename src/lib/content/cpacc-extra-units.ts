@@ -904,8 +904,8 @@ export const cpaccExtraUnits: StudyUnit[] = [
 				},
 				answer: "a",
 				explanation: {
-					ko: "시간 압박과 예측 불가능성은 불안을 증폭시킵니다. 충분한 시간(WCAG 2.2.1), 예측 가능한 구조, 정중한 오류 안내가 해결책입니다. b·c·d는 오히려 도움을 주는 요소입니다.",
-					en: "Time pressure and unpredictability amplify anxiety. Generous timing (WCAG 2.2.1), predictable structure, and respectful error guidance are the solutions; b, c, and d are helpful, not barriers.",
+					ko: "시간 압박과 예측 불가능성은 불안을 증폭시킵니다. 충분한 시간(WCAG 2.2.1), 예측 가능한 구조, 정중한 오류 안내가 해결책입니다. B·C·D는 오히려 도움을 주는 요소입니다.",
+					en: "Time pressure and unpredictability amplify anxiety. Generous timing (WCAG 2.2.1), predictable structure, and respectful error guidance are the solutions; B, C, and D are helpful, not barriers.",
 				},
 			},
 			{
