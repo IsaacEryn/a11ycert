@@ -17,12 +17,14 @@ const units: StudyUnit[] = [
 			ko: [
 				"HTML5 랜드마크 요소와 그 역할을 설명할 수 있다",
 				"올바른 제목 계층 구조(h1~h6)를 적용할 수 있다",
+				"페이지 목적을 설명하는 `<title>`을 작성하고 SPA에서 갱신할 수 있다",
 				"인터랙티브 요소 선택의 올바른 기준을 설명할 수 있다",
 				"시맨틱 HTML이 보조기술에 미치는 영향을 이해한다",
 			],
 			en: [
 				"Explain HTML5 landmark elements and their roles",
 				"Apply correct heading hierarchy (h1–h6)",
+				"Write a `<title>` that describes the page's purpose and keep it updated in an SPA",
 				"Describe correct criteria for choosing interactive elements",
 				"Understand how semantic HTML impacts assistive technologies",
 			],
@@ -67,6 +69,69 @@ const units: StudyUnit[] = [
 						"Why headings matter: surveys consistently find heading navigation (the H key) is screen reader users' most-used way to explore pages. Fake headings — bold text styled to look like headings — are entirely invisible to that navigation. Conversely, using h tags anywhere just for visual emphasis distorts the structure.",
 					],
 				},
+			},
+			{
+				heading: { ko: "페이지 제목(`<title>`)", en: "Page Title (`<title>`)" },
+				paragraphs: {
+					ko: [
+						"`<title>`은 화면에 보이지 않지만 페이지를 대표하는 이름입니다. 스크린리더는 페이지가 로드되면 본문보다 먼저 title을 읽어주고, 사용자는 그 한 줄로 '내가 원한 페이지에 도착했는지'를 판단합니다. 탭을 여러 개 띄운 상태, 브라우저 방문 기록, 즐겨찾기, 검색 결과에서도 페이지를 구분하는 것은 이 문자열입니다. 제목이 없거나 모든 페이지가 같은 제목이면 이 판단 근거가 통째로 사라집니다.",
+						"좋은 제목은 '그 페이지에만 해당하는 정보'를 앞에, 사이트명을 뒤에 둡니다(예: `주문 내역 | 어울림몰`). 앞부분이 고유해야 하는 이유는 탭이 좁아지면 뒤쪽이 잘리고, 스크린리더 사용자도 앞부분을 먼저 듣기 때문입니다. 안티패턴은 명확합니다 — 모든 페이지가 `어울림몰`인 경우, `홈`처럼 맥락 없는 단어만 있는 경우, 사이트명·슬로건·키워드를 길게 나열해 정작 페이지 고유 정보가 뒤로 밀리는 경우.",
+						"SPA에서는 이 부분이 자주 깨집니다. 클라이언트 라우팅으로 화면만 바꾸면 문서는 그대로여서 document.title이 처음 로드한 페이지의 제목에 머무릅니다. 화면은 바뀌었는데 탭 이름과 스크린리더가 읽는 제목은 그대로인 상태가 되죠. 라우트가 바뀔 때마다 제목을 갱신해야 하며, Next.js App Router는 각 라우트의 `metadata`(또는 동적 라우트의 `generateMetadata`)로 이를 서버에서 처리합니다. 라우트 변경을 스크린리더에 알리는 것은 별개 문제로, 보통 제목 갱신과 함께 live region 안내를 같이 씁니다.",
+						"근거 기준: WCAG 2.4.2 페이지 제목(Level A) — '웹 페이지에는 주제나 목적을 설명하는 제목이 있어야 한다'. KWCAG 2.2에서는 6.4.2 제목 제공에 해당하며, 이 항목은 페이지 title뿐 아니라 프레임 제목(`<iframe title>`)과 콘텐츠 블록 제목까지 함께 요구합니다. 자동 검사 도구는 title 존재 여부와 중복 정도만 잡아낼 수 있고, 제목이 실제로 페이지 내용을 설명하는지는 사람이 판단해야 합니다.",
+					],
+					en: [
+						"`<title>` never appears in the page, yet it is the page's name. Screen readers announce it before any body content on load, and users decide from that one line whether they landed where they intended. It is also what distinguishes pages in a row of tabs, in browser history, in bookmarks, and in search results. With no title — or the same title everywhere — that basis for judgment disappears entirely.",
+						"A good title puts the page-specific information first and the site name last (e.g., `Order history | Eoullim Mall`). The front matters because narrow tabs truncate the end, and screen reader users hear the beginning first. The anti-patterns are clear: every page titled `Eoullim Mall`; context-free words like `Home`; or a pile of site name, tagline, and keywords that pushes the page's own identity out of sight.",
+						"Single-page apps break this routinely. Client-side routing swaps the view without a new document, so document.title stays on whatever the first-loaded page set. The screen changed, but the tab label and the announced title did not. The title must be updated on every route change; in the Next.js App Router, each route's `metadata` export (or `generateMetadata` for dynamic routes) handles this on the server. Announcing the route change to screen readers is a separate concern, usually solved by pairing the title update with a live region message.",
+						"The requirement: WCAG 2.4.2 Page Titled (Level A) — web pages have titles that describe topic or purpose. In KWCAG 2.2 this maps to 6.4.2 Titles Provided, which additionally covers frame titles (`<iframe title>`) and content-block headings. Automated tools can only detect whether a title exists and whether titles are duplicated; whether a title actually describes the page is a human judgment.",
+					],
+				},
+				codeExamples: [
+					{
+						caption: {
+							ko: "페이지 고유 정보를 앞에 두는 제목 — 잘못된 예와 올바른 예",
+							en: "Page-specific information first — wrong vs. right",
+						},
+						lang: "html",
+						code: `<!-- ❌ 모든 페이지가 같은 제목: 탭 목록에서도, 스크린 리더로도 구분 불가 -->
+<title>어울림몰</title>
+
+<!-- ❌ 사이트명·슬로건이 앞을 차지해 페이지 고유 정보가 잘림 -->
+<title>어울림몰 - 모두를 위한 쇼핑 - 주문 내역</title>
+
+<!-- ✅ 페이지 고유 정보 + 구분자 + 사이트명 -->
+<title>주문 내역 | 어울림몰</title>`,
+					},
+					{
+						caption: {
+							ko: "Next.js App Router — 라우트마다 제목을 서버에서 지정",
+							en: "Next.js App Router — set the title per route on the server",
+						},
+						lang: "js",
+						code: `// app/layout.tsx — 사이트명은 템플릿으로 한 번만
+export const metadata = {
+  title: { template: "%s | 어울림몰", default: "어울림몰" },
+};
+
+// app/orders/page.tsx — 정적 라우트
+export const metadata = { title: "주문 내역" };
+
+// app/orders/[id]/page.tsx — 동적 라우트
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  return { title: \`주문 \${id}\` };
+}`,
+					},
+				],
+				references: [
+					{
+						label: {
+							ko: "W3C Understanding SC 2.4.2: Page Titled",
+							en: "W3C Understanding SC 2.4.2: Page Titled",
+						},
+						url: "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html",
+					},
+				],
 			},
 			{
 				heading: { ko: "인터랙티브 요소와 리스트", en: "Interactive Elements and Lists" },
