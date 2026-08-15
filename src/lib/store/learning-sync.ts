@@ -82,7 +82,7 @@ export async function syncCompletedUnitToDB(userId: string, unitId: string) {
 
 export async function syncSrsCardToDB(
 	userId: string,
-	cert: "cpacc" | "was",
+	cert: "cpacc" | "was" | "wcag",
 	cardId: string,
 	box: number,
 	dueAt: string

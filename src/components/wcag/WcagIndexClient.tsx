@@ -108,6 +108,14 @@ export default function WcagIndexClient({ criteria, locale }: Props) {
             </button>
           ))}
         </div>
+
+        <Link
+          href={`/${locale}/wcag/flashcards`}
+          className="btn btn--sm"
+          style={{ marginLeft: "auto" }}
+        >
+          {t("flashcardsCta")}
+        </Link>
       </div>
 
       <nav aria-label={t("principleNavLabel")} style={{ marginTop: "var(--space-4)" }}>

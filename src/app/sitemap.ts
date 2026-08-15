@@ -20,6 +20,7 @@ const STATIC_PATHS = [
 	"/was/mock-exam",
 	"/was/flashcards",
 	"/wcag",
+	"/wcag/flashcards",
 	"/glossary",
 	"/community",
 	"/about",

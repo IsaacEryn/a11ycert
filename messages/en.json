@@ -962,6 +962,15 @@
 		"kwcagNone": "No corresponding KWCAG 2.2 checkpoint.",
 		"relatedHeading": "Related study units",
 		"understandingLink": "Read the W3C source — Understanding SC {num}",
-		"adjacentLabel": "Previous and next success criterion"
+		"adjacentLabel": "Previous and next success criterion",
+		"flashcardsCta": "Flashcards",
+		"deckFrontLabel": "Success criterion",
+		"deckBackLabel": "Summary",
+		"deckFlipHint": "Click to reveal the summary",
+		"deckShowFront": "Show the criterion",
+		"deckShowBack": "Show the summary",
+		"deckNoDue": "Nothing is due for review right now. Switch to studying everything, or come back later.",
+		"deckTitle": "WCAG Success Criteria Flashcards",
+		"deckDescription": "Number and title on the front, summary on the back. Work through all 55 with spaced repetition."
 	}
 }

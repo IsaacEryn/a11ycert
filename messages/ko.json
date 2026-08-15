@@ -962,6 +962,15 @@
 		"kwcagNone": "대응하는 KWCAG 2.2 검사항목이 없습니다.",
 		"relatedHeading": "관련 학습 단원",
 		"understandingLink": "W3C 원문 보기 — Understanding SC {num}",
-		"adjacentLabel": "이전·다음 성공기준"
+		"adjacentLabel": "이전·다음 성공기준",
+		"flashcardsCta": "플래시카드",
+		"deckFrontLabel": "성공기준",
+		"deckBackLabel": "요약",
+		"deckFlipHint": "클릭하여 요약 확인",
+		"deckShowFront": "성공기준 보기",
+		"deckShowBack": "요약 보기",
+		"deckNoDue": "지금 복습할 성공기준이 없습니다. 전체 학습으로 전환하거나 나중에 다시 오세요.",
+		"deckTitle": "WCAG 성공기준 플래시카드",
+		"deckDescription": "앞면은 번호와 제목, 뒷면은 요약입니다. 간격 반복으로 55개를 익혀보세요."
 	}
 }

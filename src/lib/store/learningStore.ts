@@ -7,6 +7,13 @@ import { gradeCard, type SrsCardState, type SrsGrade } from "@/lib/srs/leitner";
 
 export type LanguageMode = "ko-only" | "parallel" | "en-only";
 
+/**
+ * SRS 덱 구분자 — 자격증 덱(문항) + WCAG 성공기준 덱.
+ * perCert가 string 키 맵이라 "wcag" 항목은 접근 시 lazy 생성된다.
+ * Cert 타입 자체는 넓히지 않는다 (라우팅·통계·모의시험이 전부 거기 묶여 있음).
+ */
+export type SrsScope = Cert | "wcag";
+
 /** 비로그인 사용자의 로컬 시도 이력 (cert별 최근 MAX_LOCAL_ATTEMPTS개) */
 export interface LocalAttempt {
   id: string;
@@ -76,7 +83,7 @@ interface LearningState {
   unsaveQuestion: (cert: Cert, id: string) => void;
   addWrongAnswer: (cert: Cert, id: string) => void;
   removeWrongAnswer: (cert: Cert, id: string) => void;
-  gradeFlashcard: (cert: Cert, cardId: string, grade: SrsGrade) => SrsCardState;
+  gradeFlashcard: (scope: SrsScope, cardId: string, grade: SrsGrade) => SrsCardState;
   recordAttempt: (cert: Cert, attempt: LocalAttempt) => void;
 
   // Per-cert queries
@@ -86,7 +93,7 @@ interface LearningState {
   getCompletedCount: (cert: Cert) => number;
   getBookmarks: (cert: Cert) => string[];
   getWrongNotes: (cert: Cert) => string[];
-  getSrsMap: (cert: Cert) => Record<string, SrsCardState>;
+  getSrsMap: (scope: SrsScope) => Record<string, SrsCardState>;
   getAttempts: (cert: Cert) => LocalAttempt[];
 
   setLanguageMode: (mode: LanguageMode) => void;
