@@ -452,4 +452,409 @@ export const wcagCriteria: WcagCriterion[] = [
 		],
 		relatedUnits: ["was-1-8"],
 	},
+
+	// ── 원칙 2. 운용의 용이성 (Operable) ─────────────────────────────────────────
+	{
+		id: "keyboard",
+		num: "2.1.1",
+		level: "A",
+		title: { ko: "키보드", en: "Keyboard" },
+		summary: {
+			ko: "모든 기능을 키보드만으로 사용할 수 있어야 합니다. 마우스를 쓸 수 없는 지체장애 사용자, 스크린리더 사용자, 음성 인식 사용자가 모두 키보드 인터페이스를 거쳐 웹을 조작하기 때문입니다. 네이티브 요소를 쓰면 대부분 저절로 충족되고, 문제는 거의 항상 div로 만든 가짜 버튼에서 생깁니다.",
+			en: "All functionality must be operable through a keyboard. Users with motor disabilities, screen reader users, and speech-input users all reach the page through the keyboard interface. Native elements satisfy this for free; failures almost always come from buttons built out of divs.",
+		},
+		commonFailures: [
+			{
+				ko: "`<div onclick>`로 만든 버튼이 Tab으로 도달되지 않고 Enter·Space에도 반응하지 않는 경우",
+				en: "A `<div onclick>` button that Tab never reaches and that ignores Enter and Space.",
+			},
+			{
+				ko: "드래그 앤 드롭이나 마우스 호버에만 기능을 붙여 키보드 대체 경로를 두지 않는 경우",
+				en: "Binding functionality only to drag-and-drop or hover, with no keyboard alternative.",
+			},
+		],
+		relatedUnits: ["was-1-3", "was-1-1"],
+		kwcag: [
+			{ num: "6.1.1", name: { ko: "키보드 사용 보장", en: "Keyboard Accessibility Guaranteed" } },
+		],
+	},
+	{
+		id: "no-keyboard-trap",
+		num: "2.1.2",
+		level: "A",
+		title: { ko: "키보드 함정 없음", en: "No Keyboard Trap" },
+		summary: {
+			ko: "키보드로 들어간 곳에서는 키보드로 빠져나올 수 있어야 합니다. 갇히면 페이지를 새로 고치는 것 말고는 방법이 없어, 접근성 위반 중에서도 피해가 가장 즉각적입니다. 모달과 임베드된 위젯이 대표적인 발생 지점입니다.",
+			en: "If keyboard focus can move into a component, it must be able to move out again. Getting trapped leaves reloading the page as the only escape, which makes this one of the most immediately damaging failures. Modals and embedded widgets are where it usually happens.",
+		},
+		commonFailures: [
+			{
+				ko: "모달에 포커스 트랩만 구현하고 ESC 닫기나 닫기 버튼으로의 탈출 경로를 빠뜨린 경우",
+				en: "Implementing a modal focus trap without an escape route — no Escape key, no reachable close button.",
+			},
+		],
+		relatedUnits: ["was-1-3", "was-1-8"],
+		kwcag: [
+			{ num: "6.1.1", name: { ko: "키보드 사용 보장", en: "Keyboard Accessibility Guaranteed" } },
+		],
+	},
+	{
+		id: "character-key-shortcuts",
+		num: "2.1.4",
+		level: "A",
+		title: { ko: "문자 키 단축키", en: "Character Key Shortcuts" },
+		summary: {
+			ko: "문자 하나로 동작하는 단축키를 두려면 끄거나, 다시 지정하거나, 포커스가 있을 때만 동작하도록 해야 합니다. 음성 입력 사용자가 말한 단어가 단축키로 오인되면 의도치 않은 동작이 일어나기 때문입니다. Ctrl·Alt 같은 보조 키를 함께 쓰는 단축키는 대상이 아닙니다.",
+			en: "Single-character shortcuts must be switchable off, remappable, or active only on focus. A speech-input user's dictated words can otherwise fire commands they never intended. Shortcuts that require a modifier such as Ctrl or Alt are out of scope.",
+		},
+		commonFailures: [
+			{
+				ko: "메일·문서 앱에서 `r`(답장), `a`(전체답장) 같은 단일 문자 단축키를 끌 수 없게 고정한 경우",
+				en: "Hard-wiring single-key shortcuts like `r` for reply with no way to disable them.",
+			},
+		],
+		relatedUnits: ["was-1-3"],
+		kwcag: [{ num: "6.1.4", name: { ko: "문자 단축키", en: "Character Key Shortcuts" } }],
+	},
+	{
+		id: "timing-adjustable",
+		num: "2.2.1",
+		level: "A",
+		title: { ko: "시간 조절 가능", en: "Timing Adjustable" },
+		summary: {
+			ko: "제한 시간이 있는 콘텐츠는 시간을 끄거나, 조절하거나, 연장할 수 있어야 합니다. 화면을 읽거나 입력하는 데 더 오래 걸리는 사용자가 아무 잘못 없이 작업을 잃게 되기 때문입니다. 실시간 경매나 시험처럼 시간 제한이 본질적인 경우만 예외입니다.",
+			en: "Time limits must be adjustable, extendable, or removable. Otherwise users who read or type more slowly lose their work through no fault of their own. Exceptions are narrow — real-time auctions or timed exams, where the limit is essential.",
+		},
+		commonFailures: [
+			{
+				ko: "세션이 경고 없이 만료돼 작성 중이던 폼 내용이 통째로 사라지는 경우",
+				en: "Sessions expiring without warning, wiping out a partially completed form.",
+			},
+			{
+				ko: "연장 안내를 띄우면서 응답 시간을 20초처럼 짧게 주는 경우",
+				en: "Offering an extension prompt but only allowing a few seconds to respond to it.",
+			},
+		],
+		relatedUnits: ["was-1-8", "was-1-11"],
+		kwcag: [{ num: "6.2.1", name: { ko: "응답시간 조절", en: "Adjustable Response Time" } }],
+	},
+	{
+		id: "pause-stop-hide",
+		num: "2.2.2",
+		level: "A",
+		title: { ko: "일시정지·정지·숨김", en: "Pause, Stop, Hide" },
+		summary: {
+			ko: "5초 넘게 자동으로 움직이거나 깜빡이거나 스크롤되는 콘텐츠는 사용자가 멈출 수 있어야 합니다. 주의력 관련 장애가 있는 사용자에게 끊임없이 움직이는 요소는 본문 읽기를 방해합니다. 자동 넘어가는 캐러셀과 실시간 티커가 가장 흔한 대상입니다.",
+			en: "Content that moves, blinks, or scrolls automatically for more than five seconds must be pausable. Perpetual motion makes it hard for users with attention-related disabilities to read anything else on the page. Auto-advancing carousels and live tickers are the usual cases.",
+		},
+		commonFailures: [
+			{
+				ko: "메인 배너 캐러셀이 자동으로 넘어가는데 일시정지 버튼이 없는 경우",
+				en: "A hero carousel that advances on its own with no pause control.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+		kwcag: [{ num: "6.2.2", name: { ko: "정지 기능 제공", en: "Pause Control Provided" } }],
+	},
+	{
+		id: "three-flashes-or-below-threshold",
+		num: "2.3.1",
+		level: "A",
+		title: { ko: "3회 섬광 또는 임계값 이하", en: "Three Flashes or Below Threshold" },
+		summary: {
+			ko: "1초에 세 번을 넘는 섬광이 있어서는 안 됩니다. 광과민성 발작을 유발할 수 있어, 위반의 결과가 불편이 아니라 신체적 위해라는 점에서 다른 기준과 성격이 다릅니다. 횟수 기준은 같지만, 포화된 붉은색은 섬광으로 판정되는 기준이 더 민감합니다.",
+			en: "Nothing may flash more than three times per second. Unlike most criteria, a failure here risks physical harm — photosensitive seizures — not just inconvenience. The rate threshold is the same for red, but saturated red counts as a flash more readily.",
+		},
+		commonFailures: [
+			{
+				ko: "이벤트 페이지의 강조 효과나 자동 재생 영상에 빠른 섬광이 포함된 경우",
+				en: "Rapid flashing in a promotional effect or an autoplaying video.",
+			},
+		],
+		relatedUnits: ["cpacc-1-8"],
+		kwcag: [
+			{ num: "6.3.1", name: { ko: "깜빡임과 번쩍임 사용 제한", en: "Limited Use of Flashing" } },
+		],
+	},
+	{
+		id: "bypass-blocks",
+		num: "2.4.1",
+		level: "A",
+		title: { ko: "블록 건너뛰기", en: "Bypass Blocks" },
+		summary: {
+			ko: "여러 페이지에 반복되는 영역을 건너뛸 수단이 있어야 합니다. 키보드 사용자가 페이지를 옮길 때마다 같은 내비게이션을 수십 번 Tab으로 통과하지 않아도 되게 하는 것이 목적입니다. 건너뛰기 링크가 흔한 해법이지만, 올바른 랜드마크 구조만으로도 충족할 수 있습니다.",
+			en: "There must be a way to skip blocks repeated across pages. The point is to spare keyboard users from tabbing through the same navigation on every page load. A skip link is the common solution, though proper landmark structure also satisfies it.",
+		},
+		commonFailures: [
+			{
+				ko: "건너뛰기 링크를 넣었지만 포커스를 받아도 보이지 않아 키보드 사용자가 존재를 모르는 경우",
+				en: "A skip link that stays invisible even when focused, so keyboard users never know it exists.",
+			},
+		],
+		relatedUnits: ["was-1-1", "was-1-3"],
+		kwcag: [{ num: "6.4.1", name: { ko: "반복 영역 건너뛰기", en: "Skip Repetitive Blocks" } }],
+	},
+	{
+		id: "page-titled",
+		num: "2.4.2",
+		level: "A",
+		title: { ko: "페이지 제목", en: "Page Titled" },
+		summary: {
+			ko: "모든 페이지에 주제나 목적을 설명하는 제목이 있어야 합니다. 스크린리더는 페이지를 열 때 title을 가장 먼저 읽고, 탭을 여러 개 띄운 사용자는 그것만으로 페이지를 구분합니다. 사이트명만 반복하는 제목은 이 역할을 하지 못합니다.",
+			en: "Every page needs a title describing its topic or purpose. Screen readers announce the title first on load, and anyone with many tabs open relies on it to tell pages apart. A title that only repeats the site name does not do that job.",
+		},
+		commonFailures: [
+			{
+				ko: "모든 페이지의 title이 사이트명으로 동일해 탭 목록에서 구분되지 않는 경우",
+				en: "Every page carrying the same site-name title, making tabs indistinguishable.",
+			},
+			{
+				ko: "SPA에서 라우트가 바뀌어도 document.title을 갱신하지 않는 경우",
+				en: "A single-page app that never updates document.title on route change.",
+			},
+		],
+		relatedUnits: ["was-1-1"],
+		kwcag: [{ num: "6.4.2", name: { ko: "제목 제공", en: "Titles Provided" } }],
+	},
+	{
+		id: "focus-order",
+		num: "2.4.3",
+		level: "A",
+		title: { ko: "초점 순서", en: "Focus Order" },
+		summary: {
+			ko: "포커스가 이동하는 순서는 의미와 조작 순서에 맞아야 합니다. 순서가 뒤엉키면 화면을 보지 못하는 사용자는 자신이 지금 어디에 있는지 추적할 수 없습니다. DOM 순서를 시각 순서와 일치시키는 것이 가장 확실한 대응입니다.",
+			en: "Focus must move in an order that preserves meaning and operability. When the order scrambles, users who cannot see the screen lose track of where they are. Keeping DOM order aligned with visual order is the most reliable fix.",
+		},
+		commonFailures: [
+			{
+				ko: "양수 `tabindex`(1 이상)를 써서 문서 전체의 포커스 순서를 헝클어뜨리는 경우",
+				en: "Using positive `tabindex` values, which scrambles focus order across the whole document.",
+			},
+			{
+				ko: "모달을 열었는데 포커스가 모달로 옮겨가지 않아 뒤쪽 콘텐츠를 계속 훑는 경우",
+				en: "Opening a modal without moving focus into it, leaving the user tabbing through the page behind.",
+			},
+		],
+		relatedUnits: ["was-1-3", "was-1-8"],
+		kwcag: [
+			{ num: "6.1.2", name: { ko: "초점 이동과 표시", en: "Focus Movement and Indication" } },
+		],
+	},
+	{
+		id: "link-purpose-in-context",
+		num: "2.4.4",
+		level: "A",
+		title: { ko: "링크 목적(문맥 내)", en: "Link Purpose (In Context)" },
+		summary: {
+			ko: '링크의 목적은 링크 텍스트만으로, 또는 링크가 놓인 문맥과 함께 판단할 수 있어야 합니다. 스크린리더 사용자는 링크만 모아 목록으로 훑는 경우가 많아, 그 목록에서 의미가 통해야 합니다. "더보기"가 여러 개 나열되면 어느 것이 무엇인지 알 수 없습니다.',
+			en: 'The purpose of each link must be clear from its text, or from its text plus surrounding context. Screen reader users often pull up a list of links in isolation, and the list has to make sense on its own. A page full of "read more" links tells them nothing.',
+		},
+		commonFailures: [
+			{
+				ko: '"여기를 클릭"·"더보기"처럼 목적을 알 수 없는 링크 텍스트를 반복해서 쓰는 경우',
+				en: 'Repeating opaque link text like "click here" or "read more".',
+			},
+			{
+				ko: "링크 텍스트를 URL 자체로 두어 스크린리더가 주소를 한 글자씩 읽어버리는 경우",
+				en: "Using a raw URL as link text, so a screen reader reads the address character by character.",
+			},
+		],
+		relatedUnits: ["was-1-7", "was-1-1"],
+		kwcag: [{ num: "6.4.3", name: { ko: "적절한 링크 텍스트", en: "Meaningful Link Text" } }],
+	},
+	{
+		id: "multiple-ways",
+		num: "2.4.5",
+		level: "AA",
+		title: { ko: "여러 방법", en: "Multiple Ways" },
+		summary: {
+			ko: "사이트 안에서 페이지를 찾는 방법이 둘 이상 있어야 합니다. 내비게이션 메뉴만으로 길을 찾기 어려운 사용자에게 검색·사이트맵·목차 같은 다른 경로를 주자는 취지입니다. 절차의 한 단계처럼 순서가 고정된 페이지는 예외입니다.",
+			en: "There must be more than one way to locate a page within a site. Search, a sitemap, or an index gives users an alternative when the navigation menu alone is hard to work through. Pages that are steps in a process are exempt.",
+		},
+		commonFailures: [
+			{
+				ko: "드롭다운 내비게이션 하나만 두고 검색이나 사이트맵을 제공하지 않는 경우",
+				en: "Offering only a dropdown navigation, with no search and no sitemap.",
+			},
+		],
+		relatedUnits: ["was-1-1"],
+	},
+	{
+		id: "headings-and-labels",
+		num: "2.4.6",
+		level: "AA",
+		title: { ko: "제목과 레이블", en: "Headings and Labels" },
+		summary: {
+			ko: "제목과 레이블은 주제나 목적을 설명해야 합니다. 2.4.10처럼 제목의 존재를 요구하는 것이 아니라, 이미 있는 제목·레이블의 내용이 쓸모 있는지를 묻는 기준입니다. 스크린리더 사용자가 제목 목록만 훑어 원하는 곳으로 건너뛸 수 있는지가 실질적인 판단 기준입니다.",
+			en: "Headings and labels must describe topic or purpose. This is not about whether headings exist, but whether the ones present are actually informative. The practical test is whether a screen reader user can skim the heading list and jump to the right place.",
+		},
+		commonFailures: [
+			{
+				ko: '"섹션 1"·"내용"처럼 아무 정보가 없는 제목을 쓰는 경우',
+				en: 'Headings like "Section 1" or "Content" that convey nothing.',
+			},
+			{
+				ko: '폼 레이블을 "입력"으로만 두어 무엇을 넣어야 하는지 알 수 없는 경우',
+				en: 'Labelling a form field simply "Input", leaving its purpose unclear.',
+			},
+		],
+		relatedUnits: ["was-1-1", "was-1-5"],
+	},
+	{
+		id: "focus-visible",
+		num: "2.4.7",
+		level: "AA",
+		title: { ko: "보이는 초점", en: "Focus Visible" },
+		summary: {
+			ko: "키보드 포커스를 받은 요소는 시각적으로 드러나야 합니다. 포커스 표시가 없으면 키보드 사용자는 자신이 어디에 있는지 알 수 없어 사실상 페이지를 쓸 수 없습니다. `outline: none`을 대체 표시 없이 넣는 것이 이 기준을 깨는 가장 흔한 방식입니다.",
+			en: "The element with keyboard focus must be visibly indicated. Without it, keyboard users cannot tell where they are and the page becomes effectively unusable. Setting `outline: none` with no replacement is the most common way this breaks.",
+		},
+		commonFailures: [
+			{
+				ko: "디자인상의 이유로 `outline: none`을 전역에 적용하고 대체 포커스 스타일을 주지 않는 경우",
+				en: "Applying a global `outline: none` for aesthetics without providing a replacement focus style.",
+			},
+		],
+		relatedUnits: ["was-1-3", "was-1-4"],
+		kwcag: [
+			{ num: "6.1.2", name: { ko: "초점 이동과 표시", en: "Focus Movement and Indication" } },
+		],
+	},
+	{
+		id: "focus-not-obscured-minimum",
+		num: "2.4.11",
+		level: "AA",
+		title: { ko: "초점 가림 방지(최소)", en: "Focus Not Obscured (Minimum)" },
+		summary: {
+			ko: "포커스를 받은 요소가 다른 콘텐츠에 완전히 가려져서는 안 됩니다. WCAG 2.2에서 새로 들어온 기준으로, 고정 헤더나 쿠키 배너 뒤로 포커스가 숨는 상황을 겨냥합니다. 포커스 표시가 있어도 화면에서 보이지 않으면 소용이 없다는 문제의식입니다.",
+			en: "A focused element must not be entirely hidden behind other content. New in WCAG 2.2, it targets focus disappearing behind sticky headers or cookie banners. A focus indicator that exists but cannot be seen solves nothing.",
+		},
+		commonFailures: [
+			{
+				ko: "상단 고정 헤더 때문에 Tab으로 이동한 요소가 헤더 뒤에 완전히 가려지는 경우",
+				en: "A sticky header completely covering the element the user just tabbed to.",
+			},
+		],
+		relatedUnits: ["was-1-3"],
+		kwcag: [
+			{ num: "6.1.2", name: { ko: "초점 이동과 표시", en: "Focus Movement and Indication" } },
+		],
+	},
+	{
+		id: "pointer-gestures",
+		num: "2.5.1",
+		level: "A",
+		title: { ko: "포인터 제스처", en: "Pointer Gestures" },
+		summary: {
+			ko: "여러 손가락을 쓰거나 경로를 그리는 제스처에는 단순한 대체 조작이 있어야 합니다. 손떨림이 있거나 손가락 하나만 쓸 수 있는 사용자, 헤드 포인터 사용자는 그런 제스처를 수행할 수 없습니다. 핀치 줌이나 스와이프에 버튼 대체를 함께 두면 됩니다.",
+			en: "Multipoint or path-based gestures need a simple single-pointer alternative. Users with tremor, users who can operate only one finger, and head-pointer users cannot perform them. Pairing pinch-zoom or swipe with buttons resolves it.",
+		},
+		commonFailures: [
+			{
+				ko: "지도 확대를 핀치 제스처로만 제공하고 확대·축소 버튼을 두지 않는 경우",
+				en: "Offering map zoom only through a pinch gesture, with no zoom buttons.",
+			},
+			{
+				ko: "캐러셀을 스와이프로만 넘길 수 있게 하고 이전·다음 버튼을 생략한 경우",
+				en: "A carousel navigable only by swipe, with no previous and next controls.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+		kwcag: [
+			{ num: "6.5.1", name: { ko: "단일 포인터 입력 지원", en: "Single Pointer Input Support" } },
+		],
+	},
+	{
+		id: "pointer-cancellation",
+		num: "2.5.2",
+		level: "A",
+		title: { ko: "포인터 취소", en: "Pointer Cancellation" },
+		summary: {
+			ko: "포인터를 누르는 순간이 아니라 떼는 순간에 기능이 실행되어야 합니다. 그래야 잘못 누른 사용자가 손가락을 밖으로 밀어 실행을 취소할 수 있습니다. 운동 조절이 어려운 사용자에게는 이 '되돌릴 여지'가 오조작을 막는 유일한 장치입니다.",
+			en: "Functions should fire on the up-event, not the down-event. That lets someone who pressed the wrong control slide off it to cancel. For users with limited motor control, this margin for correction is often the only safeguard against mis-taps.",
+		},
+		commonFailures: [
+			{
+				ko: "`mousedown`·`touchstart`에서 바로 삭제나 결제 같은 되돌릴 수 없는 동작을 실행하는 경우",
+				en: "Firing irreversible actions like delete or purchase on `mousedown` or `touchstart`.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+		kwcag: [{ num: "6.5.2", name: { ko: "포인터 입력 취소", en: "Pointer Cancellation" } }],
+	},
+	{
+		id: "label-in-name",
+		num: "2.5.3",
+		level: "A",
+		title: { ko: "레이블과 네임", en: "Label in Name" },
+		summary: {
+			ko: '화면에 보이는 레이블의 텍스트가 접근 가능한 이름에도 들어 있어야 합니다. 음성 인식 사용자가 "검색 버튼 클릭"이라고 말했을 때, 보이는 글자와 프로그램상의 이름이 다르면 명령이 먹히지 않습니다. aria-label을 붙일 때 보이는 텍스트를 지워버리는 것이 전형적인 실수입니다.',
+			en: 'The visible label text must be contained in the accessible name. When a speech-input user says "click search", a mismatch between what is displayed and what is exposed makes the command fail. Overwriting visible text with a different aria-label is the classic mistake.',
+		},
+		commonFailures: [
+			{
+				ko: '"검색"이라고 보이는 버튼에 `aria-label="submit"`을 붙여 음성 명령이 통하지 않는 경우',
+				en: 'A button reading "Search" carrying `aria-label="submit"`, breaking voice commands.',
+			},
+		],
+		relatedUnits: ["was-1-2", "was-1-5"],
+		kwcag: [{ num: "6.5.3", name: { ko: "레이블과 네임", en: "Label in Name" } }],
+	},
+	{
+		id: "motion-actuation",
+		num: "2.5.4",
+		level: "A",
+		title: { ko: "동작 기반 작동", en: "Motion Actuation" },
+		summary: {
+			ko: '기기를 흔들거나 기울여 실행하는 기능에는 일반 UI 대체 수단이 있어야 하고, 그 동작 감지를 끌 수 있어야 합니다. 기기를 고정해 쓰는 사용자는 흔들 수 없고, 떨림이 있는 사용자는 의도치 않게 실행하게 됩니다. "흔들어서 실행 취소"가 대표적인 사례입니다.',
+			en: 'Functions triggered by shaking or tilting the device need a conventional UI alternative, and the motion trigger must be switchable off. Users with a mounted device cannot shake it, and users with tremor trigger it by accident. "Shake to undo" is the canonical example.',
+		},
+		commonFailures: [
+			{
+				ko: "흔들기로만 실행 취소를 제공하고 화면상의 취소 버튼을 두지 않는 경우",
+				en: "Providing undo only through a shake gesture, with no on-screen undo control.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+		kwcag: [{ num: "6.5.4", name: { ko: "동작기반 작동", en: "Motion Actuation" } }],
+	},
+	{
+		id: "dragging-movements",
+		num: "2.5.7",
+		level: "AA",
+		title: { ko: "끌기 동작", en: "Dragging Movements" },
+		summary: {
+			ko: "끌어서 조작하는 기능에는 끌지 않고도 되는 단순 포인터 대체 수단이 있어야 합니다. WCAG 2.2에서 새로 들어온 기준으로, 누른 채 정확히 이동시키는 동작이 어려운 사용자를 위한 것입니다. 정렬 목록에 위·아래 버튼을 함께 두는 식으로 해결합니다.",
+			en: "Anything operated by dragging needs a single-pointer alternative that does not require dragging. New in WCAG 2.2, it addresses users who cannot hold and move a pointer precisely. Adding up and down buttons alongside a sortable list is a typical solution.",
+		},
+		commonFailures: [
+			{
+				ko: "칸반 보드의 카드 이동을 드래그 앤 드롭으로만 제공하는 경우",
+				en: "A kanban board where cards can only be moved by drag-and-drop.",
+			},
+			{
+				ko: "값 조절 슬라이더를 끌기로만 조작하게 하고 입력란이나 증감 버튼을 두지 않는 경우",
+				en: "A slider adjustable only by dragging, with no numeric input or stepper buttons.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+	},
+	{
+		id: "target-size-minimum",
+		num: "2.5.8",
+		level: "AA",
+		title: { ko: "대상 크기(최소)", en: "Target Size (Minimum)" },
+		summary: {
+			ko: "포인터로 누르는 대상은 최소 24×24 CSS 픽셀이어야 합니다. WCAG 2.2에서 새로 들어온 기준으로, 손떨림이 있거나 작은 화면을 쓰는 사용자의 오조작을 줄이는 것이 목적입니다. 대상 사이에 충분한 간격이 있거나 같은 기능의 더 큰 대상이 함께 있으면 예외로 인정됩니다.",
+			en: "Pointer targets must be at least 24 by 24 CSS pixels. New in WCAG 2.2, it aims to cut mis-taps for users with tremor or small screens. Exceptions apply when targets have sufficient spacing, or when an equivalent larger target exists.",
+		},
+		commonFailures: [
+			{
+				ko: "16px 아이콘 버튼들을 여백 없이 촘촘히 배열해 인접 버튼을 잘못 누르게 되는 경우",
+				en: "Packing 16px icon buttons together with no spacing, so neighbours get tapped by mistake.",
+			},
+		],
+		relatedUnits: ["was-1-9"],
+		kwcag: [{ num: "6.1.3", name: { ko: "조작 가능", en: "Operable Controls" } }],
+	},
 ];
